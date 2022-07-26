@@ -4,7 +4,7 @@ namespace PMCS.API.Middlewares
 {
     public class ExceptionHandlingMiddleware : IMiddleware
     {
-        private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+        private readonly ILogger _logger;
         public ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger)
         {
             _logger = logger;
@@ -37,7 +37,7 @@ namespace PMCS.API.Middlewares
         private void LogException(HttpContext? context, Exception ex)
         {
             _logger.LogWarning(ex, $"{ex.Message}");
-            _logger.LogWarning(ex, $"Exception occured in PATH: {context?.Request.Path}");
+            _logger.LogWarning(ex, $"Exception in query: {context?.Request.Path}");
         }
 
         private void SetResponseParameters(HttpContext context)
