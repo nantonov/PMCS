@@ -4,17 +4,17 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:6728",
-      "sslPort": 44308
+      "applicationUrl": "http://localhost:23591",
+      "sslPort": 44334
     }
   },
   "profiles": {
-    "WebApplication1": {
+    "PMCS.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7026;http://localhost:5026",
+      "applicationUrl": "https://localhost:7104;http://localhost:5104",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
