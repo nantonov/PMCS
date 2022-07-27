@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCS.API", "PMCS.API\PMCS.API.csproj", "{DE6187E7-8354-4291-A964-CB9EFAB3BA69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMCS.API", "PMCS.API\PMCS.API.csproj", "{DE6187E7-8354-4291-A964-CB9EFAB3BA69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCS.DAL", "PMCS.DAL\PMCS.DAL.csproj", "{C28517D8-1618-485D-9C7F-DBF28074CA3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCS.DLL", "PMCS.DLL\PMCS.DLL.csproj", "{664D94AF-2631-44D3-98C5-51499E067812}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{DE6187E7-8354-4291-A964-CB9EFAB3BA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE6187E7-8354-4291-A964-CB9EFAB3BA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE6187E7-8354-4291-A964-CB9EFAB3BA69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C28517D8-1618-485D-9C7F-DBF28074CA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C28517D8-1618-485D-9C7F-DBF28074CA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C28517D8-1618-485D-9C7F-DBF28074CA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C28517D8-1618-485D-9C7F-DBF28074CA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{664D94AF-2631-44D3-98C5-51499E067812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{664D94AF-2631-44D3-98C5-51499E067812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{664D94AF-2631-44D3-98C5-51499E067812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{664D94AF-2631-44D3-98C5-51499E067812}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
