@@ -1,38 +1,31 @@
-﻿using Newtonsoft.Json;
-
-namespace PMCS.API.Middlewares
+﻿namespace PMCS.API.Middlewares
 {
-    public class ExceptionHandlingMiddleware : IMiddleware
+    public class ExceptionHandlingMiddleware
     {
-        private readonly ILogger _logger;
-        public ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger)
+        private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+        private readonly RequestDelegate _next;
+        public ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger, RequestDelegate next)
         {
             _logger = logger;
+            _next = next;
         }
-        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
-                await next(context);
+                await _next(context);
             }
             catch(Exception ex)
             {
                 await HandleException(context, ex);
             }
         }
-
         private Task HandleException(HttpContext context, Exception ex)
         {
             SetResponseParameters(context);
             LogException(context, ex);
 
-            var errorMessage = JsonConvert.SerializeObject(new
-            {
-                ErrorMessage = ex.Message, 
-                StatusCode = context.Response.StatusCode 
-            });
-
-            return context.Response.WriteAsync(errorMessage);
+            return context.Response.WriteAsync($"{ex.Message}\nStatusCode:{context.Response.StatusCode}");
         }
         private void LogException(HttpContext? context, Exception ex)
         {
