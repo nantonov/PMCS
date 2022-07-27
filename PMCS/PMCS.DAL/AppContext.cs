@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Tools;
 using PMCS.DAL.Entities;
 
@@ -8,7 +8,9 @@ namespace PMCS.DAL
     {
         public AppContext(DbContextOptions options) : base(options)
         {
+            Database.Migrate();
         }
+        
         public DbSet<MealEntity> Meals { get; set; }
         public DbSet<WalkingEntity> Walkings { get; set; }
         public DbSet<OwnerEntity> Owners { get; set; }
