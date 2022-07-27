@@ -7,7 +7,7 @@ namespace PMCS.DAL.Entities
         public Guid Id { get; init; }
         public string Name { get; set; }
         public string? Info { get; set; }
-        public DateOnly? BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public float? Weight { get; set; }
         public Guid OwnerId { get; init; }
         public OwnerEntity Owner { get; init; }
