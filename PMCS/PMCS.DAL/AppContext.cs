@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Tools;
 using PMCS.DAL.Entities;
 
 namespace PMCS.DAL
@@ -17,6 +18,17 @@ namespace PMCS.DAL
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            SetPrimaryKeys(builder);
+        }
+
+        private void SetPrimaryKeys(ModelBuilder builder)
+        {
+            builder.Entity<MealEntity>().HasKey(x => x.Id);
+            builder.Entity<PetEntity>().HasKey(x => x.Id);
+            builder.Entity<VaccineEntity>().HasKey(x => x.Id);
+            builder.Entity<OwnerEntity>().HasKey(x => x.Id);
+            builder.Entity<WalkingEntity>().HasKey(x => x.Id);
         }
     }
 }
