@@ -11,7 +11,7 @@ namespace PMCS.DAL.Entities
         public float? Weight { get; set; }
         public Guid OwnerId { get; init; }
         public OwnerEntity Owner { get; init; }
-        public IEnumerable<MealEntity> Meals { get; set; }
-        public IEnumerable<WalkingEntity> Walkings { get; set; }
+        public IEnumerable<MealEntity> Meals { get; set; } = new List<MealEntity>();
+        public IEnumerable<WalkingEntity> Walkings { get; set; } = new List<WalkingEntity>();
     }
 }
