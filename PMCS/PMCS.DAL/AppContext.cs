@@ -19,12 +19,6 @@ namespace PMCS.DAL
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.Entity<MealEntity>().HasKey(x => x.Id);
-            builder.Entity<PetEntity>().HasKey(x => x.Id);
-            builder.Entity<VaccineEntity>().HasKey(x => x.Id);
-            builder.Entity<OwnerEntity>().HasKey(x => x.Id);
-            builder.Entity<WalkingEntity>().HasKey(x => x.Id);
         }
     }
 }
