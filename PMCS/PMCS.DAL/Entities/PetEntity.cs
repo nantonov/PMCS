@@ -14,5 +14,6 @@ namespace PMCS.DAL.Entities
         public OwnerEntity Owner { get; init; }
         public IEnumerable<MealEntity> Meals { get; set; } = new List<MealEntity>();
         public IEnumerable<WalkingEntity> Walkings { get; set; } = new List<WalkingEntity>();
+        public IEnumerable<VaccineEntity> Vaccines { get; set; } = new List<VaccineEntity>();
     }
 }

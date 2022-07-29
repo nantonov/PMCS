@@ -18,5 +18,6 @@ namespace PMCS.DLL.Models
         public OwnerModel Owner { get; init; }
         public IEnumerable<MealModel> Meals { get; set; } = new List<MealModel>();
         public IEnumerable<WalkingModel> Walkings { get; set; } = new List<WalkingModel>();
+        public IEnumerable<VaccineModel> Vaccines { get; set; } = new List<VaccineModel>();
     }
 }
