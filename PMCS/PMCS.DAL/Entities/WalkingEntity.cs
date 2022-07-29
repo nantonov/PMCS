@@ -9,6 +9,7 @@ namespace PMCS.DAL.Entities
         public string? Description { get; set; }
         public DateTime Stared { get; set; }
         public DateTime Finished { get; set; }
+
         public Guid PetId { get; init; }
         public PetEntity Pet { get; init; }
     }
