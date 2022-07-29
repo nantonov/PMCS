@@ -8,6 +8,6 @@ namespace PMCS.DAL.Interfaces.Entities
 {
     interface IHasIdEntity
     {
-        Guid Id { get;}
+        Guid Id { get; }
     }
 }
