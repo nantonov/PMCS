@@ -13,6 +13,7 @@ namespace PMCS.DLL.Models
         public string? Info { get; set; }
         public DateTime? BirthDate { get; set; }
         public float? Weight { get; set; }
+
         public Guid OwnerId { get; init; }
         public OwnerModel Owner { get; init; }
         public IEnumerable<MealModel> Meals { get; set; } = new List<MealModel>();
