@@ -20,11 +20,6 @@ namespace PMCS.DAL
         {
             base.OnModelCreating(builder);
 
-            SetPrimaryKeys(builder);
-        }
-
-        private void SetPrimaryKeys(ModelBuilder builder)
-        {
             builder.Entity<MealEntity>().HasKey(x => x.Id);
             builder.Entity<PetEntity>().HasKey(x => x.Id);
             builder.Entity<VaccineEntity>().HasKey(x => x.Id);
