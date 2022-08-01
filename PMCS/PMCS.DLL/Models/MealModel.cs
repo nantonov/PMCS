@@ -1,8 +1,6 @@
-﻿using PMCS.DAL.Interfaces.Entities;
-
-namespace PMCS.DAL.Entities
+﻿namespace PMCS.DLL.Models
 {
-    public class VaccineEntity : IHasIdEntity
+    public class MealModel
     {
         public int Id { get; init; }
         public string Title { get; set; }
@@ -10,6 +8,6 @@ namespace PMCS.DAL.Entities
         public DateTime DateTime { get; set; }
 
         public int PetId { get; init; }
-        public PetEntity Pet { get; init; }
+        public MealModel Pet { get; init; }
     }
 }

@@ -1,8 +1,6 @@
-﻿using PMCS.DAL.Interfaces.Entities;
-
-namespace PMCS.DAL.Entities
+﻿namespace PMCS.DLL.Models
 {
-    public class WalkingEntity : IHasIdEntity
+    public class WalkingModel
     {
         public int Id { get; init; }
         public string Title { get; set; }
@@ -11,6 +9,6 @@ namespace PMCS.DAL.Entities
         public DateTime Finished { get; set; }
 
         public int PetId { get; init; }
-        public PetEntity Pet { get; init; }
+        public PetModel Pet { get; init; }
     }
 }
