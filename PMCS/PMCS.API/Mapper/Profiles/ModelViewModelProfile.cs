@@ -12,9 +12,11 @@ namespace PMCS.API.Mapper.Profiles
         {
             CreateMap<OwnerModel, PostOwnerViewModel>();
             CreateMap<OwnerModel, UpdateOwnerViewModel>();
+            CreateMap<OwnerModel, OwnerViewModel>().ReverseMap();
 
             CreateMap<PetModel, PostPetViewModel>();
             CreateMap<PetModel, UpdatePetViewModel>();
+            CreateMap<PetModel, PetViewModel>().ReverseMap();
         }
     }
 }
