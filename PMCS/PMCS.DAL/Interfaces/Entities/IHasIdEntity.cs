@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PMCS.DAL.Interfaces.Entities
 {
-    interface IHasIdEntity
+    public interface IHasIdEntity
     {
         int Id { get; init; }
     }
