@@ -7,7 +7,7 @@ using PMCS.DAL.Interfaces.Entities;
 
 namespace PMCS.DAL.Interfaces.Repositories
 {
-    interface IGenericRepository <TEntity> where TEntity : IHasIdEntity
+    public interface IGenericRepository <TEntity> where TEntity : IHasIdEntity
     {
         Task<TEntity> Insert(TEntity entity, CancellationToken cancellationToken);
         Task<IEnumerable<TEntity>> Get(CancellationToken cancellationToken);
