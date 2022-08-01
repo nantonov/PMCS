@@ -2,7 +2,7 @@
 
 namespace PMCS.DAL.Interfaces.Repositories
 {
-    interface IOwnerRepository : IGenericRepository<OwnerEntity>
+    public interface IOwnerRepository : IGenericRepository<OwnerEntity>
     {
     }
 }

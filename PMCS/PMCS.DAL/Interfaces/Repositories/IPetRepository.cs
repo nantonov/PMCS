@@ -2,7 +2,7 @@
 
 namespace PMCS.DAL.Interfaces.Repositories
 {
-    interface IPetRepository : IGenericRepository<PetEntity>
+    public interface IPetRepository : IGenericRepository<PetEntity>
     {
     }
 }
