@@ -27,6 +27,9 @@ namespace PMCS.API.Validators
                 .Cascade(CascadeMode.Stop)
                 .Must(beAValidDate)
                 .WithMessage("Invalid birth date");
+            RuleFor(x => x.Weight).
+                Cascade(CascadeMode.Stop).
+                InclusiveBetween(MinWeight,MaxWeight);
         }
 
         private bool beAValidDate(DateTime? date)

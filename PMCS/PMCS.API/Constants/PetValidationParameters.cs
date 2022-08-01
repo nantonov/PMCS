@@ -7,6 +7,8 @@
         public const int MinNameLength = 30;
         public const int MaxInfoLength = 5;
         public const int MinInfoLength = 300;
+        public const float MinWeight = 0.05f;
+        public const float MaxWeight = 1000.0f;
 
         public const string NameRegularExpression = "^[a-zA-Z0-9 ]*$";
     }
