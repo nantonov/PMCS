@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using PMCS.API.ViewModels.Pet;
 using static PMCS.API.Constants.PetValidationParameters;
+using static PMCS.API.Validators.PetBirthDateValidation;
 
 namespace PMCS.API.Validators
 {
@@ -25,26 +26,11 @@ namespace PMCS.API.Validators
                 WithMessage("Info has invalid length.");
             RuleFor(x => x.BirthDate)
                 .Cascade(CascadeMode.Stop)
-                .Must(beAValidDate)
+                .Must(BeAValidDate)
                 .WithMessage("Invalid birth date");
             RuleFor(x => x.Weight).
                 Cascade(CascadeMode.Stop).
                 InclusiveBetween(MinWeight,MaxWeight);
-        }
-
-        private bool beAValidDate(DateTime? date)
-        {
-            return !date.Equals(default(DateTime)) && date < DateTime.Now && GetAge(date,DateTime.Now) <= MaxDurationOfLife;
-        }
-
-        private int? GetAge(DateTime? birthDate, DateTime now)
-        {
-            bool birthdayCelebratedThisYear = (now.DayOfYear - birthDate?.DayOfYear) >= 0;
-            var age = now.Year - birthDate?.Year;
-
-            if (!birthdayCelebratedThisYear) --age;
-
-            return age;
         }
     }
 }
