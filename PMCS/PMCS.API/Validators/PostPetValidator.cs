@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
+using PMCS.API.ViewModels.Owner;
 using PMCS.API.ViewModels.Pet;
 using static PMCS.API.Constants.PetValidationParameters;
 using static PMCS.API.Validators.PetBirthDateValidation;
@@ -7,26 +9,26 @@ namespace PMCS.API.Validators
 {
     public class PostPetValidator : AbstractValidator<PostPetViewModel>
     {
-        public PostPetValidator()
+        public PostPetValidator(IStringLocalizer<PostPetViewModel> localizer)
         {
             RuleFor(x => x.OwnerId).
                 NotEmpty().
                 GreaterThan(0).
-                WithMessage("Invalid owner's id."); ;
+                WithMessage(localizer["Id"]); ;
             RuleFor(x => x.Name).
                 NotEmpty().
                 Length(MinNameLength, MaxNameLength).
                 Matches(NameRegularExpression).
-                WithMessage("Invalid pet's name.");
+                WithMessage(localizer["PetName"]);
             RuleFor(x => x.Info).
                 Length(MinInfoLength, MaxInfoLength).
-                WithMessage("Info has invalid length.");
+                WithMessage(localizer["Info"]);
             RuleFor(x => x.BirthDate)
                 .Must(BeAValidDate)
-                .WithMessage("Invalid birth date");
+                .WithMessage(localizer["BirthDate"]);
             RuleFor(x => x.Weight).
                 InclusiveBetween(MinWeight,MaxWeight).
-                WithMessage("Invalid Weight");
+                WithMessage(localizer["Weight"]);
         }
     }
 }

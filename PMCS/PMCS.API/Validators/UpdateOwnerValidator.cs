@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using PMCS.API.ViewModels.Owner;
 using static PMCS.API.Constants.OwnerValidationParameters;
 
@@ -6,13 +7,13 @@ namespace PMCS.API.Validators
 {
     public class UpdateOwnerValidator : AbstractValidator<UpdateOwnerViewModel>
     {
-        public UpdateOwnerValidator()
+        public UpdateOwnerValidator(IStringLocalizer<UpdateOwnerViewModel> localizer)
         {
             RuleFor(x => x.FullName)
                 .NotEmpty()
                 .Length(MinNameLength, MaxNameLength)
                 .Matches(FullNameRegularExpression)
-                .WithMessage("Owner's full name is not valid.");
+                .WithMessage(localizer["PetName"]);
         }
     }
 }
