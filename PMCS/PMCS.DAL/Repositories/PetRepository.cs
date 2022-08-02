@@ -18,7 +18,8 @@ namespace PMCS.DAL.Repositories
 
         public override async Task<PetEntity> GetById(int id, CancellationToken cancellationToken)
         {
-            return await Query.Include(x => x.Vaccines).
+            return await Query.AsNoTracking().
+                               Include(x => x.Vaccines).
                                Include(x => x.Walkings).
                                Include(x => x.Meals).
                                Include(x => x.Owner).

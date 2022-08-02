@@ -2,7 +2,7 @@
 {
     public class WalkingModel
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
         public DateTime Stared { get; set; }
