@@ -8,7 +8,7 @@ namespace PMCS.DAL
     {
         public AppContext(DbContextOptions options) : base(options)
         {
-            //Database.Migrate();
+            Database.Migrate();
         }
         
         public DbSet<MealEntity> Meals { get; set; }
