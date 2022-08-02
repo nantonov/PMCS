@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using PMCS.DAL.Entities;
 
@@ -7,7 +8,7 @@ namespace PMCS.DAL
     {
         public AppContext(DbContextOptions options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
         
         public DbSet<MealEntity> Meals { get; set; }
