@@ -9,7 +9,6 @@ namespace PMCS.API.Validators
         public UpdateOwnerValidator()
         {
             RuleFor(x => x.FullName)
-                .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                 .Length(MinNameLength, MaxNameLength)
                 .Matches(FullNameRegularExpression)
