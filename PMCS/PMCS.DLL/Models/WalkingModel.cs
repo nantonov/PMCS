@@ -1,6 +1,8 @@
-﻿namespace PMCS.DLL.Models
+﻿using PMCS.DLL.Interfaces.Models;
+
+namespace PMCS.DLL.Models
 {
-    public class WalkingModel
+    public class WalkingModel : IHasIdModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

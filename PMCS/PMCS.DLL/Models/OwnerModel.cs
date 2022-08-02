@@ -1,6 +1,8 @@
-﻿namespace PMCS.DLL.Models
+﻿using PMCS.DLL.Interfaces.Models;
+
+namespace PMCS.DLL.Models
 {
-    public class OwnerModel
+    public class OwnerModel : IHasIdModel
     {
         public int Id { get; set; }
         public string FullName { get; set; }

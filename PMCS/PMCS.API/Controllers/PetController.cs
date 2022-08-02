@@ -47,12 +47,12 @@ namespace PMCS.API.Controllers
             await _service.Delete(id, cancellationToken);
         }
 
-        [HttpPut]
-        public async Task<PetViewModel> Update([FromBody] UpdatePetViewModel viewModel, CancellationToken cancellationToken)
+        [HttpPut("{id}")]
+        public async Task<PetViewModel> Update(int id, [FromBody] UpdatePetViewModel viewModel, CancellationToken cancellationToken)
         {
             var model = _mapper.Map<PetModel>(viewModel);
 
-            return _mapper.Map<PetViewModel>(await _service.Update(model, cancellationToken));
+            return _mapper.Map<PetViewModel>(await _service.Update(id, model, cancellationToken));
         }
     }
 }

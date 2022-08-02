@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using PMCS.DAL.Interfaces.Entities;
 using PMCS.DAL.Interfaces.Repositories;
+using PMCS.DLL.Interfaces.Models;
 using PMCS.DLL.Interfaces.Services;
 
 namespace PMCS.DLL.Services
 {
-    public class GenericService <TModel, TEntity> : IGenericService<TModel> where TEntity : IHasIdEntity
+    public class GenericService <TModel, TEntity> : IGenericService<TModel> 
+        where TEntity : IHasIdEntity
+        where TModel : IHasIdModel
     {
         protected readonly IGenericRepository<TEntity> _repository;
         protected readonly IMapper _mapper;
@@ -36,8 +39,9 @@ namespace PMCS.DLL.Services
             return _mapper.Map<TModel>(await _repository.Delete(id, cancellationToken));
         }
 
-        public virtual async Task<TModel> Update(TModel model, CancellationToken cancellationToken)
+        public virtual async Task<TModel> Update(int id, TModel model, CancellationToken cancellationToken)
         {
+            model.Id = id;
             var entity = _mapper.Map<TEntity>(model);
 
             return _mapper.Map<TModel>(await _repository.Update(entity, cancellationToken));

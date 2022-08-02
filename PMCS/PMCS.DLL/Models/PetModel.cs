@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PMCS.DLL.Interfaces.Models;
 
 namespace PMCS.DLL.Models
 {
-    public class PetModel
+    public class PetModel : IHasIdModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
