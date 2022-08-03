@@ -123,7 +123,7 @@
   <data name="Info" xml:space="preserve">
     <value>Info has invalid length.</value>
   </data>
-  <data name="PetName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Pet's name is not valid.</value>
   </data>
   <data name="Weight" xml:space="preserve">

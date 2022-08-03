@@ -1,36 +1,33 @@
-﻿using System.Reflection;
-using System.Resources;
-using FluentValidation;
+﻿using FluentValidation;
+using PMCS.API.Resources.Validators;
 using PMCS.API.ViewModels.Pet;
 using static PMCS.API.Constants.PetValidationParameters;
-using static PMCS.API.Validators.PetBirthDateValidation;
+using static PMCS.API.Helpers.PetValidatorHelper;
 
 namespace PMCS.API.Validators
 {
     public class PostPetValidator : AbstractValidator<PostPetViewModel>
     {
-        private ResourceManager resourceManager = new ResourceManager("PMCS.API.Resources.Validators.PostPetValidatorResources",
-            Assembly.GetExecutingAssembly());
         public PostPetValidator()
         {
             RuleFor(x => x.OwnerId).
                 NotEmpty().
                 GreaterThan(0).
-                WithMessage(resourceManager.GetString("Id"));
+                WithMessage(PostPetValidatorResources.Id);
             RuleFor(x => x.Name).
                 NotEmpty().
                 Length(MinNameLength, MaxNameLength).
                 Matches(NameRegularExpression).
-                WithMessage(resourceManager.GetString("PetName"));
+                WithMessage(PostPetValidatorResources.Name);
             RuleFor(x => x.Info).
                 Length(MinInfoLength, MaxInfoLength).
-                WithMessage(resourceManager.GetString("Info"));
+                WithMessage(PostPetValidatorResources.Info);
             RuleFor(x => x.BirthDate)
-                .Must(BeAValidDate)
-                .WithMessage(resourceManager.GetString("BirthDate"));
+                .Must(IsAValidDate)
+                .WithMessage(PostPetValidatorResources.BirthDate);
             RuleFor(x => x.Weight).
-                InclusiveBetween(MinWeight,MaxWeight).
-                WithMessage(resourceManager.GetString("Weight"));
+                InclusiveBetween(MinWeight, MaxWeight).
+                WithMessage(PostPetValidatorResources.Weight);
         }
     }
 }
