@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Validators;
 using PMCS.API.ViewModels.Owner;
 using PMCS.DLL.Interfaces.Services;
 using PMCS.DLL.Models;
@@ -13,6 +13,8 @@ namespace PMCS.API.Controllers
     {
         private readonly IOwnerService _service;
         private readonly IMapper _mapper;
+        private PostOwnerValidator _postOwnerValidator;
+        private UpdateOwnerValidator _updateOwnerValidator;
 
         public OwnerController(IOwnerService service, IMapper mapper)
         {
@@ -34,8 +36,12 @@ namespace PMCS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<OwnerViewModel> Insert([FromBody] PostOwnerViewModel viewModel, CancellationToken cancellationToken)
+        public async Task<OwnerViewModel> Insert([FromBody] PostOwnerViewModel viewModel, [FromServices] PostOwnerValidator postOwnerValidator, CancellationToken cancellationToken)
         {
+            _postOwnerValidator = postOwnerValidator;
+
+            await _postOwnerValidator.ValidateAsync(viewModel, cancellationToken);
+
             var model = _mapper.Map<OwnerModel>(viewModel);
 
             return _mapper.Map<OwnerViewModel>(await _service.Insert(model, cancellationToken));
@@ -48,11 +54,17 @@ namespace PMCS.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<OwnerViewModel> Update(int id, [FromBody] UpdateOwnerViewModel viewModel, CancellationToken cancellationToken)
+        public async Task<OwnerViewModel> Update(int id, [FromBody] UpdateOwnerViewModel viewModel, [FromServices] UpdateOwnerValidator updateOwnerValidator, CancellationToken cancellationToken)
         {
+            _updateOwnerValidator = updateOwnerValidator;
+
+            await _updateOwnerValidator.ValidateAsync(viewModel, cancellationToken);
+
             var model = _mapper.Map<OwnerModel>(viewModel);
 
             return _mapper.Map<OwnerViewModel>(await _service.Update(id, model, cancellationToken));
         }
+
+
     }
 }

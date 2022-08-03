@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Validators;
 using PMCS.API.ViewModels.Pet;
 using PMCS.DLL.Interfaces.Services;
 using PMCS.DLL.Models;
@@ -12,6 +13,8 @@ namespace PMCS.API.Controllers
     {
         private readonly IPetService _service;
         private readonly IMapper _mapper;
+        private PostPetValidator _postPetValidator;
+        private UpdatePetValidator _updatePetValidator;
 
         public PetController(IPetService petService, IMapper mapper)
         {
@@ -33,8 +36,11 @@ namespace PMCS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<PetViewModel> Insert([FromBody] PostPetViewModel viewModel, CancellationToken cancellationToken)
+        public async Task<PetViewModel> Insert([FromBody] PostPetViewModel viewModel, [FromServices] PostPetValidator postPetValidator, CancellationToken cancellationToken)
         {
+            _postPetValidator = postPetValidator;
+            await _postPetValidator.ValidateAsync(viewModel, cancellationToken);
+
             var model = _mapper.Map<PetModel>(viewModel);
 
             return _mapper.Map<PetViewModel>(await _service.Insert(model, cancellationToken));
@@ -47,8 +53,11 @@ namespace PMCS.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<PetViewModel> Update(int id, [FromBody] UpdatePetViewModel viewModel, CancellationToken cancellationToken)
+        public async Task<PetViewModel> Update(int id, [FromBody] UpdatePetViewModel viewModel, [FromServices] UpdatePetValidator updatePetValidator, CancellationToken cancellationToken)
         {
+            _updatePetValidator = updatePetValidator;
+            await _updatePetValidator.ValidateAsync(viewModel, cancellationToken);
+
             var model = _mapper.Map<PetModel>(viewModel);
 
             return _mapper.Map<PetViewModel>(await _service.Update(id, model, cancellationToken));
