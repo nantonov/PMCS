@@ -14,21 +14,21 @@ namespace PMCS.API.Validators
             RuleFor(x => x.OwnerId).
                 NotEmpty().
                 GreaterThan(0).
-                WithMessage(localizer["Id"]); ;
+                WithMessage(x=>localizer["Id"]); ;
             RuleFor(x => x.Name).
                 NotEmpty().
                 Length(MinNameLength, MaxNameLength).
                 Matches(NameRegularExpression).
-                WithMessage(localizer["PetName"]);
+                WithMessage(x=>localizer["PetName"]);
             RuleFor(x => x.Info).
                 Length(MinInfoLength, MaxInfoLength).
-                WithMessage(localizer["Info"]);
+                WithMessage(x=>localizer["Info"]);
             RuleFor(x => x.BirthDate)
                 .Must(BeAValidDate)
-                .WithMessage(localizer["BirthDate"]);
+                .WithMessage(x=>localizer["BirthDate"]);
             RuleFor(x => x.Weight).
                 InclusiveBetween(MinWeight,MaxWeight).
-                WithMessage(localizer["Weight"]);
+                WithMessage(x=>localizer["Weight"]);
         }
     }
 }
