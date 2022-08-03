@@ -60,7 +60,7 @@ namespace PMCS.API.Controllers
             var model = _mapper.Map<OwnerModel>(viewModel);
             model.Id = id;
 
-            return _mapper.Map<OwnerViewModel>(await _service.Update(id, model, cancellationToken));
+            return _mapper.Map<OwnerViewModel>(await _service.Update(model, cancellationToken));
         }
 
     }

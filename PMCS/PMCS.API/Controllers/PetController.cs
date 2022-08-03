@@ -61,7 +61,7 @@ namespace PMCS.API.Controllers
             var model = _mapper.Map<PetModel>(viewModel);
             model.Id = id;
 
-            return _mapper.Map<PetViewModel>(await _service.Update(id, model, cancellationToken));
+            return _mapper.Map<PetViewModel>(await _service.Update(model, cancellationToken));
         }
     }
 }

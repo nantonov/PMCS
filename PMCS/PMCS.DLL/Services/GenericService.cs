@@ -39,7 +39,7 @@ namespace PMCS.DLL.Services
             return _mapper.Map<TModel>(await _repository.Delete(id, cancellationToken));
         }
 
-        public virtual async Task<TModel> Update(int id, TModel model, CancellationToken cancellationToken)
+        public virtual async Task<TModel> Update(TModel model, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TEntity>(model);
 
