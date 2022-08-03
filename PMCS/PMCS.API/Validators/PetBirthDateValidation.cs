@@ -6,13 +6,13 @@ namespace PMCS.API.Validators
     {
         public static bool BeAValidDate(DateTime? date)
         {
-            return !date.Equals(default(DateTime)) && date < DateTime.Now && GetAge(date, DateTime.Now) <= MaxDurationOfLife;
+            return date!=null && date < DateTime.Now && GetAge(date) <= MaxDurationOfLife;
         }
 
-        private static int? GetAge(DateTime? birthDate, DateTime now)
+        private static int? GetAge(DateTime? birthDate)
         {
-            bool birthdayCelebratedThisYear = (now.DayOfYear - birthDate?.DayOfYear) >= 0;
-            var age = now.Year - birthDate?.Year;
+            bool birthdayCelebratedThisYear = (DateTime.Now.DayOfYear - birthDate?.DayOfYear) >= 0;
+            var age = DateTime.Now.Year - birthDate?.Year;
 
             if (!birthdayCelebratedThisYear) --age;
 

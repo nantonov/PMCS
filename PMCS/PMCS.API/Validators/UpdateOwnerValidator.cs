@@ -1,5 +1,6 @@
-﻿using FluentValidation;
-using Microsoft.Extensions.Localization;
+﻿using System.Reflection;
+using System.Resources;
+using FluentValidation;
 using PMCS.API.ViewModels.Owner;
 using static PMCS.API.Constants.OwnerValidationParameters;
 
@@ -7,13 +8,15 @@ namespace PMCS.API.Validators
 {
     public class UpdateOwnerValidator : AbstractValidator<UpdateOwnerViewModel>
     {
-        public UpdateOwnerValidator(IStringLocalizer<UpdateOwnerViewModel> localizer)
+        private ResourceManager resourceManager = new ResourceManager("PMCS.API.Resources.Validators.UpdateOwnerValidatorResources",
+            Assembly.GetExecutingAssembly());
+        public UpdateOwnerValidator()
         {
             RuleFor(x => x.FullName)
                 .NotEmpty()
                 .Length(MinNameLength, MaxNameLength)
                 .Matches(FullNameRegularExpression)
-                .WithMessage(x=>localizer["FullName"]);
+                .WithMessage(resourceManager.GetString("FullName"));
         }
     }
 }
