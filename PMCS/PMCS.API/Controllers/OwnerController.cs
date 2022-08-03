@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Owner;
@@ -39,7 +40,7 @@ namespace PMCS.API.Controllers
         [HttpPost]
         public async Task<OwnerViewModel> Add([FromBody] PostOwnerViewModel viewModel, CancellationToken cancellationToken)
         {
-            await _postOwnerValidator.ValidateAsync(viewModel, cancellationToken);
+            await _postOwnerValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
             var model = _mapper.Map<OwnerModel>(viewModel);
 
@@ -55,7 +56,7 @@ namespace PMCS.API.Controllers
         [HttpPut("{id}")]
         public async Task<OwnerViewModel> Update(int id, [FromBody] UpdateOwnerViewModel viewModel, CancellationToken cancellationToken)
         {
-            await _updateOwnerValidator.ValidateAsync(viewModel, cancellationToken);
+            await _updateOwnerValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
             var model = _mapper.Map<OwnerModel>(viewModel);
             model.Id = id;

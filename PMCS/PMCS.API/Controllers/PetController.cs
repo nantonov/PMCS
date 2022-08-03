@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using PMCS.API.Exceptions;
 using PMCS.API.Validators;
@@ -41,7 +42,7 @@ namespace PMCS.API.Controllers
         [HttpPost]
         public async Task<PetViewModel> Add([FromBody] PostPetViewModel viewModel, CancellationToken cancellationToken)
         {
-            await _postPetValidator.ValidateAsync(viewModel, cancellationToken);
+            await _postPetValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
             var model = _mapper.Map<PetModel>(viewModel);
 
@@ -57,7 +58,7 @@ namespace PMCS.API.Controllers
         [HttpPut("{id}")]
         public async Task<PetViewModel> Update(int id, [FromBody] UpdatePetViewModel viewModel, CancellationToken cancellationToken)
         {
-            await _updatePetValidator.ValidateAsync(viewModel, cancellationToken);
+            await _updatePetValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
             var model = _mapper.Map<PetModel>(viewModel);
 
