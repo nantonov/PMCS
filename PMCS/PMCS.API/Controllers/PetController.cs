@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Exceptions;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Pet;
 using PMCS.DLL.Interfaces.Services;
@@ -59,9 +60,19 @@ namespace PMCS.API.Controllers
             await _updatePetValidator.ValidateAsync(viewModel, cancellationToken);
 
             var model = _mapper.Map<PetModel>(viewModel);
+
             model.Id = id;
+            model.OwnerId = await GetPetsOwnerId(id, cancellationToken);
 
             return _mapper.Map<PetViewModel>(await _service.Update(model, cancellationToken));
+        }
+
+        private async Task<int> GetPetsOwnerId(int petId, CancellationToken cancellationToken)
+        {
+            var pet = await _service.GetById(petId, cancellationToken);
+            if (pet == null) throw new ModelIsNotFoundException();
+
+            return pet.OwnerId;
         }
     }
 }
