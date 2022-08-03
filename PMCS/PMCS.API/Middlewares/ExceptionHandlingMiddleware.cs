@@ -6,7 +6,7 @@ namespace PMCS.API.Middlewares
     {
         private readonly ILogger<ExceptionHandlingMiddleware> _logger;
         private readonly RequestDelegate _next;
-        private readonly int _defaultResponseStatusCode = StatusCodes.Status500InternalServerError;
+        private readonly int _errorDefaultStatusCode = StatusCodes.Status500InternalServerError;
         public ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger, RequestDelegate next)
         {
             _logger = logger;
@@ -26,7 +26,7 @@ namespace PMCS.API.Middlewares
             }
             catch (Exception ex)
             {
-                context.Response.StatusCode = _defaultResponseStatusCode;
+                context.Response.StatusCode = _errorDefaultStatusCode;
                 await HandleException(context, ex);
             }
         }
