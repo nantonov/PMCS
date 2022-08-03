@@ -12,7 +12,6 @@ namespace PMCS.DLL.Services
 
         public override async Task<PetModel> Update(int id, PetModel model, CancellationToken cancellationToken)
         {
-            model.Id = id;
             var entityToUpdate = _mapper.Map<PetEntity>(model);
 
             var petEntity = await _repository.GetById(id, cancellationToken);

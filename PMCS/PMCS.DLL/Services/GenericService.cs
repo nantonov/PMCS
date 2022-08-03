@@ -17,7 +17,7 @@ namespace PMCS.DLL.Services
             _repository = repository;
             _mapper = mapper;
         }
-        public virtual async Task<TModel> Insert(TModel model, CancellationToken cancellationToken)
+        public virtual async Task<TModel> Add(TModel model, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TEntity>(model);
 
@@ -41,7 +41,6 @@ namespace PMCS.DLL.Services
 
         public virtual async Task<TModel> Update(int id, TModel model, CancellationToken cancellationToken)
         {
-            model.Id = id;
             var entity = _mapper.Map<TEntity>(model);
 
             return _mapper.Map<TModel>(await _repository.Update(entity, cancellationToken));
