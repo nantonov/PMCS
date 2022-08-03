@@ -13,13 +13,15 @@ namespace PMCS.API.Controllers
     {
         private readonly IOwnerService _service;
         private readonly IMapper _mapper;
-        private PostOwnerValidator _postOwnerValidator;
-        private UpdateOwnerValidator _updateOwnerValidator;
+        private readonly PostOwnerValidator _postOwnerValidator;
+        private readonly UpdateOwnerValidator _updateOwnerValidator;
 
-        public OwnerController(IOwnerService service, IMapper mapper)
+        public OwnerController(IOwnerService service, IMapper mapper, PostOwnerValidator postOwnerValidator, UpdateOwnerValidator updateOwnerValidator)
         {
             _service = service;
             _mapper = mapper;
+            _postOwnerValidator = postOwnerValidator;
+            _updateOwnerValidator = updateOwnerValidator;
         }
 
         [HttpGet]
@@ -28,7 +30,6 @@ namespace PMCS.API.Controllers
             return _mapper.Map<IEnumerable<OwnerViewModel>>(await _service.GetAll(cancellationToken));
         }
 
-
         [HttpGet("{id}")]
         public async Task<OwnerViewModel> GetById(int id, CancellationToken cancellationToken)
         {
@@ -36,15 +37,13 @@ namespace PMCS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<OwnerViewModel> Insert([FromBody] PostOwnerViewModel viewModel, [FromServices] PostOwnerValidator postOwnerValidator, CancellationToken cancellationToken)
+        public async Task<OwnerViewModel> Add([FromBody] PostOwnerViewModel viewModel, CancellationToken cancellationToken)
         {
-            _postOwnerValidator = postOwnerValidator;
-
             await _postOwnerValidator.ValidateAsync(viewModel, cancellationToken);
 
             var model = _mapper.Map<OwnerModel>(viewModel);
 
-            return _mapper.Map<OwnerViewModel>(await _service.Insert(model, cancellationToken));
+            return _mapper.Map<OwnerViewModel>(await _service.Add(model, cancellationToken));
         }
 
         [HttpDelete("{id}")]
@@ -54,17 +53,15 @@ namespace PMCS.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<OwnerViewModel> Update(int id, [FromBody] UpdateOwnerViewModel viewModel, [FromServices] UpdateOwnerValidator updateOwnerValidator, CancellationToken cancellationToken)
+        public async Task<OwnerViewModel> Update(int id, [FromBody] UpdateOwnerViewModel viewModel, CancellationToken cancellationToken)
         {
-            _updateOwnerValidator = updateOwnerValidator;
-
             await _updateOwnerValidator.ValidateAsync(viewModel, cancellationToken);
 
             var model = _mapper.Map<OwnerModel>(viewModel);
+            model.Id = id;
 
             return _mapper.Map<OwnerViewModel>(await _service.Update(id, model, cancellationToken));
         }
-
 
     }
 }
