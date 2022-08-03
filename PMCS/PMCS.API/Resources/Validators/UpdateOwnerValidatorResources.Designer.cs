@@ -63,9 +63,9 @@ namespace PMCS.API.Resources.Validators {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Owner&apos;s full name is not valid..
         /// </summary>
-        public static string FullName {
+        public static string IncorrectFullName {
             get {
-                return ResourceManager.GetString("FullName", resourceCulture);
+                return ResourceManager.GetString("IncorrectFullName", resourceCulture);
             }
         }
     }

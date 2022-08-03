@@ -61,47 +61,47 @@ namespace PMCS.API.Resources.Validators {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Pet&apos;s BirthDate is not valid..
+        ///   Ищет локализованную строку, похожую на Owner has invalid id : it should be greater than zero..
         /// </summary>
-        public static string BirthDate {
+        public static string IdShouldBeGreaterThanZero {
             get {
-                return ResourceManager.GetString("BirthDate", resourceCulture);
+                return ResourceManager.GetString("IdShouldBeGreaterThanZero", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Owner has invalid id..
+        ///   Ищет локализованную строку, похожую на Pet&apos;s BirthDate is not valid..
         /// </summary>
-        public static string Id {
+        public static string IncorrectBirthDate {
             get {
-                return ResourceManager.GetString("Id", resourceCulture);
+                return ResourceManager.GetString("IncorrectBirthDate", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Info has invalid length..
         /// </summary>
-        public static string Info {
+        public static string IncorrectInfoLength {
             get {
-                return ResourceManager.GetString("Info", resourceCulture);
+                return ResourceManager.GetString("IncorrectInfoLength", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Pet&apos;s name is not valid..
         /// </summary>
-        public static string Name {
+        public static string IncorrectName {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("IncorrectName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Invalid weight..
+        ///   Ищет локализованную строку, похожую на Weight is not valid : out of valid range..
         /// </summary>
-        public static string Weight {
+        public static string WeightShouldBeWithinValidRange {
             get {
-                return ResourceManager.GetString("Weight", resourceCulture);
+                return ResourceManager.GetString("WeightShouldBeWithinValidRange", resourceCulture);
             }
         }
     }

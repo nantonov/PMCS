@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BirthDate" xml:space="preserve">
+  <data name="IncorrectBirthDate" xml:space="preserve">
     <value>Pet's BirthDate is not valid.</value>
   </data>
-  <data name="Info" xml:space="preserve">
+  <data name="IncorrectInfoLength" xml:space="preserve">
     <value>Info has invalid length.</value>
   </data>
-  <data name="Name" xml:space="preserve">
+  <data name="IncorrectName" xml:space="preserve">
     <value>Pet's name is not valid.</value>
   </data>
-  <data name="Weight" xml:space="preserve">
-    <value>Invalid weight.</value>
+  <data name="WeightShouldBeWithinValidRange" xml:space="preserve">
+    <value>Weight is not valid : out of valid range</value>
   </data>
 </root>

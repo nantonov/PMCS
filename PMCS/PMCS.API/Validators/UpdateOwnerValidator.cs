@@ -13,7 +13,7 @@ namespace PMCS.API.Validators
                 .NotEmpty()
                 .Length(MinNameLength, MaxNameLength)
                 .Matches(FullNameRegularExpression)
-                .WithMessage(UpdateOwnerValidatorResources.FullName);
+                .WithMessage(UpdateOwnerValidatorResources.IncorrectFullName);
         }
     }
 }
