@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PMCS.API.ViewModels.Pet;
 using PMCS.DLL.Interfaces.Services;

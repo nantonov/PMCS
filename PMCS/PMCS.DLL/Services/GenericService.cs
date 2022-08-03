@@ -6,7 +6,7 @@ using PMCS.DLL.Interfaces.Services;
 
 namespace PMCS.DLL.Services
 {
-    public class GenericService <TModel, TEntity> : IGenericService<TModel> 
+    public class GenericService<TModel, TEntity> : IGenericService<TModel>
         where TEntity : IHasIdEntity
         where TModel : IHasIdModel
     {

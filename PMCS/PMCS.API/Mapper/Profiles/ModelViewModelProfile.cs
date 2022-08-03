@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using PMCS.API.ViewModels.Owner;
 using PMCS.API.ViewModels.Pet;
-using PMCS.DAL.Entities;
 using PMCS.DLL.Models;
 
 namespace PMCS.API.Mapper.Profiles
