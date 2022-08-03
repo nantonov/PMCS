@@ -63,10 +63,10 @@ namespace PMCS.API.Controllers
         {
             await _updateOwnerValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
+            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+
             var model = _mapper.Map<OwnerModel>(viewModel);
             model.Id = id;
-
-            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
             return _mapper.Map<OwnerViewModel>(await _service.Update(model, cancellationToken));
         }

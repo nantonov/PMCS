@@ -64,10 +64,12 @@ namespace PMCS.API.Controllers
         {
             await _updatePetValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
+            var ownerId = await GetPetsOwnerId(id, cancellationToken);
+
             var model = _mapper.Map<PetModel>(viewModel);
 
             model.Id = id;
-            model.OwnerId = await GetPetsOwnerId(id, cancellationToken);
+            model.OwnerId = ownerId;
 
             return _mapper.Map<PetViewModel>(await _service.Update(model, cancellationToken));
         }
