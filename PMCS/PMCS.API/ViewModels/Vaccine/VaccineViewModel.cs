@@ -9,6 +9,6 @@ namespace PMCS.API.ViewModels.Vaccine
         public string? Description { get; set; }
         public DateTime DateTime { get; set; }
 
-        public PetViewModel Pet { get; set; }
+        public PetShortViewModel Pet { get; set; }
     }
 }

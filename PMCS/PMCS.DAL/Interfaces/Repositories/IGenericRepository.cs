@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PMCS.DAL.Interfaces.Entities;
+﻿using PMCS.DAL.Interfaces.Entities;
 
 namespace PMCS.DAL.Interfaces.Repositories
 {
