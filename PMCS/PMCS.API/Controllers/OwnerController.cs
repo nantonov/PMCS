@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using PMCS.API.Exceptions;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Owner;
 using PMCS.DLL.Interfaces.Services;
@@ -35,8 +34,6 @@ namespace PMCS.API.Controllers
         [HttpGet("{id}")]
         public async Task<OwnerViewModel> GetById(int id, CancellationToken cancellationToken)
         {
-            if (!await IsOwnerExists(id, cancellationToken)) throw new ModelIsNotFoundException();
-
             return _mapper.Map<OwnerViewModel>(await _ownerService.GetById(id, cancellationToken));
         }
 
@@ -53,8 +50,6 @@ namespace PMCS.API.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(int id, CancellationToken cancellationToken)
         {
-            if (!await IsOwnerExists(id, cancellationToken)) throw new ModelIsNotFoundException();
-
             await _ownerService.Delete(id, cancellationToken);
         }
 
@@ -63,14 +58,11 @@ namespace PMCS.API.Controllers
         {
             await _updateOwnerValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
-            if (!await IsOwnerExists(id, cancellationToken)) throw new ModelIsNotFoundException();
-
             var model = _mapper.Map<OwnerModel>(viewModel);
+
             model.Id = id;
 
             return _mapper.Map<OwnerViewModel>(await _ownerService.Update(model, cancellationToken));
         }
-
-        private async Task<bool> IsOwnerExists(int id, CancellationToken cancellationToken) => await _ownerService.IsModelExists(id, cancellationToken);
     }
 }

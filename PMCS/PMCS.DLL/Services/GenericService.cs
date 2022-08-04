@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PMCS.DAL.Interfaces.Entities;
 using PMCS.DAL.Interfaces.Repositories;
+using PMCS.DLL.Exceptions;
 using PMCS.DLL.Interfaces.Models;
 using PMCS.DLL.Interfaces.Services;
 
@@ -31,25 +32,34 @@ namespace PMCS.DLL.Services
 
         public virtual async Task<TModel> GetById(int id, CancellationToken cancellationToken)
         {
-            return _mapper.Map<TModel>(await _repository.GetById(id, cancellationToken));
+            var entity = await _repository.GetById(id, cancellationToken);
+
+            if (entity == null) throw new ModelIsNotFoundException();
+
+            return _mapper.Map<TModel>(entity);
         }
 
         public virtual async Task<TModel> Delete(int id, CancellationToken cancellationToken)
         {
+            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+
             return _mapper.Map<TModel>(await _repository.Delete(id, cancellationToken));
         }
 
         public virtual async Task<TModel> Update(TModel model, CancellationToken cancellationToken)
         {
+            if (!await IsModelExists(model.Id, cancellationToken)) throw new ModelIsNotFoundException();
+
             var entity = _mapper.Map<TEntity>(model);
 
             return _mapper.Map<TModel>(await _repository.Update(entity, cancellationToken));
         }
+
         public virtual async Task<bool> IsModelExists(int id, CancellationToken cancellationToken)
         {
-            var model = await GetById(id, cancellationToken);
+            var result = await _repository.GetById(id, cancellationToken);
 
-            return model != null;
+            return result != null;
         }
     }
 }

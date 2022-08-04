@@ -1,4 +1,4 @@
-﻿using PMCS.API.Exceptions;
+﻿using PMCS.DLL.Exceptions;
 
 namespace PMCS.API.Middlewares
 {
