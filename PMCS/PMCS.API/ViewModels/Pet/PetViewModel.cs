@@ -13,9 +13,9 @@ namespace PMCS.API.ViewModels.Pet
         public DateTime? BirthDate { get; set; }
         public float? Weight { get; set; }
 
-        public OwnerViewModel Owner { get; set; }
-        public IEnumerable<MealShortViewModel> Meals { get; set; }
-        public IEnumerable<WalkingShortViewModel> Walkings { get; set; }
-        public IEnumerable<VaccineShortViewModel> Vaccines { get; set; }
+        public OwnerShortViewModel Owner { get; set; }
+        public IEnumerable<MealViewModel> Meals { get; set; }
+        public IEnumerable<WalkingViewModel> Walkings { get; set; }
+        public IEnumerable<VaccineViewModel> Vaccines { get; set; }
     }
 }

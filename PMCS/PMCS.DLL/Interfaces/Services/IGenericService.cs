@@ -1,6 +1,8 @@
-﻿namespace PMCS.DLL.Interfaces.Services
+﻿using PMCS.DLL.Interfaces.Models;
+
+namespace PMCS.DLL.Interfaces.Services
 {
-    public interface IGenericService<TModel>
+    public interface IGenericService<TModel> where TModel : IHasIdModel
     {
         Task<TModel> Add(TModel model, CancellationToken cancellationToken);
         Task<IEnumerable<TModel>> GetAll(CancellationToken cancellationToken);

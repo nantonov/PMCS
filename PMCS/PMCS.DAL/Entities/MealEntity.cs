@@ -4,7 +4,7 @@ namespace PMCS.DAL.Entities
 {
     public class MealEntity : IHasIdEntity
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
         public DateTime DateTime { get; set; }

@@ -8,8 +8,9 @@ namespace PMCS.DAL
         public AppContext(DbContextOptions options) : base(options)
         {
             Database.Migrate();
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
-        
+
         public DbSet<MealEntity> Meals { get; set; }
         public DbSet<WalkingEntity> Walkings { get; set; }
         public DbSet<OwnerEntity> Owners { get; set; }
