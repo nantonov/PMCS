@@ -22,6 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\Validators\PostMealValidatorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PostMealValidatorResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Validators\PostOwnerValidatorResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -31,6 +36,21 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>PostPetValidatorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Validators\PostVaccineValidatorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PostVaccineValidatorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Validators\PostWalkingValidatorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PostWalkingValidatorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Validators\UpdateMealValidatorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UpdateMealValidatorResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Validators\UpdateOwnerValidatorResources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -42,9 +62,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UpdatePetValidatorResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Validators\UpdateVaccineValidatorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UpdateVaccineValidatorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Validators\UpdateWalkingValidatorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UpdateWalkingValidatorResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\Validators\PostMealValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PostMealValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Validators\PostOwnerValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PostOwnerValidatorResources.Designer.cs</LastGenOutput>
@@ -53,6 +87,18 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PostPetValidatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Validators\PostVaccineValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PostVaccineValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Validators\PostWalkingValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PostWalkingValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Validators\UpdateMealValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateMealValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Validators\UpdateOwnerValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateOwnerValidatorResources.Designer.cs</LastGenOutput>
@@ -60,6 +106,14 @@
     <EmbeddedResource Update="Resources\Validators\UpdatePetValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdatePetValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Validators\UpdateVaccineValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateVaccineValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Validators\UpdateWalkingValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateWalkingValidatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
