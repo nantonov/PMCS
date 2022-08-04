@@ -13,14 +13,16 @@ namespace PMCS.API.Controllers
     [ApiController]
     public class PetController : ControllerBase
     {
-        private readonly IPetService _service;
+        private readonly IPetService _petService;
+        private readonly IOwnerService _ownerService;
         private readonly IMapper _mapper;
         private readonly PostPetValidator _postPetValidator;
         private readonly UpdatePetValidator _updatePetValidator;
 
-        public PetController(IPetService petService, IMapper mapper, PostPetValidator postPetValidator, UpdatePetValidator updatePetValidator)
+        public PetController(IPetService petService, IOwnerService ownerService, IMapper mapper, PostPetValidator postPetValidator, UpdatePetValidator updatePetValidator)
         {
-            _service = petService;
+            _petService = petService;
+            _ownerService = ownerService;
             _mapper = mapper;
             _postPetValidator = postPetValidator;
             _updatePetValidator = updatePetValidator;
@@ -29,16 +31,16 @@ namespace PMCS.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<PetViewModel>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<PetViewModel>>(await _service.GetAll(cancellationToken));
+            return _mapper.Map<IEnumerable<PetViewModel>>(await _petService.GetAll(cancellationToken));
         }
 
 
         [HttpGet("{id}")]
         public async Task<PetViewModel> GetById(int id, CancellationToken cancellationToken)
         {
-            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+            if (!await IsPetExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
-            return _mapper.Map<PetViewModel>(await _service.GetById(id, cancellationToken));
+            return _mapper.Map<PetViewModel>(await _petService.GetById(id, cancellationToken));
         }
 
         [HttpPost]
@@ -48,15 +50,15 @@ namespace PMCS.API.Controllers
 
             var model = _mapper.Map<PetModel>(viewModel);
 
-            return _mapper.Map<PetViewModel>(await _service.Add(model, cancellationToken));
+            return _mapper.Map<PetViewModel>(await _petService.Add(model, cancellationToken));
         }
 
         [HttpDelete("{id}")]
         public async Task Delete(int id, CancellationToken cancellationToken)
         {
-            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+            if (!await IsPetExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
-            await _service.Delete(id, cancellationToken);
+            await _petService.Delete(id, cancellationToken);
         }
 
         [HttpPut("{id}")]
@@ -64,23 +66,18 @@ namespace PMCS.API.Controllers
         {
             await _updatePetValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
-            if (!await IsModelExists(id, cancellationToken) || !await IsModelExists(viewModel.OwnerId, cancellationToken)) throw new ModelIsNotFoundException();
+            if (!await IsOwnerExists(viewModel.OwnerId, cancellationToken) || !await IsPetExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
             var model = _mapper.Map<PetModel>(viewModel);
 
             model.Id = id;
 
-            return _mapper.Map<PetViewModel>(await _service.Update(model, cancellationToken));
+            return _mapper.Map<PetViewModel>(await _petService.Update(model, cancellationToken));
         }
 
-        private async Task<bool> IsModelExists(int id, CancellationToken cancellationToken)
-        {
-            var model = await _service.GetById(id, cancellationToken);
+        private async Task<bool> IsPetExists(int id, CancellationToken cancellationToken) => await _petService.IsModelExists(id, cancellationToken);
 
-            if (model == null) return false;
-
-            return true;
-        }
+        private async Task<bool> IsOwnerExists(int id, CancellationToken cancellationToken) => await _ownerService.IsModelExists(id, cancellationToken);
 
     }
 }

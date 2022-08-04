@@ -13,14 +13,14 @@ namespace PMCS.API.Controllers
     [ApiController]
     public class OwnerController : ControllerBase
     {
-        private readonly IOwnerService _service;
+        private readonly IOwnerService _ownerService;
         private readonly IMapper _mapper;
         private readonly PostOwnerValidator _postOwnerValidator;
         private readonly UpdateOwnerValidator _updateOwnerValidator;
 
-        public OwnerController(IOwnerService service, IMapper mapper, PostOwnerValidator postOwnerValidator, UpdateOwnerValidator updateOwnerValidator)
+        public OwnerController(IOwnerService ownerService, IMapper mapper, PostOwnerValidator postOwnerValidator, UpdateOwnerValidator updateOwnerValidator)
         {
-            _service = service;
+            _ownerService = ownerService;
             _mapper = mapper;
             _postOwnerValidator = postOwnerValidator;
             _updateOwnerValidator = updateOwnerValidator;
@@ -29,7 +29,7 @@ namespace PMCS.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<OwnerViewModel>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<OwnerViewModel>>(await _service.GetAll(cancellationToken));
+            return _mapper.Map<IEnumerable<OwnerViewModel>>(await _ownerService.GetAll(cancellationToken));
         }
 
         [HttpGet("{id}")]
@@ -37,7 +37,7 @@ namespace PMCS.API.Controllers
         {
             if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
-            return _mapper.Map<OwnerViewModel>(await _service.GetById(id, cancellationToken));
+            return _mapper.Map<OwnerViewModel>(await _ownerService.GetById(id, cancellationToken));
         }
 
         [HttpPost]
@@ -47,7 +47,7 @@ namespace PMCS.API.Controllers
 
             var model = _mapper.Map<OwnerModel>(viewModel);
 
-            return _mapper.Map<OwnerViewModel>(await _service.Add(model, cancellationToken));
+            return _mapper.Map<OwnerViewModel>(await _ownerService.Add(model, cancellationToken));
         }
 
         [HttpDelete("{id}")]
@@ -55,7 +55,7 @@ namespace PMCS.API.Controllers
         {
             if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
-            await _service.Delete(id, cancellationToken);
+            await _ownerService.Delete(id, cancellationToken);
         }
 
         [HttpPut("{id}")]
@@ -68,12 +68,12 @@ namespace PMCS.API.Controllers
             var model = _mapper.Map<OwnerModel>(viewModel);
             model.Id = id;
 
-            return _mapper.Map<OwnerViewModel>(await _service.Update(model, cancellationToken));
+            return _mapper.Map<OwnerViewModel>(await _ownerService.Update(model, cancellationToken));
         }
 
         private async Task<bool> IsModelExists(int id, CancellationToken cancellationToken)
         {
-            var model = await _service.GetById(id, cancellationToken);
+            var model = await _ownerService.GetById(id, cancellationToken);
 
             if (model == null) return false;
 
