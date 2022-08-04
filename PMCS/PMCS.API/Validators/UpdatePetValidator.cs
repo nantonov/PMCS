@@ -14,17 +14,20 @@ namespace PMCS.API.Validators
                 NotEmpty().
                 Length(MinNameLength, MaxNameLength).
                 Matches(NameRegularExpression).
-                WithMessage(PostPetValidatorResources.IncorrectName);
+                WithMessage(UpdatePetValidatorResources.IncorrectName);
             RuleFor(x => x.Info).
                 Length(MinInfoLength, MaxInfoLength).
-                WithMessage(PostPetValidatorResources.IncorrectInfoLength);
+                WithMessage(UpdatePetValidatorResources.IncorrectInfoLength);
             RuleFor(x => x.BirthDate)
                 .Must(IsAValidDate)
-                .WithMessage(PostPetValidatorResources.IncorrectBirthDate);
+                .WithMessage(UpdatePetValidatorResources.IncorrectBirthDate);
             RuleFor(x => x.Weight).
-                Cascade(CascadeMode.Stop).
                 InclusiveBetween(MinWeight, MaxWeight).
-                WithMessage(PostPetValidatorResources.WeightShouldBeWithinValidRange);
+                WithMessage(UpdatePetValidatorResources.WeightShouldBeWithinValidRange);
+            RuleFor(x => x.OwnerId).
+                NotEmpty().
+                GreaterThan(0).
+                WithMessage(UpdatePetValidatorResources.IdShouldBeGreaterThanZero);
         }
 
     }

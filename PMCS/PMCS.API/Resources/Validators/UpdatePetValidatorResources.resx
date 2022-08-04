@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="IdShouldBeGreaterThanZero" xml:space="preserve">
+    <value>Owner has invalid id : it should be greater than zero.</value>
+  </data>
   <data name="IncorrectBirthDate" xml:space="preserve">
     <value>Pet's BirthDate is not valid.</value>
   </data>
