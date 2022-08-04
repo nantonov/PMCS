@@ -10,8 +10,11 @@ namespace PMCS.DAL.DI
     {
         public static void RegisterDataAccessDependencies(this IServiceCollection services, IConfiguration config)
         {
-            services.AddTransient<IOwnerRepository,OwnerRepository>();
+            services.AddTransient<IOwnerRepository, OwnerRepository>();
             services.AddTransient<IPetRepository, PetRepository>();
+            services.AddTransient<IMealRepository, MealRepository>();
+            services.AddTransient<IWalkingRepository, WalkingRepository>();
+            services.AddTransient<IVaccineRepository, VaccineRepository>();
 
             services.AddDbContext<AppContext>(op =>
                 {
