@@ -4,16 +4,16 @@ namespace PMCS.API.Helpers
 {
     public class WalkingValidatorHelper
     {
-        public static bool IsAValidDate(DateTime mealDate)
+        public static bool IsAValidDate(DateTime date)
         {
-            return mealDate != null && mealDate <= DateTime.UtcNow;
+            return date != null && date <= DateTime.UtcNow;
         }
 
         public static bool IsWalkingDurationIsValid(DateTime started, DateTime finished)
         {
-            var walkingDuration = (finished - started).Minutes;
+            TimeSpan walkingDuration = finished - started;
 
-            return walkingDuration > MinWalkingDuration && walkingDuration < MaxWalkingDuration;
+            return walkingDuration.TotalSeconds > MinWalkingDurationInSeconds && walkingDuration.TotalSeconds < MaxWalkingDurationInSeconds;
         }
     }
 }

@@ -2,9 +2,9 @@
 {
     public class VaccineValidatorHelper
     {
-        public static bool IsAValidDate(DateTime mealDate)
+        public static bool IsAValidDate(DateTime date)
         {
-            return mealDate != null && mealDate <= DateTime.UtcNow;
+            return date != null && date <= DateTime.UtcNow;
         }
     }
 }
