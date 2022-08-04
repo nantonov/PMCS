@@ -14,8 +14,8 @@ namespace PMCS.API.ViewModels.Pet
         public float? Weight { get; set; }
 
         public OwnerShortViewModel Owner { get; set; }
-        public IEnumerable<MealViewModel> Meals { get; set; }
-        public IEnumerable<WalkingViewModel> Walkings { get; set; }
-        public IEnumerable<VaccineViewModel> Vaccines { get; set; }
+        public IEnumerable<MealShortViewModel> Meals { get; set; }
+        public IEnumerable<WalkingShortViewModel> Walkings { get; set; }
+        public IEnumerable<VaccineShortViewModel> Vaccines { get; set; }
     }
 }
