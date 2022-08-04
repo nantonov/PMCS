@@ -58,9 +58,22 @@ namespace PMCS.API.Controllers
         {
             await _updateVaccineValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
+            var petId = GetPetId(id, cancellationToken);
+
             var model = _mapper.Map<VaccineModel>(viewModel);
 
+            model.Id = id;
+            model.PetId = petId;
+
             return _mapper.Map<VaccineViewModel>(await _service.Update(model, cancellationToken));
+        }
+
+        private async Task<int> GetPetId(int petId, CancellationToken cancellationToken)
+        {
+            var model = await _service.GetById(petId, cancellationToken);
+            if (model == null) throw new ModelIsNotFoundException();
+
+            return model.PetId;
         }
     }
 }
