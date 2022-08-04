@@ -10,6 +10,10 @@ namespace PMCS.API.Validators
     {
         public UpdateWalkingValidator()
         {
+            RuleFor(x => x.PetId)
+                .NotEmpty()
+                .GreaterThan(0)
+                .WithMessage(UpdateWalkingValidatorResources.IdShouldBeGreaterThanZero);
             RuleFor(x => x.Description)
                 .Length(MinDescriptionLength, MaxDescriptionLength)
                 .WithMessage(UpdateWalkingValidatorResources.IncorrectDescriptionLength);

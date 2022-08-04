@@ -10,6 +10,10 @@ namespace PMCS.API.Validators
     {
         public UpdateVaccineValidator()
         {
+            RuleFor(x => x.PetId)
+                .NotEmpty()
+                .GreaterThan(0)
+                .WithMessage(UpdateVaccineValidatorResources.IdShouldBeGreaterThanZero);
             RuleFor(x => x.Description)
                 .Length(MinDescriptionLength, MaxDescriptionLength)
                 .WithMessage(UpdateVaccineValidatorResources.IncorrectDescriptionLength);

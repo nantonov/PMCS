@@ -120,6 +120,9 @@
   <data name="FinishedDateTimeMustBeLaterThanStartedOne" xml:space="preserve">
     <value>The finished walking DateTime must be later than started walking DateTime.</value>
   </data>
+  <data name="IdShouldBeGreaterThanZero" xml:space="preserve">
+    <value>Pet has invalid id : it should be greater than zero.</value>
+  </data>
   <data name="IncorrectDateTime" xml:space="preserve">
     <value>The DateTime is not valid.</value>
   </data>

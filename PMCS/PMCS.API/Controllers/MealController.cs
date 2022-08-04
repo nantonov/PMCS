@@ -62,22 +62,13 @@ namespace PMCS.API.Controllers
         {
             await _updateMealValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
-            var petId = GetPetId(id, cancellationToken);
+            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
             var model = _mapper.Map<MealModel>(viewModel);
 
             model.Id = id;
-            model.PetId = petId;
 
             return _mapper.Map<MealViewModel>(await _service.Update(model, cancellationToken));
-        }
-
-        private async Task<int> GetPetId(int petId, CancellationToken cancellationToken)
-        {
-            var model = await _service.GetById(petId, cancellationToken);
-            if (model == null) throw new ModelIsNotFoundException();
-
-            return model.PetId;
         }
 
         private async Task<bool> IsModelExists(int id, CancellationToken cancellationToken)

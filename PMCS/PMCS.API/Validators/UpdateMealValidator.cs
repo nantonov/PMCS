@@ -10,6 +10,10 @@ namespace PMCS.API.Validators
     {
         public UpdateMealValidator()
         {
+            RuleFor(x => x.PetId)
+                .NotEmpty()
+                .GreaterThan(0)
+                .WithMessage(UpdateMealValidatorResources.IdShouldBeGreaterThanZero);
             RuleFor(x => x.Title)
                 .NotEmpty()
                 .Length(MinTitleLength, MaxTitleLength)

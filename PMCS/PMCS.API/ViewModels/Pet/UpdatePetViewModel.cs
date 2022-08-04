@@ -6,5 +6,7 @@
         public string? Info { get; set; }
         public DateTime? BirthDate { get; set; }
         public float? Weight { get; set; }
+
+        public int OwnerId { get; set; }
     }
 }
