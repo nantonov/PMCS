@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Validators;
 using PMCS.API.ViewModels.Walking;
 using PMCS.DLL.Interfaces.Services;
 using PMCS.DLL.Models;
@@ -12,11 +14,15 @@ namespace PMCS.API.Controllers
     {
         private readonly IWalkingService _service;
         private readonly IMapper _mapper;
+        private readonly PostWalkingValidator _postWalkingValidator;
+        private readonly UpdateWalkingValidator _updateWalkingValidator;
 
-        public WalkingController(IWalkingService service, IMapper mapper)
+        public WalkingController(IWalkingService service, IMapper mapper, PostWalkingValidator postWalkingValidator, UpdateWalkingValidator updateWalkingValidator)
         {
             _service = service;
             _mapper = mapper;
+            _postWalkingValidator = postWalkingValidator;
+            _updateWalkingValidator = updateWalkingValidator;
         }
 
         [HttpGet]
@@ -34,6 +40,8 @@ namespace PMCS.API.Controllers
         [HttpPost]
         public async Task<WalkingViewModel> Add([FromBody] PostWalkingViewModel viewModel, CancellationToken cancellationToken)
         {
+            await _postWalkingValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
+
             var model = _mapper.Map<WalkingModel>(viewModel);
 
             return _mapper.Map<WalkingViewModel>(await _service.Add(model, cancellationToken));
@@ -48,6 +56,8 @@ namespace PMCS.API.Controllers
         [HttpPut("{id}")]
         public async Task<WalkingViewModel> Update(int id, [FromBody] UpdateWalkingViewModel viewModel, CancellationToken cancellationToken)
         {
+            await _updateWalkingValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
+
             var model = _mapper.Map<WalkingModel>(viewModel);
 
             return _mapper.Map<WalkingViewModel>(await _service.Update(model, cancellationToken));
