@@ -35,7 +35,7 @@ namespace PMCS.API.Controllers
         [HttpGet("{id}")]
         public async Task<OwnerViewModel> GetById(int id, CancellationToken cancellationToken)
         {
-            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+            if (!await IsOwnerExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
             return _mapper.Map<OwnerViewModel>(await _ownerService.GetById(id, cancellationToken));
         }
@@ -53,7 +53,7 @@ namespace PMCS.API.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(int id, CancellationToken cancellationToken)
         {
-            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+            if (!await IsOwnerExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
             await _ownerService.Delete(id, cancellationToken);
         }
@@ -63,7 +63,7 @@ namespace PMCS.API.Controllers
         {
             await _updateOwnerValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
-            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+            if (!await IsOwnerExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
             var model = _mapper.Map<OwnerModel>(viewModel);
             model.Id = id;
@@ -71,14 +71,6 @@ namespace PMCS.API.Controllers
             return _mapper.Map<OwnerViewModel>(await _ownerService.Update(model, cancellationToken));
         }
 
-        private async Task<bool> IsModelExists(int id, CancellationToken cancellationToken)
-        {
-            var model = await _ownerService.GetById(id, cancellationToken);
-
-            if (model == null) return false;
-
-            return true;
-        }
-
+        private async Task<bool> IsOwnerExists(int id, CancellationToken cancellationToken) => await _ownerService.IsModelExists(id, cancellationToken);
     }
 }
