@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PMCS.API.ViewModels.Meal;
-using PMCS.API.ViewModels.Vaccine;
 using PMCS.DLL.Interfaces.Services;
 using PMCS.DLL.Models;
 
@@ -35,11 +33,11 @@ namespace PMCS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<MealViewModel> Insert([FromBody] PostMealViewModel viewModel, CancellationToken cancellationToken)
+        public async Task<MealViewModel> Add([FromBody] PostMealViewModel viewModel, CancellationToken cancellationToken)
         {
             var model = _mapper.Map<MealModel>(viewModel);
 
-            return _mapper.Map<MealViewModel>(await _service.Insert(model, cancellationToken));
+            return _mapper.Map<MealViewModel>(await _service.Add(model, cancellationToken));
         }
 
         [HttpDelete("{id}")]

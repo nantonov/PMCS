@@ -5,7 +5,7 @@ using PMCS.DLL.Interfaces.Services;
 
 namespace PMCS.DLL.Services
 {
-    public class GenericService <TModel, TEntity> : IGenericService<TModel> where TEntity : IHasIdEntity
+    public class GenericService<TModel, TEntity> : IGenericService<TModel> where TEntity : IHasIdEntity
     {
         protected readonly IGenericRepository<TEntity> _repository;
         protected readonly IMapper _mapper;
@@ -14,7 +14,7 @@ namespace PMCS.DLL.Services
             _repository = repository;
             _mapper = mapper;
         }
-        public virtual async Task<TModel> Insert(TModel model, CancellationToken cancellationToken)
+        public virtual async Task<TModel> Add(TModel model, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TEntity>(model);
 
