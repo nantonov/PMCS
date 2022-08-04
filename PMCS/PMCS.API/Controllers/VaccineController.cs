@@ -34,6 +34,8 @@ namespace PMCS.API.Controllers
         [HttpGet("{id}")]
         public async Task<VaccineViewModel> GetById(int id, CancellationToken cancellationToken)
         {
+            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+
             return _mapper.Map<VaccineViewModel>(await _service.GetById(id, cancellationToken));
         }
 
@@ -50,6 +52,8 @@ namespace PMCS.API.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(int id, CancellationToken cancellationToken)
         {
+            if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
+
             await _service.Delete(id, cancellationToken);
         }
 
@@ -74,6 +78,14 @@ namespace PMCS.API.Controllers
             if (model == null) throw new ModelIsNotFoundException();
 
             return model.PetId;
+        }
+        private async Task<bool> IsModelExists(int id, CancellationToken cancellationToken)
+        {
+            var model = await _service.GetById(id, cancellationToken);
+
+            if (model == null) return false;
+
+            return true;
         }
     }
 }
