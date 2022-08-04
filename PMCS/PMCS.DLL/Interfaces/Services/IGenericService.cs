@@ -7,5 +7,6 @@
         Task<TModel> GetById(int id, CancellationToken cancellationToken);
         Task<TModel> Delete(int id, CancellationToken cancellationToken);
         Task<TModel> Update(TModel model, CancellationToken cancellationToken);
+        Task<bool> IsModelExists(int id, CancellationToken cancellationToken);
     }
 }

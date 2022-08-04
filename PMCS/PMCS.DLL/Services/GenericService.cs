@@ -42,5 +42,11 @@ namespace PMCS.DLL.Services
 
             return _mapper.Map<TModel>(await _repository.Update(entity, cancellationToken));
         }
+        public virtual async Task<bool> IsModelExists(int id, CancellationToken cancellationToken)
+        {
+            var result = await _repository.GetById(id, cancellationToken);
+
+            return result != null;
+        }
     }
 }
