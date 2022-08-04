@@ -1,8 +1,10 @@
-﻿namespace PMCS.DLL.Models
+﻿using PMCS.DLL.Interfaces.Models;
+
+namespace PMCS.DLL.Models
 {
-    public class MealModel
+    public class MealModel : IHasIdModel
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
         public DateTime DateTime { get; set; }

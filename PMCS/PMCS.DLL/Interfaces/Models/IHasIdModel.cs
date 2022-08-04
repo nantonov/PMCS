@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMCS.DAL.Interfaces.Entities
+namespace PMCS.DLL.Interfaces.Models
 {
-    public interface IHasIdEntity
+    public interface IHasIdModel
     {
         int Id { get; set; }
     }

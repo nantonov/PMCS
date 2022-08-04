@@ -1,10 +1,12 @@
-﻿namespace PMCS.API.Middlewares
+﻿using PMCS.DLL.Exceptions;
+
+namespace PMCS.API.Middlewares
 {
     public class ExceptionHandlingMiddleware
     {
         private readonly ILogger<ExceptionHandlingMiddleware> _logger;
         private readonly RequestDelegate _next;
-
+        private readonly int _errorDefaultStatusCode = StatusCodes.Status500InternalServerError;
         public ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger, RequestDelegate next)
         {
             _logger = logger;
@@ -17,8 +19,14 @@
             {
                 await _next(context);
             }
-            catch(Exception ex)
+            catch (ModelIsNotFoundException ex)
             {
+                context.Response.StatusCode = ex.StatusCode;
+                await HandleException(context, ex);
+            }
+            catch (Exception ex)
+            {
+                context.Response.StatusCode = _errorDefaultStatusCode;
                 await HandleException(context, ex);
             }
         }
@@ -40,7 +48,7 @@
         private void SetResponseParameters(HttpContext context)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Response.StatusCode = context.Response.StatusCode;
         }
     }
 }

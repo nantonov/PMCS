@@ -12,7 +12,7 @@ using PMCS.DAL;
 namespace PMCS.DAL.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20220727171333_Initial")]
+    [Migration("20220802113653_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,9 +26,11 @@ namespace PMCS.DAL.Migrations
 
             modelBuilder.Entity("PMCS.DAL.Entities.MealEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
@@ -36,8 +38,8 @@ namespace PMCS.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PetId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PetId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -52,9 +54,11 @@ namespace PMCS.DAL.Migrations
 
             modelBuilder.Entity("PMCS.DAL.Entities.OwnerEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -67,9 +71,11 @@ namespace PMCS.DAL.Migrations
 
             modelBuilder.Entity("PMCS.DAL.Entities.PetEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
@@ -81,8 +87,8 @@ namespace PMCS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
 
                     b.Property<float?>("Weight")
                         .HasColumnType("real");
@@ -96,9 +102,11 @@ namespace PMCS.DAL.Migrations
 
             modelBuilder.Entity("PMCS.DAL.Entities.VaccineEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
@@ -106,8 +114,8 @@ namespace PMCS.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PetId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PetId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -122,9 +130,11 @@ namespace PMCS.DAL.Migrations
 
             modelBuilder.Entity("PMCS.DAL.Entities.WalkingEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -132,8 +142,8 @@ namespace PMCS.DAL.Migrations
                     b.Property<DateTime>("Finished")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("PetId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PetId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Stared")
                         .HasColumnType("datetime2");
@@ -174,7 +184,7 @@ namespace PMCS.DAL.Migrations
             modelBuilder.Entity("PMCS.DAL.Entities.VaccineEntity", b =>
                 {
                     b.HasOne("PMCS.DAL.Entities.PetEntity", "Pet")
-                        .WithMany()
+                        .WithMany("Vaccines")
                         .HasForeignKey("PetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -201,6 +211,8 @@ namespace PMCS.DAL.Migrations
             modelBuilder.Entity("PMCS.DAL.Entities.PetEntity", b =>
                 {
                     b.Navigation("Meals");
+
+                    b.Navigation("Vaccines");
 
                     b.Navigation("Walkings");
                 });

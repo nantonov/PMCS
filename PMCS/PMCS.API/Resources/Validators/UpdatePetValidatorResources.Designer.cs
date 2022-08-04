@@ -61,6 +61,15 @@ namespace PMCS.API.Resources.Validators {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Owner has invalid id : it should be greater than zero..
+        /// </summary>
+        public static string IdShouldBeGreaterThanZero {
+            get {
+                return ResourceManager.GetString("IdShouldBeGreaterThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Pet&apos;s BirthDate is not valid..
         /// </summary>
         public static string IncorrectBirthDate {
