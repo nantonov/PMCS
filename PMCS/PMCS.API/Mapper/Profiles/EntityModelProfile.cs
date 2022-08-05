@@ -11,6 +11,12 @@ namespace PMCS.API.Mapper.Profiles
             CreateMap<OwnerEntity, OwnerModel>().ReverseMap();
 
             CreateMap<PetEntity, PetModel>().ReverseMap();
+
+            CreateMap<MealEntity, MealModel>().ReverseMap();
+
+            CreateMap<WalkingEntity, WalkingModel>().ReverseMap();
+
+            CreateMap<VaccineEntity, VaccineModel>().ReverseMap();
         }
     }
 }
