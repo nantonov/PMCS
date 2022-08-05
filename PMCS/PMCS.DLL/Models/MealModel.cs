@@ -10,6 +10,6 @@ namespace PMCS.DLL.Models
         public DateTime DateTime { get; set; }
 
         public int PetId { get; init; }
-        public MealModel Pet { get; init; }
+        public PetModel Pet { get; init; }
     }
 }
