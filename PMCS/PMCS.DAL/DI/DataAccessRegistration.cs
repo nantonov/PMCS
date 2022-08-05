@@ -13,6 +13,7 @@ namespace PMCS.DAL.DI
             services.AddTransient<IOwnerRepository, OwnerRepository>();
             services.AddTransient<IPetRepository, PetRepository>();
             services.AddTransient<IMealRepository, MealRepository>();
+            services.AddTransient<IVaccineRepository, VaccineRepository>();
 
             services.AddDbContext<AppContext>(op =>
                 {
