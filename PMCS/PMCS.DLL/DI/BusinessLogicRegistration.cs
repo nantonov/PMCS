@@ -11,6 +11,7 @@ namespace PMCS.DLL.DI
             services.AddTransient<IOwnerService, OwnerService>();
             services.AddTransient<IPetService, PetService>();
             services.AddTransient<IMealService, MealService>();
+            services.AddTransient<IVaccineService, VaccineService>();
         }
     }
 }
