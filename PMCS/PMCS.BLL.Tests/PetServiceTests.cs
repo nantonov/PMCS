@@ -19,7 +19,7 @@ namespace PMCS.BLL.Tests
         private readonly Mock<IMapper> _mapperMock = new();
 
         [Fact]
-        public async Task GetById_ShouldReturnPet_WhenPetExists()
+        public async Task GetById_ValidId_ReturnsModel()
         {
             var expectedPet = ValidPetEntity;
 
@@ -35,7 +35,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task GetById_ShouldThrowException_WhenPetDoesNotExist()
+        public async Task GetById_InexistentOwnerId_ThrowsModelIsNotFoundException()
         {
             _petRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
@@ -47,7 +47,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Update_ShouldUpdateOwner_WhenOwnerAndPetExist()
+        public async Task Update_ValidModel_ReturnsValidPetModel()
         {
             var expectedPet = ValidPetModel;
 
@@ -68,7 +68,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Update_ShouldThrowException_WhenOwnerDoesNotExist()
+        public async Task Update_ModelWithInexistentOwnerId_ThrowsModelIsNotFoundException()
         {
             _ownerRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
@@ -81,7 +81,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Update_ShouldThrowException_WhenPetDoesNotExist()
+        public async Task Update_ModelWithInexistentPetId_ThrowsModelIsNotFoundException()
         {
             _petRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
@@ -93,7 +93,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Get_ShouldReturnAllPets_WhenPetsExist()
+        public async Task GetAll_PetsExist_ReturnsPetModelList()
         {
             var expectedPets = ValidPetEntityList;
 
@@ -109,7 +109,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Get_ShouldReturnEmptyList_WhenOwnersDoNotExist()
+        public async Task GetAll_PetsDoNotExist_ReturnsEmptyList()
         {
             var expectedPets = EmptyPetEntityList;
 
@@ -124,7 +124,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Add_ShouldAddPet_WhenPetEntityIsValid()
+        public async Task Add_ValidModel_ReturnsValidOwnerModel()
         {
             var expectedPet = ValidPetModel;
 
@@ -142,7 +142,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Delete_ShouldThrowException_WhenOwnerDoesNotExist()
+        public async Task Delete_InexistentPetId_ThrowsModelIsNotFoundException()
         {
             _petRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
@@ -153,7 +153,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Delete_ShouldDeleteOwner_WhenOwnerExists()
+        public async Task Delete_ValidId_AppropriateMethodWasCalled()
         {
             var owner = ValidPetEntity;
 
