@@ -77,7 +77,6 @@ namespace PMCS.BLL.Tests
         {
             var expectedOwner = ValidOwnerModel;
 
-            _ownerRepositoryMock.Setup(x => x.GetById(ValidOwnerEntity.Id, default)).ReturnsAsync(ValidOwnerEntity);
             _ownerRepositoryMock.Setup(x => x.Insert(ValidOwnerEntity, default)).ReturnsAsync(ValidOwnerEntity);
             _mapperMock.Setup(m => m.Map<OwnerModel>(ValidOwnerEntity)).Returns(ValidOwnerModel);
             _mapperMock.Setup(m => m.Map<OwnerEntity>(ValidOwnerModel)).Returns(ValidOwnerEntity);
