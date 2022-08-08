@@ -24,9 +24,9 @@ namespace PMCS.BLL.Tests
             _ownerRepositoryMock.Setup(x => x.GetById(expectedOwner.Id, default)).ReturnsAsync(expectedOwner);
             _mapperMock.Setup(m => m.Map<OwnerModel>(expectedOwner)).Returns(ValidOwnerModel);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
 
-            var actualOwner = await _sut.GetById(expectedOwner.Id, default);
+            var actualOwner = await _service.GetById(expectedOwner.Id, default);
 
             Assert.Equal(expectedOwner.Id, actualOwner.Id);
             Assert.Equal(expectedOwner.FullName, actualOwner.FullName);
@@ -37,8 +37,8 @@ namespace PMCS.BLL.Tests
         {
             _ownerRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
-            async Task Act() => await _sut.GetById(It.IsAny<int>(), default);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            async Task Act() => await _service.GetById(It.IsAny<int>(), default);
 
             await Assert.ThrowsAsync<ModelIsNotFoundException>(Act);
         }
@@ -51,8 +51,8 @@ namespace PMCS.BLL.Tests
             _ownerRepositoryMock.Setup(x => x.Get(default)).ReturnsAsync(ValidOwnerEntityList);
             _mapperMock.Setup(m => m.Map<IEnumerable<OwnerModel>>(expectedOwners)).Returns(ValidOwnerModelList);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
-            var actualOwners = await _sut.GetAll(default);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            var actualOwners = await _service.GetAll(default);
 
             Assert.NotEmpty(actualOwners);
             Assert.Equal(expectedOwners.Count(), actualOwners.Count());
@@ -66,8 +66,8 @@ namespace PMCS.BLL.Tests
             _ownerRepositoryMock.Setup(x => x.Get(default)).ReturnsAsync(EmptyOwnerEntityList);
             _mapperMock.Setup(m => m.Map<IEnumerable<OwnerModel>>(expectedOwners)).Returns(EmptyOwnerModelList);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
-            var actualOwners = await _sut.GetAll(default);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            var actualOwners = await _service.GetAll(default);
 
             Assert.Empty(actualOwners);
         }
@@ -82,9 +82,9 @@ namespace PMCS.BLL.Tests
             _mapperMock.Setup(m => m.Map<OwnerModel>(ValidOwnerEntity)).Returns(ValidOwnerModel);
             _mapperMock.Setup(m => m.Map<OwnerEntity>(ValidOwnerModel)).Returns(ValidOwnerEntity);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
 
-            var actualOwner = await _sut.Add(expectedOwner, default);
+            var actualOwner = await _service.Add(expectedOwner, default);
 
             _ownerRepositoryMock.Verify(x => x.Insert(ValidOwnerEntity, default));
             Assert.Equal(expectedOwner.Id, actualOwner.Id);
@@ -96,8 +96,8 @@ namespace PMCS.BLL.Tests
         {
             _ownerRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
-            async Task Act() => await _sut.Delete(It.IsAny<int>(), default);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            async Task Act() => await _service.Delete(It.IsAny<int>(), default);
 
             await Assert.ThrowsAsync<ModelIsNotFoundException>(Act);
         }
@@ -111,8 +111,8 @@ namespace PMCS.BLL.Tests
             _ownerRepositoryMock.Setup(x => x.Delete(owner.Id, default));
             _mapperMock.Setup(m => m.Map<OwnerModel>(ValidOwnerEntity)).Returns(ValidOwnerModel);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
-            await _sut.Delete(owner.Id, default);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            await _service.Delete(owner.Id, default);
 
             _ownerRepositoryMock.Verify(x => x.Delete(owner.Id, default));
         }
@@ -127,9 +127,9 @@ namespace PMCS.BLL.Tests
             _mapperMock.Setup(m => m.Map<OwnerModel>(ValidOwnerEntity)).Returns(ValidOwnerModel);
             _mapperMock.Setup(m => m.Map<OwnerEntity>(ValidOwnerModel)).Returns(ValidOwnerEntity);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
 
-            var actualOwner = await _sut.Update(expectedOwner, default);
+            var actualOwner = await _service.Update(expectedOwner, default);
 
             _ownerRepositoryMock.Verify(x => x.Update(ValidOwnerEntity, default));
             Assert.Equal(expectedOwner.FullName, actualOwner.FullName);
@@ -140,9 +140,9 @@ namespace PMCS.BLL.Tests
         {
             _ownerRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
-            var _sut = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
+            var _service = new OwnerService(_ownerRepositoryMock.Object, _mapperMock.Object);
 
-            async Task Act() => await _sut.Update(ValidOwnerModel, default);
+            async Task Act() => await _service.Update(ValidOwnerModel, default);
 
             await Assert.ThrowsAsync<ModelIsNotFoundException>(Act);
         }
