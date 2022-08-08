@@ -17,7 +17,7 @@ namespace PMCS.BLL.Tests
         private readonly Mock<IMapper> _mapperMock = new();
 
         [Fact]
-        public async Task GetById_ShouldReturnOwner_WhenOwnerExists()
+        public async Task GetById_ValidId_ReturnsModel()
         {
             var expectedOwner = ValidOwnerEntity;
 
@@ -33,7 +33,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task GetById_ShouldThrowException_WhenOwnerDoesNotExist()
+        public async Task GetById_InexistentOwnerId_ThrowsModelIsNotFoundException()
         {
             _ownerRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
@@ -44,7 +44,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Get_ShouldReturnAllOwners_WhenOwnersExist()
+        public async Task GetAll_OwnersExist_ReturnsOwnerModelList()
         {
             var expectedOwners = ValidOwnerEntityList;
 
@@ -59,7 +59,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Get_ShouldReturnEmptyList_WhenOwnersDoNotExist()
+        public async Task GetAll_OwnersDoNotExist_ReturnsEmptyList()
         {
             var expectedOwners = EmptyOwnerEntityList;
 
@@ -73,11 +73,10 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Add_ShouldAddOwner_WhenOwnerEntityIsValid()
+        public async Task Add_ValidModel_ReturnsValidOwnerModel()
         {
             var expectedOwner = ValidOwnerModel;
 
-            _ownerRepositoryMock.Setup(x => x.GetById(ValidOwnerEntity.Id, default)).ReturnsAsync(ValidOwnerEntity);
             _ownerRepositoryMock.Setup(x => x.Insert(ValidOwnerEntity, default)).ReturnsAsync(ValidOwnerEntity);
             _mapperMock.Setup(m => m.Map<OwnerModel>(ValidOwnerEntity)).Returns(ValidOwnerModel);
             _mapperMock.Setup(m => m.Map<OwnerEntity>(ValidOwnerModel)).Returns(ValidOwnerEntity);
@@ -92,7 +91,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Delete_ShouldThrowException_WhenOwnerDoesNotExist()
+        public async Task Delete_InexistentOwnerId_ThrowsModelIsNotFoundException()
         {
             _ownerRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
@@ -103,7 +102,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Delete_ShouldDeleteOwner_WhenOwnerExists()
+        public async Task Delete_ValidId_AppropriateMethodWasCalled()
         {
             var owner = ValidOwnerEntity;
 
@@ -118,7 +117,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Update_ShouldUpdateOwner_WhenOwnerExists()
+        public async Task Update_ValidModel_ReturnsValidOwnerModel()
         {
             var expectedOwner = ValidOwnerModel;
 
@@ -136,7 +135,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Update_ShouldThrowException_WhenOwnerDoesNotExist()
+        public async Task Update_OwnerModelWithInexistentId_ThrowsModelIsNotFoundException()
         {
             _ownerRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
