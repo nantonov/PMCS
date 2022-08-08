@@ -124,7 +124,7 @@ namespace PMCS.BLL.Tests
         }
 
         [Fact]
-        public async Task Add_ValidModel_ReturnsValidOwnerModel()
+        public async Task Add_ValidModel_ReturnsValidPetModel()
         {
             var expectedPet = ValidPetModel;
 
