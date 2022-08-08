@@ -4,7 +4,7 @@ namespace PMCS.BLL.Tests.Entities
 {
     public static class TestMealEntity
     {
-        public static MealEntity ValidOwnerEntity = new MealEntity()
+        public static MealEntity ValidMealEntity = new MealEntity()
         {
             Id = 1,
             Title = "Test",
@@ -12,7 +12,7 @@ namespace PMCS.BLL.Tests.Entities
             DateTime = DateTime.Today
         };
 
-        public static IEnumerable<MealEntity> ValidOwnerEntityList = new List<MealEntity>()
+        public static IEnumerable<MealEntity> ValidMealEntityList = new List<MealEntity>()
         {
             new MealEntity()
             {
@@ -29,5 +29,7 @@ namespace PMCS.BLL.Tests.Entities
                 DateTime = DateTime.Today
             }
         };
+
+        public static IEnumerable<MealEntity> EmptyMealEntityList = new List<MealEntity>() { };
     }
 }

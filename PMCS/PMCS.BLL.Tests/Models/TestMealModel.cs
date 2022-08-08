@@ -4,7 +4,7 @@ namespace PMCS.BLL.Tests.Models
 {
     public static class TestMealModel
     {
-        public static MealModel ValidOwnerEntity = new MealModel()
+        public static MealModel ValidMealModel = new MealModel()
         {
             Id = 1,
             Title = "Test",
@@ -12,7 +12,7 @@ namespace PMCS.BLL.Tests.Models
             DateTime = DateTime.Today
         };
 
-        public static IEnumerable<MealModel> ValidOwnerEntityList = new List<MealModel>()
+        public static IEnumerable<MealModel> ValidMealModelList = new List<MealModel>()
         {
             new MealModel()
             {
@@ -30,6 +30,6 @@ namespace PMCS.BLL.Tests.Models
             }
         };
 
-        public static IEnumerable<MealModel> EmptyOwnerEntityList = new List<MealModel>() { };
+        public static IEnumerable<MealModel> EmptyMealModelList = new List<MealModel>() { };
     }
 }
