@@ -25,6 +25,10 @@ namespace PMCS.DAL.Tests.TestEntities
             OwnerId = 1
         };
 
+        public static PetEntity PetEntityToUpdate = new PetEntity() { Id = 10, Name = "Old Name", OwnerId = 10 };
+
+        public static PetEntity UpdatedPetEntity = new PetEntity() { Id = 10, Name = "New Name", OwnerId = 10 };
+
         public static IEnumerable<PetEntity> ValidPetEntityList = new List<PetEntity>()
         {
             new PetEntity()

@@ -35,6 +35,25 @@ namespace PMCS.DAL.Tests
         }
 
         [Fact]
+        public async Task Update_ValidEntity_UpdatesEntityInDataBase()
+        {
+            var entity = PetEntityToUpdate;
+            var owner = OwnerEntityToUpdate;
+
+            await _ownerRepository.Insert(owner, default);
+            await _petRepository.Insert(entity, default);
+
+            entity.Name = UpdatedPetEntity.Name;
+            await _petRepository.Update(entity, default);
+
+            var actual = await _petRepository.GetById(entity.Id, default);
+
+            Assert.Equal(entity.Name, actual.Name);
+
+            await _context.Database.EnsureDeletedAsync();
+        }
+
+        [Fact]
         public async Task Get_EntitiesDoNotExist_ReturnsEmptyList()
         {
             var actual = await _petRepository.Get(default);

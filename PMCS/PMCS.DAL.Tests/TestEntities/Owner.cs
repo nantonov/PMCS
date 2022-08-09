@@ -28,6 +28,10 @@ namespace PMCS.DAL.Tests.TestEntities
             FullName = "Inserted Owner"
         };
 
+        public static OwnerEntity OwnerEntityToUpdate = new OwnerEntity() { Id = 10, FullName = "Old Name" };
+
+        public static OwnerEntity UpdatedOwnerEntity = new OwnerEntity() { Id = 10, FullName = "New Name" };
+
         public static OwnerEntity OwnerEntityForPetGetByIdTest = new OwnerEntity() { Id = 1, FullName = "For Pet" };
 
         public static IEnumerable<OwnerEntity> ValidOwnerEntityList = new List<OwnerEntity>()
