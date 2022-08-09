@@ -1,18 +1,17 @@
+using PMCS.DAL.Entities;
 using PMCS.DAL.Repositories;
 using static PMCS.DAL.Tests.TestEntities.Owner;
 
 namespace PMCS.DAL.Tests
 {
-    public class OwnerRepositoryTests
+    public class OwnerRepositoryTests : IDisposable
     {
-        private readonly DbContextOptions<AppContext> _options;
-        private readonly AppContext _context;
+        private AppContext _context = new AppContext(new DbContextOptionsBuilder<AppContext>().
+            UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
         private readonly IOwnerRepository _repository;
 
         public OwnerRepositoryTests()
         {
-            _options = new DbContextOptionsBuilder<AppContext>().UseInMemoryDatabase("TestingDb").Options;
-            _context = new AppContext(_options);
             _repository = new OwnerRepository(_context);
         }
 
@@ -39,6 +38,8 @@ namespace PMCS.DAL.Tests
         [Fact]
         public async Task Get_ValidId_ReturnsOwnerEntity()
         {
+            await InsertInitialDataIntoDataBaseAsync();
+
             var expected = ValidOwnerEntity;
             var actual = await _repository.GetById(ValidOwnerEntity.Id, default);
 
@@ -57,29 +58,37 @@ namespace PMCS.DAL.Tests
         [Fact]
         public async Task Delete_ValidId_RemovesEntityFromDatabase()
         {
-            var expected = ValidOwnerEntityListWithDeletedEntity;
-            var deletedEntity = await _repository.Delete(OwnerEntityToDelete.Id, default);
+            await InsertInitialDataIntoDataBaseAsync();
 
-            var actual = await _repository.Get(default);
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+            await _repository.Delete(OwnerEntityToDelete.Id, default);
 
-            Assert.Equal(expected.Count(), actual.Count());
-            Assert.Equal(OwnerEntityToDelete.Id, deletedEntity.Id);
+            var actual = await _repository.GetById(OwnerEntityToDelete.Id, default);
+
+            Assert.Null(actual);
         }
 
         [Fact]
-        public async Task Update_ValidEntity_UpdatesEntity()
+        public async Task Insert_ValidEntity_InsertsEntityIntoDataBase()
         {
-            var expected = OwnerEntityToUpdate;
-            var actual = await _repository.Update(OwnerEntityToUpdate, default);
+            await _repository.Insert(OwnerEntityToInsert, default);
 
-            Assert.Equal(expected.Id, actual.Id);
-            Assert.Equal(OwnerEntityToUpdate.FullName, actual.FullName);
+            var actual = await _repository.GetById(OwnerEntityToInsert.Id, default);
+
+            Assert.NotNull(actual);
         }
-
 
         private async Task InsertInitialDataIntoDataBaseAsync()
         {
-            await _repository.InsertRange(ValidOwnerEntityList, default);
+            var entities = new List<OwnerEntity>(ValidOwnerEntityList);
+
+            await _repository.InsertRange(entities, default);
+        }
+
+        public void Dispose()
+        {
+            _context.Database.EnsureDeleted();
+            _context.Dispose();
         }
     }
 }
