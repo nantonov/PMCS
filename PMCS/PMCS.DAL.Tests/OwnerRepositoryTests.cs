@@ -21,6 +21,8 @@ namespace PMCS.DAL.Tests
             var actual = await _repository.Get(default);
 
             Assert.Empty(actual);
+
+            await _context.Database.EnsureDeletedAsync();
         }
 
         [Fact]
@@ -33,6 +35,8 @@ namespace PMCS.DAL.Tests
 
             Assert.NotEmpty(actual);
             Assert.Equal(expected.Count(), actual.Count());
+
+            await _context.Database.EnsureDeletedAsync();
         }
 
         [Fact]
@@ -45,6 +49,8 @@ namespace PMCS.DAL.Tests
 
             Assert.NotNull(actual);
             Assert.Equal(expected.Id, actual.Id);
+
+            await _context.Database.EnsureDeletedAsync();
         }
 
         [Fact]
@@ -53,6 +59,8 @@ namespace PMCS.DAL.Tests
             var actual = await _repository.GetById(OwnerEntityWithInexistentId.Id, default);
 
             Assert.Null(actual);
+
+            await _context.Database.EnsureDeletedAsync();
         }
 
         [Fact]
@@ -66,6 +74,8 @@ namespace PMCS.DAL.Tests
             var actual = await _repository.GetById(OwnerEntityToDelete.Id, default);
 
             Assert.Null(actual);
+
+            await _context.Database.EnsureDeletedAsync();
         }
 
         [Fact]
@@ -76,6 +86,8 @@ namespace PMCS.DAL.Tests
             var actual = await _repository.GetById(OwnerEntityToInsert.Id, default);
 
             Assert.NotNull(actual);
+
+            await _context.Database.EnsureDeletedAsync();
         }
 
         private async Task InsertInitialDataIntoDataBaseAsync()
@@ -87,7 +99,6 @@ namespace PMCS.DAL.Tests
 
         public void Dispose()
         {
-            _context.Database.EnsureDeleted();
             _context.Dispose();
         }
     }
