@@ -66,7 +66,11 @@ namespace PMCS.DAL.Tests
         [Fact]
         public async Task Get_EntitiesExist_ReturnsPetEntityList()
         {
-            await InsertInitialDataIntoDataBaseAsync();
+            var entities = new List<PetEntity>(ValidPetEntityList);
+            var owner = ValidOwnerEntity;
+
+            await _ownerRepository.Insert(owner, default);
+            await _petRepository.InsertRange(entities, default);
 
             var expected = ValidPetEntityList;
             var actual = await _petRepository.Get(default);
@@ -98,15 +102,6 @@ namespace PMCS.DAL.Tests
             Assert.NotNull(actual);
 
             await _context.Database.EnsureDeletedAsync();
-        }
-
-        private async Task InsertInitialDataIntoDataBaseAsync()
-        {
-            var entities = new List<PetEntity>(ValidPetEntityList);
-            var owner = ValidOwnerEntity;
-
-            await _ownerRepository.Insert(owner, default);
-            await _petRepository.InsertRange(entities, default);
         }
     }
 }
