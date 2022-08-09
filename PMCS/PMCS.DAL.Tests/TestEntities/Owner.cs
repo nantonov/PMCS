@@ -46,7 +46,5 @@ namespace PMCS.DAL.Tests.TestEntities
                 FullName = "Third Entity"
             }
         };
-
-        public static IEnumerable<OwnerEntity> EmptyOwnerEntityList = new List<OwnerEntity>();
     }
 }
