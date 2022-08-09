@@ -4,10 +4,8 @@ using static PMCS.DAL.Tests.TestEntities.Owner;
 
 namespace PMCS.DAL.Tests
 {
-    public class OwnerRepositoryTests : IDisposable
+    public class OwnerRepositoryTests : DALIntegrationTestsBase
     {
-        private AppContext _context = new AppContext(new DbContextOptionsBuilder<AppContext>().
-            UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
         private readonly IOwnerRepository _repository;
 
         public OwnerRepositoryTests()
@@ -95,11 +93,6 @@ namespace PMCS.DAL.Tests
             var entities = new List<OwnerEntity>(ValidOwnerEntityList);
 
             await _repository.InsertRange(entities, default);
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
         }
     }
 }

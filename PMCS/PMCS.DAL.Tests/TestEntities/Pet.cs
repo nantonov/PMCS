@@ -7,25 +7,29 @@ namespace PMCS.DAL.Tests.TestEntities
         public static PetEntity ValidPetEntity = new PetEntity()
         {
             Id = 1,
-            Name = "Test"
+            Name = "Test",
+            OwnerId = 1
         };
 
         public static PetEntity PetEntityWithInexistentId = new PetEntity()
         {
             Id = 1000,
-            Name = "Test"
+            Name = "Test",
+            OwnerId = 1
         };
 
         public static PetEntity PetEntityToDelete = new PetEntity()
         {
             Id = 1,
-            Name = "First"
+            Name = "First",
+            OwnerId = 1
         };
 
         public static PetEntity PetEntityToInsert = new PetEntity()
         {
             Id = 4,
-            Name = "Inserted"
+            Name = "Inserted",
+            OwnerId = 1
         };
 
         public static IEnumerable<PetEntity> ValidPetEntityList = new List<PetEntity>()
@@ -33,17 +37,20 @@ namespace PMCS.DAL.Tests.TestEntities
             new PetEntity()
             {
                 Id = 1,
-                Name = "First Entity"
+                Name = "First Entity",
+                OwnerId = 1
             },
             new PetEntity()
             {
                 Id = 2,
-                Name = "Second Entity"
+                Name = "Second Entity",
+                OwnerId = 1
             },
             new PetEntity()
             {
                 Id = 3,
-                Name = "Third Entity"
+                Name = "Third Entity",
+                OwnerId = 1
             }
         };
     }
