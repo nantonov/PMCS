@@ -5,22 +5,39 @@ using static PMCS.DAL.Tests.TestEntities.Pet;
 
 namespace PMCS.DAL.Tests
 {
-    [Collection("Our Test Collection #1")]
     public class PetRepositoryTests : DALIntegrationTestsBase
     {
-        private readonly IPetRepository _repository;
+        private readonly IPetRepository _petRepository;
         private readonly IOwnerRepository _ownerRepository;
 
         public PetRepositoryTests()
         {
-            _repository = new PetRepository(_context);
+            _petRepository = new PetRepository(_context);
             _ownerRepository = new OwnerRepository(_context);
+        }
+
+        [Fact]
+        public async Task Get_ValidId_ReturnsPetEntity()
+        {
+            var entity = ValidPetEntity;
+            var owner = OwnerEntityForPetGetByIdTest;
+
+            await _ownerRepository.Insert(owner, default);
+
+            await _petRepository.Insert(entity, default);
+
+            var actual = await _petRepository.GetById(ValidPetEntity.Id, default);
+
+            Assert.NotNull(actual);
+            Assert.Equal(ValidOwnerEntity.Id, actual.Id);
+
+            await _context.Database.EnsureDeletedAsync();
         }
 
         [Fact]
         public async Task Get_EntitiesDoNotExist_ReturnsEmptyList()
         {
-            var actual = await _repository.Get(default);
+            var actual = await _petRepository.Get(default);
 
             Assert.Empty(actual);
 
@@ -33,7 +50,7 @@ namespace PMCS.DAL.Tests
             await InsertInitialDataIntoDataBaseAsync();
 
             var expected = ValidPetEntityList;
-            var actual = await _repository.Get(default);
+            var actual = await _petRepository.Get(default);
 
             Assert.NotEmpty(actual);
             Assert.Equal(expected.Count(), actual.Count());
@@ -44,7 +61,7 @@ namespace PMCS.DAL.Tests
         [Fact]
         public async Task Get_InexistentId_ReturnsNull()
         {
-            var actual = await _repository.GetById(PetEntityWithInexistentId.Id, default);
+            var actual = await _petRepository.GetById(PetEntityWithInexistentId.Id, default);
 
             Assert.Null(actual);
 
@@ -55,9 +72,9 @@ namespace PMCS.DAL.Tests
         public async Task Insert_ValidEntity_InsertsEntityIntoDataBase()
         {
             await _ownerRepository.Insert(ValidOwnerEntity, default);
-            await _repository.Insert(PetEntityToInsert, default);
+            await _petRepository.Insert(PetEntityToInsert, default);
 
-            var actual = await _repository.GetById(PetEntityToInsert.Id, default);
+            var actual = await _petRepository.GetById(PetEntityToInsert.Id, default);
 
             Assert.NotNull(actual);
 
@@ -70,7 +87,7 @@ namespace PMCS.DAL.Tests
             var owner = ValidOwnerEntity;
 
             await _ownerRepository.Insert(owner, default);
-            await _repository.InsertRange(entities, default);
+            await _petRepository.InsertRange(entities, default);
         }
     }
 }
