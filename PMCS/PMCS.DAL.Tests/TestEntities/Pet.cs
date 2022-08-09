@@ -18,13 +18,6 @@ namespace PMCS.DAL.Tests.TestEntities
             OwnerId = 1
         };
 
-        public static PetEntity PetEntityToDelete = new PetEntity()
-        {
-            Id = 1,
-            Name = "First",
-            OwnerId = 1
-        };
-
         public static PetEntity PetEntityToInsert = new PetEntity()
         {
             Id = 4,
