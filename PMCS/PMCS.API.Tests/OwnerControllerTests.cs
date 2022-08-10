@@ -1,6 +1,5 @@
 ﻿using PMCS.API.Tests.ViewModels;
 using static PMCS.API.Tests.Entities.OwnerEntities;
-using static PMCS.API.Tests.ViewModels.OwnerViewModels;
 
 namespace PMCS.API.Tests
 {
@@ -59,7 +58,7 @@ namespace PMCS.API.Tests
             var actual = await getResponse.Content.ReadAsAsync<List<OwnerViewModel>>();
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(0, actual.Count());
+            Assert.Empty(actual);
         }
 
         [Fact]
@@ -87,7 +86,7 @@ namespace PMCS.API.Tests
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var content = SerializeObjectToHttpContent(ValidPostOwner);
+            var content = SerializeObjectToHttpContent(model);
 
             var postResponse = await _httpClient.PostAsync("/api/Owner", content);
 
@@ -96,7 +95,7 @@ namespace PMCS.API.Tests
 
             Assert.Equal(HttpStatusCode.OK, postResponse.StatusCode);
             Assert.NotEmpty(actual);
-            Assert.Equal(ValidPostOwner.FullName, actual.FirstOrDefault().FullName);
+            Assert.Equal(model.FullName, actual.FirstOrDefault().FullName);
         }
 
         [Theory]
