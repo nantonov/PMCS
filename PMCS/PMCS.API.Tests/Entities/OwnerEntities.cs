@@ -20,14 +20,17 @@ namespace PMCS.API.Tests.Entities
         {
             new OwnerEntity()
             {
+                Id = 1,
                 FullName = "First Owner"
             },
             new OwnerEntity()
             {
+                Id = 2,
                 FullName = "Second Owner"
             },
             new OwnerEntity()
             {
+                Id = 3,
                 FullName = "Third Owner"
             }
         };
