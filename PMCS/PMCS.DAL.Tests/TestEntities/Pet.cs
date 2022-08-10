@@ -29,18 +29,6 @@ namespace PMCS.DAL.Tests.TestEntities
             Owner = OwnerEntityToInsert
         };
 
-        public static PetEntity PetEntityForRelatedEntitiesTests = new PetEntity()
-        {
-            Id = 1,
-            Name = "For meal",
-            OwnerId = 1,
-            Owner = new OwnerEntity()
-            {
-                FullName = "Test Owner",
-                Id = 1
-            }
-        };
-
         public static PetEntity PetEntityToUpdate = new PetEntity() { Id = 10, Name = "Old Name", OwnerId = 10, Owner = OwnerEntityToUpdate };
 
         public static PetEntity UpdatedPetEntity = new PetEntity() { Id = 10, Name = "New Name", OwnerId = 10, Owner = OwnerEntityToUpdate };
