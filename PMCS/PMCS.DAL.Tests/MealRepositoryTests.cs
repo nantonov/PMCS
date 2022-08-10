@@ -15,7 +15,7 @@ namespace PMCS.DAL.Tests
         }
 
         [Fact]
-        public async Task Get_ValidId_ReturnsPetEntity()
+        public async Task Get_ValidId_ReturnsMealEntity()
         {
             var entity = ValidMealEntity;
 
