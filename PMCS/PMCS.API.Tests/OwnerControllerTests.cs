@@ -139,12 +139,12 @@ namespace PMCS.API.Tests
 
             var content = SerializeObjectToHttpContent(model);
 
-            var postResponse = await _httpClient.PutAsync($"https://localhost:7104/api/Owner/{ValidOwnerEntity.Id}", content);
+            var putResponse = await _httpClient.PutAsync($"https://localhost:7104/api/Owner/{ValidOwnerEntity.Id}", content);
 
             var getResponse = await _httpClient.GetAsync($"https://localhost:7104/api/Owner/{ValidOwnerEntity.Id}");
             var actual = await getResponse.Content.ReadAsAsync<OwnerViewModel>();
 
-            Assert.Equal(HttpStatusCode.OK, postResponse.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, putResponse.StatusCode);
             Assert.NotNull(actual);
             Assert.Equal(model.FullName, actual.FullName);
         }
