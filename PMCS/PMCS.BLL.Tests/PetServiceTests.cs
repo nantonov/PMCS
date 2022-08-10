@@ -39,7 +39,7 @@ namespace PMCS.BLL.Tests
         {
             _petRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
-            var service = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default);
+            var service = new PetService(_petRepositoryMock.Object, default, default);
 
             async Task Act() => await service.GetById(It.IsAny<int>(), default);
 
@@ -73,7 +73,7 @@ namespace PMCS.BLL.Tests
             _ownerRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
             var ownerService = new OwnerService(_ownerRepositoryMock.Object, default);
-            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, ownerService);
+            var petService = new PetService(_petRepositoryMock.Object, default, ownerService);
 
             async Task Act() => await petService.Update(ValidPetModel, default);
 
@@ -85,7 +85,7 @@ namespace PMCS.BLL.Tests
         {
             _petRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
-            var service = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default);
+            var service = new PetService(_petRepositoryMock.Object, default, default);
 
             async Task Act() => await service.Update(ValidPetModel, default);
 
@@ -146,7 +146,7 @@ namespace PMCS.BLL.Tests
         {
             _petRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
-            var service = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default);
+            var service = new PetService(_petRepositoryMock.Object, default, default);
             async Task Act() => await service.Delete(It.IsAny<int>(), default);
 
             await Assert.ThrowsAsync<ModelIsNotFoundException>(Act);

@@ -22,6 +22,14 @@ namespace PMCS.DAL.Repositories
             return entity;
         }
 
+        public async Task<IEnumerable<TEntity>> InsertRange(IEnumerable<TEntity> entities, CancellationToken cancellationToken)
+        {
+            await _dbSet.AddRangeAsync(entities, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return entities;
+        }
+
         public async Task<TEntity> Delete(int id, CancellationToken cancellationToken)
         {
             var entity = await GetById(id, cancellationToken);

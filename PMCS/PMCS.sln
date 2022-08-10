@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMCS.BLL.Tests", "PMCS.BLL.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCS.API.Tests", "PMCS.API.Tests\PMCS.API.Tests.csproj", "{EACCF36C-F0BC-41C6-A11D-A2A81C717423}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCS.DAL.Tests", "PMCS.DAL.Tests\PMCS.DAL.Tests.csproj", "{BBBAF1E0-9C84-478C-956B-F8EAE274A0D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EACCF36C-F0BC-41C6-A11D-A2A81C717423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EACCF36C-F0BC-41C6-A11D-A2A81C717423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EACCF36C-F0BC-41C6-A11D-A2A81C717423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBBAF1E0-9C84-478C-956B-F8EAE274A0D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBBAF1E0-9C84-478C-956B-F8EAE274A0D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBBAF1E0-9C84-478C-956B-F8EAE274A0D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBBAF1E0-9C84-478C-956B-F8EAE274A0D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

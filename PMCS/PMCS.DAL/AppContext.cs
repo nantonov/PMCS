@@ -7,7 +7,8 @@ namespace PMCS.DAL
     {
         public AppContext(DbContextOptions options) : base(options)
         {
-            //Database.Migrate();
+            if (Database.IsRelational()) Database.Migrate();
+
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
