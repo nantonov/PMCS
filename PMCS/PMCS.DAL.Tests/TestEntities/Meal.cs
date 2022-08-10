@@ -39,34 +39,14 @@ namespace PMCS.DAL.Tests.TestEntities
                 Id = 1,
                 Title = "First Entity",
                 PetId = 1,
-                Pet = new PetEntity()
-                {
-                    Id = 1,
-                    Name = "For meal",
-                    OwnerId = 1,
-                    Owner = new OwnerEntity()
-                    {
-                        FullName = "Test Owner",
-                        Id = 1
-                    }
-                }
+                Pet = ValidPetEntity
             },
             new MealEntity()
             {
                 Id = 2,
                 Title = "Second Entity",
-                PetId = 2,
-                Pet = new PetEntity()
-                {
-                    Id = 2,
-                    Name = "For meal",
-                    OwnerId = 2,
-                    Owner = new OwnerEntity()
-                    {
-                        FullName = "Test Owner",
-                        Id = 2
-                    }
-                }
+                PetId = 1,
+                Pet = ValidPetEntity
             },
         };
     }
