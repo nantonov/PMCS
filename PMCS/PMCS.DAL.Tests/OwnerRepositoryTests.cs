@@ -4,10 +4,8 @@ using static PMCS.DAL.Tests.TestEntities.Owner;
 
 namespace PMCS.DAL.Tests
 {
-    public class OwnerRepositoryTests : IDisposable
+    public class OwnerRepositoryTests : DALIntegrationTestsBase
     {
-        private AppContext _context = new AppContext(new DbContextOptionsBuilder<AppContext>().
-            UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
         private readonly IOwnerRepository _repository;
 
         public OwnerRepositoryTests()
@@ -90,16 +88,28 @@ namespace PMCS.DAL.Tests
             await _context.Database.EnsureDeletedAsync();
         }
 
+        [Fact]
+        public async Task Update_ValidEntity_UpdatesEntityInDataBase()
+        {
+            var entity = OwnerEntityToUpdate;
+
+            await _repository.Insert(entity, default);
+
+            entity.FullName = UpdatedOwnerEntity.FullName;
+            await _repository.Update(entity, default);
+
+            var actual = await _repository.GetById(entity.Id, default);
+
+            Assert.Equal(entity.FullName, actual.FullName);
+
+            await _context.Database.EnsureDeletedAsync();
+        }
+
         private async Task InsertInitialDataIntoDataBaseAsync()
         {
             var entities = new List<OwnerEntity>(ValidOwnerEntityList);
 
             await _repository.InsertRange(entities, default);
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
         }
     }
 }
