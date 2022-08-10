@@ -25,21 +25,21 @@ namespace PMCS.API.Tests.Entities
         {
             new PetEntity()
             {
-                Id = 1,
+                Id = 2,
                 Name = "First Owner",
                 OwnerId = 1,
                 Owner = ValidOwnerEntityForPetTests
             },
             new PetEntity()
             {
-                Id = 2,
+                Id = 3,
                 Name = "Second Owner",
                 OwnerId = 1,
                 Owner = ValidOwnerEntityForPetTests
             },
             new PetEntity()
             {
-                Id = 3,
+                Id = 4,
                 Name = "Third Owner",
                 OwnerId = 1,
                 Owner = ValidOwnerEntityForPetTests
