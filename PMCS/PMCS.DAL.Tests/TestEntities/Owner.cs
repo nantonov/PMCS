@@ -32,7 +32,7 @@ namespace PMCS.DAL.Tests.TestEntities
 
         public static OwnerEntity UpdatedOwnerEntity = new OwnerEntity() { Id = 10, FullName = "New Name" };
 
-        public static OwnerEntity OwnerEntityForPetGetByIdTest = new OwnerEntity() { Id = 1, FullName = "For Pet" };
+        public static OwnerEntity OwnerEntityForPetTest = new OwnerEntity() { Id = 1, FullName = "For Pet" };
 
         public static IEnumerable<OwnerEntity> ValidOwnerEntityList = new List<OwnerEntity>()
         {
