@@ -101,7 +101,7 @@ namespace PMCS.API.Tests
 
         [Theory]
         [ClassData(typeof(PostValidMealsTestData))]
-        public async Task Add_ValidPet_ReturnsOwnerWithOKStatusCode(PostMealViewModel model)
+        public async Task Add_ValidMeal_ReturnsModelWithOKStatusCode(PostMealViewModel model)
         {
             await _context.Database.EnsureDeletedAsync();
 
@@ -140,7 +140,7 @@ namespace PMCS.API.Tests
 
         [Theory]
         [ClassData(typeof(UpdateInvalidMealsTestData))]
-        public async Task Update_PetWithInvalidData_ValidationFailsWithBadRequestStatusCode(UpdateMealViewModel model)
+        public async Task Update_MealWithInvalidData_ValidationFailsWithBadRequestStatusCode(UpdateMealViewModel model)
         {
             await _context.Database.EnsureDeletedAsync();
 
@@ -157,7 +157,7 @@ namespace PMCS.API.Tests
 
         [Theory]
         [ClassData(typeof(UpdateValidMealsTestData))]
-        public async Task Update_ValidPetViewModel_ReturnsOwnerWithOKStatusCode(UpdateMealViewModel model)
+        public async Task Update_ValidMealViewModel_ReturnsMealWithOKStatusCode(UpdateMealViewModel model)
         {
             await _context.Database.EnsureDeletedAsync();
 
@@ -178,7 +178,7 @@ namespace PMCS.API.Tests
         }
 
         [Fact]
-        public async Task GetAll_PetsExist_ReturnsOwnersListWithOKStatusCode()
+        public async Task GetAll_MealsExist_ReturnsMealsListWithOKStatusCode()
         {
             await _context.Database.EnsureDeletedAsync();
 

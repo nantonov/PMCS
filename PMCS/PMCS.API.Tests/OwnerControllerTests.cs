@@ -16,9 +16,10 @@ namespace PMCS.API.Tests
             await _context.SaveChangesAsync();
 
             var response = await _httpClient.GetAsync("https://localhost:7104/api/Owner");
+            var actual = await response.Content.ReadAsAsync<List<OwnerViewModel>>();
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.NotEmpty(await response.Content.ReadAsAsync<List<OwnerViewModel>>());
+            Assert.NotEmpty(actual);
         }
 
         [Fact]
@@ -77,9 +78,10 @@ namespace PMCS.API.Tests
             await _context.Database.EnsureDeletedAsync();
 
             var response = await _httpClient.GetAsync("https://localhost:7104/api/Owner");
+            var actual = await response.Content.ReadAsAsync<List<OwnerViewModel>>();
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Empty(await response.Content.ReadAsAsync<List<OwnerViewModel>>());
+            Assert.Empty(actual);
         }
 
         [Theory]
