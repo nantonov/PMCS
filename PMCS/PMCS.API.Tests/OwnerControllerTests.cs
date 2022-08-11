@@ -4,6 +4,7 @@ using static PMCS.API.Tests.ViewModels.OwnerViewModels;
 
 namespace PMCS.API.Tests
 {
+    [Collection("Sequential")]
     public class OwnerControllerTests : APIIntegrationTestsBase
     {
         [Fact]
