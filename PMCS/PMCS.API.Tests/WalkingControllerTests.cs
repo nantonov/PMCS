@@ -1,5 +1,4 @@
 ﻿using PMCS.API.Tests.ViewModels.Meal;
-using PMCS.API.ViewModels.Vaccine;
 using PMCS.API.ViewModels.Walking;
 using static PMCS.API.Tests.Entities.WalkingEntities;
 
@@ -109,7 +108,7 @@ namespace PMCS.API.Tests
 
         [Theory]
         [ClassData(typeof(PostInvalidWalkingsTestData))]
-        public async Task Add_VaccineWithInvalidData_ValidationFailsWithBadRequestStatusCode(PostWalkingViewModel model)
+        public async Task Add_WalkingWithInvalidData_ValidationFailsWithBadRequestStatusCode(PostWalkingViewModel model)
         {
             await _context.Database.EnsureDeletedAsync();
 
@@ -119,14 +118,14 @@ namespace PMCS.API.Tests
 
             var content = SerializeObjectToHttpContent(model);
 
-            var response = await _httpClient.PostAsync("/api/Vaccine", content);
+            var response = await _httpClient.PostAsync("/api/Walking", content);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [Theory]
-        [ClassData(typeof(UpdateInvalidVaccinesTestData))]
-        public async Task Update_VaccineWithInvalidData_ValidationFailsWithBadRequestStatusCode(UpdateVaccineViewModel model)
+        [ClassData(typeof(UpdateInvalidWalkingsTestData))]
+        public async Task Update_WalkingWithInvalidData_ValidationFailsWithBadRequestStatusCode(UpdateWalkingViewModel model)
         {
             await _context.Database.EnsureDeletedAsync();
 
@@ -136,7 +135,7 @@ namespace PMCS.API.Tests
 
             var content = SerializeObjectToHttpContent(model);
 
-            var response = await _httpClient.PutAsync($"/api/Vaccine/{ValidWalkingEntity.Id}", content);
+            var response = await _httpClient.PutAsync($"/api/Walking/{ValidWalkingEntity.Id}", content);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
@@ -164,7 +163,7 @@ namespace PMCS.API.Tests
         }
 
         [Fact]
-        public async Task GetAll_VaccinesExist_ReturnsVaccinesListWithOKStatusCode()
+        public async Task GetAll_WalkingsExist_ReturnsWalkingsListWithOKStatusCode()
         {
             await _context.Database.EnsureDeletedAsync();
 
