@@ -4,6 +4,7 @@ using static PMCS.API.Tests.Entities.OwnerEntities;
 
 namespace PMCS.API.Tests
 {
+    [Collection("Sequential")]
     public class OwnerControllerTests : APIIntegrationTestsBase
     {
         [Fact]

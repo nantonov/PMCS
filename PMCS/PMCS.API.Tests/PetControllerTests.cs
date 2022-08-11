@@ -5,8 +5,32 @@ using static PMCS.API.Tests.Entities.PetEntities;
 
 namespace PMCS.API.Tests
 {
+    [Collection("Sequential")]
     public class PetControllerTests : APIIntegrationTestsBase
     {
+        [Theory]
+        [ClassData(typeof(PostValidPetsTestData))]
+        public async Task Add_ValidPet_ReturnsOwnerWithOKStatusCode(PostPetViewModel model)
+        {
+            await _context.Database.EnsureDeletedAsync();
+
+            await _context.AddAsync(ValidOwnerEntityForPetTests);
+            await _context.SaveChangesAsync();
+
+            var content = SerializeObjectToHttpContent(model);
+
+            var postResponse = await _httpClient.PostAsync("/api/Pet", content);
+
+            var getResponse = await _httpClient.GetAsync($"/api/Pet/");
+            var actual = await getResponse.Content.ReadAsAsync<List<PetViewModel>>();
+
+            Assert.Equal(HttpStatusCode.OK, postResponse.StatusCode);
+            Assert.NotEmpty(actual);
+            Assert.NotNull(actual.FirstOrDefault(x => x.Name == model.Name));
+            Assert.NotNull(actual.FirstOrDefault(x => x.BirthDate == model.BirthDate));
+        }
+
+
         [Fact]
         public async Task GetAll_PetsExist_ReturnsOwnersListWithOKStatusCode()
         {
@@ -82,28 +106,6 @@ namespace PMCS.API.Tests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.NotNull(actual);
             Assert.Equal(expected.Id, actual.Id);
-        }
-
-        [Theory]
-        [ClassData(typeof(PostValidPetsTestData))]
-        public async Task Add_ValidPet_ReturnsOwnerWithOKStatusCode(PostPetViewModel model)
-        {
-            await _context.Database.EnsureDeletedAsync();
-
-            await _context.AddAsync(ValidOwnerEntityForPetTests);
-            await _context.SaveChangesAsync();
-
-            var content = SerializeObjectToHttpContent(model);
-
-            var postResponse = await _httpClient.PostAsync("/api/Pet", content);
-
-            var getResponse = await _httpClient.GetAsync("/api/Pet/");
-            var actual = await getResponse.Content.ReadAsAsync<List<PetViewModel>>();
-
-            Assert.Equal(HttpStatusCode.OK, postResponse.StatusCode);
-            Assert.NotEmpty(actual);
-            Assert.Equal(model.Name, actual.FirstOrDefault().Name);
-            Assert.Equal(model.BirthDate, actual.FirstOrDefault().BirthDate);
         }
 
         [Theory]
