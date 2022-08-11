@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace PMCS.API.Tests.ViewModels
+namespace PMCS.API.Tests.ViewModels.Pet
 {
     public class PostOwnersWithInvalidFullNamesTestData : IEnumerable<object[]>
     {

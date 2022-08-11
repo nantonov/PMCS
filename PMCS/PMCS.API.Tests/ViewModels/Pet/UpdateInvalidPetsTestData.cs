@@ -1,7 +1,7 @@
 ﻿using PMCS.API.ViewModels.Pet;
 using System.Collections;
 
-namespace PMCS.API.Tests.ViewModels
+namespace PMCS.API.Tests.ViewModels.Pet
 {
     public class UpdateInvalidPetsTestData : IEnumerable<object[]>
     {

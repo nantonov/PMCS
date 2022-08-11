@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace PMCS.API.Tests.ViewModels
+namespace PMCS.API.Tests.ViewModels.Owner
 {
     public class PostValidOwnersTestData : IEnumerable<object[]>
     {

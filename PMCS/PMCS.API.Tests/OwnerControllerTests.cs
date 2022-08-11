@@ -1,4 +1,5 @@
-﻿using PMCS.API.Tests.ViewModels;
+﻿using PMCS.API.Tests.ViewModels.Owner;
+using PMCS.API.Tests.ViewModels.Pet;
 using static PMCS.API.Tests.Entities.OwnerEntities;
 
 namespace PMCS.API.Tests

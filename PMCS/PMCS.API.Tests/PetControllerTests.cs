@@ -1,4 +1,4 @@
-﻿using PMCS.API.Tests.ViewModels;
+﻿using PMCS.API.Tests.ViewModels.Pet;
 using PMCS.API.ViewModels.Pet;
 using static PMCS.API.Tests.Entities.OwnerEntities;
 using static PMCS.API.Tests.Entities.PetEntities;
@@ -124,7 +124,7 @@ namespace PMCS.API.Tests
 
         [Theory]
         [ClassData(typeof(UpdateInvalidPetsTestData))]
-        public async Task Update_PetWithInvalidName_ValidationFailsWithBadRequestStatusCode(UpdatePetViewModel model)
+        public async Task Update_PetWithInvalidData_ValidationFailsWithBadRequestStatusCode(UpdatePetViewModel model)
         {
             await _context.Database.EnsureDeletedAsync();
 
@@ -141,7 +141,7 @@ namespace PMCS.API.Tests
 
         [Theory]
         [ClassData(typeof(UpdateValidPetsTestData))]
-        public async Task Update_ValidOwnerViewModel_ReturnsOwnerWithOKStatusCode(UpdatePetViewModel model)
+        public async Task Update_ValidPetViewModel_ReturnsOwnerWithOKStatusCode(UpdatePetViewModel model)
         {
             await _context.Database.EnsureDeletedAsync();
 
