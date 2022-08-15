@@ -1,6 +1,6 @@
-﻿using PMCS.API.Tests.ViewModels;
+﻿using PMCS.API.Tests.ViewModels.Owner;
+using PMCS.API.Tests.ViewModels.Pet;
 using static PMCS.API.Tests.Entities.OwnerEntities;
-using static PMCS.API.Tests.ViewModels.OwnerViewModels;
 
 namespace PMCS.API.Tests
 {
@@ -15,8 +15,9 @@ namespace PMCS.API.Tests
             await _context.Owners.AddRangeAsync(ValidOwnerEntityList);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.GetAsync("https://localhost:7104/api/Owner");
+            var response = await _httpClient.GetAsync("/api/Owner");
             var actual = await response.Content.ReadAsAsync<List<OwnerViewModel>>();
+            
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.NotEmpty(actual);
@@ -28,7 +29,7 @@ namespace PMCS.API.Tests
             await _context.Owners.AddAsync(ValidOwnerEntity);
             await _context.AddRangeAsync();
 
-            var response = await _httpClient.GetAsync("https://localhost:7104/api/Owner/1");
+            var response = await _httpClient.GetAsync("/api/Owner/1");
 
             var expected = ValidOwnerEntityList.FirstOrDefault(x => x.Id == 1);
             var actual = await response.Content.ReadAsAsync<OwnerViewModel>();
@@ -41,7 +42,7 @@ namespace PMCS.API.Tests
         [Fact]
         public async Task GetById_OwnerWithInexistentId_SetsNotFoundStatusCode()
         {
-            var response = await _httpClient.GetAsync($"https://localhost:7104/api/Owner/{OwnerEntityWithInvalidId.Id}");
+            var response = await _httpClient.GetAsync($"/api/Owner/{OwnerEntityWithInvalidId.Id}");
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
@@ -54,20 +55,20 @@ namespace PMCS.API.Tests
             await _context.Owners.AddAsync(ValidOwnerEntity);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.DeleteAsync($"https://localhost:7104/api/Owner/{ValidOwnerEntity.Id}");
+            var response = await _httpClient.DeleteAsync($"/api/Owner/{ValidOwnerEntity.Id}");
 
-            var getResponse = await _httpClient.GetAsync("https://localhost:7104/api/Owner");
+            var getResponse = await _httpClient.GetAsync("/api/Owner");
 
             var actual = await getResponse.Content.ReadAsAsync<List<OwnerViewModel>>();
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(0, actual.Count());
+            Assert.Empty(actual);
         }
 
         [Fact]
         public async Task Delete_OwnerWithInexistentId_SetsNotFoundStatusCode()
         {
-            var response = await _httpClient.DeleteAsync($"https://localhost:7104/api/Owner/{OwnerEntityWithInvalidId.Id}");
+            var response = await _httpClient.DeleteAsync($"/api/Owner/{OwnerEntityWithInvalidId.Id}");
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
@@ -77,7 +78,7 @@ namespace PMCS.API.Tests
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.GetAsync("https://localhost:7104/api/Owner");
+            var response = await _httpClient.GetAsync("/api/Owner");
             var actual = await response.Content.ReadAsAsync<List<OwnerViewModel>>();
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -90,16 +91,16 @@ namespace PMCS.API.Tests
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var content = SerializeObjectToHttpContent(ValidPostOwner);
+            var content = SerializeObjectToHttpContent(model);
 
-            var postResponse = await _httpClient.PostAsync("https://localhost:7104/api/Owner", content);
+            var postResponse = await _httpClient.PostAsync("/api/Owner", content);
 
-            var getResponse = await _httpClient.GetAsync("https://localhost:7104/api/Owner");
+            var getResponse = await _httpClient.GetAsync("/api/Owner");
             var actual = await getResponse.Content.ReadAsAsync<List<OwnerViewModel>>();
 
             Assert.Equal(HttpStatusCode.OK, postResponse.StatusCode);
             Assert.NotEmpty(actual);
-            Assert.Equal(ValidPostOwner.FullName, actual.FirstOrDefault().FullName);
+            Assert.Equal(model.FullName, actual.FirstOrDefault().FullName);
         }
 
         [Theory]
@@ -110,7 +111,7 @@ namespace PMCS.API.Tests
 
             var content = SerializeObjectToHttpContent(model);
 
-            var response = await _httpClient.PostAsync("https://localhost:7104/api/Owner", content);
+            var response = await _httpClient.PostAsync("/api/Owner", content);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
@@ -126,7 +127,7 @@ namespace PMCS.API.Tests
 
             var content = SerializeObjectToHttpContent(model);
 
-            var response = await _httpClient.PutAsync($"https://localhost:7104/api/Owner/{ValidOwnerEntity.Id}", content);
+            var response = await _httpClient.PutAsync($"/api/Owner/{ValidOwnerEntity.Id}", content);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
@@ -142,9 +143,9 @@ namespace PMCS.API.Tests
 
             var content = SerializeObjectToHttpContent(model);
 
-            var putResponse = await _httpClient.PutAsync($"https://localhost:7104/api/Owner/{ValidOwnerEntity.Id}", content);
+            var putResponse = await _httpClient.PutAsync($"/api/Owner/{ValidOwnerEntity.Id}", content);
 
-            var getResponse = await _httpClient.GetAsync($"https://localhost:7104/api/Owner/{ValidOwnerEntity.Id}");
+            var getResponse = await _httpClient.GetAsync($"/api/Owner/{ValidOwnerEntity.Id}");
             var actual = await getResponse.Content.ReadAsAsync<OwnerViewModel>();
 
             Assert.Equal(HttpStatusCode.OK, putResponse.StatusCode);
