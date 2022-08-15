@@ -1,4 +1,4 @@
-﻿namespace PMCS.API.Tests.ViewModels
+﻿namespace PMCS.API.Tests.ViewModels.Owner
 {
     public static class OwnerViewModels
     {

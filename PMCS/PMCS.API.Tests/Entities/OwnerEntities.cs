@@ -34,5 +34,11 @@ namespace PMCS.API.Tests.Entities
                 FullName = "Third Owner"
             }
         };
+
+        public static OwnerEntity ValidOwnerEntityForPetTests = new OwnerEntity()
+        {
+            Id = 1,
+            FullName = "Test Owner"
+        };
     }
 }
