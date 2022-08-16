@@ -22,12 +22,16 @@ namespace PMCS.DLL.Services
         {
             var entity = _mapper.Map<TEntity>(model);
 
-            return _mapper.Map<TModel>(await _repository.Insert(entity, cancellationToken));
+            var result = await _repository.Insert(entity, cancellationToken);
+
+            return _mapper.Map<TModel>(result);
         }
 
         public virtual async Task<IEnumerable<TModel>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<TModel>>(await _repository.Get(cancellationToken));
+            var result = await _repository.Get(cancellationToken);
+
+            return _mapper.Map<IEnumerable<TModel>>(result);
         }
 
         public virtual async Task<TModel> GetById(int id, CancellationToken cancellationToken)
@@ -43,7 +47,9 @@ namespace PMCS.DLL.Services
         {
             if (!await IsModelExists(id, cancellationToken)) throw new ModelIsNotFoundException();
 
-            return _mapper.Map<TModel>(await _repository.Delete(id, cancellationToken));
+            var result = await _repository.Delete(id, cancellationToken);
+
+            return _mapper.Map<TModel>(result);
         }
 
         public virtual async Task<TModel> Update(TModel model, CancellationToken cancellationToken)
@@ -52,7 +58,9 @@ namespace PMCS.DLL.Services
 
             var entity = _mapper.Map<TEntity>(model);
 
-            return _mapper.Map<TModel>(await _repository.Update(entity, cancellationToken));
+            var result = await _repository.Update(entity, cancellationToken);
+
+            return _mapper.Map<TModel>(result);
         }
 
         public virtual async Task<bool> IsModelExists(int id, CancellationToken cancellationToken)

@@ -15,6 +15,7 @@ namespace PMCS.DLL.Services
         {
             _petService = petService;
         }
+
         public override async Task<VaccineModel> Update(VaccineModel model, CancellationToken cancellationToken)
         {
             if (!await IsModelExists(model.Id, cancellationToken) || !await _petService.IsModelExists(model.PetId, cancellationToken))
@@ -22,7 +23,9 @@ namespace PMCS.DLL.Services
 
             var entity = _mapper.Map<VaccineEntity>(model);
 
-            return _mapper.Map<VaccineModel>(await _repository.Update(entity, cancellationToken));
+            var result = await _repository.Update(entity, cancellationToken);
+
+            return _mapper.Map<VaccineModel>(result);
         }
     }
 }

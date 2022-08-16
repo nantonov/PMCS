@@ -28,13 +28,17 @@ namespace PMCS.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<OwnerViewModel>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<OwnerViewModel>>(await _ownerService.GetAll(cancellationToken));
+            var models = await _ownerService.GetAll(cancellationToken);
+
+            return _mapper.Map<IEnumerable<OwnerViewModel>>(models);
         }
 
         [HttpGet("{id}")]
         public async Task<OwnerViewModel> GetById(int id, CancellationToken cancellationToken)
         {
-            return _mapper.Map<OwnerViewModel>(await _ownerService.GetById(id, cancellationToken));
+            var model = await _ownerService.GetById(id, cancellationToken);
+
+            return _mapper.Map<OwnerViewModel>(model);
         }
 
         [HttpPost]
@@ -44,7 +48,9 @@ namespace PMCS.API.Controllers
 
             var model = _mapper.Map<OwnerModel>(viewModel);
 
-            return _mapper.Map<OwnerViewModel>(await _ownerService.Add(model, cancellationToken));
+            var result = await _ownerService.Add(model, cancellationToken);
+
+            return _mapper.Map<OwnerViewModel>(result);
         }
 
         [HttpDelete("{id}")]
@@ -62,7 +68,9 @@ namespace PMCS.API.Controllers
 
             model.Id = id;
 
-            return _mapper.Map<OwnerViewModel>(await _ownerService.Update(model, cancellationToken));
+            var result = await _ownerService.Update(model, cancellationToken);
+
+            return _mapper.Map<OwnerViewModel>(result);
         }
     }
 }
