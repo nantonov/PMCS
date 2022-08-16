@@ -10,6 +10,7 @@ namespace PMCS.DLL.Services
     public class PetService : GenericService<PetModel, PetEntity>, IPetService
     {
         private readonly IOwnerService _ownerService;
+
         public PetService(IPetRepository repository, IMapper mapper, IOwnerService ownerService) : base(repository, mapper)
         {
             _ownerService = ownerService;
@@ -22,7 +23,9 @@ namespace PMCS.DLL.Services
 
             var entity = _mapper.Map<PetEntity>(model);
 
-            return _mapper.Map<PetModel>(await _repository.Update(entity, cancellationToken));
+            var result = await _repository.Update(entity, cancellationToken);
+
+            return _mapper.Map<PetModel>(result);
         }
     }
 }

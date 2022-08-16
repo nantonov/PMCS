@@ -28,13 +28,17 @@ namespace PMCS.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<VaccineViewModel>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<VaccineViewModel>>(await _service.GetAll(cancellationToken));
+            var models = await _service.GetAll(cancellationToken);
+
+            return _mapper.Map<IEnumerable<VaccineViewModel>>(models);
         }
 
         [HttpGet("{id}")]
         public async Task<VaccineViewModel> GetById(int id, CancellationToken cancellationToken)
         {
-            return _mapper.Map<VaccineViewModel>(await _service.GetById(id, cancellationToken));
+            var model = await _service.GetById(id, cancellationToken);
+
+            return _mapper.Map<VaccineViewModel>(model);
         }
 
         [HttpPost]
@@ -44,7 +48,9 @@ namespace PMCS.API.Controllers
 
             var model = _mapper.Map<VaccineModel>(viewModel);
 
-            return _mapper.Map<VaccineViewModel>(await _service.Add(model, cancellationToken));
+            var result = await _service.Add(model, cancellationToken);
+
+            return _mapper.Map<VaccineViewModel>(result);
         }
 
         [HttpDelete("{id}")]
@@ -62,7 +68,9 @@ namespace PMCS.API.Controllers
 
             model.Id = id;
 
-            return _mapper.Map<VaccineViewModel>(await _service.Update(model, cancellationToken));
+            var result = await _service.Update(model, cancellationToken);
+
+            return _mapper.Map<VaccineViewModel>(result);
         }
     }
 }

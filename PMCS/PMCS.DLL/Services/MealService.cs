@@ -22,7 +22,9 @@ namespace PMCS.DLL.Services
 
             var entity = _mapper.Map<MealEntity>(model);
 
-            return _mapper.Map<MealModel>(await _repository.Update(entity, cancellationToken));
+            var result = await _repository.Update(entity, cancellationToken);
+
+            return _mapper.Map<MealModel>(result);
         }
     }
 }

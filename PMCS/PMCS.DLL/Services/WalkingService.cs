@@ -15,6 +15,7 @@ namespace PMCS.DLL.Services
         {
             _petService = petService;
         }
+
         public override async Task<WalkingModel> Update(WalkingModel model, CancellationToken cancellationToken)
         {
             if (!await IsModelExists(model.Id, cancellationToken) || !await _petService.IsModelExists(model.PetId, cancellationToken))
@@ -22,7 +23,9 @@ namespace PMCS.DLL.Services
 
             var entity = _mapper.Map<WalkingEntity>(model);
 
-            return _mapper.Map<WalkingModel>(await _repository.Update(entity, cancellationToken));
+            var result = await _repository.Update(entity, cancellationToken);
+
+            return _mapper.Map<WalkingModel>(result);
         }
     }
 }
