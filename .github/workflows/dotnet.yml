@@ -7,7 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+
+  BuildPetService:
 
     runs-on: ubuntu-latest
 
@@ -18,8 +19,25 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore PMCS/PMCS.sln
+      run: dotnet restore PMCS/Services/PetService/PMCS.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore PMCS/PMCS.sln
+      run: dotnet build --configuration Release --no-restore PMCS/Services/PetService/PMCS.sln
     - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal PMCS/PMCS.sln
+      run: dotnet test --no-build --configuration Release --verbosity normal PMCS/Services/PetService/PMCS.sln
+      
+  BuildNotificationService:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore PMCS/Services/NotificationService/NotificationService.sln
+    - name: Build
+      run: dotnet build --configuration Release --no-restore PMCS/Services/NotificationService/NotificationService.sln
+    - name: Test
+      run: dotnet test --no-build --configuration Release --verbosity normal PMCS/Services/NotificationService/NotificationService.sln
