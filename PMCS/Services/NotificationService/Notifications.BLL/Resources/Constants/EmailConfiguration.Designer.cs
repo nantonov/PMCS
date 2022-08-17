@@ -79,7 +79,7 @@ namespace Notifications.BLL.Resources.Constants {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на false.
+        ///   Ищет локализованную строку, похожую на true.
         /// </summary>
         public static string IS_BODY_HTML {
             get {

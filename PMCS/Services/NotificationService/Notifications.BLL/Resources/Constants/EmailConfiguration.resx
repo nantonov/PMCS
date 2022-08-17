@@ -124,7 +124,7 @@
     <value>true</value>
   </data>
   <data name="IS_BODY_HTML" xml:space="preserve">
-    <value>false</value>
+    <value>true</value>
   </data>
   <data name="SENDER_EMAIL" xml:space="preserve">
     <value>petcontrolapp@gmail.com</value>

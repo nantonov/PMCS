@@ -12,6 +12,7 @@ namespace Notifications.API.Controllers
     {
         private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
+
         public NotificationController(IMapper mapper, IEmailService emailService)
         {
             _mapper = mapper ?? throw new NullReferenceException();
