@@ -21,7 +21,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore PMCS/Services/PetService/PMCS.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore PMCS/PMCS.sln
+      run: dotnet build --configuration Release --no-restore PMCS/Services/PetService/PMCS.sln
     - name: Test
       run: dotnet test --no-build --configuration Release --verbosity normal PMCS/Services/PetService/PMCS.sln
       
@@ -38,6 +38,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore PMCS/Services/NotificationService/NotificationService.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore PMCS/PMCS.sln
+      run: dotnet build --configuration Release --no-restore PMCS/Services/NotificationService/NotificationService.sln
     - name: Test
       run: dotnet test --no-build --configuration Release --verbosity normal PMCS/Services/NotificationService/NotificationService.sln
