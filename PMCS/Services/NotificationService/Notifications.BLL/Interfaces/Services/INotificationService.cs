@@ -1,9 +1,9 @@
-﻿using Notifications.BLL.Models.Payloads;
+﻿using Notifications.BLL.Models.DTOs;
 
 namespace Notifications.BLL.Interfaces.Services
 {
-    public interface INotificationService<T> where T : NotificationPayload
+    public interface INotificationService<T> where T : Notification
     {
-        public Task SendNotification(T payload);
+        public Task SendNotification(T notification);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Notifications.BLL.Interfaces.Services;
+using Notifications.BLL.Models.DTOs;
 using Notifications.BLL.Models.Payloads;
 using Notifications.BLL.Resources.Constants;
 using System.Net;
@@ -9,8 +10,9 @@ namespace Notifications.BLL.Services
 {
     public class EmailService : IEmailService
     {
-        public async Task SendNotification(EmailNotificationPayload payload)
+        public async Task SendNotification(EmailNotification notification)
         {
+            var payload = MapNotificationToPayload(notification);
             var message = CreateMailMessage(payload);
             var smtpClient = ConfigureSmtpClient();
 
@@ -64,6 +66,17 @@ namespace Notifications.BLL.Services
             template.AppendLine($"{Phrases.Goodbye}");
 
             return template.ToString();
+        }
+        private static EmailNotificationPayload MapNotificationToPayload(EmailNotification notification)
+        {
+            return new EmailNotificationPayload()
+            {
+                RecieverEmailAddress = notification.RecieverEmailAddress,
+                OwnerName = notification.OwnerName,
+                Message = notification.Message,
+                Subject = notification.Subject,
+                PetName = notification.PetName
+            };
         }
     }
 }

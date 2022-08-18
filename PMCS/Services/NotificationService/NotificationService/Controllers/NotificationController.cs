@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Notifications.API.Models.Requests;
 using Notifications.BLL.Interfaces.Services;
-using Notifications.BLL.Models.Payloads;
+using Notifications.BLL.Models.DTOs;
 
 namespace Notifications.API.Controllers
 {
@@ -22,11 +22,11 @@ namespace Notifications.API.Controllers
         [HttpPost("/email")]
         public async Task<IActionResult> NotifyByEmail([FromBody] EmailNotificationRequest request)
         {
-            var payload = _mapper.Map<EmailNotificationPayload>(request);
+            var notification = _mapper.Map<EmailNotification>(request);
 
-            await _emailService.SendNotification(payload);
+            await _emailService.SendNotification(notification);
 
-            return Ok(payload);
+            return Ok(notification);
         }
     }
 }

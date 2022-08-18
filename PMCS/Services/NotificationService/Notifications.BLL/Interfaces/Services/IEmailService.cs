@@ -1,8 +1,8 @@
-﻿using Notifications.BLL.Models.Payloads;
+﻿using Notifications.BLL.Models.DTOs;
 
 namespace Notifications.BLL.Interfaces.Services
 {
-    public interface IEmailService : INotificationService<EmailNotificationPayload>
+    public interface IEmailService : INotificationService<EmailNotification>
     {
     }
 }
