@@ -1,13 +1,13 @@
-﻿namespace Notifications.API.Middlewares
+﻿using Serilog;
+
+namespace Notifications.API.Middlewares
 {
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionMiddleware> _logger;
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+        public ExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
-            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -21,6 +21,10 @@
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 await HandleException(context, ex);
             }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         private Task HandleException(HttpContext context, Exception ex)
@@ -33,8 +37,8 @@
 
         private void LogException(HttpContext? context, Exception ex)
         {
-            _logger.LogWarning(ex, $"{ex.Message}");
-            _logger.LogWarning(ex, $"Exception in query: {context?.Request.Path}");
+            Log.Error(ex, $"{ex.Message}");
+            Log.Error(ex, $"Exception in query: {context?.Request.Path}");
         }
 
         private void SetResponseParameters(HttpContext context)
