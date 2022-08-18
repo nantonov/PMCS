@@ -9,6 +9,7 @@ namespace Notifications.BLL.DI
         public static void RegisterBusinessLogicDependencies(this IServiceCollection services)
         {
             services.AddScoped<IEmailService, EmailService>();
+            services.AddSingleton<IClientService, ClientService>();
         }
     }
 }
