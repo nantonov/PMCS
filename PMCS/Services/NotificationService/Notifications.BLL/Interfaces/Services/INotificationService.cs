@@ -2,7 +2,7 @@
 
 namespace Notifications.BLL.Interfaces.Services
 {
-    public interface INotificationService<in T> where T : NotificationPayload
+    public interface INotificationService<T> where T : NotificationPayload
     {
         public Task SendNotification(T payload);
     }

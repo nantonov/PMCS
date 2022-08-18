@@ -106,7 +106,7 @@ namespace Notifications.BLL.Resources.Constants {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на owpbdghnvqmsneor.
+        ///   Ищет локализованную строку, похожую на kqujwcubixaibhrn.
         /// </summary>
         public static string SENDER_PASSWORD {
             get {
