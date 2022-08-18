@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService", "NotificationService\NotificationService.csproj", "{502C8199-08A7-4B75-98F4-72F4759E9DFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.API", "NotificationService\Notifications.API.csproj", "{502C8199-08A7-4B75-98F4-72F4759E9DFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.BLL", "Notifications.BLL\Notifications.BLL.csproj", "{C4AC2506-44FD-463A-8246-BCD017315380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{502C8199-08A7-4B75-98F4-72F4759E9DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{502C8199-08A7-4B75-98F4-72F4759E9DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{502C8199-08A7-4B75-98F4-72F4759E9DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4AC2506-44FD-463A-8246-BCD017315380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4AC2506-44FD-463A-8246-BCD017315380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4AC2506-44FD-463A-8246-BCD017315380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4AC2506-44FD-463A-8246-BCD017315380}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
