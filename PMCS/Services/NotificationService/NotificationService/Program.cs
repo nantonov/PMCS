@@ -1,3 +1,6 @@
+using FluentValidation.AspNetCore;
+using Notifications.BLL.DI;
+using System.Reflection;
 using Notifications.API.Middlewares;
 using Notifications.BLL.DI;
 using Serilog;
@@ -6,7 +9,6 @@ using Microsoft.AspNetCore.Http.Connections;
 using Notifications.BLL.DI;
 using Notifications.BLL.Resources.Constants;
 using Notifications.BLL.SignalR.Hubs;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,7 @@ Log.Logger = Log.Logger = new LoggerConfiguration()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly())); ;
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSignalR(options =>

@@ -22,6 +22,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Phrases.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Constants\Validators\ValidationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +41,10 @@
     <EmbeddedResource Update="Resources\Constants\Phrases.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Phrases.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Constants\Validators\ValidationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
