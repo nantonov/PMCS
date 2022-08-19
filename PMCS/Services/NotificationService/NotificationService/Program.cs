@@ -2,6 +2,11 @@ using Notifications.API.Middlewares;
 using Notifications.BLL.DI;
 using Serilog;
 using Serilog.Events;
+using Microsoft.AspNetCore.Http.Connections;
+using Notifications.BLL.DI;
+using Notifications.BLL.Resources.Constants;
+using Notifications.BLL.SignalR.Hubs;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,14 +27,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddAuthorization();
-builder.Services.AddControllers();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+});
+
 BusinessLogicRegistration.RegisterBusinessLogicDependencies(builder.Services);
 
 var app = builder.Build();
+
+app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
 {
@@ -42,5 +50,10 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<NotificationHub>(HubConfiguration.HubURL, options =>
+{
+    options.Transports = HttpTransportType.ServerSentEvents;
+});
 
 app.Run();

@@ -67,6 +67,7 @@ namespace Notifications.BLL.Services
 
             return template.ToString();
         }
+
         private static EmailNotificationPayload MapNotificationToPayload(EmailNotification notification)
         {
             return new EmailNotificationPayload()
