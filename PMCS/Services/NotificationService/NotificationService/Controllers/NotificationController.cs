@@ -11,12 +11,14 @@ namespace Notifications.API.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly IEmailService _emailService;
+        private readonly IClientService _clientService;
         private readonly IMapper _mapper;
 
-        public NotificationController(IMapper mapper, IEmailService emailService)
+        public NotificationController(IMapper mapper, IEmailService emailService, IClientService clientService)
         {
             _mapper = mapper ?? throw new NullReferenceException();
             _emailService = emailService ?? throw new NullReferenceException();
+            _clientService = clientService ?? throw new NullReferenceException();
         }
 
         [HttpPost("/email")]
@@ -25,6 +27,16 @@ namespace Notifications.API.Controllers
             var notification = _mapper.Map<EmailNotification>(request);
 
             await _emailService.SendNotification(notification);
+
+            return Ok(notification);
+        }
+
+        [HttpPost("/client")]
+        public async Task<IActionResult> NotifyClient([FromBody] ClientNotificationRequest request, CancellationToken cancellationToken)
+        {
+            var notification = _mapper.Map<ClientNotification>(request);
+
+            await _clientService.SendNotification(notification);
 
             return Ok(notification);
         }
