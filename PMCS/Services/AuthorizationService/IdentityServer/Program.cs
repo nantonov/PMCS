@@ -7,7 +7,7 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configuration = new ConfigurationBuilder().Build();
+IConfiguration configuration = new ConfigurationBuilder().Build();
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -58,7 +58,7 @@ builder.Services.AddCors(config =>
 
 var app = builder.Build();
 
-app.UseIdentityServer();
+DataInitializer.InitializeDatabase(app);
 
 if (app.Environment.IsDevelopment())
 {
