@@ -7,7 +7,7 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-IConfiguration configuration = new ConfigurationBuilder().Build();
+ConfigurationManager configuration = builder.Configuration;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -21,8 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 var migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
-//var connectionString = configuration.GetConnectionString("AuthDbConnection");
-var connectionString = "Server=localhost;Database=Identity;Trusted_Connection=True";
+var connectionString = configuration.GetConnectionString("AuthDbConnection");
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(connectionString,
