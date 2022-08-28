@@ -1,0 +1,23 @@
+name: "Build a microservice"
+description: "Builds microservice and runs all tests"
+
+inputs:
+  project_path:
+    description: "Path to the project to run commands"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+   - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore ${{inputs.project_path}}
+    - name: Build
+      run: dotnet build --configuration Release --no-restore ${{inputs.project_path}}
+    - name: Test
+      run: dotnet test --no-build --configuration Release --verbosity normal ${{inputs.project_path}}
+  
