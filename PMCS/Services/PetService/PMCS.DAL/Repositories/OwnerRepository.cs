@@ -17,5 +17,10 @@ namespace PMCS.DAL.Repositories
         {
             return await Query.Include(x => x.Pets).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
+
+        public async Task<OwnerEntity> GetByExternalId(int externalId, CancellationToken cancellationToken)
+        {
+            return await Query.AsNoTracking().FirstOrDefaultAsync(x => x.UserId == externalId, cancellationToken);
+        }
     }
 }
