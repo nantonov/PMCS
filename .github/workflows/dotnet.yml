@@ -1,50 +1,32 @@
 name: .NET
-
 on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
-
   BuildPetService:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
     - uses: actions/checkout@v2
-    
     - name: Build Pet Microservice
       uses: ./.github/workflows/Composite/Build
       with:
         project_path: PMCS/Services/PetService/PMCS.sln
-      
   BuildNotificationService:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
     - uses: actions/checkout@v2
-    
     - name: Build Notifications Microservice
       uses: ./.github/workflows/Composite/Build
       with:
         project_path: PMCS/Services/NotificationService/NotificationService.sln
-        
   BuildAuthorizationService:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
     - uses: actions/checkout@v2
-    
     - name: Build Authorization Microservice
       uses: ./.github/workflows/Composite/Build
       with:
         project_path: PMCS/Services/AuthorizationService/AuthorizationService.sln
- 
