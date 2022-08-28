@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Authorization.Policy;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Mime;
 
@@ -21,6 +22,7 @@ namespace PMCS.API.Tests
                     services.Remove(dbContextDescriptor);
 
                     services.AddDbContext<PMCS.DAL.AppContext>(options => options.UseInMemoryDatabase("Test_db"));
+                    services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
                 }));
 
             _httpClient = _appFactory.CreateClient();
