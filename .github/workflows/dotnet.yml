@@ -1,6 +1,7 @@
 name: .NET
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
@@ -13,31 +14,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+    - name: Checkout code
+    - uses: actions/checkout@v2
+    
+    - name: Build Pet Microservice
+      uses: ./.github/workflows/Composite/Build
       with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore PMCS/Services/PetService/PMCS.sln
-    - name: Build
-      run: dotnet build --configuration Release --no-restore PMCS/Services/PetService/PMCS.sln
-    - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal PMCS/Services/PetService/PMCS.sln
+        project_path: PMCS/Services/PetService/PMCS.sln
       
   BuildNotificationService:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+    - name: Checkout code
+    - uses: actions/checkout@v2
+    
+    - name: Build Notifications Microservice
+      uses: ./.github/workflows/Composite/Build
       with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore PMCS/Services/NotificationService/NotificationService.sln
-    - name: Build
-      run: dotnet build --configuration Release --no-restore PMCS/Services/NotificationService/NotificationService.sln
-    - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal PMCS/Services/NotificationService/NotificationService.sln
+        project_path: PMCS/Services/NotificationService/NotificationService.sln
+        
+  BuildAuthorizationService:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+    - uses: actions/checkout@v2
+    
+    - name: Build Authorization Microservice
+      uses: ./.github/workflows/Composite/Build
+      with:
+        project_path: PMCS/Services/AuthorizationService/AuthorizationService.sln
+ 
