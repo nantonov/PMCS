@@ -15,9 +15,12 @@ runs:
       dotnet-version: 6.0.x
       
   - name: Restore dependencies
+    shell: bash
     run: dotnet restore ${{inputs.project_path}}
   - name: Build
+    shell: bash
     run: dotnet build --configuration Release --no-restore ${{inputs.project_path}}
   - name: Test
+    shell: bash
     run: dotnet test --no-build --configuration Release --verbosity normal ${{inputs.project_path}}
   
