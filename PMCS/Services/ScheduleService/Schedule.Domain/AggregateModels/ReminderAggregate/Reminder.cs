@@ -5,7 +5,7 @@ namespace Schedule.Domain.AggregateModels.ReminderAggregate
 {
     public class Reminder : Entity, IAggregateRoot
     {
-        private DateTime _triggerDateTime;
+        public TriggerDateTime TriggerDateTime { get; private set; }
 
         private readonly DateTime _creationDateTime;
 
@@ -26,9 +26,10 @@ namespace Schedule.Domain.AggregateModels.ReminderAggregate
         public ReminderStatus ReminderStatus { get; private set; }
         private int _statusId;
 
-        public Reminder(DateTime triggerDateTime, int petId, int notificationTypeId, string message, int actionToRemindId,
+        public Reminder(TriggerDateTime triggerDateTime, int petId, int notificationTypeId, string message, int actionToRemindId,
             int userId, string? description = null)
         {
+            TriggerDateTime = triggerDateTime;
             _petId = petId;
             _userId = userId;
             _creationDateTime = DateTime.UtcNow;
@@ -37,7 +38,6 @@ namespace Schedule.Domain.AggregateModels.ReminderAggregate
             SetNotificationTypeId(notificationTypeId);
             SetActionToRemindId(actionToRemindId);
             ResetStatus();
-            SetTriggerDateTime(triggerDateTime);
             SetMessage(message);
         }
 
@@ -56,18 +56,10 @@ namespace Schedule.Domain.AggregateModels.ReminderAggregate
         }
 
         public string GetMessage => _message;
-        public DateTime GetTriggerDateTime => _triggerDateTime;
         public DateTime GetCreationDateTime => _creationDateTime;
         public int GetPetId => _petId;
         public string GetDescription => _description;
         public int GetUserId => _userId;
-
-        public void SetTriggerDateTime(DateTime value)
-        {
-            ValidateDateTime(value);
-
-            _triggerDateTime = value;
-        }
 
         public void SetMessage(string value)
         {
@@ -118,12 +110,6 @@ namespace Schedule.Domain.AggregateModels.ReminderAggregate
         public void ResetStatus()
         {
             _statusId = ReminderStatus.ToDo.GetId;
-        }
-
-        private static void ValidateDateTime(DateTime value)
-        {
-            if (value > DateTime.Now || value == null)
-                throw new ScheduleDomainException("The date time can't be triggered in feature");
         }
 
         private static void ValidateMessage(string value)
