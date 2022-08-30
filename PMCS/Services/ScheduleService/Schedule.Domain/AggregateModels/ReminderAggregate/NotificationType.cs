@@ -9,9 +9,14 @@ namespace Schedule.Domain.AggregateModels.ReminderAggregate
         public static NotificationType Email = new NotificationType(1, nameof(Email).ToLowerInvariant());
         public static NotificationType PersonalAccount = new NotificationType(2, nameof(PersonalAccount).ToLowerInvariant());
 
-        public override IEnumerable<Enumeration> Types()
+        protected override IReadOnlyList<Enumeration> Types()
         {
             return new[] { Email, PersonalAccount };
+        }
+
+        protected override IReadOnlyList<int> PossibleIds()
+        {
+            return new[] { Email.GetId, PersonalAccount.GetId };
         }
     }
 }

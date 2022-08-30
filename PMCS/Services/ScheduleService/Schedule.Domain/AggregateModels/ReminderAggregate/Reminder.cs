@@ -30,15 +30,29 @@ namespace Schedule.Domain.AggregateModels.ReminderAggregate
             int userId, string? description = null)
         {
             _petId = petId;
-            _notificationTypeId = notificationTypeId;
             _userId = userId;
-            _description = description;
             _creationDateTime = DateTime.UtcNow;
-            _actionToRemindId = actionToRemindId;
+            _description = description;
 
+            SetNotificationTypeId(notificationTypeId);
+            SetActionToRemindId(actionToRemindId);
             ResetStatus();
             SetTriggerDateTime(triggerDateTime);
             SetMessage(message);
+        }
+
+        private void SetActionToRemindId(int actionToRemindId)
+        {
+            ActionToRemindType.ValidateId(actionToRemindId);
+
+            _actionToRemindId = actionToRemindId;
+        }
+
+        private void SetNotificationTypeId(int notificationTypeId)
+        {
+            NotificationType.ValidateId(notificationTypeId);
+
+            _notificationTypeId = notificationTypeId;
         }
 
         public string GetMessage => _message;

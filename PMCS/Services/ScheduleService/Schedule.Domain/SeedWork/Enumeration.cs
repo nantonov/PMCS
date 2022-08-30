@@ -1,3 +1,5 @@
+using Schedule.Domain.Exceptions;
+
 namespace Schedule.Domain.SeedWork;
 
 public abstract class Enumeration
@@ -9,12 +11,14 @@ public abstract class Enumeration
     public int GetId => _id;
 
     protected Enumeration(int id, string name) => (_id, _name) = (id, name);
-    public abstract IEnumerable<Enumeration> Types();
+    protected abstract IEnumerable<Enumeration> Types();
 
     public override string ToString() => _name;
+    protected abstract IReadOnlyList<int> PossibleIds();
 
-    protected string PossibleValues()
+    public void ValidateId(int value)
     {
-        return String.Join(",", Types().Select(s => s.GetName));
+        if (!PossibleIds().Contains(value))
+            throw new ScheduleDomainException($"Type with id {value} does not exist.");
     }
 }

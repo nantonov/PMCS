@@ -9,9 +9,14 @@ namespace Schedule.Domain.AggregateModels.ReminderAggregate
         public static ReminderStatus ToDo = new ReminderStatus(1, nameof(ToDo).ToLowerInvariant());
         public static ReminderStatus Done = new ReminderStatus(2, nameof(Done).ToLowerInvariant());
 
-        public override IEnumerable<Enumeration> Types()
+        protected override IReadOnlyList<Enumeration> Types()
         {
             return new[] { ToDo, Done };
+        }
+
+        protected override IReadOnlyList<int> PossibleIds()
+        {
+            return new[] { ToDo.GetId, Done.GetId };
         }
     }
 }
