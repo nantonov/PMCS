@@ -50,11 +50,6 @@ builder.Services.AddIdentityServer()
     })
     .AddDeveloperSigningCredential();
 
-builder.Services.ConfigureApplicationCookie(config =>
-{
-    config.Cookie.Name = "PMCS.Identity.Cookie";
-});
-
 builder.Services.AddCors(config =>
 {
     config.AddPolicy("DefaultPolicy",
@@ -72,9 +67,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors("DefaultPolicy");
 app.UseHttpsRedirection();
 app.UseIdentityServer();
 app.UseAuthorization();
+
+app.UseCsp(options => options.DefaultSources(s => s.Self())
+    .ConnectSources(s => s.CustomSources("wss://localhost:44348/IdentityServer/")));
 
 app.UseEndpoints(endpoints =>
 {
