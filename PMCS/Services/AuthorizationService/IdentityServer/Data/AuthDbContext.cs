@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer.Data
 {
-    public class AuthDbContext : IdentityDbContext<User>
+    public class AuthDbContext : IdentityDbContext<User, Role, int>
     {
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options) { }
     }
