@@ -17,7 +17,7 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .CreateLogger();
 
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddEndpointsApiExplorer();
 
 var migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
@@ -25,8 +25,16 @@ var connectionString = configuration.GetConnectionString("AuthDbConnection");
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(connectionString,
-        b => b.MigrationsAssembly(migrationsAssembly)));
-builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<AuthDbContext>();
+        b => b.MigrationsAssembly(migrationsAssembly))).
+    AddIdentity<User, Role>(config =>
+    {
+        config.Password.RequireDigit = false;
+        config.Password.RequireLowercase = false;
+        config.Password.RequireNonAlphanumeric = false;
+        config.Password.RequireUppercase = false;
+        config.Password.RequiredLength = 6;
+    }).
+    AddEntityFrameworkStores<AuthDbContext>();
 
 builder.Services.AddIdentityServer()
     .AddAspNetIdentity<User>()
@@ -45,8 +53,6 @@ builder.Services.AddIdentityServer()
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.Cookie.Name = "PMCS.Identity.Cookie";
-    config.LoginPath = "/Account/Login";
-    config.LogoutPath = "/Account/Logout";
 });
 
 builder.Services.AddCors(config =>
@@ -64,11 +70,15 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.UseStaticFiles();
+app.UseRouting();
 app.UseHttpsRedirection();
-
 app.UseIdentityServer();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapDefaultControllerRoute();
+});
 
 app.Run();
