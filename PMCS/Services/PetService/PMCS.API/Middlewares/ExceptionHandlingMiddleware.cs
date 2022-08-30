@@ -24,6 +24,11 @@ namespace PMCS.API.Middlewares
                 context.Response.StatusCode = ex.StatusCode;
                 await HandleException(context, ex);
             }
+            catch (InvalidNameIdentifierClaimException ex)
+            {
+                context.Response.StatusCode = ex.StatusCode;
+                await HandleException(context, ex);
+            }
             catch (Exception ex)
             {
                 context.Response.StatusCode = _errorDefaultStatusCode;

@@ -10,7 +10,7 @@ namespace PMCS.API.Tests.ViewModels.Meal
             yield return new object[] { new UpdateVaccineViewModel()
             {
                 Title = "Vaccines",
-                DateTime = DateTime.Today,
+                DateTime = new DateTime(2022, 1, 1, 1, 1, 1),
                 PetId = 2
             } };
         }

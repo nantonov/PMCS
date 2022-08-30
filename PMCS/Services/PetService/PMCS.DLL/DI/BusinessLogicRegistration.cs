@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PMCS.BLL.Interfaces.Services;
+using PMCS.BLL.Services;
 using PMCS.DLL.Interfaces.Services;
 using PMCS.DLL.Services;
 
@@ -13,6 +15,7 @@ namespace PMCS.DLL.DI
             services.AddTransient<IMealService, MealService>();
             services.AddTransient<IVaccineService, VaccineService>();
             services.AddTransient<IWalkingService, WalkingService>();
+            services.AddTransient<IIdentityService, IdentityService>();
         }
     }
 }

@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Owner;
+using PMCS.BLL.Interfaces.Services;
 using PMCS.DLL.Interfaces.Services;
 using PMCS.DLL.Models;
 
 namespace PMCS.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OwnerController : ControllerBase
@@ -16,13 +19,20 @@ namespace PMCS.API.Controllers
         private readonly IMapper _mapper;
         private readonly PostOwnerValidator _postOwnerValidator;
         private readonly UpdateOwnerValidator _updateOwnerValidator;
+        private readonly IIdentityService _identityService;
 
-        public OwnerController(IOwnerService ownerService, IMapper mapper, PostOwnerValidator postOwnerValidator, UpdateOwnerValidator updateOwnerValidator)
+        public OwnerController(
+            IOwnerService ownerService,
+            IMapper mapper,
+            PostOwnerValidator postOwnerValidator,
+            UpdateOwnerValidator updateOwnerValidator,
+            IIdentityService identityService)
         {
             _ownerService = ownerService;
             _mapper = mapper;
             _postOwnerValidator = postOwnerValidator;
             _updateOwnerValidator = updateOwnerValidator;
+            _identityService = identityService;
         }
 
         [HttpGet]
@@ -41,12 +51,22 @@ namespace PMCS.API.Controllers
             return _mapper.Map<OwnerViewModel>(model);
         }
 
+        [HttpGet("userId/{externalId}")]
+        public async Task<OwnerViewModel> GetByExternalId(int externalId, CancellationToken cancellationToken)
+        {
+            var model = await _ownerService.GetByExternalId(externalId, cancellationToken);
+
+            return _mapper.Map<OwnerViewModel>(model);
+        }
+
         [HttpPost]
         public async Task<OwnerViewModel> Add([FromBody] PostOwnerViewModel viewModel, CancellationToken cancellationToken)
         {
             await _postOwnerValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
 
             var model = _mapper.Map<OwnerModel>(viewModel);
+
+            model.UserId = _identityService.GetUserId();
 
             var result = await _ownerService.Add(model, cancellationToken);
 

@@ -13,11 +13,13 @@ namespace PMCS.DLL.Services
     {
         protected readonly IGenericRepository<TEntity> _repository;
         protected readonly IMapper _mapper;
+
         public GenericService(IGenericRepository<TEntity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
+
         public virtual async Task<TModel> Add(TModel model, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TEntity>(model);

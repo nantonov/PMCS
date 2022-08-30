@@ -9,8 +9,8 @@ namespace IdentityServer.Configuration
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>()
             {
-                new ApiScope("PetApi", "Pets WebAPI"),
-                new ApiScope("NotificationsApi", "Notifications WebAPI")
+                new ApiScope("PetAPI", "Pets WebAPI"),
+                new ApiScope("NotificationsAPI", "Notifications WebAPI")
             };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
@@ -24,8 +24,8 @@ namespace IdentityServer.Configuration
         public static IEnumerable<ApiResource> ApiResources =>
             new List<ApiResource>()
             {
-                new ApiResource("PetApi"),
-                new ApiResource("NotificationsApi")
+                new ApiResource("PetAPI"),
+                new ApiResource("NotificationsAPI")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -44,6 +44,19 @@ namespace IdentityServer.Configuration
                        "PetAPI",
                        "NotificationsAPI"
                    }
+                },
+                new Client()
+                {
+                    ClientId = "swagger-client-id",
+                    ClientSecrets = { new Secret("client_secret".ToSha256()) },
+                    ClientName = "Swagger Client",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "PetAPI",
+                        "NotificationsAPI"
+                    }
                 }
             };
     }

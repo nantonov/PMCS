@@ -10,8 +10,8 @@ namespace PMCS.API.Tests.ViewModels.Meal
             yield return new object[] { new PostWalkingViewModel()
             {
                 Title = "Walking",
-                Stared = DateTime.Today,
-                Finished = DateTime.Today.AddMinutes(20),
+                Stared = new DateTime(2022, 1, 1, 1, 1, 1),
+                Finished = new DateTime(2022, 1, 1, 1, 5, 1),
                 PetId = 2
             } };
             yield return new object[] { new PostWalkingViewModel()

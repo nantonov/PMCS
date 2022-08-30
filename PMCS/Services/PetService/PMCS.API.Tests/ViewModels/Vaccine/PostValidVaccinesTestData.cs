@@ -10,13 +10,13 @@ namespace PMCS.API.Tests.ViewModels.Meal
             yield return new object[] { new PostVaccineViewModel()
             {
                 Title = "Vaccine",
-                DateTime = DateTime.Today,
+                DateTime = new DateTime(2022, 1, 1, 1, 1, 1),
                 PetId = 2
             } };
             yield return new object[] { new PostVaccineViewModel()
             {
                 Title = "COVID-19",
-                DateTime = new DateTime(2022, 8, 1),
+                DateTime = new DateTime(2022, 1, 1, 1, 1, 1),
                 PetId = 2
             } };
         }
