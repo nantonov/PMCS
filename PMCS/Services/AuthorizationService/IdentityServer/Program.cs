@@ -1,6 +1,8 @@
+using AutoMapper;
 using IdentityServer.Data;
 using IdentityServer.Data.Initializaton;
 using IdentityServer.Models;
+using IdentityServer.Profiles;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -23,6 +25,12 @@ builder.Services.AddEndpointsApiExplorer();
 
 var migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
 var connectionString = configuration.GetConnectionString("AuthDbConnection");
+
+var mapperConfiguration = new MapperConfiguration(c =>
+{
+    c.AddProfile<ViewModelUser>();
+});
+builder.Services.AddSingleton<IMapper>(s => mapperConfiguration.CreateMapper());
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(connectionString,

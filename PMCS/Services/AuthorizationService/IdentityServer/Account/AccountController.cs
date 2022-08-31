@@ -1,3 +1,4 @@
+using AutoMapper;
 using IdentityModel;
 using IdentityServer.Account;
 using IdentityServer.Models;
@@ -24,6 +25,7 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IEventService _events;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
         public AccountController(
             SignInManager<User> signInManager,
@@ -31,7 +33,8 @@ namespace IdentityServerHost.Quickstart.UI
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
-            IEventService events)
+            IEventService events,
+            IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -39,6 +42,7 @@ namespace IdentityServerHost.Quickstart.UI
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
             _events = events;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -318,11 +322,7 @@ namespace IdentityServerHost.Quickstart.UI
                 return View(viewModel);
             }
 
-            var user = new User
-            {
-                UserName = viewModel.Username,
-                Email = viewModel.Email
-            };
+            var user = _mapper.Map<User>(viewModel);
 
             var result = await _userManager.CreateAsync(user, viewModel.Password);
 
