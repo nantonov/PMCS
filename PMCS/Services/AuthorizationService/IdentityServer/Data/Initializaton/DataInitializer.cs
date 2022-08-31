@@ -6,17 +6,12 @@ using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using static IdentityServer.Data.Initializaton.InitializationData;
 
-namespace IdentityServer.Data
+namespace IdentityServer.Data.Initializaton
 {
     public static class DataInitializer
     {
-        private static User testUser = new User()
-        {
-            UserName = "TestUser",
-            Email = "test@gmail.com",
-        };
-
         public async static Task InitializeDatabase(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
@@ -64,12 +59,12 @@ namespace IdentityServer.Data
                     await context.SaveChangesAsync();
                 }
 
-                if (await userManager.FindByNameAsync(testUser.UserName) == null)
+                if (await userManager.FindByNameAsync(InitialUser.UserName) == null)
                 {
-                    await userManager.CreateAsync(testUser, "secret");
+                    await userManager.CreateAsync(InitialUser, "secret");
 
-                    await userManager.AddClaimAsync(testUser, new Claim(JwtClaimTypes.Email, testUser.Email));
-                    await userManager.AddClaimAsync(testUser, new Claim(JwtClaimTypes.Name, testUser.UserName));
+                    await userManager.AddClaimAsync(InitialUser, new Claim(JwtClaimTypes.Email, InitialUser.Email));
+                    await userManager.AddClaimAsync(InitialUser, new Claim(JwtClaimTypes.Name, InitialUser.UserName));
                 }
             }
         }

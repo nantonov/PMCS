@@ -1,4 +1,5 @@
 using IdentityServer.Data;
+using IdentityServer.Data.Initializaton;
 using IdentityServer.Models;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
