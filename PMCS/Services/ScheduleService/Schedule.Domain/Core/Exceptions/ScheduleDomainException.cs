@@ -1,4 +1,4 @@
-﻿namespace Schedule.Domain.Exceptions;
+﻿namespace Schedule.Domain.Core.Exceptions;
 
 public class ScheduleDomainException : Exception
 {

@@ -1,6 +1,7 @@
-﻿using Schedule.Domain.SeedWork;
+﻿using Schedule.Domain.Entities;
+using Schedule.Domain.SeedWork;
 
-namespace Schedule.Domain.AggregateModels.ReminderAggregate
+namespace Schedule.Domain.Repositories
 {
     public interface IReminderRepository : IRepository<Reminder>
     {
