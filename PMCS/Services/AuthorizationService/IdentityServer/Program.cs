@@ -1,5 +1,8 @@
+using AutoMapper;
 using IdentityServer.Data;
+using IdentityServer.Data.Initializaton;
 using IdentityServer.Models;
+using IdentityServer.Profiles;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -22,6 +25,12 @@ builder.Services.AddEndpointsApiExplorer();
 
 var migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
 var connectionString = configuration.GetConnectionString("AuthDbConnection");
+
+var mapperConfiguration = new MapperConfiguration(c =>
+{
+    c.AddProfile<ViewModelUser>();
+});
+builder.Services.AddSingleton<IMapper>(s => mapperConfiguration.CreateMapper());
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(connectionString,
@@ -50,11 +59,6 @@ builder.Services.AddIdentityServer()
     })
     .AddDeveloperSigningCredential();
 
-builder.Services.ConfigureApplicationCookie(config =>
-{
-    config.Cookie.Name = "PMCS.Identity.Cookie";
-});
-
 builder.Services.AddCors(config =>
 {
     config.AddPolicy("DefaultPolicy",
@@ -72,9 +76,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors("DefaultPolicy");
 app.UseHttpsRedirection();
 app.UseIdentityServer();
 app.UseAuthorization();
+
+app.UseCsp(options => options.DefaultSources(s => s.Self())
+    .ConnectSources(s => s.CustomSources("wss://localhost:44348/IdentityServer/")));
 
 app.UseEndpoints(endpoints =>
 {
