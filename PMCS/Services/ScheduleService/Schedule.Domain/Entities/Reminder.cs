@@ -1,0 +1,117 @@
+﻿using Schedule.Domain.Core.Constants;
+using Schedule.Domain.Core.Exceptions;
+using Schedule.Domain.Core.Utility;
+using Schedule.Domain.Enums;
+using Schedule.Domain.SeedWork;
+
+namespace Schedule.Domain.Entities
+{
+    public class Reminder : Entity
+    {
+        public int PetId { get; private set; }
+        public int UserId { get; private set; }
+        public DateTime LastModified { get; private set; }
+        public string Description { get; private set; }
+        public string NotificationMessage { get; private set; }
+        public NotificationType NotificationType { get; private set; }
+        public ActionToRemindType ActionToRemindType { get; private set; }
+        public ExecutionStatus Status { get; private set; }
+
+        public DateTime TriggerDateTime
+        {
+            get => TriggerDateTime;
+
+            private set
+            {
+                if (value > DateTime.Now)
+                    throw new ScheduleDomainException("The date time can't be triggered in feature");
+
+                TriggerDateTime = value;
+            }
+        }
+
+        public Reminder(DateTime triggerDateTime, int petId, int userId, string message, NotificationType notificationType,
+            ActionToRemindType actionToRemindType)
+        {
+            Ensure.NotEmpty(triggerDateTime, "Trigger DateTime is required.", nameof(triggerDateTime));
+            Ensure.NotEmpty(message, "Message is required", nameof(message));
+            Ensure.IsGreaterThanZero(petId, "PetId is required", nameof(petId));
+            Ensure.IsGreaterThanZero(userId, "UserId is required", nameof(userId));
+
+            SetActionToRemind(actionToRemindType);
+
+            TriggerDateTime = triggerDateTime;
+            NotificationMessage = message;
+            NotificationType = notificationType;
+            PetId = petId;
+            UserId = userId;
+
+            ResetStatus();
+        }
+
+        private Reminder() { }
+
+        public void SetStatusAsDone()
+        {
+            Status = ExecutionStatus.Done;
+
+            UpdateLastModifiedDate();
+        }
+
+        public void ResetStatus()
+        {
+            Status = ExecutionStatus.ToDo;
+
+            UpdateLastModifiedDate();
+        }
+
+        private void UpdateLastModifiedDate()
+        {
+            LastModified = DateTime.UtcNow;
+        }
+
+        private void SetActionToRemindAsToGoForWalk()
+        {
+            ActionToRemindType = ActionToRemindType.GoForWalk;
+
+            Description = ReminderDescriptionMessages.GoForAWalk;
+        }
+
+        private void SetActionToRemindAsToFeedPet()
+        {
+            ActionToRemindType = ActionToRemindType.FeedPet;
+
+            Description = ReminderDescriptionMessages.FeedPet;
+        }
+
+        private void SetActionToRemindAsToMakeVaccine()
+        {
+            ActionToRemindType = ActionToRemindType.MakeVaccine;
+
+            Description = ReminderDescriptionMessages.MakeVaccine;
+        }
+
+        private void SetActionToRemind(ActionToRemindType type)
+        {
+            switch (type)
+            {
+                case ActionToRemindType.GoForWalk:
+                    {
+                        SetActionToRemindAsToGoForWalk();
+                        break;
+                    }
+                case ActionToRemindType.FeedPet:
+                    {
+                        SetActionToRemindAsToFeedPet();
+                        break;
+                    }
+                case ActionToRemindType.MakeVaccine:
+                    {
+                        SetActionToRemindAsToMakeVaccine();
+                        break;
+                    }
+                default: throw new ScheduleDomainException("Such type of enum doesn't exist.");
+            }
+        }
+    }
+}
