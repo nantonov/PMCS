@@ -329,7 +329,7 @@ namespace IdentityServerHost.Quickstart.UI
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return Redirect(viewModel.ReturnUrl);
+                return Redirect("/");
             }
 
             ModelState.AddModelError(String.Empty, "Error while registration occured.");
