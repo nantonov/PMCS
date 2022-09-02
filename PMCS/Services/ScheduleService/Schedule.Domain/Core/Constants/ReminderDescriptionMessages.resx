@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FeedPet" xml:space="preserve">
-    <value />
+    <value>Reminds to feed a pet.</value>
   </data>
   <data name="GoForAWalk" xml:space="preserve">
-    <value />
+    <value>Reminds to go for a walk with a pet.</value>
   </data>
   <data name="MakeVaccine" xml:space="preserve">
-    <value />
+    <value>Reminds to make a vaccine.</value>
   </data>
 </root>

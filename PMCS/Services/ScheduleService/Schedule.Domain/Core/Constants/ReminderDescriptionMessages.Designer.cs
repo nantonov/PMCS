@@ -61,7 +61,7 @@ namespace Schedule.Domain.Core.Constants {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Reminds to feed a pet..
         /// </summary>
         public static string FeedPet {
             get {
@@ -70,7 +70,7 @@ namespace Schedule.Domain.Core.Constants {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Reminds to go for a walk with a pet..
         /// </summary>
         public static string GoForAWalk {
             get {
@@ -79,7 +79,7 @@ namespace Schedule.Domain.Core.Constants {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на Reminds to make a vaccine..
         /// </summary>
         public static string MakeVaccine {
             get {
