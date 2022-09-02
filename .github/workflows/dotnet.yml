@@ -30,3 +30,11 @@ jobs:
       uses: ./.github/workflows/Composite/Build
       with:
         project_path: PMCS/Services/AuthorizationService/AuthorizationService.sln
+  BuildScheduleService:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build Schedule Microservice
+      uses: ./.github/workflows/Composite/Build
+      with:
+        project_path: PMCS/Services/ScheduleService/ScheduleService.sln
