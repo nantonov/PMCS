@@ -66,8 +66,6 @@ namespace Schedule.Domain.Entities
             Status = ExecutionStatus.Done;
 
             UpdateLastModifiedDate();
-
-            AddReminderStatusChangedAsDoneDomainEvent();
         }
 
         public void ResetStatus()
@@ -126,19 +124,11 @@ namespace Schedule.Domain.Entities
             }
         }
 
-
         private void AddReminderTriggeredDomainEvent()
         {
             var reminderTriggeredDomainEvent = new ReminderTriggeredDomainEvent(this);
 
             this.AddDomainEvent(reminderTriggeredDomainEvent);
-        }
-
-        private void AddReminderStatusChangedAsDoneDomainEvent()
-        {
-            var reminderStatusChangedAsDoneDomainEvent = new ReminderStatusChangedAsDoneEvent(Id);
-
-            this.AddDomainEvent(reminderStatusChangedAsDoneDomainEvent);
         }
     }
 }
