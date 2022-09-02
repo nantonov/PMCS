@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notifications.API.Models.Requests;
 using Notifications.BLL.Interfaces.Services;
@@ -8,6 +9,7 @@ namespace Notifications.API.Controllers
 {
     [Route("api/notify/")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Custom")]
     public class NotificationController : ControllerBase
     {
         private readonly IEmailService _emailService;
