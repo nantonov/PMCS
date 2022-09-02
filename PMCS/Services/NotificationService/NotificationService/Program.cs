@@ -1,8 +1,7 @@
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Connections;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Notifications.API.Extentions;
 using Notifications.API.Middlewares;
 using Notifications.BLL.DI;
 using Notifications.BLL.Resources.Constants;
@@ -32,16 +31,8 @@ builder.Services.AddCors(config =>
         builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.Authority = "https://localhost:5001/";
-    options.RequireHttpsMetadata = false;
-    options.Audience = "NotificationsAPI";
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateAudience = false,
-    };
-});
+AuthorizationExtentions.ConfigureAuthenticationScheme(builder.Services);
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddSwaggerGen(options =>
