@@ -2,6 +2,7 @@
 using Schedule.Domain.Core.Exceptions;
 using Schedule.Domain.Core.Utility;
 using Schedule.Domain.Enums;
+using Schedule.Domain.Events;
 using Schedule.Domain.SeedWork;
 
 namespace Schedule.Domain.Entities
@@ -23,8 +24,8 @@ namespace Schedule.Domain.Entities
 
             private set
             {
-                if (value > DateTime.Now)
-                    throw new ScheduleDomainException("The date time can't be triggered in feature");
+                if (value < DateTime.Now)
+                    throw new ScheduleDomainException("The date time can't be triggered in past.");
 
                 TriggerDateTime = value;
             }
@@ -51,11 +52,21 @@ namespace Schedule.Domain.Entities
 
         private Reminder() { }
 
+        public void Triggered()
+        {
+            if (TriggerDateTime <= DateTime.UtcNow)
+                throw new ScheduleDomainException("Trigger date time hasn't come yet.");
+
+            AddReminderTriggeredDomainEvent();
+        }
+
         public void SetStatusAsDone()
         {
             Status = ExecutionStatus.Done;
 
             UpdateLastModifiedDate();
+
+            AddReminderStatusChangedAsDoneDomainEvent();
         }
 
         public void ResetStatus()
@@ -112,6 +123,21 @@ namespace Schedule.Domain.Entities
                     }
                 default: throw new ScheduleDomainException("Such type of enum doesn't exist.");
             }
+        }
+
+
+        private void AddReminderTriggeredDomainEvent()
+        {
+            var reminderTriggeredDomainEvent = new ReminderTriggeredDomainEvent(this);
+
+            this.AddDomainEvent(reminderTriggeredDomainEvent);
+        }
+
+        private void AddReminderStatusChangedAsDoneDomainEvent()
+        {
+            var reminderStatusChangedAsDoneDomainEvent = new ReminderStatusChangedAsDoneEvent(Id);
+
+            this.AddDomainEvent(reminderStatusChangedAsDoneDomainEvent);
         }
     }
 }
