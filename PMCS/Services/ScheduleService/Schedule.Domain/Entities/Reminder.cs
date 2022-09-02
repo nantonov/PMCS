@@ -18,16 +18,17 @@ namespace Schedule.Domain.Entities
         public ActionToRemindType ActionToRemindType { get; private set; }
         public ExecutionStatus Status { get; private set; }
 
+        private DateTime _triggerDateTime;
         public DateTime TriggerDateTime
         {
-            get => TriggerDateTime;
+            get => _triggerDateTime;
 
             private set
             {
                 if (value < DateTime.Now)
                     throw new ScheduleDomainException("The date time can't be triggered in past.");
 
-                TriggerDateTime = value;
+                _triggerDateTime = value;
             }
         }
 
