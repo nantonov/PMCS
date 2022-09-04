@@ -14,6 +14,7 @@ namespace Schedule.Domain.Entities
         public DateTime LastModified { get; private set; }
         public string Description { get; private set; }
         public string NotificationMessage { get; private set; }
+        public bool IsTriggered { get; private set; }
         public NotificationType NotificationType { get; private set; }
         public ActionToRemindType ActionToRemindType { get; private set; }
         public ExecutionStatus Status { get; private set; }
@@ -47,6 +48,7 @@ namespace Schedule.Domain.Entities
             NotificationType = notificationType;
             PetId = petId;
             UserId = userId;
+            IsTriggered = false;
 
             ResetStatus();
         }
@@ -57,6 +59,8 @@ namespace Schedule.Domain.Entities
         {
             if (TriggerDateTime <= DateTime.UtcNow)
                 throw new ScheduleDomainException("Trigger date time hasn't come yet.");
+
+            IsTriggered = true;
 
             AddReminderTriggeredDomainEvent();
         }
