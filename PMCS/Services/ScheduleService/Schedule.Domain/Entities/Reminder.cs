@@ -55,6 +55,18 @@ namespace Schedule.Domain.Entities
 
         private Reminder() { }
 
+        public void Update(DateTime triggerDateTime, string message, NotificationType notificationType, ActionToRemindType actionToRemindType)
+        {
+            Ensure.NotEmpty(triggerDateTime, "Trigger DateTime is required.", nameof(triggerDateTime));
+            Ensure.NotEmpty(message, "Message is required", nameof(message));
+
+            SetActionToRemind(actionToRemindType);
+
+            TriggerDateTime = triggerDateTime;
+            NotificationType = notificationType;
+            NotificationMessage = message;
+        }
+
         public void Triggered()
         {
             if (TriggerDateTime <= DateTime.UtcNow)

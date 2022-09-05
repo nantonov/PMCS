@@ -16,12 +16,6 @@ namespace Notifications.API.Validators
             RuleFor(x => x.Message)
                 .NotEmpty()
                 .WithMessage(ValidationResources.MessageMustNotBeEmpty);
-            RuleFor(x => x.OwnerName)
-                .NotEmpty()
-                .WithMessage(ValidationResources.NameMustNotBeEmpty);
-            RuleFor(x => x.PetName)
-                .NotEmpty()
-                .WithMessage(ValidationResources.NameMustNotBeEmpty);
         }
     }
 }
