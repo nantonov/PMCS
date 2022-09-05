@@ -2,6 +2,7 @@
 using Schedule.Domain.Core.Exceptions;
 using Schedule.Domain.Core.Utility;
 using Schedule.Domain.Enums;
+using Schedule.Domain.Events;
 using Schedule.Domain.SeedWork;
 
 namespace Schedule.Domain.Entities
@@ -13,20 +14,22 @@ namespace Schedule.Domain.Entities
         public DateTime LastModified { get; private set; }
         public string Description { get; private set; }
         public string NotificationMessage { get; private set; }
+        public bool IsTriggered { get; private set; }
         public NotificationType NotificationType { get; private set; }
         public ActionToRemindType ActionToRemindType { get; private set; }
         public ExecutionStatus Status { get; private set; }
 
+        private DateTime _triggerDateTime;
         public DateTime TriggerDateTime
         {
-            get => TriggerDateTime;
+            get => _triggerDateTime;
 
             private set
             {
-                if (value > DateTime.Now)
-                    throw new ScheduleDomainException("The date time can't be triggered in feature");
+                if (value < DateTime.Now)
+                    throw new ScheduleDomainException("The date time can't be triggered in past.");
 
-                TriggerDateTime = value;
+                _triggerDateTime = value;
             }
         }
 
@@ -45,11 +48,22 @@ namespace Schedule.Domain.Entities
             NotificationType = notificationType;
             PetId = petId;
             UserId = userId;
+            IsTriggered = false;
 
             ResetStatus();
         }
 
         private Reminder() { }
+
+        public void Triggered()
+        {
+            if (TriggerDateTime <= DateTime.UtcNow)
+                throw new ScheduleDomainException("Trigger date time hasn't come yet.");
+
+            IsTriggered = true;
+
+            AddReminderTriggeredDomainEvent();
+        }
 
         public void SetStatusAsDone()
         {
@@ -112,6 +126,13 @@ namespace Schedule.Domain.Entities
                     }
                 default: throw new ScheduleDomainException("Such type of enum doesn't exist.");
             }
+        }
+
+        private void AddReminderTriggeredDomainEvent()
+        {
+            var reminderTriggeredDomainEvent = new ReminderTriggeredDomainEvent(this);
+
+            this.AddDomainEvent(reminderTriggeredDomainEvent);
         }
     }
 }
