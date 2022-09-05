@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Schedule.Application.Configuration;
 
 namespace Schedule.API.Extentions
 {
@@ -9,12 +10,12 @@ namespace Schedule.API.Extentions
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
-                options.Authority = "https://localhost:5001/";
-                options.RequireHttpsMetadata = false;
-                options.Audience = "ScheduleAPI";
+                options.Authority = AuthConfiguration.Authority;
+                options.RequireHttpsMetadata = AuthConfiguration.RequireHttpsMetadata;
+                options.Audience = AuthConfiguration.Audience;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateAudience = false,
+                    ValidateAudience = AuthConfiguration.ValidateAudience,
                 };
             });
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using Schedule.Application.Configuration;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Schedule.API.Extentions
@@ -17,7 +18,7 @@ namespace Schedule.API.Extentions
                         TokenUrl = new Uri("https://localhost:5001/connect/token"),
                         Scopes = new Dictionary<string, string>
                         {
-                            {"ScheduleAPI", "Schedule WebAPI"}
+                            {SwaggerConfiguration.Scope, SwaggerConfiguration.ScopeDescription}
                         }
                     }
                 }
@@ -31,10 +32,10 @@ namespace Schedule.API.Extentions
                         Reference = new OpenApiReference
                         {
                             Type = ReferenceType.SecurityScheme,
-                            Id = "oauth2"
+                            Id = SwaggerConfiguration.OpenApiReferenceId
                         },
-                        Scheme = "oauth2",
-                        Name = "Bearer",
+                        Scheme = SwaggerConfiguration.Scheme,
+                        Name = SwaggerConfiguration.SchemeName,
                         In = ParameterLocation.Header
                     },
                     new List<string>()
