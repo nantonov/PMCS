@@ -121,12 +121,18 @@
     <value>Such type of enum doesn't exist.</value>
   </data>
   <data name="IdFieldMustNotBeEmpty" xml:space="preserve">
-    <value>The field "Id" must not be empty.</value>
+    <value>The field 'Id' must not be empty.</value>
+  </data>
+  <data name="InvalidMessageLength" xml:space="preserve">
+    <value>The length of message must be less than 100 symbols.</value>
+  </data>
+  <data name="MessageMustNotBeEmpty" xml:space="preserve">
+    <value>Notification message mustn't be empty.</value>
   </data>
   <data name="TriggerDateMustBeInFuture" xml:space="preserve">
     <value>The trigger date must be later than now.</value>
   </data>
   <data name="TriggerDateMustNotBeEmpty" xml:space="preserve">
-    <value>The field "TriggerDateTime" must not be empty.</value>
+    <value>The field 'TriggerDateTime' must not be empty.</value>
   </data>
 </root>

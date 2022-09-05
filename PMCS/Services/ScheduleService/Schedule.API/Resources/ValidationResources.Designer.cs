@@ -70,11 +70,29 @@ namespace Schedule.API.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на The field &quot;Id&quot; must not be empty..
+        ///   Ищет локализованную строку, похожую на The field &apos;Id&apos; must not be empty..
         /// </summary>
         public static string IdFieldMustNotBeEmpty {
             get {
                 return ResourceManager.GetString("IdFieldMustNotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The length of message must be less than 100 symbols..
+        /// </summary>
+        public static string InvalidMessageLength {
+            get {
+                return ResourceManager.GetString("InvalidMessageLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Notification message mustn&apos;t be empty..
+        /// </summary>
+        public static string MessageMustNotBeEmpty {
+            get {
+                return ResourceManager.GetString("MessageMustNotBeEmpty", resourceCulture);
             }
         }
         
@@ -88,7 +106,7 @@ namespace Schedule.API.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на The field &quot;TriggerDateTime&quot; must not be empty..
+        ///   Ищет локализованную строку, похожую на The field &apos;TriggerDateTime&apos; must not be empty..
         /// </summary>
         public static string TriggerDateMustNotBeEmpty {
             get {

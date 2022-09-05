@@ -2,6 +2,8 @@
 {
     public enum ActionToRemindType
     {
-        MakeVaccine, FeedPet, GoForWalk
+        MakeVaccine,
+        FeedPet,
+        GoForWalk
     }
 }
