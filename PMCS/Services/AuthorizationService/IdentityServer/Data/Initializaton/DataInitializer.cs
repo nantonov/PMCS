@@ -12,7 +12,7 @@ namespace IdentityServer.Data.Initializaton
 {
     public static class DataInitializer
     {
-        public async static Task InitializeDatabase(IApplicationBuilder app)
+        public static async Task InitializeDatabase(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
