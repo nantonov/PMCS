@@ -88,15 +88,6 @@ namespace Notifications.BLL.Resources.Constants.Validators {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Invalid Name: must not be empty..
-        /// </summary>
-        public static string NameMustNotBeEmpty {
-            get {
-                return ResourceManager.GetString("NameMustNotBeEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Invalid Id: must not be null..
         /// </summary>
         public static string UserIdIsNotNull {

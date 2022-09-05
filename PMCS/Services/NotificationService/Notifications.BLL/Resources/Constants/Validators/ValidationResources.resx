@@ -126,9 +126,6 @@
   <data name="MessageMustNotBeEmpty" xml:space="preserve">
     <value>Invalid Message: must not be empty.</value>
   </data>
-  <data name="NameMustNotBeEmpty" xml:space="preserve">
-    <value>Invalid Name: must not be empty.</value>
-  </data>
   <data name="UserIdIsNotNull" xml:space="preserve">
     <value>Invalid Id: must not be null.</value>
   </data>
