@@ -48,8 +48,7 @@ namespace Notifications.BLL.Services
         {
             StringBuilder template = new StringBuilder();
 
-            template.AppendLine($"{Phrases.Greeting} {payload.OwnerName},");
-            template.AppendLine($"<p>{Phrases.News} <b>{payload.PetName}<b></p>");
+            template.AppendLine($"{Phrases.Greeting}");
             template.AppendLine($"<p>{payload.Message}</p>");
             template.AppendLine($"<p>{Phrases.Goodbye}</p>");
 
@@ -60,8 +59,7 @@ namespace Notifications.BLL.Services
         {
             StringBuilder template = new StringBuilder();
 
-            template.AppendLine($"{Phrases.Greeting} {payload.OwnerName}.");
-            template.AppendLine($"{Phrases.News} {payload.PetName}");
+            template.AppendLine($"{Phrases.Greeting}");
             template.AppendLine($"{payload.Message}");
             template.AppendLine($"{Phrases.Goodbye}");
 
@@ -73,10 +71,8 @@ namespace Notifications.BLL.Services
             return new EmailNotificationPayload()
             {
                 RecieverEmailAddress = notification.RecieverEmailAddress,
-                OwnerName = notification.OwnerName,
                 Message = notification.Message,
                 Subject = notification.Subject,
-                PetName = notification.PetName
             };
         }
     }

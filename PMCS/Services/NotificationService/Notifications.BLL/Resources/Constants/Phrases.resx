@@ -121,9 +121,6 @@
     <value>With regards, Pet's Monitoring and Control System.</value>
   </data>
   <data name="Greeting" xml:space="preserve">
-    <value>Hey,</value>
-  </data>
-  <data name="News" xml:space="preserve">
-    <value>There is some news for your pet -</value>
+    <value>Hey, there is some news for your pet.</value>
   </data>
 </root>

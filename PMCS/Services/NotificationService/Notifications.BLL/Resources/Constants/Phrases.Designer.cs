@@ -70,20 +70,11 @@ namespace Notifications.BLL.Resources.Constants {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Hey,.
+        ///   Ищет локализованную строку, похожую на Hey, there is some news for your pet..
         /// </summary>
         public static string Greeting {
             get {
                 return ResourceManager.GetString("Greeting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на There is some news for your pet -.
-        /// </summary>
-        public static string News {
-            get {
-                return ResourceManager.GetString("News", resourceCulture);
             }
         }
     }
