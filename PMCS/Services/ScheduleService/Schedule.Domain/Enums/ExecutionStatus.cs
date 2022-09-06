@@ -2,6 +2,7 @@
 {
     public enum ExecutionStatus
     {
-        ToDo, Done
+        ToDo,
+        Done
     }
 }

@@ -10,7 +10,8 @@ namespace IdentityServer.Configuration
             new List<ApiScope>()
             {
                 new ApiScope("PetAPI", "Pets WebAPI"),
-                new ApiScope("NotificationsAPI", "Notifications WebAPI")
+                new ApiScope("NotificationsAPI", "Notifications WebAPI"),
+                new ApiScope("ScheduleAPI","Schedule WebAPI")
             };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
@@ -25,7 +26,8 @@ namespace IdentityServer.Configuration
             new List<ApiResource>()
             {
                 new ApiResource("PetAPI"),
-                new ApiResource("NotificationsAPI")
+                new ApiResource("NotificationsAPI"),
+                new ApiResource("ScheduleAPI")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -42,7 +44,8 @@ namespace IdentityServer.Configuration
                        IdentityServerConstants.StandardScopes.Profile,
                        IdentityServerConstants.StandardScopes.Email,
                        "PetAPI",
-                       "NotificationsAPI"
+                       "NotificationsAPI",
+                       "ScheduleAPI"
                    }
                 },
                 new Client()
@@ -55,7 +58,8 @@ namespace IdentityServer.Configuration
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "PetAPI",
-                        "NotificationsAPI"
+                        "NotificationsAPI",
+                        "ScheduleAPI"
                     }
                 }
             };

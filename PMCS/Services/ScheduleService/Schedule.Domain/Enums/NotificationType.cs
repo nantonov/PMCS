@@ -2,6 +2,7 @@
 {
     public enum NotificationType
     {
-        Email, PersonalAccount
+        Email,
+        PersonalAccount
     }
 }
