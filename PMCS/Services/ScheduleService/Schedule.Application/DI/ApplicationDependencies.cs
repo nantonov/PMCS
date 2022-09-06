@@ -1,6 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Schedule.Application.DI
 {
@@ -8,7 +6,7 @@ namespace Schedule.Application.DI
     {
         public static void RegisterDependencies(this IServiceCollection services)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+
         }
     }
 }
