@@ -80,6 +80,7 @@ namespace Schedule.Domain.Entities
         public void SetStatusAsDone()
         {
             Status = ExecutionStatus.Done;
+            IsTriggered = true;
 
             UpdateLastModifiedDate();
         }
