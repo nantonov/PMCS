@@ -20,9 +20,10 @@ namespace Schedule.Application.Common.CommandHandlers
         public async Task<Reminder> Handle(AddReminderCommand request, CancellationToken cancellationToken)
         {
             var userId = _identityService.GetUserId();
+            var userEmail = _identityService.GetUserEmail();
 
             var reminder = new Reminder(request.TriggerDateTime, request.PetId,
-                userId, request.NotificationMessage, request.NotificationType, request.ActionToRemindType);
+                userId, request.NotificationMessage, userEmail, request.NotificationType, request.ActionToRemindType);
 
             var result = await _repository.Insert(reminder, cancellationToken);
 

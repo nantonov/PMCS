@@ -36,6 +36,7 @@ namespace Schedule.Infrastructure.DI
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IPetService, PetService>();
         }
     }
 }
