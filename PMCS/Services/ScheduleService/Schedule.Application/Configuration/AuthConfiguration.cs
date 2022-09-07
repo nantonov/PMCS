@@ -8,9 +8,11 @@
         public const bool ValidateAudience = false;
 
         public const string ClientId = "pmcs-client-id";
+        public const string SwaggerClientId = "swagger-client-id";
         public const string ClientSecret = "client_secret";
 
         public const string PetScope = "PetAPI";
         public const string NotificationScope = "NotificationsAPI";
+        public const string ScheduleScope = "ScheduleAPI";
     }
 }

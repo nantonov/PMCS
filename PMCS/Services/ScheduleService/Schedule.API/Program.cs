@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Schedule.API.Middlewares;
 using Schedule.Application.Common.CommandHandlers;
+using Schedule.Application.Configuration;
 using Schedule.Application.DI;
 using Schedule.BackgroundTasks.DI;
 using Schedule.BackgroundTasks.EventHandlers;
@@ -58,9 +59,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.OAuthClientId("swagger-client-id");
+        options.OAuthClientId(AuthConfiguration.SwaggerClientId);
         options.OAuthScopeSeparator(" ");
-        options.OAuthClientSecret("client_secret");
+        options.OAuthClientSecret(AuthConfiguration.ClientSecret);
         options.DocExpansion(DocExpansion.List);
     });
 }

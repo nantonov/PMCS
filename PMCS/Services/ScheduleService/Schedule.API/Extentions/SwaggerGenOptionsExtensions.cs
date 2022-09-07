@@ -18,10 +18,11 @@ namespace Schedule.API.Extentions
                         TokenUrl = new Uri("https://localhost:5001/connect/token"),
                         Scopes = new Dictionary<string, string>
                         {
-                            {SwaggerConfiguration.Scope, SwaggerConfiguration.ScopeDescription}
-                        }
+                            {SwaggerConfiguration.Scope, SwaggerConfiguration.ScopeDescription},
+                        },
                     }
-                }
+                },
+                OpenIdConnectUrl = new Uri("https://localhost:5001/.well-known/openid-configuration"),
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement
