@@ -1,11 +1,7 @@
 ﻿using IdentityModel.Client;
 using Schedule.Application.Configuration;
 using Schedule.Application.Core.Abstractions.Services;
-using Schedule.Application.Core.Models.Pets.Meal;
 using Schedule.Application.Core.Models.Pets.Owner;
-using Schedule.Application.Core.Models.Pets.Vaccine;
-using Schedule.Application.Core.Models.Pets.Walking;
-using Schedule.Application.Helpers;
 
 namespace Schedule.Infrastructure.Services
 {
@@ -27,45 +23,6 @@ namespace Schedule.Infrastructure.Services
             var response = await client.GetAsync($"/api/owner/userId/{userId}");
 
             var result = await response.Content.ReadAsAsync<Owner>();
-
-            return result;
-        }
-
-        public async Task<Meal> AddMeal(PostMealRequest request)
-        {
-            var client = await GetAuthenticatedClient();
-
-            var content = CommunicationServicesHelper.SerializeObjectToHttpContent(request);
-
-            var response = await client.PostAsync("/api/meal", content);
-
-            var result = await response.Content.ReadAsAsync<Meal>();
-
-            return result;
-        }
-
-        public async Task<Walking> AddWalking(PostWalkingRequest request)
-        {
-            var client = await GetAuthenticatedClient();
-
-            var content = CommunicationServicesHelper.SerializeObjectToHttpContent(request);
-
-            var response = await client.PostAsync("/api/walking", content);
-
-            var result = await response.Content.ReadAsAsync<Walking>();
-
-            return result;
-        }
-
-        public async Task<Vaccine> AddVaccine(PostVaccineRequest request)
-        {
-            var client = await GetAuthenticatedClient();
-
-            var content = CommunicationServicesHelper.SerializeObjectToHttpContent(request);
-
-            var response = await client.PostAsync("/api/vaccine", content);
-
-            var result = await response.Content.ReadAsAsync<Vaccine>();
 
             return result;
         }
