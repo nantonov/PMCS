@@ -7,10 +7,10 @@
         public const bool RequireHttpsMetadata = false;
         public const bool ValidateAudience = false;
 
-        public const string ClientId = "client_id";
-        public const string ClientSecret = "pmcs-client-secret";
+        public const string ClientId = "pmcs-client-id";
+        public const string ClientSecret = "client_secret";
 
-        public const string PetScope = "PetsAPI";
+        public const string PetScope = "PetAPI";
         public const string NotificationScope = "NotificationsAPI";
     }
 }
