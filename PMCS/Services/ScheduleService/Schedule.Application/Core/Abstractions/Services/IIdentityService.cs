@@ -4,6 +4,6 @@
     {
         public int GetUserId();
         public string GetUserEmail();
-        public bool? IsAuthenticated();
+        public bool IsAuthenticated();
     }
 }

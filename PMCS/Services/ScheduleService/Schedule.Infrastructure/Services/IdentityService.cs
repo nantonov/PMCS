@@ -35,9 +35,9 @@ namespace Schedule.Infrastructure.Services
             return email;
         }
 
-        public bool? IsAuthenticated()
+        public bool IsAuthenticated()
         {
-            var isAuthenticated = _context?.HttpContext?.User?.Identity?.IsAuthenticated;
+            var isAuthenticated = _context.HttpContext.User.Identity.IsAuthenticated;
 
             return isAuthenticated;
         }
