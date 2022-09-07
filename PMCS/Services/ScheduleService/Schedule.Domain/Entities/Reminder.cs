@@ -69,7 +69,7 @@ namespace Schedule.Domain.Entities
 
         public void Triggered()
         {
-            if (TriggerDateTime <= DateTime.UtcNow)
+            if (TriggerDateTime >= DateTime.UtcNow)
                 throw new ScheduleDomainException("Trigger date time hasn't come yet.");
 
             IsTriggered = true;
@@ -80,6 +80,7 @@ namespace Schedule.Domain.Entities
         public void SetStatusAsDone()
         {
             Status = ExecutionStatus.Done;
+            IsTriggered = true;
 
             UpdateLastModifiedDate();
         }

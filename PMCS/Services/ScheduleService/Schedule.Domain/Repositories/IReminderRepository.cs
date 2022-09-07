@@ -1,5 +1,6 @@
 ﻿using Schedule.Domain.Entities;
 using Schedule.Domain.SeedWork;
+using System.Linq.Expressions;
 
 namespace Schedule.Domain.Repositories
 {
@@ -11,5 +12,6 @@ namespace Schedule.Domain.Repositories
         Task<Reminder> Insert(Reminder reminder, CancellationToken cancellationToken);
         Task<Reminder> Update(Reminder reminder, CancellationToken cancellationToken);
         Task<Reminder> Delete(Reminder reminder, CancellationToken cancellationToken);
+        Task<IReadOnlyList<Reminder>> Get(Expression<Func<Reminder, bool>> predicate, CancellationToken cancellationToken);
     }
 }

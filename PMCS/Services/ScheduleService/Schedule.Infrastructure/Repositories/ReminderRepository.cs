@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Schedule.Domain.Entities;
 using Schedule.Domain.Repositories;
+using System.Linq.Expressions;
 
 namespace Schedule.Infrastructure.Repositories
 {
@@ -11,6 +12,11 @@ namespace Schedule.Infrastructure.Repositories
         public ReminderRepository(ScheduleDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<IReadOnlyList<Reminder>> Get(Expression<Func<Reminder, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await _context.Reminders.Where(predicate).ToListAsync(cancellationToken);
         }
 
         public async Task<IReadOnlyList<Reminder>> GetAll(CancellationToken cancellationToken)

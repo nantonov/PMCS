@@ -1,6 +1,10 @@
 using FluentValidation.AspNetCore;
+using MediatR;
 using Schedule.API.Middlewares;
+using Schedule.Application.Common.CommandHandlers;
 using Schedule.Application.DI;
+using Schedule.BackgroundTasks.DI;
+using Schedule.BackgroundTasks.EventHandlers;
 using Schedule.Infrastructure.DI;
 using Serilog;
 using Serilog.Events;
@@ -17,6 +21,7 @@ Log.Logger = Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .CreateLogger();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,8 +29,11 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
+builder.Services.AddMediatR(typeof(AddReminderCommandHandler).Assembly, typeof(ReminderTriggeredDomainEventHandler).Assembly);
+
 InfrastructureDependencies.RegisterDependencies(builder.Services, configuration);
 ApplicationDependencies.RegisterDependencies(builder.Services);
+BackgroundServicesRegistration.AddBackgroundTasks(builder.Services);
 
 builder.Services.AddCors(config =>
 {
