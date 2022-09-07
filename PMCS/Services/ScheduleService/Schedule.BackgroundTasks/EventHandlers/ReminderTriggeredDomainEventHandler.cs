@@ -1,23 +1,29 @@
 ﻿using MediatR;
+using Schedule.Application.Core.Abstractions.Services;
 using Schedule.Domain.Events;
-using Schedule.Domain.Repositories;
+using Serilog;
 
 namespace Schedule.BackgroundTasks.EventHandlers
 {
     public class ReminderTriggeredDomainEventHandler : INotificationHandler<ReminderTriggeredDomainEvent>
     {
-        private readonly IReminderRepository _repository;
+        private readonly INotificationService _notificationService;
 
-        public ReminderTriggeredDomainEventHandler(IReminderRepository repository)
+        public ReminderTriggeredDomainEventHandler(INotificationService notificationService)
         {
-            _repository = repository;
+            _notificationService = notificationService;
         }
 
-        public async Task Handle(ReminderTriggeredDomainEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(ReminderTriggeredDomainEvent domainEvent, CancellationToken cancellationToken)
         {
-            var reminder = notification.Reminder;
+            var reminder = domainEvent.Reminder;
 
-            await _repository.Update(reminder, cancellationToken);
+            var notification = await _notificationService.Notify(reminder);
+
+            if (notification != null)
+            {
+                Log.Information("Notification {Notification} was sent.", notification);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
 using Schedule.Application.Configuration;
 using Schedule.Application.Core.Abstractions.Services;
 using Schedule.Domain.Repositories;
@@ -14,16 +15,16 @@ namespace Schedule.Infrastructure.DI
         public static void RegisterDependencies(this IServiceCollection services, IConfiguration config)
         {
             services.AddHttpClient(ClientsConfiguration.AuthClientName,
-                client => client.BaseAddress = new Uri(ClientsConfiguration.AuthServiceAddress)
-            );
+                    client => client.BaseAddress = new Uri(ClientsConfiguration.AuthServiceAddress))
+                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
 
             services.AddHttpClient(ClientsConfiguration.PetClientName,
-                client => client.BaseAddress = new Uri(ClientsConfiguration.PetServiceAddress)
-            );
+                client => client.BaseAddress = new Uri(ClientsConfiguration.PetServiceAddress))
+                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
 
             services.AddHttpClient(ClientsConfiguration.NotificationClientName,
-                client => client.BaseAddress = new Uri(ClientsConfiguration.NotificationServiceAddress)
-            );
+                client => client.BaseAddress = new Uri(ClientsConfiguration.NotificationServiceAddress))
+                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
 
             services.AddDbContext<ScheduleDbContext>(op =>
                 {
@@ -34,6 +35,7 @@ namespace Schedule.Infrastructure.DI
             services.AddTransient<IReminderRepository, ReminderRepository>();
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IPetService, PetService>();
             services.AddScoped<IIdentityService, IdentityService>();
         }
     }

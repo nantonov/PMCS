@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Schedule.Application.Common.Queries;
-using Schedule.Application.Core.Abstractions.Services;
 using Schedule.BackgroundTasks.Abstractions;
 using Schedule.BackgroundTasks.Settings;
+using Schedule.Domain.Repositories;
 using Serilog;
 
 namespace Schedule.BackgroundTasks.Services
@@ -10,12 +10,12 @@ namespace Schedule.BackgroundTasks.Services
     public class ReminderService : IProcessingService
     {
         private readonly IMediator _mediator;
-        private readonly INotificationService _notificationService;
+        private readonly IReminderRepository _reminderRepository;
 
-        public ReminderService(IMediator mediator, INotificationService notificationService)
+        public ReminderService(IMediator mediator, IReminderRepository reminderRepository)
         {
             _mediator = mediator;
-            _notificationService = notificationService;
+            _reminderRepository = reminderRepository;
         }
 
         public async Task DoWork(CancellationToken stoppingToken)
@@ -34,9 +34,8 @@ namespace Schedule.BackgroundTasks.Services
                     {
                         reminder.Triggered();
 
-                        var notification = await _notificationService.Notify(reminder);
-
-                        Log.Information("Notification {Notification} was send to user.", notification);
+                        await _reminderRepository.Update(reminder, stoppingToken);
+                        Log.Information("Reminder {Reminder} was triggered.", reminder);
                     }
                 }
 
