@@ -61,6 +61,9 @@ namespace Schedule.Domain.Entities
 
         public void Update(DateTime triggerDateTime, string message, NotificationType notificationType, ActionToRemindType actionToRemindType)
         {
+            if (IsTriggered || Status == ExecutionStatus.Done)
+                throw new ScheduleDomainException("The reminder can't be changed after it has been triggered or executed.");
+
             Ensure.NotEmpty(triggerDateTime, "Trigger DateTime is required.", nameof(triggerDateTime));
             Ensure.NotEmpty(message, "Message is required", nameof(message));
 
