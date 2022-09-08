@@ -1,16 +1,20 @@
 ﻿using IdentityModel.Client;
+using Microsoft.AspNetCore.Http;
 using Schedule.Application.Configuration;
 using Schedule.Application.Core.Abstractions.Services;
+using System.Security.Claims;
 
 namespace Schedule.Infrastructure.Services
 {
     public class AuthService : IAuthService
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHttpContextAccessor _context;
 
-        public AuthService(IHttpClientFactory httpClientFactory)
+        public AuthService(IHttpClientFactory httpClientFactory, IHttpContextAccessor context)
         {
             _httpClientFactory = httpClientFactory;
+            _context = context;
         }
 
         public async Task<string> GetAccessToken(string scope)
@@ -30,5 +34,24 @@ namespace Schedule.Infrastructure.Services
 
             return tokenResponse.AccessToken;
         }
+
+        public async Task<IEnumerable<Claim>> GetUserClaims()
+        {
+            var client = _httpClientFactory.CreateClient(ClientsConfiguration.AuthClientName);
+            var discoveryDocument = await client.GetDiscoveryDocumentAsync(ClientsConfiguration.AuthServiceAddress);
+
+            var token = _context.HttpContext.Request.Headers.FirstOrDefault(x => x.Key == "Authorization").
+                Value.SingleOrDefault().Replace("Bearer ", "");
+
+            var response = await client.GetUserInfoAsync(new UserInfoRequest
+            {
+                Address = discoveryDocument.UserInfoEndpoint,
+                Token = token
+            });
+
+            return response.Claims;
+        }
+
     }
 }
+

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
@@ -11,7 +10,12 @@ namespace Schedule.API.Extentions
     {
         public static void ConfigureAuthenticationScheme(this IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+
+                }).AddJwtBearer(options =>
             {
                 options.Authority = AuthConfiguration.Authority;
                 options.RequireHttpsMetadata = AuthConfiguration.RequireHttpsMetadata;
@@ -21,7 +25,6 @@ namespace Schedule.API.Extentions
                     ValidateAudience = AuthConfiguration.ValidateAudience,
                 };
             })
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, config =>
             {
                 config.Authority = AuthConfiguration.Authority;
@@ -37,7 +40,6 @@ namespace Schedule.API.Extentions
                 config.Scope.Add(AuthConfiguration.ScheduleScope);
                 config.Scope.Add("email");
                 config.Scope.Add("openid");
-                config.Scope.Add("profile");
 
                 config.GetClaimsFromUserInfoEndpoint = true;
                 config.ClaimActions.MapAll();

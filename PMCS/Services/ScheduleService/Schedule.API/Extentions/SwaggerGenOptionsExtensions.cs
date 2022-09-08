@@ -19,6 +19,8 @@ namespace Schedule.API.Extentions
                         Scopes = new Dictionary<string, string>
                         {
                             {SwaggerConfiguration.Scope, SwaggerConfiguration.ScopeDescription},
+                            {"openid", "openid"},
+                            {"email", "email"}
                         },
                     }
                 },
