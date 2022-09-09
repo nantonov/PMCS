@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Schedule.Application.Configuration;
 using Schedule.Application.Core.Abstractions.Services;
+using Schedule.Application.RetryPolicy;
 using Schedule.Domain.Repositories;
 using Schedule.Infrastructure.Repositories;
 using Schedule.Infrastructure.Services;
@@ -15,16 +16,18 @@ namespace Schedule.Infrastructure.DI
         public static void RegisterDependencies(this IServiceCollection services, IConfiguration config)
         {
             services.AddHttpClient(ClientsConfiguration.AuthClientName,
-                    client => client.BaseAddress = new Uri(ClientsConfiguration.AuthServiceAddress))
-                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
+                client => client.BaseAddress = new Uri(ClientsConfiguration.AuthServiceAddress))
+                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300))); ;
 
             services.AddHttpClient(ClientsConfiguration.PetClientName,
                 client => client.BaseAddress = new Uri(ClientsConfiguration.PetServiceAddress))
-                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
+                .AddPolicyHandler(ResilientPolicy.TransientErrorRetryPolicy)
+                .AddPolicyHandler(ResilientPolicy.CircuitBreakerPolicy);
 
             services.AddHttpClient(ClientsConfiguration.NotificationClientName,
                 client => client.BaseAddress = new Uri(ClientsConfiguration.NotificationServiceAddress))
-                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
+                .AddPolicyHandler(ResilientPolicy.TransientErrorRetryPolicy)
+                .AddPolicyHandler(ResilientPolicy.CircuitBreakerPolicy);
 
             services.AddDbContext<ScheduleDbContext>(op =>
                 {
