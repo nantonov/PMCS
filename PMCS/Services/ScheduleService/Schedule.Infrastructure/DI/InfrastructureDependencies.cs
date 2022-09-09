@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Schedule.Application.Configuration;
 using Schedule.Application.Core.Abstractions.Services;
-using Schedule.Application.RetryPolicy;
 using Schedule.Domain.Repositories;
 using Schedule.Infrastructure.Repositories;
 using Schedule.Infrastructure.Services;
@@ -20,14 +19,10 @@ namespace Schedule.Infrastructure.DI
                 .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300))); ;
 
             services.AddHttpClient(ClientsConfiguration.PetClientName,
-                client => client.BaseAddress = new Uri(ClientsConfiguration.PetServiceAddress))
-                .AddPolicyHandler(ResilientPolicy.TransientErrorRetryPolicy)
-                .AddPolicyHandler(ResilientPolicy.CircuitBreakerPolicy);
+                client => client.BaseAddress = new Uri(ClientsConfiguration.PetServiceAddress));
 
             services.AddHttpClient(ClientsConfiguration.NotificationClientName,
-                client => client.BaseAddress = new Uri(ClientsConfiguration.NotificationServiceAddress))
-                .AddPolicyHandler(ResilientPolicy.TransientErrorRetryPolicy)
-                .AddPolicyHandler(ResilientPolicy.CircuitBreakerPolicy);
+                client => client.BaseAddress = new Uri(ClientsConfiguration.NotificationServiceAddress));
 
             services.AddDbContext<ScheduleDbContext>(op =>
                 {

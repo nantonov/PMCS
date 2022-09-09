@@ -4,6 +4,7 @@ using Schedule.Application.Core.Abstractions.Models;
 using Schedule.Application.Core.Abstractions.Services;
 using Schedule.Application.Core.Models.Notifications;
 using Schedule.Application.Helpers;
+using Schedule.Application.RetryPolicy;
 using Schedule.Domain.Entities;
 using Schedule.Domain.Enums;
 
@@ -55,7 +56,7 @@ namespace Schedule.Infrastructure.Services
 
             var content = CommunicationServicesHelper.SerializeObjectToHttpContent(request);
 
-            var response = await client.PostAsync("/email", content);
+            var response = await ResilientPolicy.ResilientPolicyWrapper.ExecuteAsync(() => client.PostAsync("/email", content));
 
             var notification = await response.Content.ReadAsAsync<EmailNotification>();
 
@@ -71,7 +72,7 @@ namespace Schedule.Infrastructure.Services
 
             var content = CommunicationServicesHelper.SerializeObjectToHttpContent(request);
 
-            var response = await client.PostAsync("/client", content);
+            var response = await ResilientPolicy.ResilientPolicyWrapper.ExecuteAsync(() => client.PostAsync("/client", content));
 
             var notification = await response.Content.ReadAsAsync<PersonalAccountNotification>();
 
