@@ -6,7 +6,6 @@ using Schedule.API.Requests;
 using Schedule.API.ViewModels;
 using Schedule.Application.Common.Commands;
 using Schedule.Application.Common.Queries;
-using Schedule.Application.Core.Abstractions.Services;
 
 namespace Schedule.API.Controllers
 {
@@ -17,13 +16,11 @@ namespace Schedule.API.Controllers
     {
         private IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly INotificationService _notificationService;
 
-        public ReminderController(IMediator mediator, IMapper mapper, INotificationService notificationService)
+        public ReminderController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
-            _notificationService = notificationService;
         }
 
         [HttpGet]
