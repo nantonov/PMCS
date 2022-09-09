@@ -16,7 +16,7 @@ namespace Schedule.Infrastructure.DI
         {
             services.AddHttpClient(ClientsConfiguration.AuthClientName,
                 client => client.BaseAddress = new Uri(ClientsConfiguration.AuthServiceAddress))
-                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300))); ;
+                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(300))); ;
 
             services.AddHttpClient(ClientsConfiguration.PetClientName,
                 client => client.BaseAddress = new Uri(ClientsConfiguration.PetServiceAddress));
