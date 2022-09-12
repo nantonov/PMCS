@@ -4,7 +4,7 @@ using Schedule.Application.Core.Abstractions.Models;
 using Schedule.Application.Core.Abstractions.Services;
 using Schedule.Application.Core.Models.Notifications;
 using Schedule.Application.Helpers;
-using Schedule.Application.RetryPolicy;
+using Schedule.Application.ResiliencePolicy;
 using Schedule.Domain.Entities;
 using Schedule.Domain.Enums;
 

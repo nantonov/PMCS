@@ -5,7 +5,7 @@ using Polly.Wrap;
 using Schedule.Application.Configuration;
 using Serilog;
 
-namespace Schedule.Application.RetryPolicy
+namespace Schedule.Application.ResiliencePolicy
 {
     public static class ResilientPolicy
     {
@@ -16,8 +16,7 @@ namespace Schedule.Application.RetryPolicy
                 .CircuitBreakerAsync(ResilientPolicyConfiguration.ErrorsAmountBeforeBreaking, TimeSpan.FromSeconds(ResilientPolicyConfiguration.BreakingDurationInSeconds));
 
         public static AsyncRetryPolicy<HttpResponseMessage> TransientErrorRetryPolicy =
-            Policy.HandleResult<HttpResponseMessage>(message =>
-                (int)message.StatusCode >= 500 || (int)message.StatusCode == 429).WaitAndRetryAsync(
+            Policy.HandleResult<HttpResponseMessage>(message => message.IsSuccessStatusCode).WaitAndRetryAsync(
                 ResilientPolicyConfiguration.RetryCount,
                 retryAttempt =>
                 {
