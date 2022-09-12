@@ -12,11 +12,11 @@ namespace Schedule.Application.ResiliencePolicy
         private static Random Jitter = new Random();
 
         public static AsyncCircuitBreakerPolicy<HttpResponseMessage> CircuitBreakerPolicy =
-            Policy.HandleResult<HttpResponseMessage>(message => (int)message.StatusCode >= 500)
+            Policy.HandleResult<HttpResponseMessage>(message => !message.IsSuccessStatusCode)
                 .CircuitBreakerAsync(ResilientPolicyConfiguration.ErrorsAmountBeforeBreaking, TimeSpan.FromSeconds(ResilientPolicyConfiguration.BreakingDurationInSeconds));
 
         public static AsyncRetryPolicy<HttpResponseMessage> TransientErrorRetryPolicy =
-            Policy.HandleResult<HttpResponseMessage>(message => message.IsSuccessStatusCode).WaitAndRetryAsync(
+            Policy.HandleResult<HttpResponseMessage>(message => !message.IsSuccessStatusCode).WaitAndRetryAsync(
                 ResilientPolicyConfiguration.RetryCount,
                 retryAttempt =>
                 {
