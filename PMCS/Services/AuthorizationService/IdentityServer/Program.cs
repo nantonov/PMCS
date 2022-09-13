@@ -3,10 +3,14 @@ using IdentityServer.Data;
 using IdentityServer.Data.Initializaton;
 using IdentityServer.Models;
 using IdentityServer.Profiles;
+using IdentityServer4;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +68,39 @@ builder.Services.AddCors(config =>
     config.AddPolicy("DefaultPolicy",
         builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
+
+
+builder.Services.AddAuthentication()
+    .AddOAuth("VK", "VKontakte", options =>
+    {
+        options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+        options.ClientId = builder.Configuration["Authentication:VK:ClientId"];
+        options.ClientSecret = builder.Configuration["Authentication:VK:ClientSecret"];
+        options.ClaimsIssuer = "VK Provider";
+        options.SaveTokens = true;
+        options.CallbackPath = new PathString("/signin-vkontakte-token");
+        options.AuthorizationEndpoint = "https://oauth.vk.com/authorize";
+        options.TokenEndpoint = "https://oauth.vk.com/access_token";
+        options.Scope.Add("email");
+        options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "user_id");
+        options.ClaimActions.MapJsonKey(ClaimTypes.Email, "email");
+
+        options.Events = new OAuthEvents
+        {
+            OnCreatingTicket = context =>
+            {
+                context.RunClaimActions(context.TokenResponse.Response.RootElement);
+                return Task.CompletedTask;
+            },
+            OnRemoteFailure = OnFailure
+        };
+    });
+
+Task OnFailure(RemoteFailureContext arg)
+{
+    Console.WriteLine(arg);
+    return Task.CompletedTask;
+}
 
 var app = builder.Build();
 
