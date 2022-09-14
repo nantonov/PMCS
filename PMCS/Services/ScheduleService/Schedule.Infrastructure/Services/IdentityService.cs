@@ -9,10 +9,12 @@ namespace Schedule.Infrastructure.Services
     public class IdentityService : IIdentityService
     {
         private readonly IHttpContextAccessor _context;
+        private readonly IAuthService _authService;
 
-        public IdentityService(IHttpContextAccessor context)
+        public IdentityService(IHttpContextAccessor context, IAuthService authService)
         {
             _context = context;
+            _authService = authService;
         }
 
         public int GetUserId()
@@ -24,9 +26,11 @@ namespace Schedule.Infrastructure.Services
             return id;
         }
 
-        public string GetUserEmail()
+        public async Task<string?> GetUserEmail()
         {
-            var emailFromClaims = _context.HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value;
+            var claims = await _authService.GetUserClaims();
+
+            var emailFromClaims = claims.FirstOrDefault(x => x.Type == "email").Value;
 
             var (result, email) = Ensure.IsValidEmail(emailFromClaims);
 
@@ -35,9 +39,9 @@ namespace Schedule.Infrastructure.Services
             return email;
         }
 
-        public bool? IsAuthenticated()
+        public bool IsAuthenticated()
         {
-            var isAuthenticated = _context?.HttpContext?.User?.Identity?.IsAuthenticated;
+            var isAuthenticated = _context.HttpContext.User.Identity.IsAuthenticated;
 
             return isAuthenticated;
         }

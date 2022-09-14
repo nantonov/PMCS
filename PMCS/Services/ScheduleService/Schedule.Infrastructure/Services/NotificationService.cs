@@ -12,13 +12,11 @@ namespace Schedule.Infrastructure.Services
     public class NotificationService : INotificationService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IIdentityService _identityService;
         private readonly IAuthService _authService;
 
-        public NotificationService(IHttpClientFactory httpClientFactory, IIdentityService identityService, IAuthService authService)
+        public NotificationService(IHttpClientFactory httpClientFactory, IIdentityService identityService, IAuthService authService, IPetService petService)
         {
             _httpClientFactory = httpClientFactory;
-            _identityService = identityService;
             _authService = authService;
         }
 
@@ -28,7 +26,7 @@ namespace Schedule.Infrastructure.Services
             {
                 case NotificationType.Email:
                     {
-                        var request = new EmailNotificationRequest(_identityService.GetUserEmail(), reminder.NotificationMessage);
+                        var request = new EmailNotificationRequest(reminder.UserEmail, reminder.NotificationMessage);
 
                         var notification = await NotifyByEmail(request);
 
@@ -36,7 +34,7 @@ namespace Schedule.Infrastructure.Services
                     }
                 case NotificationType.PersonalAccount:
                     {
-                        var request = new PersonalAccountNotificationRequest(_identityService.GetUserId().ToString(), reminder.NotificationMessage);
+                        var request = new PersonalAccountNotificationRequest(reminder.UserId.ToString(), reminder.NotificationMessage);
 
                         var notification = await NotifyPersonalAccount(request);
 

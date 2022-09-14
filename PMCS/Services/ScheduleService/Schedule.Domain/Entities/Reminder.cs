@@ -15,6 +15,7 @@ namespace Schedule.Domain.Entities
         public string Description { get; private set; }
         public string NotificationMessage { get; private set; }
         public bool IsTriggered { get; private set; }
+        public string UserEmail { get; private set; }
         public NotificationType NotificationType { get; private set; }
         public ActionToRemindType ActionToRemindType { get; private set; }
         public ExecutionStatus Status { get; private set; }
@@ -33,13 +34,15 @@ namespace Schedule.Domain.Entities
             }
         }
 
-        public Reminder(DateTime triggerDateTime, int petId, int userId, string message, NotificationType notificationType,
+        public Reminder(DateTime triggerDateTime, int petId, int userId, string message, string email, NotificationType notificationType,
             ActionToRemindType actionToRemindType)
         {
             Ensure.NotEmpty(triggerDateTime, "Trigger DateTime is required.", nameof(triggerDateTime));
             Ensure.NotEmpty(message, "Message is required", nameof(message));
             Ensure.IsGreaterThanZero(petId, "PetId is required", nameof(petId));
             Ensure.IsGreaterThanZero(userId, "UserId is required", nameof(userId));
+            Ensure.NotEmpty(email, "Email is required.", nameof(email));
+            Ensure.IsValidEmail(email);
 
             SetActionToRemind(actionToRemindType);
 
@@ -49,6 +52,7 @@ namespace Schedule.Domain.Entities
             PetId = petId;
             UserId = userId;
             IsTriggered = false;
+            UserEmail = email;
 
             ResetStatus();
         }
@@ -57,6 +61,9 @@ namespace Schedule.Domain.Entities
 
         public void Update(DateTime triggerDateTime, string message, NotificationType notificationType, ActionToRemindType actionToRemindType)
         {
+            if (IsTriggered || Status == ExecutionStatus.Done)
+                throw new ScheduleDomainException("The reminder can't be changed after it has been triggered or executed.");
+
             Ensure.NotEmpty(triggerDateTime, "Trigger DateTime is required.", nameof(triggerDateTime));
             Ensure.NotEmpty(message, "Message is required", nameof(message));
 
