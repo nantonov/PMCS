@@ -7,7 +7,7 @@ using static ScheduleService.DomainTests.TestData.TestValidReminderEntity;
 
 namespace ScheduleService.DomainTests
 {
-    public class ReminerEntityTests
+    public class ReminderEntityTests
     {
         [Fact]
         public void CallConstructor_ValidData_CreatesNewReminder()
