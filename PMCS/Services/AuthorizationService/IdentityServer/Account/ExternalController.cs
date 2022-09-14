@@ -1,10 +1,8 @@
-using IdentityServer.Models;
 using IdentityServer4;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -22,9 +20,7 @@ namespace IdentityServerHost.Quickstart.UI
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IEventService events,
-            ILogger<ExternalController> logger,
-            UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            ILogger<ExternalController> logger)
         {
             _interaction = interaction;
             _clientStore = clientStore;
