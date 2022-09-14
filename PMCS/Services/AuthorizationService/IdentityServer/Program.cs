@@ -83,7 +83,7 @@ builder.Services.AddAuthentication()
         options.TokenEndpoint = "https://oauth.vk.com/access_token";
         options.Scope.Add("email");
         options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "user_id");
-        options.ClaimActions.MapJsonKey(ClaimTypes.Email, "email");
+        options.ClaimActions.MapJsonKey("email", "email");
 
         options.Events = new OAuthEvents
         {

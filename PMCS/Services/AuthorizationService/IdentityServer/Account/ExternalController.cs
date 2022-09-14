@@ -78,7 +78,7 @@ namespace IdentityServerHost.Quickstart.UI
                 throw new Exception("Unknown userid");
             }
 
-            var email = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            var email = claims.FirstOrDefault(c => c.Type == "email").Value;
             var username = email.Split("@")[0];
             var externalProvider = userIdClaim.Issuer;
 
