@@ -13,26 +13,18 @@ namespace ScheduleService.DomainTests
         public void CallConstructor_ValidData_CreatesNewReminder()
         {
             var reminder = new Reminder(ValidReminder.TriggerDateTime, ValidReminder.PetId, ValidReminder.UserId,
-                ValidReminder.NotificationMessage, ValidReminder.NotificationType, ValidReminder.ActionToRemindType);
+                ValidReminder.NotificationMessage, ValidReminder.UserEmail, ValidReminder.NotificationType, ValidReminder.ActionToRemindType);
 
             Assert.NotNull(reminder);
             Assert.Equal(ValidReminder.TriggerDateTime, reminder.TriggerDateTime);
         }
 
         [Theory]
-        [ClassData(typeof(RemindersWithInvalidDomainLogicTestData))]
-        public void CallConstructor_InvalidDomainLogicData_ThrowsScheduleDomainException(TestReminder reminder)
-        {
-            Assert.Throws<ScheduleDomainException>(() => new Reminder(reminder.TriggerDateTime, reminder.PetId, reminder.UserId,
-                reminder.NotificationMessage, reminder.NotificationType, reminder.ActionToRemindType));
-        }
-
-        [Theory]
-        [ClassData(typeof(RemindersWithInvalidArgumentsTestData))]
+        [ClassData(typeof(RemindersWithInvalidTestData))]
         public void CallConstructor_InvalidArguments_ThrowsArgumentException(TestReminder reminder)
         {
-            Assert.Throws<ArgumentException>(() => new Reminder(reminder.TriggerDateTime, reminder.PetId, reminder.UserId,
-                reminder.NotificationMessage, reminder.NotificationType, reminder.ActionToRemindType));
+            Assert.ThrowsAny<Exception>(() => new Reminder(reminder.TriggerDateTime, reminder.PetId, reminder.UserId,
+                reminder.NotificationMessage, reminder.UserEmail, reminder.NotificationType, reminder.ActionToRemindType));
         }
 
         [Fact]

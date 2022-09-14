@@ -6,6 +6,6 @@ namespace ScheduleService.DomainTests.TestData
     public static class TestValidReminderEntity
     {
         public static Reminder ValidReminder = new Reminder(DateTime.UtcNow.AddYears(1), 1, 1,
-            "Jackie has to visit vet.", NotificationType.Email, ActionToRemindType.MakeVaccine);
+            "Jackie has to visit vet.", "test@gmail.com", NotificationType.Email, ActionToRemindType.MakeVaccine);
     }
 }
