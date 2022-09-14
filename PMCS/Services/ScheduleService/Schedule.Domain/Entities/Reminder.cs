@@ -27,7 +27,7 @@ namespace Schedule.Domain.Entities
 
             private set
             {
-                if (value < DateTime.Now)
+                if (value < DateTime.UtcNow)
                     throw new ScheduleDomainException("The date time can't be triggered in past.");
 
                 _triggerDateTime = value;
