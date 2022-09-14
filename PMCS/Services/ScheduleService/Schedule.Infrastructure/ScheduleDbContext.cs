@@ -13,7 +13,7 @@ namespace Schedule.Infrastructure
 
         public ScheduleDbContext(DbContextOptions<ScheduleDbContext> options, IMediator mediator) : base(options)
         {
-            Database.Migrate();
+            if (Database.IsRelational()) Database.Migrate();
 
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }

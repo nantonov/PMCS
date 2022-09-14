@@ -33,7 +33,6 @@ namespace Schedule.Infrastructure.Repositories
             return result;
         }
 
-
         public async Task<Reminder> GetById(int id, CancellationToken cancellationToken)
         {
             var result = await _context.Reminders.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
