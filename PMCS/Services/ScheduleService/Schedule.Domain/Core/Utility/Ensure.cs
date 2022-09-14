@@ -1,4 +1,7 @@
-﻿namespace Schedule.Domain.Core.Utility
+﻿using System.Net.Mail;
+using System.Runtime.Serialization;
+
+namespace Schedule.Domain.Core.Utility
 {
     public static class Ensure
     {
@@ -33,6 +36,13 @@
             {
                 throw new ArgumentNullException(argumentName, message);
             }
+        }
+
+        public static void IsValidEmail(string email)
+        {
+            var succeed = MailAddress.TryCreate(email, out var validEmail);
+
+            if (!succeed) throw new InvalidDataContractException("The email is not valid.");
         }
     }
 }

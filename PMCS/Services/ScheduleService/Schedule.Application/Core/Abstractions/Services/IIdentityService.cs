@@ -3,7 +3,7 @@
     public interface IIdentityService
     {
         public int GetUserId();
-        public string GetUserEmail();
-        public bool? IsAuthenticated();
+        public Task<string?> GetUserEmail();
+        public bool IsAuthenticated();
     }
 }

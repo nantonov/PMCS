@@ -9,7 +9,7 @@ namespace Notifications.API.Controllers
 {
     [Route("api/notify/")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Custom")]
+    [Authorize]
     public class NotificationController : ControllerBase
     {
         private readonly IEmailService _emailService;

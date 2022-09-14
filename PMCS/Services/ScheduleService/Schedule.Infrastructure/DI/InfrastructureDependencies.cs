@@ -15,16 +15,14 @@ namespace Schedule.Infrastructure.DI
         public static void RegisterDependencies(this IServiceCollection services, IConfiguration config)
         {
             services.AddHttpClient(ClientsConfiguration.AuthClientName,
-                    client => client.BaseAddress = new Uri(ClientsConfiguration.AuthServiceAddress))
-                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
+                client => client.BaseAddress = new Uri(ClientsConfiguration.AuthServiceAddress))
+                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(300))); ;
 
             services.AddHttpClient(ClientsConfiguration.PetClientName,
-                client => client.BaseAddress = new Uri(ClientsConfiguration.PetServiceAddress))
-                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
+                client => client.BaseAddress = new Uri(ClientsConfiguration.PetServiceAddress));
 
             services.AddHttpClient(ClientsConfiguration.NotificationClientName,
-                client => client.BaseAddress = new Uri(ClientsConfiguration.NotificationServiceAddress))
-                .AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(300)));
+                client => client.BaseAddress = new Uri(ClientsConfiguration.NotificationServiceAddress));
 
             services.AddDbContext<ScheduleDbContext>(op =>
                 {
@@ -36,6 +34,7 @@ namespace Schedule.Infrastructure.DI
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IPetService, PetService>();
         }
     }
 }
