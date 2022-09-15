@@ -13,6 +13,7 @@ namespace ScheduleService.DomainTests.TestData
         public NotificationType NotificationType { get; set; }
         public ActionToRemindType ActionToRemindType { get; set; }
         public ExecutionStatus Status { get; set; }
+        public string UserEmail { get; set; }
 
         public DateTime TriggerDateTime { get; set; }
     }
