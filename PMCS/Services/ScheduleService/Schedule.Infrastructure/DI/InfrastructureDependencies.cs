@@ -3,10 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Schedule.Application.Configuration;
-using Schedule.Application.Core.Abstractions.Services;
 using Schedule.Domain.Repositories;
 using Schedule.Infrastructure.Repositories;
-using Schedule.Infrastructure.Services;
 
 namespace Schedule.Infrastructure.DI
 {
@@ -31,10 +29,6 @@ namespace Schedule.Infrastructure.DI
             );
 
             services.AddTransient<IReminderRepository, ReminderRepository>();
-            services.AddTransient<INotificationService, NotificationService>();
-            services.AddTransient<IAuthService, AuthService>();
-            services.AddScoped<IIdentityService, IdentityService>();
-            services.AddScoped<IPetService, PetService>();
         }
     }
 }

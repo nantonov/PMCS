@@ -4,7 +4,7 @@ using Schedule.Application.Configuration;
 using Schedule.Application.Core.Abstractions.Services;
 using System.Security.Claims;
 
-namespace Schedule.Infrastructure.Services
+namespace Schedule.Application.Services
 {
     public class AuthService : IAuthService
     {
