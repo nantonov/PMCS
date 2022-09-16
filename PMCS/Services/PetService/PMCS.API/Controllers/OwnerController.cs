@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Owner;
@@ -10,7 +9,7 @@ using PMCS.DLL.Models;
 
 namespace PMCS.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OwnerController : ControllerBase
