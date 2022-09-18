@@ -10,11 +10,18 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/Reminder/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/Reminder/{action}/{id}",
       "DownstreamScheme": "https",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -27,6 +34,13 @@
     {
       "DownstreamPathTemplate": "/api/Reminder",
       "DownstreamScheme": "https",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -39,6 +53,13 @@
     {
       "DownstreamPathTemplate": "/api/{controller}/{id}",
       "DownstreamScheme": "https",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -51,6 +72,13 @@
     {
       "DownstreamPathTemplate": "/api/{controller}",
       "DownstreamScheme": "https",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -63,6 +91,13 @@
     {
       "DownstreamPathTemplate": "/api/{controller}/{action}/{id}",
       "DownstreamScheme": "https",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 2
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",

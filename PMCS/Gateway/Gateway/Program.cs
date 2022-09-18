@@ -20,6 +20,6 @@ app.UseEndpoints(endpoints =>
     });
 });
 
-app.UseOcelot();
+app.UseOcelot().Wait();
 
 app.Run();
