@@ -10,87 +10,19 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/Reminder/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "DELETE" ]
     },
     {
-      "DownstreamPathTemplate": "/api/Reminder/{action}/{id}",
+      "DownstreamPathTemplate": "/api/Reminder/{id}",
       "DownstreamScheme": "https",
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/gateway/Reminder/{action}/{id}",
-      "UpstreamHttpMethod": [ "PUT" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Reminder",
-      "DownstreamScheme": "https",
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      },
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7064
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/Reminder",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{controller}/{id}",
-      "DownstreamScheme": "https",
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      },
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7104
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/{controller}/{id}",
-      "UpstreamHttpMethod": [ "DELETE", "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{controller}",
-      "DownstreamScheme": "https",
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      },
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7104
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/{controller}",
-      "UpstreamHttpMethod": [ "POST", "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{controller}/{action}/{id}",
-      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/gateway/Reminder/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
@@ -98,6 +30,90 @@
         "PeriodTimespan": 1,
         "Limit": 2
       },
+      "FileCacheOptions": { "TtlSeconds": 15 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Reminder/{action}/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7064
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Reminder/{action}/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Reminder",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7064
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Reminder",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "FileCacheOptions": { "TtlSeconds": 15 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{controller}/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7104
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/{controller}/{id}",
+      "UpstreamHttpMethod": [ "DELETE", "GET" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "FileCacheOptions": { "TtlSeconds": 15 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{controller}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7104
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/{controller}",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{controller}/{action}/{id}",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -105,7 +121,15 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/{controller}/{action}/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 2
+      },
+      "FileCacheOptions": { "TtlSeconds": 15 }
     }
   ],
   "GlobalConfiguration": {
