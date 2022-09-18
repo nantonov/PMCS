@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Schedule.API.Requests;
 using Schedule.API.ViewModels;
@@ -10,7 +11,7 @@ namespace Schedule.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
     public class ReminderController : ControllerBase
     {
         private IMediator _mediator;

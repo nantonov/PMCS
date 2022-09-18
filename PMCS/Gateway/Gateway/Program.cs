@@ -9,6 +9,19 @@ IConfiguration configuration = new ConfigurationBuilder()
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOcelot(configuration).AddCacheManager(options => options.WithDictionaryHandle());
 
+builder.Services.AddAuthentication()
+    .AddJwtBearer("IdentityApiKey", x =>
+    {
+        x.Authority = "https://localhost:5001";
+        x.RequireHttpsMetadata = false;
+        x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+        {
+            ValidateAudience = false,
+            ValidateIssuer = true,
+            ValidIssuer = "https://localhost:5001"
+        };
+    });
+
 var app = builder.Build();
 
 app.UseRouting();

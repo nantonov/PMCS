@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Meal;
@@ -8,9 +9,9 @@ using PMCS.DLL.Models;
 
 namespace PMCS.API.Controllers
 {
-    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MealController : ControllerBase
     {
         private readonly IMealService _service;
