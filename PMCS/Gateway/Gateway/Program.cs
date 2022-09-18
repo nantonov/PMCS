@@ -7,6 +7,7 @@ IConfiguration configuration = new ConfigurationBuilder()
     .Build();
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
 builder.Services.AddOcelot(configuration).AddCacheManager(options => options.WithDictionaryHandle());
 
 builder.Services.AddAuthentication()
@@ -22,8 +23,14 @@ builder.Services.AddAuthentication()
         };
     });
 
+builder.Services.AddSwaggerForOcelot(configuration);
+
 var app = builder.Build();
 
+app.UseSwaggerForOcelotUI(opt =>
+{
+    opt.PathToSwaggerGenerator = "/swagger/docs";
+});
 app.UseRouting();
 
 app.UseEndpoints(endpoints =>

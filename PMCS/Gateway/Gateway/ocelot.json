@@ -9,15 +9,16 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/gateway/Reminder/{id}",
+      "UpstreamPathTemplate": "/api/Reminder/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
         "AllowedScopes": []
-      }
+      },
+      "SwaggerKey": "schedule"
     },
     {
-      "DownstreamPathTemplate": "/api/Reminder/{id}",
+      "DownstreamPathTemplate": "/api/Reminder/{userId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -25,7 +26,7 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/gateway/Reminder/{id}",
+      "UpstreamPathTemplate": "/api/Reminder/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -38,7 +39,8 @@
         "PeriodTimespan": 1,
         "Limit": 2
       },
-      "FileCacheOptions": { "TtlSeconds": 15 }
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "SwaggerKey": "schedule"
     },
     {
       "DownstreamPathTemplate": "/api/Reminder/{action}/{id}",
@@ -49,7 +51,7 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/gateway/Reminder/{action}/{id}",
+      "UpstreamPathTemplate": "/api/Reminder/{action}/{id}",
       "UpstreamHttpMethod": [ "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -61,7 +63,8 @@
         "Period": "1s",
         "PeriodTimespan": 1,
         "Limit": 1
-      }
+      },
+      "SwaggerKey": "schedule"
     },
     {
       "DownstreamPathTemplate": "/api/Reminder",
@@ -72,7 +75,7 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/gateway/Reminder",
+      "UpstreamPathTemplate": "/api/Reminder",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -85,7 +88,8 @@
         "PeriodTimespan": 1,
         "Limit": 1
       },
-      "FileCacheOptions": { "TtlSeconds": 15 }
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "SwaggerKey": "schedule"
     },
     {
       "DownstreamPathTemplate": "/api/{controller}/{id}",
@@ -96,7 +100,7 @@
           "Port": 7104
         }
       ],
-      "UpstreamPathTemplate": "/gateway/{controller}/{id}",
+      "UpstreamPathTemplate": "/api/{controller}/{id}",
       "UpstreamHttpMethod": [ "DELETE", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -109,7 +113,8 @@
         "PeriodTimespan": 1,
         "Limit": 1
       },
-      "FileCacheOptions": { "TtlSeconds": 15 }
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "SwaggerKey": "pet"
     },
     {
       "DownstreamPathTemplate": "/api/{controller}",
@@ -120,7 +125,7 @@
           "Port": 7104
         }
       ],
-      "UpstreamPathTemplate": "/gateway/{controller}",
+      "UpstreamPathTemplate": "/api/{controller}",
       "UpstreamHttpMethod": [ "POST", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -133,7 +138,8 @@
         "PeriodTimespan": 1,
         "Limit": 1
       },
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "FileCacheOptions": { "TtlSeconds": 30 },
+      "SwaggerKey": "pet"
     },
     {
       "DownstreamPathTemplate": "/api/{controller}/{action}/{id}",
@@ -144,7 +150,7 @@
           "Port": 7104
         }
       ],
-      "UpstreamPathTemplate": "/gateway/{controller}/{action}/{id}",
+      "UpstreamPathTemplate": "/api/{controller}/{action}/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -157,10 +163,34 @@
         "PeriodTimespan": 1,
         "Limit": 2
       },
-      "FileCacheOptions": { "TtlSeconds": 15 }
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "SwaggerKey": "pet"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "pet",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "PetAPI",
+          "Version": "v1",
+          "Url": "https://localhost:7104/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "schedule",
+      "Config": [
+        {
+          "Name": "ScheduleAPI",
+          "Version": "v1",
+          "Url": "https://localhost:7064/swagger/v1/swagger.json"
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7045"
-  } 
+  }
 }
