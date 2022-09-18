@@ -2,28 +2,33 @@ using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
-IConfiguration configuration = new ConfigurationBuilder()
+IConfiguration ocelotConfiguration = new ConfigurationBuilder()
     .AddJsonFile("ocelot.json")
+    .Build();
+IConfiguration appSettingsConfiguration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
     .Build();
 
 var builder = WebApplication.CreateBuilder(args);
+var identityServerUrl = appSettingsConfiguration.GetValue<string>("IdentityServerURL");
+
 builder.Services.AddControllers();
-builder.Services.AddOcelot(configuration).AddCacheManager(options => options.WithDictionaryHandle());
+builder.Services.AddOcelot(ocelotConfiguration).AddCacheManager(options => options.WithDictionaryHandle());
 
 builder.Services.AddAuthentication()
     .AddJwtBearer("IdentityApiKey", x =>
     {
-        x.Authority = "https://localhost:5001";
+        x.Authority = identityServerUrl;
         x.RequireHttpsMetadata = false;
         x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
         {
             ValidateAudience = false,
             ValidateIssuer = true,
-            ValidIssuer = "https://localhost:5001"
+            ValidIssuer = identityServerUrl
         };
     });
 
-builder.Services.AddSwaggerForOcelot(configuration);
+builder.Services.AddSwaggerForOcelot(ocelotConfiguration);
 
 var app = builder.Build();
 
