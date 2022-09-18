@@ -31,7 +31,10 @@ app.UseSwaggerForOcelotUI(opt =>
 {
     opt.PathToSwaggerGenerator = "/swagger/docs";
 });
+
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseEndpoints(endpoints =>
 {
