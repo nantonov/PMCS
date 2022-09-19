@@ -4,7 +4,7 @@
     {
         public static bool IsAValidDate(DateTime mealDate)
         {
-            return mealDate != null && mealDate <= DateTime.UtcNow;
+            return mealDate <= DateTime.UtcNow;
         }
     }
 }

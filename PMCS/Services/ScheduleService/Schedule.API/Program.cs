@@ -32,9 +32,9 @@ builder.Services.AddControllers()
 
 builder.Services.AddMediatR(typeof(AddReminderCommandHandler).Assembly, typeof(ReminderTriggeredDomainEventHandler).Assembly);
 
-InfrastructureDependencies.RegisterDependencies(builder.Services, configuration);
-ApplicationDependencies.RegisterDependencies(builder.Services);
-BackgroundServicesRegistration.AddBackgroundTasks(builder.Services);
+builder.Services.RegisterDependencies(configuration);
+builder.Services.RegisterDependencies();
+builder.Services.AddBackgroundTasks();
 
 builder.Services.AddCors(config =>
 {
