@@ -17,6 +17,7 @@ namespace PMCS.BLL.Tests
         private readonly Mock<IMealRepository> _mealRepositoryMock = new();
         private readonly Mock<IPetRepository> _petRepositoryMock = new();
         private readonly Mock<IMapper> _mapperMock = new();
+        private readonly Mock<IHttpClientFactory> _httpClientFactoryMock = new();
 
         [Fact]
         public async Task GetById_ValidId_ReturnsModel()
@@ -59,7 +60,7 @@ namespace PMCS.BLL.Tests
             _mapperMock.Setup(m => m.Map<MealEntity>(ValidMealModel)).Returns(ValidMealEntity);
             _mapperMock.Setup(m => m.Map<PetModel>(ValidPetEntity)).Returns(ValidPetModel);
 
-            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default);
+            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default, _httpClientFactoryMock.Object);
             var mealService = new MealService(_mealRepositoryMock.Object, _mapperMock.Object, petService);
 
             var actualMeal = await mealService.Update(expectedMeal, default);
@@ -73,7 +74,7 @@ namespace PMCS.BLL.Tests
         {
             _petRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
-            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default);
+            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default, _httpClientFactoryMock.Object);
             var mealService = new MealService(_mealRepositoryMock.Object, default, petService);
 
             async Task Act() => await mealService.Update(ValidMealModel, default);

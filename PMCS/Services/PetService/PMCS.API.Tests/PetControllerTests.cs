@@ -67,7 +67,6 @@ namespace PMCS.API.Tests
 
             var actual = await getResponse.Content.ReadAsAsync<List<PetViewModel>>();
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Empty(actual);
         }
 
