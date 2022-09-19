@@ -88,7 +88,6 @@
         "PeriodTimespan": 1,
         "Limit": 1
       },
-      "FileCacheOptions": { "TtlSeconds": 30 },
       "SwaggerKey": "schedule"
     },
     {
@@ -138,7 +137,6 @@
         "PeriodTimespan": 1,
         "Limit": 1
       },
-      "FileCacheOptions": { "TtlSeconds": 30 },
       "SwaggerKey": "pet"
     },
     {
