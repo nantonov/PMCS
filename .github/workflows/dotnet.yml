@@ -54,3 +54,15 @@ jobs:
       uses: ./.github/workflows/Composite/Test
       with:
         project_path: PMCS/Services/ScheduleService/ScheduleService.sln
+  BuildGateway:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      uses: ./.github/workflows/Composite/Build
+      with:
+        project_path: PMCS/Gateway/Gateway.sln
+    - name: Test
+      uses: ./.github/workflows/Composite/Test
+      with:
+        project_path: PMCS/Gateway/Gateway.sln
