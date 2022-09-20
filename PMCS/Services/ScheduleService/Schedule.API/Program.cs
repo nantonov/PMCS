@@ -45,10 +45,7 @@ builder.Services.AddCors(config =>
 Schedule.API.Extentions.ServiceCollectionExtensions.ConfigureAuthenticationScheme(builder.Services);
 builder.Services.AddAuthorization();
 
-builder.Services.AddSwaggerGen(options =>
-{
-    Schedule.API.Extentions.SwaggerGenOptionsExtensions.AddSecurityConfiguration(options);
-});
+builder.Services.AddSwaggerGen(Schedule.API.Extentions.SwaggerGenOptionsExtensions.AddSecurityConfiguration);
 
 builder.Services.AddEndpointsApiExplorer();
 
