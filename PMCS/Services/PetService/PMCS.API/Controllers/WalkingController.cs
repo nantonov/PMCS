@@ -9,9 +9,9 @@ using PMCS.DLL.Models;
 
 namespace PMCS.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WalkingController : ControllerBase
     {
         private readonly IWalkingService _service;

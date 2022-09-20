@@ -17,7 +17,7 @@ namespace PMCS.API.Tests
 
             var response = await _httpClient.GetAsync("/api/Owner");
             var actual = await response.Content.ReadAsAsync<List<OwnerViewModel>>();
-            
+
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.NotEmpty(actual);
@@ -100,7 +100,7 @@ namespace PMCS.API.Tests
 
             Assert.Equal(HttpStatusCode.OK, postResponse.StatusCode);
             Assert.NotEmpty(actual);
-            Assert.Equal(model.FullName, actual.FirstOrDefault().FullName);
+            Assert.Equal(model.FullName, actual.FirstOrDefault()?.FullName);
         }
 
         [Theory]

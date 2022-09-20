@@ -67,7 +67,7 @@ namespace Schedule.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("/complete/{id}")]
+        [HttpPut("complete/{id}")]
         public async Task<ActionResult> SetReminderStatusAsDone(int id, CancellationToken cancellationToken = default)
         {
             var command = new SetReminderStatusAsDoneCommand(id);
@@ -78,7 +78,7 @@ namespace Schedule.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("/reset/{id}")]
+        [HttpPut("reset/{id}")]
         public async Task<ActionResult> ResetReminderStatus(int id, CancellationToken cancellationToken = default)
         {
             var command = new ResetReminderStatusCommand(id);

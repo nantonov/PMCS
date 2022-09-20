@@ -32,9 +32,9 @@ builder.Services.AddControllers()
 
 builder.Services.AddMediatR(typeof(AddReminderCommandHandler).Assembly, typeof(ReminderTriggeredDomainEventHandler).Assembly);
 
-InfrastructureDependencies.RegisterDependencies(builder.Services, configuration);
-ApplicationDependencies.RegisterDependencies(builder.Services);
-BackgroundServicesRegistration.AddBackgroundTasks(builder.Services);
+builder.Services.RegisterDependencies(configuration);
+builder.Services.RegisterDependencies();
+builder.Services.AddBackgroundTasks();
 
 builder.Services.AddCors(config =>
 {
@@ -45,10 +45,7 @@ builder.Services.AddCors(config =>
 Schedule.API.Extentions.ServiceCollectionExtensions.ConfigureAuthenticationScheme(builder.Services);
 builder.Services.AddAuthorization();
 
-builder.Services.AddSwaggerGen(options =>
-{
-    Schedule.API.Extentions.SwaggerGenOptionsExtensions.AddSecurityConfiguration(options);
-});
+builder.Services.AddSwaggerGen(Schedule.API.Extentions.SwaggerGenOptionsExtensions.AddSecurityConfiguration);
 
 builder.Services.AddEndpointsApiExplorer();
 

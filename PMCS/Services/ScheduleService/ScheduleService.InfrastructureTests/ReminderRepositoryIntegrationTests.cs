@@ -11,7 +11,7 @@ namespace ScheduleService.InfrastructureTests
 {
     public class ReminderRepositoryIntegrationTests : IDisposable
     {
-        private readonly Mock<IMediator> _mediatorMock = new Mock<IMediator>();
+        private readonly Mock<IMediator> _mediatorMock = new();
         private readonly IReminderRepository _repository;
         private ScheduleDbContext _context;
 

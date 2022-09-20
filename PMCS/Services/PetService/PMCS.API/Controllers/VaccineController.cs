@@ -9,9 +9,9 @@ using PMCS.DLL.Models;
 
 namespace PMCS.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VaccineController : ControllerBase
     {
         private readonly IVaccineService _service;

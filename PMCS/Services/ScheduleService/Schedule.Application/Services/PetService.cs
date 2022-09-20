@@ -3,7 +3,7 @@ using Schedule.Application.Configuration;
 using Schedule.Application.Core.Abstractions.Services;
 using Schedule.Application.Core.Models.Pets.Owner;
 
-namespace Schedule.Infrastructure.Services
+namespace Schedule.Application.Services
 {
     public class PetService : IPetService
     {

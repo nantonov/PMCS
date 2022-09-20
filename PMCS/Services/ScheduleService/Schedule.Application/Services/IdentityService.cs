@@ -4,7 +4,7 @@ using Schedule.Application.Core.Exceptions;
 using Schedule.Application.Core.Utility;
 using System.Security.Claims;
 
-namespace Schedule.Infrastructure.Services
+namespace Schedule.Application.Services
 {
     public class IdentityService : IIdentityService
     {

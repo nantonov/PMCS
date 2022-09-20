@@ -23,7 +23,7 @@ namespace Notifications.API.Controllers
             _clientService = clientService ?? throw new NullReferenceException();
         }
 
-        [HttpPost("/email")]
+        [HttpPost("email")]
         public async Task<IActionResult> NotifyByEmail([FromBody] EmailNotificationRequest request)
         {
             var notification = _mapper.Map<EmailNotification>(request);
@@ -33,7 +33,7 @@ namespace Notifications.API.Controllers
             return Ok(notification);
         }
 
-        [HttpPost("/client")]
+        [HttpPost("client")]
         public async Task<IActionResult> NotifyClient([FromBody] ClientNotificationRequest request, CancellationToken cancellationToken)
         {
             var notification = _mapper.Map<ClientNotification>(request);
