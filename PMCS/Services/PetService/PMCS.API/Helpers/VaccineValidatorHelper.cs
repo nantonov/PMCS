@@ -4,7 +4,7 @@
     {
         public static bool IsAValidDate(DateTime date)
         {
-            return date != null && date <= DateTime.UtcNow;
+            return date <= DateTime.UtcNow;
         }
     }
 }
