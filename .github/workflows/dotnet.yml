@@ -10,31 +10,59 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build Authorization Microservice
+    - name: Build
       uses: ./.github/workflows/Composite/Build
       with:
-        project_path: PMCS/Services/AuthorizationService/AuthorizationService.sln
+        project_path: PMCS/Services/PetService/PMCS.sln
+    - name: Test
+      uses: ./.github/workflows/Composite/Test
+      with:
+        project_path: PMCS/Services/PetService/PMCS.sln
   BuildNotificationService:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build Notifications Microservice
+    - name: Build
       uses: ./.github/workflows/Composite/Build
+      with:
+        project_path: PMCS/Services/NotificationService/NotificationService.sln
+    - name: Test
+      uses: ./.github/workflows/Composite/Test
       with:
         project_path: PMCS/Services/NotificationService/NotificationService.sln
   BuildScheduleService:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build Schedule Microservice
+    - name: Build
       uses: ./.github/workflows/Composite/Build
       with:
         project_path: PMCS/Services/ScheduleService/ScheduleService.sln
+    - name: Test
+      uses: ./.github/workflows/Composite/Test
+      with:
+        project_path: PMCS/Services/ScheduleService/ScheduleService.sln
+  BuildGateway:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      uses: ./.github/workflows/Composite/Build
+      with:
+        project_path: PMCS/Gateway/Gateway.sln
+    - name: Test
+      uses: ./.github/workflows/Composite/Test
+      with:
+        project_path: PMCS/Gateway/Gateway.sln
   BuildPetService:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build Pet Microservice
+    - name: Build
       uses: ./.github/workflows/Composite/Build
+      with:
+        project_path: PMCS/Services/PetService/PMCS.sln
+    - name: Test
+      uses: ./.github/workflows/Composite/Test
       with:
         project_path: PMCS/Services/PetService/PMCS.sln

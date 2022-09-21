@@ -1,5 +1,5 @@
 name: "Build a microservice"
-description: "Builds microservice and runs all tests"
+description: "Builds microservice"
 
 inputs:
   project_path:
@@ -20,7 +20,3 @@ runs:
   - name: Build
     shell: bash
     run: dotnet build --configuration Release --no-restore ${{inputs.project_path}}
-  - name: Test
-    shell: bash
-    run: dotnet test --no-build --configuration Release --verbosity normal ${{inputs.project_path}}
-  
