@@ -100,5 +100,17 @@ namespace Schedule.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpDelete("pet/{petId}")]
+        public async Task<ActionResult> DeleteReminderByPetId(int petId, CancellationToken cancellationToken = default)
+        {
+            var command = new DeleteRemindersByPetIdCommand(petId);
+
+            var reminders = await _mediator.Send(command, cancellationToken);
+
+            var result = _mapper.Map<IReadOnlyList<ReminderViewModel>>(reminders);
+
+            return Ok(result);
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace PMCS.BLL.Tests
         private readonly Mock<IWalkingRepository> _walkingRepositoryMock = new();
         private readonly Mock<IPetRepository> _petRepositoryMock = new();
         private readonly Mock<IMapper> _mapperMock = new();
+        private readonly Mock<IHttpClientFactory> _httpClientFactoryMock = new();
 
         [Fact]
         public async Task GetById_ValidId_ReturnsModel()
@@ -59,7 +60,7 @@ namespace PMCS.BLL.Tests
             _mapperMock.Setup(m => m.Map<WalkingEntity>(ValidWalkingModel)).Returns(ValidWalkingEntity);
             _mapperMock.Setup(m => m.Map<PetModel>(ValidPetEntity)).Returns(ValidPetModel);
 
-            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default);
+            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default, _httpClientFactoryMock.Object);
             var walkingService = new WalkingService(_walkingRepositoryMock.Object, _mapperMock.Object, petService);
 
             var actualWalking = await walkingService.Update(expectedWalking, default);
@@ -73,7 +74,7 @@ namespace PMCS.BLL.Tests
         {
             _petRepositoryMock.Setup(x => x.GetById(It.IsAny<int>(), default)).ReturnsAsync(() => null);
 
-            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default);
+            var petService = new PetService(_petRepositoryMock.Object, _mapperMock.Object, default, _httpClientFactoryMock.Object);
             var walkingService = new WalkingService(_walkingRepositoryMock.Object, default, petService);
 
             async Task Act() => await walkingService.Update(ValidWalkingModel, default);

@@ -6,22 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  BuildPetService:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build Pet Microservice
-      uses: ./.github/workflows/Composite/Build
-      with:
-        project_path: PMCS/Services/PetService/PMCS.sln
-  BuildNotificationService:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build Notifications Microservice
-      uses: ./.github/workflows/Composite/Build
-      with:
-        project_path: PMCS/Services/NotificationService/NotificationService.sln
   BuildAuthorizationService:
     runs-on: ubuntu-latest
     steps:
@@ -30,6 +14,14 @@ jobs:
       uses: ./.github/workflows/Composite/Build
       with:
         project_path: PMCS/Services/AuthorizationService/AuthorizationService.sln
+  BuildNotificationService:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build Notifications Microservice
+      uses: ./.github/workflows/Composite/Build
+      with:
+        project_path: PMCS/Services/NotificationService/NotificationService.sln
   BuildScheduleService:
     runs-on: ubuntu-latest
     steps:
@@ -38,3 +30,11 @@ jobs:
       uses: ./.github/workflows/Composite/Build
       with:
         project_path: PMCS/Services/ScheduleService/ScheduleService.sln
+  BuildPetService:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build Pet Microservice
+      uses: ./.github/workflows/Composite/Build
+      with:
+        project_path: PMCS/Services/PetService/PMCS.sln

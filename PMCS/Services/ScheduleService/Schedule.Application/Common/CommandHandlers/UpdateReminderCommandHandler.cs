@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Schedule.Application.Common.Commands;
 using Schedule.Domain.Core.Exceptions;
 using Schedule.Domain.Entities;
@@ -11,7 +10,7 @@ namespace Schedule.Application.Common.CommandHandlers
     {
         private readonly IReminderRepository _repository;
 
-        public UpdateReminderCommandHandler(IReminderRepository repository, IMapper mapper)
+        public UpdateReminderCommandHandler(IReminderRepository repository)
         {
             _repository = repository;
         }
