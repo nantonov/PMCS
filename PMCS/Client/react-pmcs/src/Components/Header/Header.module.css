@@ -1,0 +1,23 @@
+.header {
+    grid-area: header;
+    background-color: rgb(253, 255, 254);
+    display: grid;
+    grid-template-areas: 
+   "icon title notifications";
+   grid-template-columns: 1fr 20fr 1fr;
+   padding: 10px;
+}
+.header .title{
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    grid-area: title;
+    font-size:larger;
+}
+.header .icon{
+    grid-area: icon;
+    color: black;
+}
+.header .notifications{
+    grid-area: notifications;
+    color: black;
+}

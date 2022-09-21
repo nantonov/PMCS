@@ -1,0 +1,5 @@
+.content {
+    grid-area: content;
+    background-color: rgb(255, 255, 255);
+    height: max-content;
+}

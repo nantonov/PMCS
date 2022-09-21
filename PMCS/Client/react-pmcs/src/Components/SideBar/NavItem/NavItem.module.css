@@ -1,0 +1,10 @@
+.navLink ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    list-style-position: outside;
+}
+
+.navLink ul li{
+    letter-spacing: 1px;;
+}

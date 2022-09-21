@@ -1,0 +1,13 @@
+.sideBar {
+    grid-area: nav;
+    background-color: rgb(229, 255, 250);
+}
+.sideBar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    list-style-position: outside;
+}
+.sideBar ul li{
+    letter-spacing: 1px;;
+}

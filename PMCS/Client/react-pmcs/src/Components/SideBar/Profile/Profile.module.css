@@ -1,0 +1,31 @@
+.profile {
+    display: grid;
+
+    grid-template-areas:
+        "icon username"
+        ". settings";
+    grid-template-rows: 5fr 1fr;
+    grid-template-columns: 1fr 4fr;
+
+    background-color: rgb(222, 248, 236);
+}
+
+.profile .userIcon{
+    padding-top: 10px;
+    grid-area: icon;
+    padding-left: 10px;
+}
+
+.profile .ownerName{
+    padding-top: 10px;
+    grid-area: username;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
+.profile .ownerName .settings{
+    grid-area: settings;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
