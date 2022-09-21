@@ -3,6 +3,7 @@
 namespace Schedule.API.ViewModels
 {
     public record ReminderViewModel(
+        string Id,
         DateTime TriggerDateTime,
         DateTime LastModified,
         string Description,

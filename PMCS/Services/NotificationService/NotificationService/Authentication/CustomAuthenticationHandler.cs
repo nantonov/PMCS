@@ -20,25 +20,25 @@ namespace Notifications.API.Authentication
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             if (!Request.Headers.ContainsKey("Authorization"))
-                return AuthenticateResult.Fail("Unauthorized");
+                return await Task.Run(() => AuthenticateResult.Fail("Unauthorized"));
 
             string authorizationHeader = Request.Headers["Authorization"];
 
             if (string.IsNullOrEmpty(authorizationHeader))
             {
-                return AuthenticateResult.NoResult();
+                return await Task.Run(AuthenticateResult.NoResult);
             }
 
             if (!authorizationHeader.StartsWith("Bearer", StringComparison.OrdinalIgnoreCase))
             {
-                return AuthenticateResult.Fail("Unauthorized");
+                return await Task.Run(() => AuthenticateResult.Fail("Unauthorized"));
             }
 
             string token = authorizationHeader.Substring("Bearer".Length).Trim();
 
             if (string.IsNullOrEmpty(token))
             {
-                return AuthenticateResult.Fail("Unauthorized");
+                return await Task.Run(() => AuthenticateResult.Fail("Unauthorized"));
             }
 
             try
@@ -47,7 +47,7 @@ namespace Notifications.API.Authentication
             }
             catch (Exception ex)
             {
-                return AuthenticateResult.Fail(ex.Message);
+                return await Task.Run(() => AuthenticateResult.Fail("Unauthorized"));
             }
         }
 
@@ -57,8 +57,8 @@ namespace Notifications.API.Authentication
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, GetJWTTokenClaim(validatedToken, ClaimTypes.NameIdentifier)),
-                new Claim(ClaimTypes.Email, GetJWTTokenClaim(validatedToken, ClaimTypes.Email)),
+                new Claim(ClaimTypes.Name, GetJWTTokenClaim(validatedToken, ClaimTypes.NameIdentifier) ?? string.Empty),
+                new Claim(ClaimTypes.Email, GetJWTTokenClaim(validatedToken, ClaimTypes.Email) ?? string.Empty),
             };
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
@@ -67,7 +67,7 @@ namespace Notifications.API.Authentication
             return AuthenticateResult.Success(ticket);
         }
 
-        private string GetJWTTokenClaim(JwtSecurityToken securityToken, string claimName)
+        private string? GetJWTTokenClaim(JwtSecurityToken securityToken, string claimName)
         {
             var claimValue = securityToken.Claims.FirstOrDefault(c => c.Type == claimName)?.Value;
 

@@ -76,8 +76,8 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-DataAccessRegistration.RegisterDataAccessDependencies(builder.Services, configuration);
-BusinessLogicRegistration.RegisterBusinessLogicDependencies(builder.Services);
+builder.Services.RegisterDataAccessDependencies(configuration);
+builder.Services.RegisterBusinessLogicDependencies();
 
 var app = builder.Build();
 

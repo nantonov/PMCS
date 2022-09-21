@@ -13,5 +13,6 @@ namespace Schedule.Domain.Repositories
         Task<Reminder> Update(Reminder reminder, CancellationToken cancellationToken);
         Task<Reminder> Delete(Reminder reminder, CancellationToken cancellationToken);
         Task<IReadOnlyList<Reminder>> Get(Expression<Func<Reminder, bool>> predicate, CancellationToken cancellationToken);
+        Task<IReadOnlyList<Reminder>> DeleteRange(IReadOnlyList<Reminder> reminders, CancellationToken cancellationToken);
     }
 }

@@ -23,7 +23,7 @@ public abstract class Entity
     {
         _domainEvents?.Clear();
     }
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj == null || !(obj is Entity))
             return false;
@@ -44,7 +44,7 @@ public abstract class Entity
         return base.GetHashCode();
     }
 
-    public static bool operator ==(Entity left, Entity right)
+    public static bool operator ==(Entity left, Entity? right)
     {
         if (Object.Equals(left, null))
             return (Object.Equals(right, null)) ? true : false;

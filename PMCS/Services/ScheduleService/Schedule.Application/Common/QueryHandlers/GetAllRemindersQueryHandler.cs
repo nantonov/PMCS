@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Schedule.Application.Common.Queries;
 using Schedule.Domain.Entities;
 using Schedule.Domain.Repositories;
@@ -10,7 +9,7 @@ namespace Schedule.Application.Common.QueryHandlers
     {
         private readonly IReminderRepository _repository;
 
-        public GetAllRemindersQueryHandler(IReminderRepository repository, IMapper mapper)
+        public GetAllRemindersQueryHandler(IReminderRepository repository)
         {
             _repository = repository;
         }

@@ -63,5 +63,17 @@ namespace Schedule.Infrastructure.Repositories
 
             return reminder;
         }
+
+        public async Task<IReadOnlyList<Reminder>> DeleteRange(IReadOnlyList<Reminder> reminders, CancellationToken cancellationToken)
+        {
+            foreach (var reminder in reminders)
+            {
+                _context.Entry(reminder).State = EntityState.Deleted;
+            }
+
+            await _context.SaveEntitiesAsync(cancellationToken);
+
+            return reminders;
+        }
     }
 }

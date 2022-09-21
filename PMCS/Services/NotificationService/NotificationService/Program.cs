@@ -31,7 +31,7 @@ builder.Services.AddCors(config =>
         builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
-AuthorizationExtentions.ConfigureAuthenticationScheme(builder.Services);
+builder.Services.ConfigureAuthenticationScheme();
 
 builder.Services.AddAuthorization();
 
@@ -81,7 +81,7 @@ builder.Services.AddSignalR(options =>
     options.EnableDetailedErrors = true;
 });
 
-BusinessLogicRegistration.RegisterBusinessLogicDependencies(builder.Services);
+builder.Services.RegisterBusinessLogicDependencies();
 
 var app = builder.Build();
 

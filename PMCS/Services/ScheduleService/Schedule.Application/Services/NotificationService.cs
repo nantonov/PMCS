@@ -8,7 +8,7 @@ using Schedule.Application.ResiliencePolicy;
 using Schedule.Domain.Entities;
 using Schedule.Domain.Enums;
 
-namespace Schedule.Infrastructure.Services
+namespace Schedule.Application.Services
 {
     public class NotificationService : INotificationService
     {
@@ -54,7 +54,7 @@ namespace Schedule.Infrastructure.Services
 
             var content = CommunicationServicesHelper.SerializeObjectToHttpContent(request);
 
-            var response = await ResilientPolicy.ResilientPolicyWrapper.ExecuteAsync(() => client.PostAsync("/email", content));
+            var response = await ResilientPolicy.ResilientPolicyWrapper.ExecuteAsync(() => client.PostAsync("api/notify/email", content));
 
             var notification = await response.Content.ReadAsAsync<EmailNotification>();
 
@@ -70,7 +70,7 @@ namespace Schedule.Infrastructure.Services
 
             var content = CommunicationServicesHelper.SerializeObjectToHttpContent(request);
 
-            var response = await ResilientPolicy.ResilientPolicyWrapper.ExecuteAsync(() => client.PostAsync("/client", content));
+            var response = await ResilientPolicy.ResilientPolicyWrapper.ExecuteAsync(() => client.PostAsync("api/notify/client", content));
 
             var notification = await response.Content.ReadAsAsync<PersonalAccountNotification>();
 

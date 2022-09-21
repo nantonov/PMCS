@@ -67,7 +67,7 @@ namespace Schedule.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("/complete/{id}")]
+        [HttpPut("complete/{id}")]
         public async Task<ActionResult> SetReminderStatusAsDone(int id, CancellationToken cancellationToken = default)
         {
             var command = new SetReminderStatusAsDoneCommand(id);
@@ -78,7 +78,7 @@ namespace Schedule.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("/reset/{id}")]
+        [HttpPut("reset/{id}")]
         public async Task<ActionResult> ResetReminderStatus(int id, CancellationToken cancellationToken = default)
         {
             var command = new ResetReminderStatusCommand(id);
@@ -97,6 +97,18 @@ namespace Schedule.API.Controllers
             var reminder = await _mediator.Send(command, cancellationToken);
 
             var result = _mapper.Map<ReminderViewModel>(reminder);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("pet/{petId}")]
+        public async Task<ActionResult> DeleteReminderByPetId(int petId, CancellationToken cancellationToken = default)
+        {
+            var command = new DeleteRemindersByPetIdCommand(petId);
+
+            var reminders = await _mediator.Send(command, cancellationToken);
+
+            var result = _mapper.Map<IReadOnlyList<ReminderViewModel>>(reminders);
 
             return Ok(result);
         }

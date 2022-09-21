@@ -6,7 +6,7 @@ namespace PMCS.API.Helpers
     {
         public static bool IsAValidDate(DateTime date)
         {
-            return date != null && date <= DateTime.UtcNow;
+            return date <= DateTime.UtcNow;
         }
 
         public static bool IsWalkingDurationIsValid(DateTime started, DateTime finished)
