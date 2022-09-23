@@ -1,11 +1,12 @@
+import { MailRounded } from '@mui/icons-material';
 import React from 'react';
 import s from './Content.module.css'
 
 const Content = () => {
     return (
-        <div className={s.content}>
+        <main className={s.content}>
             Content
-        </div>
+        </main>
     );
 }
 

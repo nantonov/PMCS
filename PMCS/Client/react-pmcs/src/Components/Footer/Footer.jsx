@@ -3,11 +3,9 @@ import s from './Footer.module.css'
 
 const Footer = () => {
     return (
-        <div className={s.footer}>
-            <footer>
-                Footer
-            </footer>
-        </div>
+        <footer className={s.footer}>
+            Footer
+        </footer>
     );
 }
 
