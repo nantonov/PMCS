@@ -1,6 +1,6 @@
 .header {
     grid-area: header;
-    background-color: rgb(253, 255, 254);
+    background-color: rgb(251, 249, 249);
     display: grid;
     grid-template-areas: 
    "icon title notifications";
@@ -9,7 +9,7 @@
 }
 .header .title{
     color:rgb(0, 0, 0);
-    letter-spacing: 1px;
+    letter-spacing: 3px;
     grid-area: title;
     font-size:larger;
 }
