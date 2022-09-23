@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaw } from '@fortawesome/free-solid-svg-icons'
 import NotificationsButton from './Notifications/NotificationsButton';
 
-function Header() {
+const Header = () => {
     return (
         <header className={s.header}>
             <div className={s.icon}>

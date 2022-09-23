@@ -5,11 +5,11 @@ import s from './NotificationsButton.module.css';
 
 const NotificationsButton = () => {
     return (
-        <div>
-             <IconButton>
-        <CircleNotificationsIcon />
-            </IconButton>
-        </div>
+            <div className={s.button}>
+                <IconButton>
+                    <CircleNotificationsIcon />
+                </IconButton>
+            </div>
     );
 }
 

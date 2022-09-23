@@ -5,7 +5,7 @@ import SideBar from './Components/SideBar/SideBar';
 import Content from './Components/Content/Content';
 import './App.css'
 
-function App() {
+const App = () => {
   return (
     <div className='app-wrapper'>
       <Header />
