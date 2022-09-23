@@ -1,19 +1,17 @@
 import React from 'react';
-import s from './SideBar.module.css';
+import s from './Nav.module.css';
 import NavItem from './NavItem/NavItem';
-import Profile from './Profile/Profile';
 
-const SideBar = () => {
+const Nav = () => {
     return (
-        <nav className={s.sideBar}>
-           <Profile ownerName='Daniil Leonchik'/>
-           <NavItem name='MyPets'/>
+        <nav className={s.nav}>
            <NavItem name='Walkings'/>
            <NavItem name='Meals'/>
            <NavItem name='Vaccines'/>
            <NavItem name='Reminders'/>
+           <NavItem name='Pets'/>
         </nav>
     );
 }
 
-export default SideBar;
+export default Nav;

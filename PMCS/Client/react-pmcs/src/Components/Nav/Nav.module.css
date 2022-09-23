@@ -1,0 +1,6 @@
+.nav {
+    grid-area: nav;
+    background-color: rgb(240, 255, 252);
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr 3fr 10fr;
+}

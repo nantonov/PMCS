@@ -1,0 +1,13 @@
+.navLink {
+    letter-spacing: 3px;
+    padding: 10px;
+    justify-content: center;
+}
+.navLink:hover {
+    background-color: rgb(223, 245, 235);
+    cursor: pointer;
+}
+.navLink:active {
+    background-color: rgb(218, 248, 233);
+    cursor: pointer;
+}

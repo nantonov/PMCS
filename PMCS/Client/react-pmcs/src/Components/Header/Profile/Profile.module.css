@@ -1,0 +1,18 @@
+.button{
+    color: black;
+}
+
+.button .text {
+    color: rgb(40, 40, 40);
+    letter-spacing: 3px;
+    font-size: medium;
+    padding: 7px;
+}
+
+.button-disabled {
+    color: rgb(0, 0, 0);
+  }
+
+.button-active {
+    color: rgb(0, 0, 0);
+  }

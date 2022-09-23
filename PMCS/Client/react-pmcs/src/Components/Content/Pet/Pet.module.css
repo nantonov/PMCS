@@ -1,0 +1,71 @@
+.item {
+  display: grid;
+  background-color: rgb(249, 255, 251);
+  border-radius: 10px;
+  grid-template-columns: 5fr 2fr 2fr;
+  grid-template-areas:
+    "name . activities"
+    "info . activities"
+    "birth weight activities"
+    ". . button";
+
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+.item .name {
+  grid-area: name;
+  letter-spacing: 5px;
+  font-weight: 600;
+  font-size: larger;
+  padding: 15px;
+
+  display: grid;
+  grid-template-areas:
+    "nameText buttons";
+  grid-template-columns: 1fr 1fr 5fr;
+}
+
+.item .name .nameText{
+  grid-area: nameText;
+}
+
+.item .name .buttons{
+  grid-area: buttons;
+}
+
+.item .info {
+  grid-area: info;
+  padding: 10px;
+}
+
+.item .birth {
+  grid-area: birth;
+  padding: 10px;
+}
+
+.item .weight {
+  grid-area: weight;
+  padding: 10px;
+}
+
+.item .showButton {
+  grid-area: button;
+}
+
+.item .activities {
+  grid-area: activities;
+  display: block;
+  height: 100%;
+}
+
+.item .activities:hover {
+  background-color: rgb(233, 238, 234);
+}
+
+.item .activities .title {
+  letter-spacing: 8px;
+  font-size: larger;
+  padding: 5px;
+  justify-content: center;
+}

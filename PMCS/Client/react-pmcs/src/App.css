@@ -3,11 +3,11 @@
 
   height: auto;
   grid-template-areas: 
-  "header header"
-  "nav content"
-  "footer footer";
-  grid-template-rows: 1fr 9fr 1fr;
-  grid-template-columns: 3fr 10fr;
+  "header"
+  "nav"
+  "content"
+  "footer";
+  grid-template-rows: 1fr 0.5fr 8.5fr 1fr;
   grid-gap:1px;
   font-family: 'Raleway', sans-serif;
 }
