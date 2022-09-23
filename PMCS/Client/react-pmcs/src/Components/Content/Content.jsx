@@ -8,7 +8,6 @@ const Content = () => {
     return (
         <main className={s.content}>
             <Pet pet={pet}/>
-            <Pet pet={pet}/>
         </main>
     );
 }

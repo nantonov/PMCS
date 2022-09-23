@@ -13,6 +13,10 @@
   margin-bottom: 5px;
 }
 
+.item:hover {
+  background-color: rgb(245, 248, 246);
+}
+
 .item .name {
   grid-area: name;
   letter-spacing: 5px;
