@@ -6,7 +6,6 @@
    "icon title notifications profile";
    grid-template-columns: 1fr 12fr 1fr 2fr;
    padding: 10px;
-   position: relative;
 }
 .header .title{
     color:rgb(0, 0, 0);
@@ -25,7 +24,5 @@
 .header .profile {
     grid-area: profile;
     top:50%;
-    position: absolute;
     margin:0px;
-    transform: translate(0, -50%);
 }

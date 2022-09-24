@@ -1,7 +1,6 @@
 .app-wrapper{
   display: grid;
 
-  height: auto;
   grid-template-areas: 
   "header"
   "nav"
@@ -10,5 +9,12 @@
   grid-template-rows: 1fr 0.5fr 8.5fr 1fr;
   grid-gap:1px;
   font-family: 'Raleway', sans-serif;
+}
+
+.app-content-wrapper {
+  grid-area: content;
+  background-color: rgb(255, 255, 255);
+  letter-spacing: 1px;
+  padding: 10px;
 }
 
