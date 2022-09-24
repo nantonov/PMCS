@@ -3,6 +3,17 @@
     padding: 10px;
     justify-content: center;
 }
+
+.navLink a{
+    text-decoration: none;
+    color: black
+}
+
+.navLink a:active{
+    color: rgb(133, 93, 160)
+}
+
+
 .navLink:hover {
     background-color: rgb(223, 245, 235);
     cursor: pointer;

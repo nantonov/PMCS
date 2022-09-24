@@ -5,11 +5,9 @@ import NavItem from './NavItem/NavItem';
 const Nav = () => {
     return (
         <nav className={s.nav}>
-           <NavItem name='Walkings'/>
-           <NavItem name='Meals'/>
-           <NavItem name='Vaccines'/>
-           <NavItem name='Reminders'/>
-           <NavItem name='Pets'/>
+            <NavItem name='Pets' path='/pets' />
+            <NavItem name='Activities' path='/activities' />
+            <NavItem name='Reminders' path='/reminders' />
         </nav>
     );
 }

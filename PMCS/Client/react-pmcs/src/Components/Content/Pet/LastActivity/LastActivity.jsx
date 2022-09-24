@@ -8,7 +8,7 @@ const LastActivity = (props) => {
                 {props.item.name}
             </div>
             <div className={s.date}>
-                {props.item.date}
+                on {props.item.date}
             </div>
         </div >
     );

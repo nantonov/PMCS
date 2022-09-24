@@ -4,8 +4,8 @@
   border-radius: 10px;
   grid-template-columns: 5fr 2fr 2fr;
   grid-template-areas:
-    "name . activities"
-    "info . activities"
+    "name name activities"
+    "info info activities"
     "birth weight activities"
     ". . button";
 
@@ -68,8 +68,9 @@
 }
 
 .item .activities .title {
-  letter-spacing: 8px;
-  font-size: larger;
+  letter-spacing: 4px;
+  font-size: medium;
   padding: 5px;
-  justify-content: center;
+  font-weight:lighter;
+  text-align: center;
 }

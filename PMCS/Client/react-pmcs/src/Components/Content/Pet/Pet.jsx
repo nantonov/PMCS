@@ -43,7 +43,7 @@ const Pet = (props) => {
                 <span className={s.text}>Show all info</span>
             </Button>
             <article className={s.activities}>
-                <span className='title'>Last activities</span>
+                <span className={s.title}>Last activities</span>
                 <LastActivity item={walking} />
                 <LastActivity item={meal} />
                 <LastActivity item={vaccine} />

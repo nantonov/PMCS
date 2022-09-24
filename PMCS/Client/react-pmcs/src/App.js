@@ -1,18 +1,28 @@
-import logo from './logo.svg';
 import Header from './Components/Header/Header'
-import Footer from './Components/Footer/Footer';
+import Reminder from './Components/Content/Reminder/Reminder';
 import Nav from './Components/Nav/Nav';
-import Content from './Components/Content/Content';
-import './App.css'
+import Pet from './Components/Content/Pet/Pet';
+import Activity from './Components/Content/Activity/Activity';
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+let pet = { name: "Johny", info: "Very funny pet.", birthdate: "12/05/2012", weight: "5kg" };
 
 const App = () => {
   return (
-    <div className='app-wrapper'>
-      <Header />
-      <Nav />
-      <Content />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className='app-wrapper'>
+        <Header />
+        <Nav />
+        <main className='app-content-wrapper'>
+          <Routes>
+            <Route path='/pets' element={<Pet pet={pet} />}></Route>
+            <Route path='/activities' element={<Activity />}></Route>
+            <Route path='/reminders' element={<Reminder />}></Route>
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
