@@ -15,7 +15,7 @@
 }
 .header .icon{
     grid-area: icon;
-    color: black;;
+    color: black;
 }
 .header .notifications{
     grid-area: notifications;

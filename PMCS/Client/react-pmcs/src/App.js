@@ -6,8 +6,6 @@ import Activities from './Components/Content/Activities/Activities';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-let pet = { name: "Johny", info: "Very funny pet.", birthdate: "12/05/2012", weight: "5kg" };
-
 const App = () => {
   return (
     <BrowserRouter>
