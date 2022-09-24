@@ -14,7 +14,7 @@ const App = (props) => {
         <Nav />
         <main className='app-content-wrapper'>
           <Routes>
-            <Route path='/pets/*' element={<Pets pets={props.pets}/>}></Route>
+            <Route path='/pets/*' element={<Pets petsPage={props.state.petsPage}/>}></Route>
             <Route path='/activities/*' element={<Activities />}></Route>
             <Route path='/reminders/*' element={<Reminders />}></Route>
           </Routes>
