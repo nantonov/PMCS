@@ -2,12 +2,12 @@
   display: grid;
   background-color: rgb(249, 255, 251);
   border-radius: 10px;
-  grid-template-columns: 5fr 2fr 2fr;
+  grid-template-columns: 6fr 2fr;
+  grid-template-rows: 1fr 2fr 1fr;
   grid-template-areas:
-    "name name activities"
-    "info info activities"
-    "birth weight activities"
-    ". . button";
+    "name activities"
+    "info activities"
+    "num button";
 
   letter-spacing: 2px;
   margin-bottom: 5px;
@@ -43,14 +43,22 @@
   padding: 10px;
 }
 
-.item .birth {
-  grid-area: birth;
+.item .numeralInfo{
+  grid-area: num;
   padding: 10px;
+  font-size: small;
+
+  display: grid;
+  grid-template-areas: "birth weight";
+  grid-template-columns: 1fr 3fr;
 }
 
-.item .weight {
+.item .numeralInfo .birth {
+  grid-area: birth;
+}
+
+.item .numeralInfo .weight {
   grid-area: weight;
-  padding: 10px;
 }
 
 .item .showButton {

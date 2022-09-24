@@ -22,7 +22,7 @@ const Pet = (props) => {
                 <div className={s.buttons}>
                     <Stack direction="row" spacing={1}>
                         <IconButton aria-label="edit" size="small">
-                            <EditIcon fontSize='small'/>
+                            <EditIcon fontSize='small' />
                         </IconButton>
                         <IconButton aria-label="delete" size="small">
                             <DeleteIcon />
@@ -33,11 +33,13 @@ const Pet = (props) => {
             <div className={s.info}>
                 {props.pet.info}
             </div>
-            <div className={s.birth}>
-                Birth Date: {props.pet.birthdate}
-            </div>
-            <div className={s.weight}>
-                Weight: {props.pet.weight}
+            <div className={s.numeralInfo}>
+                <div className={s.birth}>
+                    Birth Date: {props.pet.birthdate}
+                </div>
+                <div className={s.weight}>
+                    Weight: {props.pet.weight}
+                </div>
             </div>
             <Button color='info' startIcon={<VisibilityOutlinedIcon />} className={s.showButton}>
                 <span className={s.text}>Show all info</span>
