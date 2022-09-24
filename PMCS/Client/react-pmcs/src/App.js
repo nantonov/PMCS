@@ -6,7 +6,7 @@ import Activities from './Components/Content/Activities/Activities';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-const App = () => {
+const App = (props) => {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -14,7 +14,7 @@ const App = () => {
         <Nav />
         <main className='app-content-wrapper'>
           <Routes>
-            <Route path='/pets/*' element={<Pets />}></Route>
+            <Route path='/pets/*' element={<Pets pets={props.pets}/>}></Route>
             <Route path='/activities/*' element={<Activities />}></Route>
             <Route path='/reminders/*' element={<Reminders />}></Route>
           </Routes>
