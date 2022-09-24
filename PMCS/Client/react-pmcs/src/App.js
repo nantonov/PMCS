@@ -1,8 +1,8 @@
 import Header from './Components/Header/Header'
-import Reminder from './Components/Content/Reminder/Reminder';
+import Reminders from './Components/Content/Reminders/Reminders';
 import Nav from './Components/Nav/Nav';
-import Pet from './Components/Content/Pet/Pet';
-import Activity from './Components/Content/Activity/Activity';
+import Pets from './Components/Content/Pets/Pets';
+import Activities from './Components/Content/Activities/Activities';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -16,9 +16,9 @@ const App = () => {
         <Nav />
         <main className='app-content-wrapper'>
           <Routes>
-            <Route path='/pets' element={<Pet pet={pet} />}></Route>
-            <Route path='/activities' element={<Activity />}></Route>
-            <Route path='/reminders' element={<Reminder />}></Route>
+            <Route path='/pets' element={<Pets />}></Route>
+            <Route path='/activities' element={<Activities />}></Route>
+            <Route path='/reminders' element={<Reminders />}></Route>
           </Routes>
         </main>
       </div>

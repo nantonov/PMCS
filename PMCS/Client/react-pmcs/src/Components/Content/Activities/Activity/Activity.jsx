@@ -1,9 +1,10 @@
 import React from 'react';
 import s from './Activity.module.css'
 
-const Activity = () => {
+
+const Activity = (props) => {
     return (
-        <article className={s.wrapper}>
+        <article className={s.item}>
             Content
         </article>
     );
