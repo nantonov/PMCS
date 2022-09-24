@@ -9,9 +9,7 @@ const LastActivityList = (props) => {
         <article className={s.wrapper}>
             <div className={s.title}>Last activities</div>
             <div className={s.list}>
-                <LastActivity item={props.activities[0]} />
-                <LastActivity item={props.activities[1]} />
-                <LastActivity item={props.activities[2]} />
+                {props.activities.map(activityItem => <LastActivity item={activityItem} />)}
             </div>
             <Button color='info' startIcon={<VisibilityOutlinedIcon />} className={s.showButton}>
                 <span className={s.text}>Show all info</span>
