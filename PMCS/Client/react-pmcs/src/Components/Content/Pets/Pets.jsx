@@ -9,7 +9,7 @@ let pets = [{ name: "Johny", info: "Very funny pet.", birthdate: "12/05/2012", w
 
 const Pets = (props) => {
     return (
-        <section>
+        <section className={s.wrapper}>
             <Pet pet = {pets[0]}/>
             <Pet pet = {pets[1]}/>
             <Pet pet = {pets[2]}/>
