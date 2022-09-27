@@ -1,4 +1,4 @@
-import {Colors} from './Components/Shared/Constants/Colors.js';
+@import './Components/Shared/Constants/Colors.scss';
 
 .app-wrapper{
   display: grid;
@@ -15,7 +15,7 @@ import {Colors} from './Components/Shared/Constants/Colors.js';
 
 .app-content-wrapper {
   grid-area: content;
-  background-color: Colors.contentBackground;
+  background-color: var(--color-content-background);
   letter-spacing: 1px;
   padding: 10px;
 }
