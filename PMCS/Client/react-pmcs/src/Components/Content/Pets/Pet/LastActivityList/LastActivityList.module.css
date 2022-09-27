@@ -1,0 +1,33 @@
+.wrapper {
+  grid-area: activities;
+
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas:
+    "title"
+    "list"
+    "button";
+}
+
+.wrapper:hover {
+  background-color: rgb(233, 238, 234);
+}
+
+.wrapper .title {
+  grid-area: title;
+
+  letter-spacing: 4px;
+  font-size: medium;
+  padding: 5px;
+  font-weight:lighter;
+  text-align: center;
+}
+
+
+.wrapper .showButton {
+  grid-area: button;
+}
+
+.wrapper .list {
+  grid-area: list;
+}

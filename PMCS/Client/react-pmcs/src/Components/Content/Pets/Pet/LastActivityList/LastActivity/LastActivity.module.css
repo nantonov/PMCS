@@ -1,0 +1,17 @@
+.item{
+    grid-area: item;
+    padding: 2px;
+}
+
+.item .name{
+    padding:5px;
+    font-size: larger;
+    letter-spacing: 4px;
+    font-weight: bolder;
+}
+
+.item .date{
+    padding:5px;
+    font-size: medium;
+    letter-spacing: 1px;
+}

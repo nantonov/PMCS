@@ -1,0 +1,31 @@
+.wrapper {
+  grid-area: info;
+
+  display: grid;
+  grid-template-areas: "description"
+    "num";
+  grid-template-rows: 2fr 1fr;
+}
+
+.info {
+  padding: 10px;
+  grid-area: description;
+}
+
+.numeralInfo {
+  grid-area: num;
+  padding: 10px;
+  font-size: small;
+
+  display: grid;
+  grid-template-areas: "birth weight";
+  grid-template-columns: 1fr 3fr;
+}
+
+.numeralInfo .birth {
+  grid-area: birth;
+}
+
+.numeralInfo .weight {
+  grid-area: weight;
+}

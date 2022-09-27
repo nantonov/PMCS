@@ -1,0 +1,8 @@
+@import './../../Shared/Constants/Colors.scss';
+
+.button .text {
+    color: var(--color-text-global);
+    letter-spacing: 3px;
+    font-size: medium;
+    padding: 7px;
+}

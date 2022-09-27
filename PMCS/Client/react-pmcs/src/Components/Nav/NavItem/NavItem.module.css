@@ -1,0 +1,26 @@
+@import './../../Shared/Constants/Colors.scss';
+
+.navLink {
+    letter-spacing: 3px;
+    padding: 10px;
+    justify-content: center;
+}
+
+.navLink a{
+    text-decoration: none;
+    color: var(--color-text-global);
+}
+
+.navLink a:active{
+    color: var(--color-link-active);
+}
+
+
+.navLink:hover {
+    background-color: var(--color-background-link-hover);
+    cursor: pointer;
+}
+.navLink:active {
+    background-color: var(--color-background-link-active);
+    cursor: pointer;
+}

@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import Header from './Components/Header/Header'
+import Reminders from './Components/Content/Reminders/Reminders';
+import Nav from './Components/Nav/Nav';
+import Pets from './Components/Content/Pets/Pets';
+import Activities from './Components/Content/Activities/Activities';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-function App() {
+const App = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className='app-wrapper'>
+        <Header />
+        <Nav />
+        <main className='app-content-wrapper'>
+          <Routes>
+            <Route path='/pets/*' element={<Pets petsPage={props.state.petsPage}/>}></Route>
+            <Route path='/activities/*' element={<Activities />}></Route>
+            <Route path='/reminders/*' element={<Reminders />}></Route>
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
