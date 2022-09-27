@@ -1,3 +1,5 @@
+@import './../../Shared/Constants/Colors.scss';
+
 .navLink {
     letter-spacing: 3px;
     padding: 10px;
@@ -6,19 +8,19 @@
 
 .navLink a{
     text-decoration: none;
-    color: black
+    color: var(--color-text-global);
 }
 
 .navLink a:active{
-    color: rgb(133, 93, 160)
+    color: var(--color-link-active);
 }
 
 
 .navLink:hover {
-    background-color: rgb(223, 245, 235);
+    background-color: var(--color-background-link-hover);
     cursor: pointer;
 }
 .navLink:active {
-    background-color: rgb(218, 248, 233);
+    background-color: var(--color-background-link-active);
     cursor: pointer;
 }

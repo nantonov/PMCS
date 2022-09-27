@@ -1,6 +1,8 @@
+@import './../Shared/Constants/Colors.scss';
+
 .header {
     grid-area: header;
-    background-color: rgb(251, 249, 249);
+    background-color: var(--color-header-background);
     display: grid;
     grid-template-areas: 
    "icon title notifications profile";
@@ -8,18 +10,20 @@
    padding: 10px;
 }
 .header .title{
-    color:rgb(0, 0, 0);
+    color:var(--color-text-global);
     letter-spacing: 3px;
     grid-area: title;
     font-size:larger;
 }
 .header .icon{
     grid-area: icon;
-    color: black;
+    color: var(--color-icons-global);
+    font-size: 40px;
+    padding-left: 10px;
 }
 .header .notifications{
     grid-area: notifications;
-    color: black;
+    color: var(--color-text-global);
 }
 .header .profile {
     grid-area: profile;

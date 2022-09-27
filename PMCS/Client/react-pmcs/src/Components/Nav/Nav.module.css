@@ -1,6 +1,8 @@
+@import './../Shared/Constants/Colors.scss';
+
 .nav {
     grid-area: nav;
-    background-color: rgb(240, 255, 252);
+    background-color: var(--color-nav-background);
     display: grid;
     grid-template-columns: 3fr 3fr 3fr 3fr 3fr 10fr;
 }

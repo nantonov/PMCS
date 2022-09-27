@@ -1,3 +1,5 @@
+@import './Components/Shared/Constants/Colors.scss';
+
 .app-wrapper{
   display: grid;
 
@@ -13,7 +15,7 @@
 
 .app-content-wrapper {
   grid-area: content;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-content-background);
   letter-spacing: 1px;
   padding: 10px;
 }

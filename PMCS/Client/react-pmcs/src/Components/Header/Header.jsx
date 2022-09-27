@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <header className={s.header}>
             <div className={s.icon}>
-            <FontAwesomeIcon icon={faPaw} size="3x"/>
+            <FontAwesomeIcon icon={faPaw} />
             </div>
             <div className={s.title}>
                 Pets Monitoring and Control System

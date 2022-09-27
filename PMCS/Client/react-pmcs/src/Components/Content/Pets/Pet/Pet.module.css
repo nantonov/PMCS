@@ -1,8 +1,10 @@
+@import './../../../Shared/Constants/Colors.scss';
+
 .item {
   grid-area: item;
 
   display: grid;
-  background-color: rgb(249, 255, 251);
+  background-color: var(--color-content-component-background-global);
   border-radius: 10px;
   grid-template-columns: 6fr 2fr;
   grid-template-rows: 1fr 3fr;
@@ -15,7 +17,7 @@
 }
 
 .item:hover {
-  background-color: rgb(245, 248, 246);
+  background-color: var(--color-content-component-background-hover);
 }
 
 .item .info{
