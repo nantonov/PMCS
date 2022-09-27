@@ -23,6 +23,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: PMCS/Client/react-pmcs/package-lock.json
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: npm --prefix PMCS/Client/react-pmcs/package-lock.json ci
+    - run: npm --prefix PMCS/Client/react-pmcs/package-lock.json run build --if-present
+    - run: npm --prefix PMCS/Client/react-pmcs/package-lock.json test
