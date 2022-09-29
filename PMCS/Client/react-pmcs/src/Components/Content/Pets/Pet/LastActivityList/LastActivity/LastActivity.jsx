@@ -5,10 +5,10 @@ const LastActivity = (props) => {
     return (
         <div className={s.item}>
             <div className={s.name}>
-                {props.item.name}
+                {props.name}
             </div>
             <div className={s.date}>
-                on {props.item.date}
+                on {props.date}
             </div>
         </div >
     );

@@ -7,9 +7,9 @@ import PetInfo from './Info/PetInfo';
 const Pet = (props) => {
     return (
         <article className={s.item}>
-            <PetHeader pet={props.pet} />
+            <PetHeader pet={props.pet} dispatch={props.dispatch}/>
             <PetInfo pet={props.pet} />
-            <LastActivityList activities={props.pet.activities} />
+            <LastActivityList pet={props.pet} />
         </article>
     );
 }

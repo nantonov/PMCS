@@ -4,18 +4,29 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { deletePetActionCreator, editPetActionCreator } from '../../../../../redux/petsReducer';
 
 const PetHeader = (props) => {
+    let onDeleteButtonClick = () => {
+        let action = deletePetActionCreator(props.pet.id);
+        props.dispatch(action);
+    }
+
+    let onEditButtonClick = () => {
+        let action = editPetActionCreator(props.pet);
+        props.dispatch(action);
+    }
+
     return (<header className={s.wrapper}>
         <div className={s.nameText}>
             {props.pet.name} &#9733;
         </div>
         <div className={s.buttons}>
             <Stack direction="row" spacing={1}>
-                <IconButton aria-label="edit" size="small">
+                <IconButton aria-label="edit" size="small" onClick={onEditButtonClick}>
                     <EditIcon fontSize='small' />
                 </IconButton>
-                <IconButton aria-label="delete" size="small">
+                <IconButton aria-label="delete" size="small" onClick={onDeleteButtonClick}>
                     <DeleteIcon />
                 </IconButton>
             </Stack>
