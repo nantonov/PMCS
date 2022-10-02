@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Pets from './Pets';
-import { deletePetActionCreator, editPetActionCreator } from '../../../redux/petsReducer';
+import { deletePetActionCreator, editPetActionCreator, setPetsActionCreator} from '../../../redux/reducers/petsReducer/petsReducer';
 
 function mapStateToProps(state) {
-    return { petsPage: state.petsPage }
+    return { pets: state.petsPage.pets }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -15,7 +15,11 @@ function mapDispatchToProps(dispatch) {
         onDeleteButtonClick: (id) => {
             let action = deletePetActionCreator(id);
             dispatch(action);
-        }
+        },
+        setPets: (pets) => {
+            let action = setPetsActionCreator(pets);
+            dispatch(action);
+        },
     }
 }
 

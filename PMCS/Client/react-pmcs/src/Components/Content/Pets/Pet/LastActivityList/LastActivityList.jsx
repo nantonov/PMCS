@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 const LastActivityList = (props) => {
-    let walkingElelement = props.pet.walkings.map(activityItem => <LastActivity date={activityItem.started} key = {activityItem.id} name={"Walking"}/>);
+    let walkingElelement = props.pet.walkings.map(activityItem => <LastActivity date={activityItem.stared} key = {activityItem.id} name={"Walking"}/>);
     let mealElelement = props.pet.meals.map(activityItem => <LastActivity date={activityItem.dateTime} key = {activityItem.id} name={"Meal"}/>);
     let vaccineElelement = props.pet.vaccines.map(activityItem => <LastActivity date={activityItem.dateTime} key = {activityItem.id} name={"Vaccine"}/>);
 
