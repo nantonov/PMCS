@@ -30,6 +30,7 @@ const EditPetModal = (props) => {
                     <input
                         type="text"
                         name="name"
+                        required
                         value={inputs.name || ""}
                         onChange={handleChange}
                         placeholder={props.pet.name}
@@ -40,6 +41,7 @@ const EditPetModal = (props) => {
                         type="number"
                         step="0.1"
                         name="weight"
+                        required
                         value={inputs.weight || ""}
                         onChange={handleChange}
                         placeholder={props.pet.weight}
