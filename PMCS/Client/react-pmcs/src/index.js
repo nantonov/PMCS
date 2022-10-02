@@ -5,25 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-let rerenderTree = () => {
-  root.render(
-    <BrowserRouter>
-      <React.StrictMode>
-        <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
-      </React.StrictMode>
-    </BrowserRouter>
-  );
-}
-
-rerenderTree(store.getState());
-
-store.subscribe(()=>{
-  let state = store.getState();
-
-  rerenderTree(state)
-}
+root.render(
+  <BrowserRouter>
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
+  </BrowserRouter>
 );
 
 reportWebVitals();

@@ -4,9 +4,7 @@ import Pet from './Pet/Pet'
 
 const Pets = (props) => {
     let petsElements = props.petsPage.pets.map(petItem =>
-        <Pet key={petItem.id}
-            pet={petItem}
-            dispatch={props.dispatch} />);
+        <Pet key={petItem.id} pet={petItem} onEditButtonClick={props.onEditButtonClick} onDeleteButtonClick={props.onDeleteButtonClick}/>);
 
     return (
         <section className={s.wrapper}>

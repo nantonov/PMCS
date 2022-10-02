@@ -7,7 +7,7 @@ import PetInfo from './Info/PetInfo';
 const Pet = (props) => {
     return (
         <article className={s.item}>
-            <PetHeader pet={props.pet} dispatch={props.dispatch}/>
+            <PetHeader pet={props.pet} onEditButtonClick={props.onEditButtonClick} onDeleteButtonClick={props.onDeleteButtonClick}/>
             <PetInfo pet={props.pet} />
             <LastActivityList pet={props.pet} />
         </article>
