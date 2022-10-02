@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import s from './EditPetModal.module.css'
 
-const EditPetModal = (props) => {
+const EditPetModal = props => {
 
+    const {pet, setEditModalOpen, editPet} = props;
     const [inputs, setInputs] = useState({});
 
     const handleChange = (event) => {
@@ -14,12 +15,12 @@ const EditPetModal = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        props.editPet({ name: inputs.name, weight: inputs.weight + 'kg', id: props.pet.id });
-        props.setEditModalOpen(false);
+        editPet({ name: inputs.name, weight: inputs.weight + 'kg', id: pet.id });
+        setEditModalOpen(false);
     }
 
     const onCancelled = () => {
-        props.setEditModalOpen(false);
+        setEditModalOpen(false);
     }
 
     return (
@@ -33,7 +34,7 @@ const EditPetModal = (props) => {
                         required
                         value={inputs.name || ""}
                         onChange={handleChange}
-                        placeholder={props.pet.name}
+                        placeholder={pet.name}
                     />
                 </label>
                 <label>Weight:
@@ -44,7 +45,7 @@ const EditPetModal = (props) => {
                         required
                         value={inputs.weight || ""}
                         onChange={handleChange}
-                        placeholder={props.pet.weight}
+                        placeholder={pet.weight}
                     />
                 </label>
                 <button type="submit">Submit</button>

@@ -4,10 +4,12 @@ import LastActivity from './LastActivity/LastActivity';
 import Button from '@mui/material/Button';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
-const LastActivityList = (props) => {
-    let walkingElelement = props.pet.walkings.map(activityItem => <LastActivity date={activityItem.stared} key = {activityItem.id} name={"Walking"}/>);
-    let mealElelement = props.pet.meals.map(activityItem => <LastActivity date={activityItem.dateTime} key = {activityItem.id} name={"Meal"}/>);
-    let vaccineElelement = props.pet.vaccines.map(activityItem => <LastActivity date={activityItem.dateTime} key = {activityItem.id} name={"Vaccine"}/>);
+const LastActivityList = props => {
+    const {pet} = props;
+
+    let walkingElelement = pet.walkings.map(activityItem => <LastActivity date={activityItem.stared} key = {activityItem.id} name={"Walking"}/>);
+    let mealElelement = pet.meals.map(activityItem => <LastActivity date={activityItem.dateTime} key = {activityItem.id} name={"Meal"}/>);
+    let vaccineElelement = pet.vaccines.map(activityItem => <LastActivity date={activityItem.dateTime} key = {activityItem.id} name={"Vaccine"}/>);
 
     return (
         <article className={s.wrapper}>

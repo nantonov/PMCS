@@ -5,17 +5,19 @@ import PetHeader from './Header/PetHeader';
 import PetInfo from './Info/PetInfo';
 import EditPetModal from './../Pet/Modal/EditPetModal';
 
-const Pet = (props) => {
+const Pet = props => {
+
+    const {pet, editPet, deletePet} = props;
     const [isEditModalOpened, setEditModalOpen] = useState(false);
 
     return (
         <article className={s.item}>
-            {isEditModalOpened ? <EditPetModal pet={props.pet} editPet={props.editPet} setEditModalOpen = {setEditModalOpen}/> : null}
-            <PetHeader pet={props.pet} 
-            deletePet={props.deletePet}
+            {isEditModalOpened ? <EditPetModal pet={pet} editPet={editPet} setEditModalOpen = {setEditModalOpen}/> : null}
+            <PetHeader pet={pet} 
+            deletePet={deletePet}
             setEditModalOpen = {setEditModalOpen}/>
-            <PetInfo pet={props.pet} />
-            <LastActivityList pet={props.pet} />
+            <PetInfo pet={pet} />
+            <LastActivityList pet={pet} />
         </article>
     );
 }

@@ -6,19 +6,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 const PetHeader = (props) => {
+
+    const {pet, deletePet, setEditModalOpen} = props;
+
     let onDeleteButtonClick = () => {
-        let id = props.pet.id;
-        props.deletePet(id);
+        let id = pet.id;
+        deletePet(id);
     };
 
     let onEditButtonClick = () => {
-       props.setEditModalOpen(true);
+       setEditModalOpen(true);
     };
 
     return (
     <header className={s.wrapper}>
         <div className={s.nameText}>
-            {props.pet.name} &#9733;
+            {pet.name}
         </div>
         <div className={s.buttons}>
             <Stack direction="row" spacing={1}>
