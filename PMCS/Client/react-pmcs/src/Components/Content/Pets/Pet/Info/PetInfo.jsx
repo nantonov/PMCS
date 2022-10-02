@@ -2,7 +2,7 @@ import React from 'react';
 import s from './PetInfo.module.css'
 
 const PetInfo = (props) => {
-    const {pet} = props;
+    const { pet } = props;
 
     return (<article className={s.wrapper}>
         <div className={s.info}>

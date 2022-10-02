@@ -27,7 +27,7 @@ const EditPetModal = props => {
         <div className={s.modal}>
             <form className={s.formBox} onSubmit={handleSubmit}>
                 <header>Edit pet</header>
-                <label>New name:
+                <label>Name:   
                     <input
                         type="text"
                         name="name"

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Pets from './Pets';
-import { deletePetActionCreator, editPetActionCreator, setPetsActionCreator} from '../../../redux/reducers/petsReducer/petsReducer';
+import { deletePetActionCreator, editPetActionCreator, setPetsActionCreator } from '../../../redux/reducers/petsReducer/petsReducer';
 
 function mapStateToProps(state) {
     return { pets: state.petsPage.pets }

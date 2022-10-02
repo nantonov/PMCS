@@ -1,46 +1,46 @@
 @import './../../../../Shared/Constants/Colors.scss';
 
-.modal{
+.modal {
   z-index: 2;
   position: fixed;
-  top:30%;
-  left:35%;
-  background-color: var(--color-modals-background-global);
-  padding: 30px;
-  border-radius: 25px;
-  box-shadow: 0 4px 8px 0 var(--color-box-shadow-global),0 6px 20px 0 var(--color-box-shadow-global);
+  top: 30%;
+  left: 35%;
 }
 
-.formBox{
+.formBox {
   display: grid;
   grid-gap: 6.5px;
   font-size: larger;
+  background-color: var(--color-modals-background-global);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
 }
 
-.formBox header{
+.formBox header {
   font-weight: bold;
   text-align: center;
 }
 
-.formBox label{
+.formBox label {
   line-height: 24px;
 }
 
-.formBox input{
+.formBox input {
   box-sizing: border-box;
-  border: 1px solid  var(--color-inputs-border-global);
+  border: 1px solid var(--color-inputs-border-global);
   border-radius: 20px;
   margin: 12px;
   padding: 5px;
 }
 
-::placeholder{
-padding: 7px;
-letter-spacing: 2px;
-font-size: 15px;
+::placeholder {
+  padding: 7px;
+  letter-spacing: 2px;
+  font-size: 15px;
 }
 
-.formBox button{
+.formBox button {
   border-radius: 15px;
   font-size: 15px;
   padding: 5px;
@@ -48,7 +48,7 @@ font-size: 15px;
 }
 
 
-.formBox button:hover{
-cursor: pointer;
-background-color: var(--color-inputs-border-global);
+.formBox button:hover {
+  cursor: pointer;
+  background-color: var(--color-inputs-border-global);
 }

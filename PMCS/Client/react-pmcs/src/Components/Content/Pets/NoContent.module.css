@@ -1,6 +1,6 @@
 @import './../../Shared/Constants/Colors.scss';
 
-.noContent{
+.noContent {
     justify-content: left;
     height: 100%;
     background-color: var(--color-content-block-background-global);
