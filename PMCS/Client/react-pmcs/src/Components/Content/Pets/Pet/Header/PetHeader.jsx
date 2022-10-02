@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 const PetHeader = (props) => {
     let onDeleteButtonClick = () => {
         let id = props.pet.id;
-        props.onDeleteButtonClick(id);
+        props.deletePet(id);
     };
 
     let onEditButtonClick = () => {
