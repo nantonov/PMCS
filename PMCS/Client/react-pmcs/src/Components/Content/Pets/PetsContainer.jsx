@@ -8,11 +8,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        onEditButtonClick: (pet) => {
+        editPet: (pet) => {
             let action = editPetActionCreator(pet);
             dispatch(action);
         },
-        onDeleteButtonClick: (id) => {
+        deletePet: (id) => {
             let action = deletePetActionCreator(id);
             dispatch(action);
         },

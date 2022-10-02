@@ -6,18 +6,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 const PetHeader = (props) => {
-
     let onDeleteButtonClick = () => {
         let id = props.pet.id;
         props.onDeleteButtonClick(id);
     };
 
     let onEditButtonClick = () => {
-        let pet = props.pet;
-        props.onEditButtonClick(pet);
+       props.setEditModalOpen(true);
     };
 
-    return (<header className={s.wrapper}>
+    return (
+    <header className={s.wrapper}>
         <div className={s.nameText}>
             {props.pet.name} &#9733;
         </div>

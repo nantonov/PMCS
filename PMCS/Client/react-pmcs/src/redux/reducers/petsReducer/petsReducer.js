@@ -33,7 +33,8 @@ const petsReducer = (state = initialState, action) => {
             };
 
             let petToUpdate = stateCopy.pets.findIndex(p => p.id === action.pet.id);
-            stateCopy.pets[petToUpdate] = action.pet;
+            stateCopy.pets[petToUpdate].name = action.pet.name;
+            stateCopy.pets[petToUpdate].weight = action.pet.weight;
 
             return stateCopy;
         }
