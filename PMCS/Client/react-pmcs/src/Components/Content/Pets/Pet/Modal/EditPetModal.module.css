@@ -4,10 +4,11 @@
   z-index: 2;
   position: fixed;
   top:30%;
-  left:30%;
-  background-color: var(--color-modals-background);
+  left:35%;
+  background-color: var(--color-modals-background-global);
   padding: 30px;
   border-radius: 25px;
+  box-shadow: 0 4px 8px 0 var(--color-box-shadow-global),0 6px 20px 0 var(--color-box-shadow-global);
 }
 
 .formBox{
@@ -27,7 +28,7 @@
 
 .formBox input{
   box-sizing: border-box;
-  border: 1px solid #E6E6E6;
+  border: 1px solid  var(--color-inputs-border-global);
   border-radius: 20px;
   margin: 12px;
   padding: 5px;
@@ -49,5 +50,5 @@ font-size: 15px;
 
 .formBox button:hover{
 cursor: pointer;
-background-color: #E6E6E6;
+background-color: var(--color-inputs-border-global);
 }
