@@ -6,6 +6,7 @@ import PetInfo from './Info/PetInfo';
 import EditPetModal from './../Pet/Modal/EditPetModal';
 import InfoPetModal from './../Pet/Modal/InfoPetModal';
 
+
 const Pet = props => {
 
     const {pet, editPet, deletePet} = props;

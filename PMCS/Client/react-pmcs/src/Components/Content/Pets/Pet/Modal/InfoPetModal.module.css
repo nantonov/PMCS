@@ -42,18 +42,20 @@
   letter-spacing: 6px;
 }
 
-.walkingsWrapper {
+.itemWrapper {
   display: grid;
   grid-gap: 10px;
   border-radius: 15px;
   padding: 5px;
+  margin:3px;
+  background-color: var( --color-activity-element);
 }
 
-.walkingsWrapper:hover {
+.itemWrapper:hover {
   background-color: var(--color-activity-element-hover);
 }
 
 
-.walkingsWrapper .title {
+.itemWrapper .title {
   font-size: 26px;
 }

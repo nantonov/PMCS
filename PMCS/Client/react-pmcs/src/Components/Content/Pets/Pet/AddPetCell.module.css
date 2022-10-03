@@ -1,0 +1,13 @@
+@import './../../../Shared/Constants/Colors.scss';
+
+.item {
+  background-color: var(--color-content-component-background-global);
+}
+
+.item .button{
+
+}
+
+.item .button .icon{
+
+}

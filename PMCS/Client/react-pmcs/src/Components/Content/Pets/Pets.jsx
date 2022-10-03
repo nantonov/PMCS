@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Pets.module.css';
 import Pet from './Pet/Pet';
 import NoContent from './NoContent';
+import AddPetCell from './Pet/AddPetCell';
+import AddPetModal from './Pet/Modal/AddPetModal';
+
 
 const Pets = props => {
-
+    const [isAddModalOpened, setAddModalOpen] = useState(false);
     const { pets, editPet, deletePet } = props;
 
     let petsElements = props.pets.map(petItem =>
@@ -17,7 +20,9 @@ const Pets = props => {
 
     return (
         <section className={s.wrapper}>
+            {isAddModalOpened ? <AddPetModal setAddModalOpen = {setAddModalOpen}/> : null}
             {content}
+            <AddPetCell setAddModalOpen={setAddModalOpen}/>
         </section>
     );
 }

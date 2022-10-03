@@ -9,7 +9,7 @@ const LastActivityList = props => {
 
     let walkingElelement = pet.walkings.map(activityItem => <LastActivity date={activityItem.stared} key={activityItem.id} name={"Walking"} />);
     let mealElelement = pet.meals.map(activityItem => <LastActivity date={activityItem.dateTime} key={activityItem.id} name={"Meal"} />);
-    let vaccineElelement = pet.vaccines.map(activityItem => <LastActivity date={activityItem.dateTime} key={activityItem.id} name={"Vaccine"} />);
+    let vaccineElelement = pet.vaccines. map(activityItem => <LastActivity date={activityItem.dateTime} key={activityItem.id} name={"Vaccine"} />);
 
     let onShowInfoClick = () => {
         setInfoModalOpened(true);
@@ -19,9 +19,9 @@ const LastActivityList = props => {
         <article className={s.wrapper}>
             <div className={s.title}>Last activities</div>
             <div className={s.list}>
-                {walkingElelement}
-                {mealElelement}
-                {vaccineElelement}
+                {walkingElelement[0]}
+                {mealElelement[0]}
+                {vaccineElelement[0]}
             </div>
             <Button color='info' startIcon={<VisibilityOutlinedIcon />} className={s.showButton} onClick={onShowInfoClick}>
                 <span className={s.text}>Show all info</span>

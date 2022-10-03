@@ -18,11 +18,23 @@ const InfoPetModal = props => {
         };
     }, []);
 
-    let walking = pet.walkings.map(item => <div className={s.walkingsWrapper}>
+    let walking = pet.walkings.map(item => <div className={s.itemWrapper}>
         <div className={s.title}>{item.title}</div>
         <div className={s.description}>{item.description}</div>
         <div>Started: {item.stared}</div>
         <div>Finished: {item.finished}</div>
+    </div>);
+
+    let meal = pet.meals.map(item => <div className={s.itemWrapper}>
+        <div className={s.title}>{item.title}</div>
+        <div className={s.description}>{item.description}</div>
+        <div>Date: {item.dateTime}</div>
+    </div>);
+
+    let vaccine = pet.vaccines.map(item => <div className={s.itemWrapper}>
+        <div className={s.title}>{item.title}</div>
+        <div className={s.description}>{item.description}</div>
+        <div>Date: {item.dateTime}</div>
     </div>);
 
     return (
@@ -35,11 +47,11 @@ const InfoPetModal = props => {
                 </div>
                 <h3>Meals</h3>
                 <div>
-                    {walking}
+                    {meal}
                 </div>
                 <h3>Vaccines</h3>
                 <div>
-                    {walking}
+                    {vaccine}
                 </div>
             </div>
         </div>);

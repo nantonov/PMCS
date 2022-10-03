@@ -5,15 +5,16 @@ const SET_PETS = 'SET-PETS';
 let initialState = {
     pets: [{
         id: 1,
-        name: "Johny", info: "Very funny pet.", birthDate: "12/05/2012", weight: "5.0kg",
+        name: "Johny", info: "Very funny pet.", birthDate: "13/05/2020", weight: "5.0kg",
         meals: [{ id: 1, title: "Yummy", description: "Very yummy food.", dateTime: "12.05.2012 21.58" }],
-        vaccines: [{ id: 1, title: "Yummy", description: "Very yummy food.", dateTime: "12.05.2012 21.58" }],
-        walkings: [{ id: 1, title: "Yummy", description: "Very yummy food.", stared: "12.05.2012 21.58", finished: "12.05.2012 22.17" }],
+        vaccines: [{ id: 1, title: "COVID-19", description: "Remedy.", dateTime: "12.05.2021 21.58" },
+        { id: 2, title: "Ebola", description: "", dateTime: "17.05.2022 21.04" },],
+        walkings: [{ id: 1, title: "Going to Gorky Park", description: "7 kms for fun", stared: "12.05.2021 21.58", finished: "12.05.2021 22.17" },],
         owner: { id: 1, name: "John" }
     },
     {
         id: 2,
-        name: "William", info: "Very funny pet.", birthDate: "12/05/2020", weight: "7.28kg",
+        name: "William", info: "Big old cat.", birthDate: "11/01/2002", weight: "7.28kg",
         meals: [{ id: 1, title: "Yummy", description: "Very yummy food.", dateTime: "12.05.2012 21.58" }],
         vaccines: [{ id: 1, title: "Yummy", description: "Very yummy food.", dateTime: "12.05.2012 21.58" }],
         walkings: [{ id: 1, title: "Yummy", description: "Very yummy food.", stared: "12.05.2012 21.58", finished: "12.05.2012 22.17" }],
