@@ -2,16 +2,18 @@ import React from 'react';
 import s from './PetInfo.module.css'
 
 const PetInfo = (props) => {
+    const { pet } = props;
+
     return (<article className={s.wrapper}>
         <div className={s.info}>
-            {props.pet.info}
+            {pet.info}
         </div>
         <div className={s.numeralInfo}>
             <div className={s.birth}>
-                Birth Date: {props.pet.birthdate}
+                Birth Date: {pet.birthDate}
             </div>
             <div className={s.weight}>
-                Weight: {props.pet.weight}
+                Weight: {pet.weight}
             </div>
         </div>
     </article>

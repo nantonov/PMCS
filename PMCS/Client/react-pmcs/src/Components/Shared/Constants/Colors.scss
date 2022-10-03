@@ -1,13 +1,16 @@
 :root {
-    --color-content-background: rgb(255, 255, 255);
-    --color-nav-background: rgb(240, 255, 252);
-    --color-header-background:  rgb(251, 249, 249);
-    --color-text-global: black;
-    --color-icons-global: black;
-    --color-background-link-hover: rgb(223, 245, 235);
-    --color-background-link-active: rgb(218, 248, 233);
-    --color-link-active:rgb(133, 93, 160);
-    --color-content-block-background-global:rgb(232, 246, 243);
-    --color-content-component-background-global: rgb(249, 255, 251);
-    --color-content-component-background-hover: rgb(245, 248, 246);
-  }
+  --color-content-background: rgb(255, 255, 255);
+  --color-nav-background: rgb(240, 255, 252);
+  --color-header-background: rgb(251, 249, 249);
+  --color-text-global: black;
+  --color-icons-global: black;
+  --color-background-link-hover: rgb(223, 245, 235);
+  --color-background-link-active: rgb(218, 248, 233);
+  --color-link-active: rgb(133, 93, 160);
+  --color-content-block-background-global: rgb(247, 255, 253);
+  --color-content-component-background-global: rgb(249, 255, 251);
+  --color-content-component-background-hover: rgb(245, 248, 246);
+  --color-modals-background-global: rgb(248, 242, 242);
+  --color-inputs-border-global: #E6E6E6;
+  --color-box-shadow-global: rgba(0, 0, 0, 0.1);
+}

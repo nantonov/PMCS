@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Pet.module.css'
 import LastActivityList from './LastActivityList/LastActivityList';
 import PetHeader from './Header/PetHeader';
 import PetInfo from './Info/PetInfo';
+import EditPetModal from './../Pet/Modal/EditPetModal';
 
-const Pet = (props) => {
+const Pet = props => {
+
+    const {pet, editPet, deletePet} = props;
+    const [isEditModalOpened, setEditModalOpen] = useState(false);
+
     return (
         <article className={s.item}>
-            <PetHeader pet={props.pet} />
-            <PetInfo pet={props.pet} />
-            <LastActivityList activities={props.pet.activities} />
+            {isEditModalOpened ? <EditPetModal pet={pet} editPet={editPet} setEditModalOpen = {setEditModalOpen}/> : null}
+            <PetHeader pet={pet} 
+            deletePet={deletePet}
+            setEditModalOpen = {setEditModalOpen}/>
+            <PetInfo pet={pet} />
+            <LastActivityList pet={pet} />
         </article>
     );
 }

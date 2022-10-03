@@ -6,21 +6,34 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 const PetHeader = (props) => {
-    return (<header className={s.wrapper}>
-        <div className={s.nameText}>
-            {props.pet.name} &#9733;
-        </div>
-        <div className={s.buttons}>
-            <Stack direction="row" spacing={1}>
-                <IconButton aria-label="edit" size="small">
-                    <EditIcon fontSize='small' />
-                </IconButton>
-                <IconButton aria-label="delete" size="small">
-                    <DeleteIcon />
-                </IconButton>
-            </Stack>
-        </div>
-    </header>
+
+    const { pet, deletePet, setEditModalOpen } = props;
+
+    let onDeleteButtonClick = () => {
+        let id = pet.id;
+        deletePet(id);
+    };
+
+    let onEditButtonClick = () => {
+        setEditModalOpen(true);
+    };
+
+    return (
+        <header className={s.wrapper}>
+            <div className={s.nameText}>
+                {pet.name}
+            </div>
+            <div className={s.buttons}>
+                <Stack direction="row" spacing={1}>
+                    <IconButton aria-label="edit" size="small" onClick={onEditButtonClick}>
+                        <EditIcon fontSize='small' />
+                    </IconButton>
+                    <IconButton aria-label="delete" size="small" onClick={onDeleteButtonClick}>
+                        <DeleteIcon />
+                    </IconButton>
+                </Stack>
+            </div>
+        </header>
     );
 }
 
