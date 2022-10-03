@@ -23,6 +23,7 @@
 
 ::-webkit-scrollbar-track {
   background: var(--color-scrollbar-track-background);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {

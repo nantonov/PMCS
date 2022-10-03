@@ -8,7 +8,7 @@ import AddPetModal from './Pet/Modal/AddPetModal';
 
 const Pets = props => {
     const [isAddModalOpened, setAddModalOpen] = useState(false);
-    const { pets, editPet, deletePet } = props;
+    const { pets, editPet, deletePet, addPet } = props;
 
     let petsElements = props.pets.map(petItem =>
         <Pet key={petItem.id}
@@ -20,7 +20,7 @@ const Pets = props => {
 
     return (
         <section className={s.wrapper}>
-            {isAddModalOpened ? <AddPetModal setAddModalOpen = {setAddModalOpen}/> : null}
+            {isAddModalOpened ? <AddPetModal addPet={addPet} setAddModalOpen = {setAddModalOpen}/> : null}
             {content}
             <AddPetCell setAddModalOpen={setAddModalOpen}/>
         </section>

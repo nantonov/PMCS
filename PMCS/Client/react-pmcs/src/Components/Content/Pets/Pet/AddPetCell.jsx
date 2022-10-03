@@ -6,7 +6,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 const AddPetCell = props => {
     return (
         <article className={s.item}>
-            Add new pet
+            <span>Add new pet</span>
             <IconButton onClick={props.setAddModalOpen} className={s.button}>
                 <AddCircleIcon className={s.icon} />
             </IconButton>

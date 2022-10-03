@@ -1,9 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import s from './EditPetModal.module.css'
+import s from './AddPetModal.module.css'
 
 const AddPetModal = props => {
-    const {setAddModalOpen} = props;
     const [inputs, setInputs] = useState({});
+
+    const { setAddModalOpen } = props;
 
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {
@@ -28,14 +29,25 @@ const AddPetModal = props => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        props.addPet({
+            id: 10,
+            name: inputs.name,
+            weight: inputs.weight,
+            birthDate: inputs.birthDate,
+            info: inputs.info,
+            walkings: [],
+            vaccines: [],
+            meals: [],
+        });
         setAddModalOpen(false);
     }
 
     return (
-        <div className={s.modal}>
-            <form className={s.formBox} onSubmit={handleSubmit}>
-                <header>Add pet</header>
-                <label>Name:   
+        <div className={s.wrapper}>
+            <div className={s.modal}>
+                <form className={s.formBox} onSubmit={handleSubmit}>
+                    <header>Add pet</header>
+                    <label>Name   </label>
                     <input
                         type="text"
                         name="name"
@@ -43,17 +55,14 @@ const AddPetModal = props => {
                         value={inputs.name || ""}
                         onChange={handleChange}
                     />
-                </label>
-                <label>Info:   
-                    <textarea
+                    <label>Info</label>
+                    <textarea className={s.info}
                         type="text"
-                        name="name"
-                        required
+                        name="info"
                         value={inputs.info || ""}
                         onChange={handleChange}
-                    />
-                </label>
-                <label>Weight:
+                    ></textarea>
+                    <label>Weight</label>
                     <input
                         type="number"
                         step="0.1"
@@ -62,8 +71,7 @@ const AddPetModal = props => {
                         value={inputs.weight || ""}
                         onChange={handleChange}
                     />
-                </label>
-                <label>Birth Date:   
+                    <label>Birth Date</label>
                     <input
                         type="date"
                         name="birthDate"
@@ -72,9 +80,10 @@ const AddPetModal = props => {
                         max={Date.now()}
                         onChange={handleChange}
                     />
-                </label>
-                <button type="submit">Submit</button>
-            </form>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>);
 }
 

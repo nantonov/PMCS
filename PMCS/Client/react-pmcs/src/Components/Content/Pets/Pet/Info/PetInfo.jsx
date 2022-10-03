@@ -13,7 +13,7 @@ const PetInfo = (props) => {
                 Birth Date: {pet.birthDate}
             </div>
             <div className={s.weight}>
-                Weight: {pet.weight}
+                Weight: {pet.weight}kg
             </div>
         </div>
     </article>
