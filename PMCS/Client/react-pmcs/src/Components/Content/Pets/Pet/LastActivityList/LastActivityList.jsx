@@ -5,11 +5,15 @@ import Button from '@mui/material/Button';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 const LastActivityList = props => {
-    const { pet } = props;
+    const { pet, setInfoModalOpened } = props;
 
     let walkingElelement = pet.walkings.map(activityItem => <LastActivity date={activityItem.stared} key={activityItem.id} name={"Walking"} />);
     let mealElelement = pet.meals.map(activityItem => <LastActivity date={activityItem.dateTime} key={activityItem.id} name={"Meal"} />);
     let vaccineElelement = pet.vaccines.map(activityItem => <LastActivity date={activityItem.dateTime} key={activityItem.id} name={"Vaccine"} />);
+
+    let onShowInfoClick = () => {
+        setInfoModalOpened(true);
+    };
 
     return (
         <article className={s.wrapper}>
@@ -19,7 +23,7 @@ const LastActivityList = props => {
                 {mealElelement}
                 {vaccineElelement}
             </div>
-            <Button color='info' startIcon={<VisibilityOutlinedIcon />} className={s.showButton}>
+            <Button color='info' startIcon={<VisibilityOutlinedIcon />} className={s.showButton} onClick={onShowInfoClick}>
                 <span className={s.text}>Show all info</span>
             </Button>
         </article>

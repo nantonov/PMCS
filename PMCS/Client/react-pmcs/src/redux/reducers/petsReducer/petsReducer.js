@@ -13,7 +13,7 @@ let initialState = {
     },
     {
         id: 2,
-        name: "William", info: "Very funny pet.", birthDate: "12/05/2012", weight: "5.0kg",
+        name: "William", info: "Very funny pet.", birthDate: "12/05/2020", weight: "7.28kg",
         meals: [{ id: 1, title: "Yummy", description: "Very yummy food.", dateTime: "12.05.2012 21.58" }],
         vaccines: [{ id: 1, title: "Yummy", description: "Very yummy food.", dateTime: "12.05.2012 21.58" }],
         walkings: [{ id: 1, title: "Yummy", description: "Very yummy food.", stared: "12.05.2012 21.58", finished: "12.05.2012 22.17" }],
