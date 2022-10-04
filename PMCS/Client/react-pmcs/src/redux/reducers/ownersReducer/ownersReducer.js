@@ -1,5 +1,4 @@
 const EDIT_OWNER = 'EDIT-OWNER';
-const DELETE_OWNER = 'DELETE-OWNER';
 const SET_OWNER = 'SET-OWNER';
 const ADD_OWNER = 'ADD-OWNER';
 

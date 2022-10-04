@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './Header.module.css';
-import Profile from './Profile/Profile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaw } from '@fortawesome/free-solid-svg-icons'
 import NotificationsButton from './Notifications/NotificationsButton';
