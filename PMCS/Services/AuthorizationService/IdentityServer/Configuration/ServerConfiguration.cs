@@ -62,6 +62,25 @@ namespace IdentityServer.Configuration
                         "NotificationsAPI",
                         "ScheduleAPI"
                     }
+                },
+                new Client()
+                {
+                    ClientId = "react-client-id",
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+                    RequirePkce = true,
+                    ClientName = "React Client",
+                    AllowedCorsOrigins = {"http://localhost:3000"},
+                    RedirectUris = { "http://localhost:3000/pets" },
+                    PostLogoutRedirectUris = { "http://localhost:3000/pets" },
+                    AllowedGrantTypes =  GrantTypes.Code,
+                    AllowedScopes = {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "PetAPI",
+                        "ScheduleAPI"
+                    }
                 }
             };
     }
