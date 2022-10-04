@@ -1,0 +1,62 @@
+@import './../../../../Shared/Constants/Colors.scss';
+
+.modal {
+  z-index: 2;
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  display: grid;
+  grid-gap: 6.5px;
+  background-color: var(--color-modals-background-global);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
+  width: 30%;
+  height: 50%;
+
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-scrollbar-track-background);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb-background);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-thumb-hover-background);
+  cursor: pointer;
+}
+
+.wrapper .petName{
+  text-align: center;
+  font-size: 24px;
+  font-weight: bolder;
+  letter-spacing: 6px;
+}
+
+.itemWrapper {
+  display: grid;
+  grid-gap: 10px;
+  border-radius: 15px;
+  padding: 5px;
+  margin:3px;
+  background-color: var( --color-activity-element);
+}
+
+.itemWrapper:hover {
+  background-color: var(--color-activity-element-hover);
+}
+
+
+.itemWrapper .title {
+  font-size: 26px;
+}

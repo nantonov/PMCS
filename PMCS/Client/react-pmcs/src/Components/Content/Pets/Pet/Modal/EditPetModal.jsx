@@ -15,7 +15,7 @@ const EditPetModal = props => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        editPet({ name: inputs.name, weight: inputs.weight + 'kg', id: pet.id });
+        editPet({ name: inputs.name, weight: inputs.weight, id: pet.id });
         setEditModalOpen(false);
     }
 
