@@ -18,7 +18,6 @@ const ProfileInfo = props => {
         setIsEdit(true);
     };
 
-    debugger;
     const deactivateEditMode = () => {
         setIsEdit(false);
 
