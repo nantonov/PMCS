@@ -15,12 +15,6 @@ const ownersReducer = (state = initialState, action) => {
                 owner: { ...state.owner, fullName: action.owner.fullName }
             };
         }
-        case DELETE_OWNER: {
-            return {
-                ...state,
-                owner: null
-            };
-        }
         case ADD_OWNER:
         case SET_OWNER: {
             return {
@@ -33,9 +27,8 @@ const ownersReducer = (state = initialState, action) => {
     }
 }
 
-export const editOwnerActionCreator = (owner) => ({ type: EDIT_OWNER, owner: owner });
-export const deleteOwnerActionCreator = (id) => ({ type: DELETE_OWNER, id: id });
-export const setOwnerActionCreator = (owner) => ({ type: SET_OWNER, owner: owner });
-export const addOwnerActionCreator = (owner) => ({ type: ADD_OWNER, owner: owner });
+export const editOwner = (owner) => ({ type: EDIT_OWNER, owner: owner });
+export const setOwner = (owner) => ({ type: SET_OWNER, owner: owner });
+export const addOwner = (owner) => ({ type: ADD_OWNER, owner: owner });
 
 export default ownersReducer;
