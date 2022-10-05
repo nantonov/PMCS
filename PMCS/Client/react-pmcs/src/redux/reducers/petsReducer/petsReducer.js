@@ -61,9 +61,9 @@ const petsReducer = (state = initialState, action) => {
     }
 }
 
-export const editPetActionCreator = (pet) => ({ type: EDIT_PET, pet: pet });
-export const deletePetActionCreator = (id) => ({ type: DELETE_PET, id: id });
-export const setPetsActionCreator = (pets) => ({ type: SET_PETS, pets: pets });
-export const addPetActionCreator = (pet) => ({ type: ADD_PET, pet: pet });
+export const editPet = (pet) => ({ type: EDIT_PET, pet: pet });
+export const deletePet = (id) => ({ type: DELETE_PET, id: id });
+export const setPets = (pets) => ({ type: SET_PETS, pets: pets });
+export const addPet = (pet) => ({ type: ADD_PET, pet: pet });
 
 export default petsReducer;

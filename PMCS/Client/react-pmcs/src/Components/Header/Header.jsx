@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './Header.module.css';
-import Profile from './Profile/Profile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaw } from '@fortawesome/free-solid-svg-icons'
 import NotificationsButton from './Notifications/NotificationsButton';
+import ProfileContainer from './Profile/ProfileContainer';
 
 const Header = () => {
     return (
@@ -18,7 +18,7 @@ const Header = () => {
                 <NotificationsButton/>
             </div>
             <div className={s.profile}>
-                <Profile/>
+                <ProfileContainer/>
             </div>
         </header>
     );
