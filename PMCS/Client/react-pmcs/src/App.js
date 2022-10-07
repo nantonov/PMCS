@@ -5,10 +5,12 @@ import PetsContainer from './Components/Content/Pets/PetsContainer';
 import Activities from './Components/Content/Activities/Activities';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import Callback from './Components/Auth/Callback';
+import Refresh from './Components/Auth/Refresh';
+import Logout from './Components/Auth/Logout';
 
 const App = (props) => {
   return (
-
     <div className='app-wrapper'>
       <Header />
       <Nav />
@@ -17,6 +19,9 @@ const App = (props) => {
           <Route path='/pets/*' element={<PetsContainer />}></Route>
           <Route path='/activities/*' element={<Activities />}></Route>
           <Route path='/reminders/*' element={<Reminders />}></Route>
+          <Route path='/callback' element={<Callback />}></Route>
+          <Route path='/refresh' element={<Refresh />}></Route>
+          <Route path='/logout' element={<Logout />}></Route>
         </Routes>
       </main>
     </div>

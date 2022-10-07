@@ -1,0 +1,14 @@
+import React from 'react';
+import { Navigate } from "react-router-dom";
+import authService from "../../Services/authService";
+
+const Refresh = () => {
+    authService.signInSilentCallback();
+    return (
+        <div>
+            <Navigate to="/pets" replace={true} />
+        </div>
+    );
+}
+
+export default Refresh;

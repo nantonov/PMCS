@@ -71,8 +71,8 @@ namespace IdentityServer.Configuration
                     RequirePkce = true,
                     ClientName = "React Client",
                     AllowedCorsOrigins = {"http://localhost:3000"},
-                    RedirectUris = { "http://localhost:3000/pets" },
-                    PostLogoutRedirectUris = { "http://localhost:3000/pets" },
+                    RedirectUris = { "http://localhost:3000/callback", "http://localhost:3000/refresh" },
+                    PostLogoutRedirectUris = { "http://localhost:3000/logout" },
                     AllowedGrantTypes =  GrantTypes.Code,
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,

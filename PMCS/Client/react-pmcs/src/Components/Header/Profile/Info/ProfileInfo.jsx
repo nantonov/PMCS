@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 const ProfileInfo = props => {
 
-    const { owner, editOwner } = props;
+    const { owner, editOwner} = props;
 
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState(owner.fullName);
