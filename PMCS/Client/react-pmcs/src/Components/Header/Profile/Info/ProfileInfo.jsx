@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import s from './ProfileInfo.module.css';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import authService, { useUser } from '../../../../Services/authService';
 import { Button } from '@mui/material';
+import { useAuthContext } from '../../../Auth/AuthProvider';
 
 const ProfileInfo = props => {
 
@@ -12,7 +13,7 @@ const ProfileInfo = props => {
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState(owner.fullName);
 
-    const [user, isAuth] = useUser();
+    const { user, isAuth } = useAuthContext();
 
     useEffect(() => {
         setName(owner.fullName);
@@ -36,11 +37,15 @@ const ProfileInfo = props => {
     return (<div className={s.wrapper}>
         {!isEdit &&
             <div className={s.info}>
-                <span className={s.name}>{owner.fullName}
+                {user && <span className={s.name}>
+                    {owner.fullName}
                     <IconButton onClick={activateEditMode}>
                         <EditIcon fontSize='small' />
                     </IconButton>
-                </span>
+                </span>}
+                {user === null && <span className={s.guest}>
+                    Hey, Guest!
+                </span>}
                 <div className={s.buttons}>
                     {isAuth && <Button onClick={async () => await authService.signOut()}>Logout </Button>}
                     {!isAuth && <Button onClick={async () => await authService.signIn()}>Login</Button>}

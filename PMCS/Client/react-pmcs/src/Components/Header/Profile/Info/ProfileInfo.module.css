@@ -21,6 +21,10 @@
     margin-left: 4px;
 }
 
+.wrapper .info .guest {
+    padding: 5px;
+}
+
 .wrapper .info input {
     border: 0;
     outline: 0;

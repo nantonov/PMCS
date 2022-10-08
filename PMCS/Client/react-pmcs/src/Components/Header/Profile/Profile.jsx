@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState } from 'react';
 import s from './Profile.module.css';
 import Button from '@mui/material/Button';
 import Face5Icon from '@mui/icons-material/Face5';

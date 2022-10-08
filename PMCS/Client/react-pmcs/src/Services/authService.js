@@ -17,7 +17,7 @@ export const useUser = () => {
 
     }, []);
 
-    return [user, isAuth];
+    return {user, isAuth};
 };
 
 const authService = {
