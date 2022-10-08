@@ -1,20 +1,23 @@
 import { UserManager } from 'oidc-client';
 import authConfig from '../configuration/authConfig';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 const signInManager = new UserManager(authConfig);
 
 export const useUser = () => {
     const [user, setUser] = useState(null);
+    const [isAuth, setAuth] = useState(false);
+
+    const getUser = useMemo(async () => await signInManager.getUser());
 
     useEffect(() => {
-        signInManager.getUser().then(user => {
+        getUser.then(user => {
             setUser(user);
-            console.log('set user');
+            setAuth(user !== null);
         });
-    }, [user]);
+    }, []);
 
-    return { user };
+    return [user, isAuth];
 };
 
 const authService = {
@@ -36,25 +39,13 @@ const authService = {
     },
     signInSilentCallback: async () => {
         await signInManager.signinSilentCallback();
-    },
-    isAuthenticated: async () => {
-        return await signInManager.getUser() !== null;
     }
 }
-
-signInManager.events.addUserSignedOut(function () {
-    console.log('user signed out');
-});
-
-signInManager.events.addUserSignedIn(function () {
-    console.log('user signed in');
-});
 
 signInManager.events.addAccessTokenExpired(async function () {
     console.log('access token expired');
     await signInManager.signinSilent();
 });
-
 
 export default authService;
 
