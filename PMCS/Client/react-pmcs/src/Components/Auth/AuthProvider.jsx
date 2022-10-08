@@ -1,11 +1,11 @@
-import {createContext, useContext} from 'react'
+import { createContext, useContext } from 'react'
 import { useUser } from '../../Services/authService'
 
 const AuthContext = createContext()
 
 const useAuthContext = () => useContext(AuthContext)
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
     const auth = useUser()
 
@@ -14,4 +14,4 @@ const AuthProvider = ({children}) => {
     </AuthContext.Provider>
 }
 
-export { useAuthContext, AuthProvider}
+export { useAuthContext, AuthProvider }

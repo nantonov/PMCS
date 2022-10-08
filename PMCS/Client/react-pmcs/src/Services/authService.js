@@ -13,10 +13,9 @@ export const useUser = () => {
             setUser(user);
             setAuth(user !== null);
         });
-
     }, []);
 
-    return {user, isAuth};
+    return { user, isAuth };
 };
 
 const authService = {

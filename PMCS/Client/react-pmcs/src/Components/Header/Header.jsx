@@ -9,16 +9,16 @@ const Header = () => {
     return (
         <header className={s.header}>
             <div className={s.icon}>
-            <FontAwesomeIcon icon={faPaw} />
+                <FontAwesomeIcon icon={faPaw} />
             </div>
             <div className={s.title}>
                 Pets Monitoring and Control System
             </div>
             <div className={s.notifications}>
-                <NotificationsButton/>
+                <NotificationsButton />
             </div>
             <div className={s.profile}>
-                <ProfileContainer/>
+                <ProfileContainer />
             </div>
         </header>
     );
