@@ -10,9 +10,8 @@ export const useUser = () => {
 
     useEffect(() => {
         authService.getUser().then(user => {
-            console.log('loaded');
-            setUser(u=> u = user);
-            setAuth(isAuth => isAuth = user !== null);
+            setUser(user);
+            setAuth(user !== null);
         });
 
     }, []);

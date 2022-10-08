@@ -5,13 +5,11 @@ import { useAuthContext } from "./AuthProvider";
 const withAuthRedirect = Component => ({ ...props }) => {
     const { isAuth } = useAuthContext();
 
-    if (!isAuth) return (
-        <div>
-            <Navigate to="/" />
-        </div>
-    );
     return (
-        <Component {...props} />
+        <div>
+            {!isAuth && <Navigate to='/' />}
+            {<Component {...props} />}
+        </div>
     );
 }
 
