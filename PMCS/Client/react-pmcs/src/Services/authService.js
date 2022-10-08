@@ -1,6 +1,6 @@
 import { UserManager } from 'oidc-client';
 import authConfig from '../configuration/authConfig';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 const signInManager = new UserManager(authConfig);
 
@@ -8,13 +8,13 @@ export const useUser = () => {
     const [user, setUser] = useState(null);
     const [isAuth, setAuth] = useState(false);
 
-    const getUser = useMemo(async () => await signInManager.getUser());
-
     useEffect(() => {
-        getUser.then(user => {
-            setUser(user);
-            setAuth(user !== null);
+        authService.getUser().then(user => {
+            console.log('loaded');
+            setUser(u=> u = user);
+            setAuth(isAuth => isAuth = user !== null);
         });
+
     }, []);
 
     return [user, isAuth];
