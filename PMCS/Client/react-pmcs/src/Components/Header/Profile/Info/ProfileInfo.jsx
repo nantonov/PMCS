@@ -1,18 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import s from './ProfileInfo.module.css';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import authService from '../../../../Services/authService';
+import { Button } from '@mui/material';
 
 const ProfileInfo = props => {
 
-    const { owner, editOwner} = props;
+    const { owner, editOwner } = props;
 
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState(owner.fullName);
 
+    const [isAuth, setAuth] = useState(false);
+    const isAuthenticated = useMemo(async () => await authService.isAuthenticated(),[isAuth]);
+
+    useEffect(() => {
+        isAuthenticated.then((result) => {
+            setAuth(result);
+        })
+    }, [authService.isAuthenticated]);
+
     useEffect(() => {
         setName(owner.fullName);
-    },[owner.fullName]);
+    }, [owner.fullName]);
 
     const activateEditMode = () => {
         setIsEdit(true);
@@ -29,13 +40,18 @@ const ProfileInfo = props => {
         setName(e.currentTarget.value);
     }
 
-    return (<div>
+    return (<div className={s.wrapper}>
         {!isEdit &&
             <div className={s.info}>
-                <span>{owner.fullName}</span>
+                <span className={s.name}>{owner.fullName}
                 <IconButton onClick={activateEditMode}>
-                        <EditIcon fontSize='small' />
+                    <EditIcon fontSize='small' />
                 </IconButton>
+                </span>
+                <div className={s.buttons}>
+                    {isAuth && <Button onClick={async () => await authService.signOut()}>Logout</Button>}
+                    {!isAuth && <Button onClick={async () => await authService.signIn()}>Login</Button>}
+                </div>
             </div>
         }
         {isEdit &&
