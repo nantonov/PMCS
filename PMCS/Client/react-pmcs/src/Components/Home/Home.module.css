@@ -1,0 +1,10 @@
+.wrapper{
+    width:100%;
+    letter-spacing: 2px;
+    margin-left:2px;
+}
+
+.wrapper .text{
+    font-size: 1.2rem;
+    font-weight: 500;
+}

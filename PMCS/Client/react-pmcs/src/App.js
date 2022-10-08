@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import Callback from './Components/Auth/Callback';
 import Refresh from './Components/Auth/Refresh';
 import Logout from './Components/Auth/Logout';
+import Home from './Components/Home/Home';
 
 const App = (props) => {
   return (
@@ -22,6 +23,7 @@ const App = (props) => {
           <Route path='/callback' element={<Callback />}></Route>
           <Route path='/refresh' element={<Refresh />}></Route>
           <Route path='/logout' element={<Logout />}></Route>
+          <Route path='/' element={<Home />}></Route>
         </Routes>
       </main>
     </div>
