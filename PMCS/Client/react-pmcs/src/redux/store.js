@@ -1,4 +1,4 @@
-import petsReducer from "./reducers/petsReducer/petsReducer";
+import petsReducer from "./reducers/petsReducer";
 
 let store = {
     _state: {

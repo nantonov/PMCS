@@ -1,6 +1,6 @@
 import { combineReducers, legacy_createStore as createStore } from 'redux';
-import ownersReducer from './reducers/ownersReducer/ownersReducer';
-import petsReducer from "./reducers/petsReducer/petsReducer";
+import ownersReducer from './reducers/ownersReducer';
+import petsReducer from "./reducers/petsReducer";
 
 let reducersBatch = combineReducers({
     petsPage: petsReducer,

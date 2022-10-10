@@ -4,29 +4,33 @@
     grid-area: header;
     background-color: var(--color-header-background);
     display: grid;
-    grid-template-areas: 
-   "icon title notifications profile";
-   grid-template-columns: 1fr 12fr 1fr 2fr;
-   padding: 10px;
+    grid-template-areas:
+        "icon title notifications profile";
+    grid-template-columns: 1fr 12fr 1fr 2fr;
+    padding: 10px;
 }
-.header .title{
-    color:var(--color-text-global);
+
+.header .title {
+    color: var(--color-text-global);
     letter-spacing: 3px;
     grid-area: title;
-    font-size:larger;
+    font-size: larger;
 }
-.header .icon{
+
+.header .icon {
     grid-area: icon;
     color: var(--color-icons-global);
     font-size: 40px;
     padding-left: 10px;
 }
-.header .notifications{
+
+.header .notifications {
     grid-area: notifications;
     color: var(--color-text-global);
 }
+
 .header .profile {
     grid-area: profile;
-    top:50%;
-    margin:0px;
+    top: 50%;
+    margin: 0px;
 }

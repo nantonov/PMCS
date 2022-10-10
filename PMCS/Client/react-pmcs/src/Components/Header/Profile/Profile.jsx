@@ -5,7 +5,6 @@ import Face5Icon from '@mui/icons-material/Face5';
 import ProfileInfo from './Info/ProfileInfo';
 
 const Profile = props => {
-
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     let toggleProfileSign = isProfileOpen ? String.fromCharCode(9650) : String.fromCharCode(9660);
