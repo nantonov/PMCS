@@ -35,9 +35,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
+        "Period": "3s",
         "PeriodTimespan": 1,
-        "Limit": 2
+        "Limit": 15
       },
       "FileCacheOptions": { "TtlSeconds": 15 },
       "SwaggerKey": "schedule"
@@ -60,9 +60,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
+        "Period": "3s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 15
       },
       "SwaggerKey": "schedule"
     },
@@ -84,9 +84,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
+        "Period": "3s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 15
       },
       "SwaggerKey": "schedule"
     },
@@ -108,9 +108,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
+        "Period": "3s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 15
       },
       "FileCacheOptions": { "TtlSeconds": 15 },
       "SwaggerKey": "pet"
@@ -133,9 +133,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
+        "Period": "3s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 15
       },
       "SwaggerKey": "pet"
     },
@@ -157,9 +157,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
+        "Period": "3s",
         "PeriodTimespan": 1,
-        "Limit": 2
+        "Limit": 15
       },
       "SwaggerKey": "pet"
     }

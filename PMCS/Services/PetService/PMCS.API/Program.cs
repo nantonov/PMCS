@@ -95,7 +95,6 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 
 app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseCors("DefaultPolicy");
 
 if (app.Environment.IsDevelopment())
 {
@@ -113,6 +112,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors("DefaultPolicy");
 
 app.MapControllers();
 
