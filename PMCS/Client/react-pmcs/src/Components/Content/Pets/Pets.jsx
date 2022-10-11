@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Pets.module.css';
 import Pet from './Pet/Pet';
 import NoContent from './NoContent';
 import AddPetCell from './Pet/AddPetCell';
 import AddPetModal from './Pet/Modal/AddPetModal';
 
-
 const Pets = props => {
     const [isAddModalOpened, setAddModalOpen] = useState(false);
-    const { pets, editPet, deletePet, addPet } = props;
+    const { pets, editPet, deletePet, createPet, fetchPets } = props;
+
+    useEffect(() => {
+        fetchPets();
+    },[]);
 
     let petsElements = props.pets.map(petItem =>
         <Pet key={petItem.id}
@@ -20,7 +23,7 @@ const Pets = props => {
 
     return (
         <section className={s.wrapper}>
-            {isAddModalOpened ? <AddPetModal addPet={addPet} setAddModalOpen = {setAddModalOpen}/> : null}
+            {isAddModalOpened ? <AddPetModal addPet={createPet} setAddModalOpen = {setAddModalOpen}/> : null}
             {content}
             <AddPetCell setAddModalOpen={setAddModalOpen}/>
         </section>
