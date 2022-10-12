@@ -8,16 +8,17 @@ import { useAuthContext } from '../../../Auth/AuthProvider';
 
 const ProfileInfo = props => {
 
-    const { owner, editOwner } = props;
+    const { owner, editOwner, createOwner } = props;
 
     const [isEdit, setIsEdit] = useState(false);
-    const [name, setName] = useState(owner.fullName);
+    const [name, setName] = useState('');
 
     const { isAuth } = useAuthContext();
 
     useEffect(() => {
+        if (!owner) createOwner();
         setName(owner.fullName);
-    }, [owner.fullName]);
+    }, [owner]);
 
     const activateEditMode = () => {
         setIsEdit(true);
@@ -37,7 +38,7 @@ const ProfileInfo = props => {
     return (<div className={s.wrapper}>
         {!isEdit &&
             <div className={s.info}>
-                {isAuth && <span className={s.name}>
+                {isAuth && owner && <span className={s.name}>
                     {owner.fullName}
                     <IconButton onClick={activateEditMode}>
                         <EditIcon fontSize='small' />

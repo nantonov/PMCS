@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Face5Icon from '@mui/icons-material/Face5';
 import ProfileInfo from './Info/ProfileInfo';
 
-const Profile = ({fetchOwner, editOwner, owner}) => {
+const Profile = ({fetchOwner, createOwner, editOwner, owner}) => {
     
     useEffect(() => {
         fetchOwner();
@@ -19,7 +19,8 @@ const Profile = ({fetchOwner, editOwner, owner}) => {
                 <span className={s.text}>Profile {toggleProfileSign}</span>
             </Button>
             {isProfileOpen ? <ProfileInfo owner={owner}
-                editOwner={editOwner} /> : null}
+                editOwner={editOwner}
+                createOwner={createOwner} /> : null}
         </div>
     );
 }

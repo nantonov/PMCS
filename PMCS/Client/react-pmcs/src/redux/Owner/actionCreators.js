@@ -5,7 +5,6 @@ import { setOwner } from "./actions";
 export const fetchOwner = () => {
     return async (dispatch) => {
         const owner = await ownerService.getByUserId();
-        if(!owner) dispatch(createOwner());
         dispatch(setOwner(owner));
     };
 };
