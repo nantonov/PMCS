@@ -5,17 +5,20 @@ const ownerService = {
     getByUserId: async() => {
         const userId = await authService.getUser().then((user) => user.profile.sub);
         const result = await axiosInstance.get(`api/Owner/userId/${userId}`).
-        then((response) => response.data);
+        then((response) => response.data).
+        catch((error) => {
+            console.log(error);
+            if(error.response.status === 404) return null;
+        });
 
         return result;
     },
-    create: async(owner) => {
-        const request = {fullName:owner.fullName};
+    create: async(request) => {
         const result = await axiosInstance.post('api/owner', {...request}).
         then((response) => response.data).
         catch((error) => {
-            if(error.response.status === 400) return null;
             console.log(error);
+            if(error.response.status === 400) return {fullName: 'Default Name'};
         });
 
         return result;

@@ -116,6 +116,23 @@
       "SwaggerKey": "pet"
     },
     {
+      "DownstreamPathTemplate": "/api/{controller}/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7104
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{controller}/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "pet"
+    },
+    {
       "DownstreamPathTemplate": "/api/{controller}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [

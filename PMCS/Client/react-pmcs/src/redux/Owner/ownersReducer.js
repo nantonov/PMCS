@@ -8,8 +8,7 @@ const ownersReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_OWNER: {
             return {
-                ...state,
-                owner: action.owner
+                ...state, owner: action.owner
             };
         }
         default:
