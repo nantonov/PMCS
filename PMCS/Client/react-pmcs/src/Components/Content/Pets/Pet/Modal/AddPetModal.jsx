@@ -4,7 +4,7 @@ import s from './AddPetModal.module.css'
 const AddPetModal = props => {
     const [inputs, setInputs] = useState({});
 
-    const { setAddModalOpen } = props;
+    const { setAddModalOpen, addPet } = props;
 
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {
@@ -29,15 +29,11 @@ const AddPetModal = props => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        props.addPet({
-            id: 10,
+        addPet({
             name: inputs.name,
             weight: inputs.weight,
             birthDate: inputs.birthDate,
             info: inputs.info,
-            walkings: [],
-            vaccines: [],
-            meals: [],
         });
         setAddModalOpen(false);
     }
@@ -80,7 +76,6 @@ const AddPetModal = props => {
                         max={Date.now()}
                         onChange={handleChange}
                     />
-
                     <button type="submit">Submit</button>
                 </form>
             </div>

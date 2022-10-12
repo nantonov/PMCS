@@ -1,5 +1,5 @@
 import { axiosInstance } from '../utils/axiosInstance';
-import authService from '../Services/authService';
+import { createRequestForPetsService } from '../utils/createRequestForPetsService';
 
 const petsService = {
     getAll: async() => {
@@ -15,14 +15,7 @@ const petsService = {
         return result;
     },
     create: async (pet) => {
-        const ownerId = await authService.getUser().then((user) => user.profile.sub);
-        const request = {
-            name: pet.name,
-            info: pet.info,
-            birthDate: pet.birthDate,
-            weight: pet.weight,
-            ownerId: 9
-        };
+       const request = await createRequestForPetsService(pet);
 
         const result = await axiosInstance.post('api/pet/', {...request}).
         then((response) => response.data).
@@ -31,7 +24,9 @@ const petsService = {
         return result;
     },
     update: async (pet) => {
-        const result = await axiosInstance.put(`api/pet/${pet.id}`, {...pet}).
+        const request = await createRequestForPetsService(pet);
+
+        const result = await axiosInstance.put(`api/pet/${pet.id}`, {...request}).
         then((response) => response.data).
         catch((error) => console.log(error));
 

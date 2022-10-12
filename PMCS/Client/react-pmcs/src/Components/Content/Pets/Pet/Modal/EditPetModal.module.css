@@ -47,6 +47,13 @@
   border: none;
 }
 
+.formBox .info {
+  resize: none;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
 
 .formBox button:hover {
   cursor: pointer;
