@@ -6,19 +6,16 @@ import authService, { useUser } from '../../../../Services/authService';
 import { Button } from '@mui/material';
 import { useAuthContext } from '../../../Auth/AuthProvider';
 
-const ProfileInfo = props => {
+const ProfileInfo = ({ owner, editOwner, createOwner }) => {
 
-    const { owner, editOwner, createOwner } = props;
-
-    const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState('');
 
-    const { isAuth } = useAuthContext();
-
     useEffect(() => {
-        if (!owner) createOwner();
-        setName(owner.fullName);
+        owner === null ? createOwner() : setName(owner.fullName);
     }, [owner]);
+
+    const [isEdit, setIsEdit] = useState(false);
+    const { isAuth } = useAuthContext();
 
     const activateEditMode = () => {
         setIsEdit(true);
