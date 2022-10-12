@@ -1,0 +1,33 @@
+import { axiosInstance } from '../utils/axiosInstance';
+import authService from '../Services/authService';
+
+const ownerService = {
+    getByUserId: async() => {
+        const userId = await authService.getUser().then((user) => user.profile.sub);
+        const result = await axiosInstance.get(`api/Owner/userId/${userId}`).
+        then((response) => response.data);
+
+        return result;
+    },
+    create: async(owner) => {
+        const request = {fullName:owner.fullName};
+        const result = await axiosInstance.post('api/owner', {...request}).
+        then((response) => response.data).
+        catch((error) => {
+            if(error.response.status === 400) return null;
+            console.log(error);
+        });
+
+        return result;
+    },
+    update: async(owner) => {
+        const request = {fullName:owner.fullName};
+        const result = await axiosInstance.put(`api/owner/${owner.id}`, {...request}).
+        then((response) => response.data).
+        catch((error) => console.log(error));
+
+        return result;
+    }
+};
+
+export default ownerService;

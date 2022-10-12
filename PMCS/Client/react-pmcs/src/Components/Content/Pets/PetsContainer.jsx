@@ -13,8 +13,6 @@ const PetsContainer = (props) => {
         fetchPets();
     }, []);
 
-    console.log('PetsContainer pets', pets);
-
     let petsElements = pets.map(petItem =>
         <Pet key={petItem.id}
             pet={petItem}
@@ -31,11 +29,8 @@ const PetsContainer = (props) => {
 }
 
 function mapStateToProps(state) {
-    console.log('PetsContainer mapStateToProps', state);
     return { pets: state.petsPage.pets }
 }
-
-//export default connect(mapStateToProps, {deletePet, editPet, fetchPets, createPet})(PetsContainer);
 
 export default compose(
     connect(mapStateToProps, { deletePet, editPet, fetchPets, createPet }),

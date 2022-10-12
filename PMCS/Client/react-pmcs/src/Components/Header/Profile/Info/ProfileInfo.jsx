@@ -13,7 +13,7 @@ const ProfileInfo = props => {
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState(owner.fullName);
 
-    const { user, isAuth } = useAuthContext();
+    const { isAuth } = useAuthContext();
 
     useEffect(() => {
         setName(owner.fullName);
@@ -37,13 +37,13 @@ const ProfileInfo = props => {
     return (<div className={s.wrapper}>
         {!isEdit &&
             <div className={s.info}>
-                {user && <span className={s.name}>
+                {isAuth && <span className={s.name}>
                     {owner.fullName}
                     <IconButton onClick={activateEditMode}>
                         <EditIcon fontSize='small' />
                     </IconButton>
                 </span>}
-                {user === null && <span className={s.guest}>
+                {!isAuth && <span className={s.guest}>
                     Hey, Guest!
                 </span>}
                 <div className={s.buttons}>

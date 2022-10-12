@@ -1,5 +1,5 @@
 import { combineReducers, applyMiddleware, legacy_createStore as createStore } from 'redux';
-import ownersReducer from './reducers/ownersReducer';
+import ownersReducer from './Owner/ownersReducer';
 import petsReducer from "./Pets/petsReducer";
 import thunkMiddleware from 'redux-thunk';
 
