@@ -2,8 +2,8 @@ import { axiosInstance } from '../utils/axiosInstance';
 import { createRequestForPetsService } from '../utils/createRequestForPetsService';
 
 const petsService = {
-    getAll: async() => {
-        const result = await axiosInstance.get(`api/Pet`).
+    getAll: async(ownerId) => {
+        const result = await axiosInstance.get(`api/Pet/ownerId/${ownerId}`).
         then((response) => response.data);
 
         return result;

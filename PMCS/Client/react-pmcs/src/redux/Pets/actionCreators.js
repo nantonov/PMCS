@@ -1,9 +1,11 @@
+import ownerService from "../../Services/ownerService";
 import petsService from "../../Services/petsService";
 import { setPets } from "./actions";
 
 export const fetchPets = () => {
-    return async (dispatch) => {
-        const pets = await petsService.getAll();
+    return async (dispatch) =>{
+        const ownerId = await ownerService.getByUserId().then((owner) => owner.id);
+        const pets = await petsService.getAll(ownerId);
         dispatch(setPets(pets));
     };
 };

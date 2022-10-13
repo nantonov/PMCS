@@ -44,6 +44,14 @@ namespace PMCS.API.Controllers
             return _mapper.Map<PetViewModel>(model);
         }
 
+        [HttpGet("ownerId/{ownerId}")]
+        public async Task<IEnumerable<PetViewModel>> GetByOwnerId(int ownerId, CancellationToken cancellationToken)
+        {
+            var model = await _petService.GetByOwnerId(ownerId, cancellationToken);
+
+            return _mapper.Map<IEnumerable<PetViewModel>>(model);
+        }
+
         [HttpPost]
         public async Task<PetViewModel> Add([FromBody] PostPetViewModel viewModel, CancellationToken cancellationToken)
         {
