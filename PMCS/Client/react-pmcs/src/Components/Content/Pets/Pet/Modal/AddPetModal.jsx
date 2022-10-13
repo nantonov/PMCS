@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import s from './AddPetModal.module.css'
+import s from './PetModal.module.css'
 
 const AddPetModal = props => {
     const [inputs, setInputs] = useState({});
@@ -63,6 +63,7 @@ const AddPetModal = props => {
                         type="number"
                         step="0.1"
                         name="weight"
+                        min="0.1"
                         required
                         value={inputs.weight || ""}
                         onChange={handleChange}

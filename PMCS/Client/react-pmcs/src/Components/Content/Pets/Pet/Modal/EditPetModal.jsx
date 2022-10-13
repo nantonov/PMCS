@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import s from './EditPetModal.module.css'
+import s from './PetModal.module.css'
 
 const EditPetModal = props => {
 
     const { pet, setEditModalOpen, editPet } = props;
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({name: pet.name, weight: pet.weight, info: pet.info, id: pet.id, birthDate: pet.birthDate});
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -27,34 +27,31 @@ const EditPetModal = props => {
         <div className={s.modal}>
             <form className={s.formBox} onSubmit={handleSubmit}>
                 <header>Edit pet</header>
-                <label>Name:
+                <label>Name</label>
                     <input
                         type="text"
                         name="name"
                         required
-                        value={inputs.name || pet.name}
+                        value={inputs.name}
                         onChange={handleChange}
-                        placeholder={pet.name}
                     />
-                </label>
                 <label>Info</label>
                 <textarea className={s.info}
                     type="text"
                     name="info"
-                    value={inputs.info || pet.info}
+                    value={inputs.info}
                     onChange={handleChange}
                 ></textarea>
-                <label>Weight:
+                <label>Weight</label>
                     <input
+                        min="0.1"
                         type="number"
                         step="0.1"
                         name="weight"
+                        value={inputs.weight}
                         required
-                        value={inputs.weight || pet.weight}
                         onChange={handleChange}
-                        placeholder={pet.weight}
                     />
-                </label>
                 <button type="submit">Submit</button>
                 <button onClick={onCancelled}>Cancel</button>
             </form>

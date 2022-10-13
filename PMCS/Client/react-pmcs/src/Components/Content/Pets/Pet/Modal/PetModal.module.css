@@ -3,7 +3,7 @@
 .modal {
   z-index: 2;
   position: fixed;
-  padding: 50px;
+  padding: 40px;
   width: 30%;
   top: 50%;
   left: 50%;
@@ -15,7 +15,7 @@
   grid-gap: 6.5px;
   font-size: larger;
   background-color: var(--color-modals-background-global);
-  padding: 50px;
+  padding: 40px;
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
 }
@@ -23,7 +23,7 @@
 .formBox header {
   font-weight: bold;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.4em;
   opacity: 0.8;
 }
 
@@ -34,7 +34,7 @@
   margin-bottom: 10px;
   font-size: 1.3rem;
   line-height: 1.2;
-  padding: 10px 20px;
+  padding: 10px;
 }
 
 .formBox .info {
