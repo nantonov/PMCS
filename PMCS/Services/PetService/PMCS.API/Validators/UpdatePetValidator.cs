@@ -16,7 +16,7 @@ namespace PMCS.API.Validators
                 Matches(NameRegularExpression).
                 WithMessage(UpdatePetValidatorResources.IncorrectName);
             RuleFor(x => x.Info).
-                Length(MinInfoLength, MaxInfoLength).
+                MaximumLength(MaxInfoLength).
                 WithMessage(UpdatePetValidatorResources.IncorrectInfoLength);
             RuleFor(x => x.BirthDate)
                 .Must(IsAValidDate)
