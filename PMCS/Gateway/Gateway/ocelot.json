@@ -39,7 +39,6 @@
         "PeriodTimespan": 1,
         "Limit": 15
       },
-      "FileCacheOptions": { "TtlSeconds": 15 },
       "SwaggerKey": "schedule"
     },
     {
@@ -100,7 +99,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{controller}/{id}",
-      "UpstreamHttpMethod": [ "DELETE", "GET" ],
+      "UpstreamHttpMethod": [ "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
         "AllowedScopes": []
@@ -112,7 +111,6 @@
         "PeriodTimespan": 1,
         "Limit": 15
       },
-      "FileCacheOptions": { "TtlSeconds": 15 },
       "SwaggerKey": "pet"
     },
     {
@@ -125,7 +123,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{controller}/{id}",
-      "UpstreamHttpMethod": [ "PUT" ],
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
         "AllowedScopes": []
