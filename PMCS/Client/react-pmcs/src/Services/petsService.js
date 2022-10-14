@@ -1,17 +1,20 @@
 import { axiosInstance } from '../utils/axiosInstance';
 import { createRequestForPetsService } from '../utils/createRequestForPetsService';
+import { setPetDatesToLocalFormattedDate, toLocalDate } from '../utils/dateFormatitng';
 
 const petsService = {
     getAll: async(ownerId) => {
-        const result = await axiosInstance.get(`api/Pet/ownerId/${ownerId}`).
+        const pets = await axiosInstance.get(`api/Pet/ownerId/${ownerId}`).
         then((response) => response.data);
 
+        const result = setPetDatesToLocalFormattedDate(pets);
         return result;
     },
     getById: async(petId) => {
-        const result = await axiosInstance.get(`api/pet/${petId}`).
+        const pets = await axiosInstance.get(`api/pet/${petId}`).
         then((response) => response.data);
 
+        const result = setPetDatesToLocalFormattedDate(pets);
         return result;
     },
     create: async (pet) => {

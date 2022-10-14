@@ -11,7 +11,7 @@ const PetsContainer = (props) => {
     const {deletePet, editPet, fetchPets, createPet, pets} = props;
     useEffect(() => {
         fetchPets();
-    }, []);
+    }, [pets]);
 
     let petsElements = pets.map(petItem =>
         <Pet key={petItem.id}
