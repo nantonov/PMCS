@@ -6,7 +6,7 @@ const Refresh = () => {
     authService.signInSilentCallback();
     return (
         <div>
-            <Navigate to="/pets" replace={true} />
+            <Navigate to="/" replace={true} />
         </div>
     );
 }

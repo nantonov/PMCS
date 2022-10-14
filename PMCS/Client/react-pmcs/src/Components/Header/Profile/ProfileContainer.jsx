@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { editOwner, setOwner, addOwner } from '../../../redux/reducers/ownersReducer';
+import {fetchOwner, editOwner, createOwner} from '../../../redux/Owner/actionCreators';
 
 function mapStateToProps(state) {
     return { owner: state.profile.owner }
 }
 
-const ProfileContainer = connect(mapStateToProps, { editOwner, addOwner, setOwner })(Profile);
+const ProfileContainer = connect(mapStateToProps, {fetchOwner, editOwner, createOwner})(Profile);
 
 export default ProfileContainer;

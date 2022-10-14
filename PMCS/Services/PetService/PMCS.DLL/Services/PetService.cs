@@ -12,12 +12,14 @@ namespace PMCS.DLL.Services
     {
         private readonly IOwnerService _ownerService;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IPetRepository _repository;
 
         public PetService(IPetRepository repository,
             IMapper mapper,
             IOwnerService ownerService,
             IHttpClientFactory httpClientFactory) : base(repository, mapper)
         {
+            _repository = repository;
             _ownerService = ownerService;
             _httpClientFactory = httpClientFactory;
         }
@@ -48,6 +50,13 @@ namespace PMCS.DLL.Services
             }
 
             return _mapper.Map<PetModel>(result);
+        }
+
+        public async Task<IEnumerable<PetModel>> GetByOwnerId(int ownerId, CancellationToken cancellationToken)
+        {
+            var result = await _repository.GetByOwnerId(ownerId, cancellationToken);
+
+            return _mapper.Map<IEnumerable<PetModel>>(result);
         }
     }
 }

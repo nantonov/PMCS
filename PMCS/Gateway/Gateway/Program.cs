@@ -28,6 +28,14 @@ builder.Services.AddAuthentication()
         };
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 builder.Services.AddSwaggerForOcelot(ocelotConfiguration);
 
 var app = builder.Build();
@@ -40,6 +48,8 @@ app.UseSwaggerForOcelotUI(opt =>
 app.UseRouting();
 
 app.UseAuthentication();
+
+app.UseCors("CorsPolicy");
 
 app.UseEndpoints(endpoints =>
 {

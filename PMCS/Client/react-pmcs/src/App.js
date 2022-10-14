@@ -1,7 +1,6 @@
 import Header from './Components/Header/Header'
 import Nav from './Components/Nav/Nav';
 import PetsContainer from './Components/Content/Pets/PetsContainer';
-import Activities from './Components/Content/Activities/Activities';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Callback from './Components/Auth/Callback';

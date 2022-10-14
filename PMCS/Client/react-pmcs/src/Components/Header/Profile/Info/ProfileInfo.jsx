@@ -6,18 +6,16 @@ import authService, { useUser } from '../../../../Services/authService';
 import { Button } from '@mui/material';
 import { useAuthContext } from '../../../Auth/AuthProvider';
 
-const ProfileInfo = props => {
+const ProfileInfo = ({ owner, editOwner, createOwner }) => {
 
-    const { owner, editOwner } = props;
-
-    const [isEdit, setIsEdit] = useState(false);
-    const [name, setName] = useState(owner.fullName);
-
-    const { user, isAuth } = useAuthContext();
+    const [name, setName] = useState('');
 
     useEffect(() => {
-        setName(owner.fullName);
-    }, [owner.fullName]);
+        owner === null ? createOwner() : setName(owner.fullName);
+    }, [owner]);
+
+    const [isEdit, setIsEdit] = useState(false);
+    const { isAuth } = useAuthContext();
 
     const activateEditMode = () => {
         setIsEdit(true);
@@ -37,13 +35,13 @@ const ProfileInfo = props => {
     return (<div className={s.wrapper}>
         {!isEdit &&
             <div className={s.info}>
-                {user && <span className={s.name}>
+                {isAuth && owner && <span className={s.name}>
                     {owner.fullName}
                     <IconButton onClick={activateEditMode}>
                         <EditIcon fontSize='small' />
                     </IconButton>
                 </span>}
-                {user === null && <span className={s.guest}>
+                {!isAuth && <span className={s.guest}>
                     Hey, Guest!
                 </span>}
                 <div className={s.buttons}>

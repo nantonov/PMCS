@@ -25,5 +25,16 @@ namespace PMCS.DAL.Repositories
                          Include(x => x.Owner).
                          FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
+
+        public async Task<IEnumerable<PetEntity>> GetByOwnerId(int ownerId, CancellationToken cancellationToken)
+        {
+            return await Query
+                .Where(x => x.OwnerId == ownerId)
+                .Include(x => x.Vaccines)
+                .Include(x => x.Walkings)
+                .Include(x => x.Meals)
+                .Include(x => x.Owner)
+                .ToListAsync(cancellationToken);
+        }
     }
 }

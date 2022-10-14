@@ -11,7 +11,7 @@ const Callback = () => {
     });
     return (
         <div>
-            <Navigate to="/pets" replace={true} />
+            <Navigate to="/" replace={true} />
         </div>
     );
 }

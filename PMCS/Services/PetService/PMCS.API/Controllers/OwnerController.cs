@@ -88,6 +88,8 @@ namespace PMCS.API.Controllers
 
             model.Id = id;
 
+            model.UserId = _identityService.GetUserId();
+
             var result = await _ownerService.Update(model, cancellationToken);
 
             return _mapper.Map<OwnerViewModel>(result);
