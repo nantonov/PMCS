@@ -1,16 +1,12 @@
 import React from 'react';
 import s from './LastActivity.module.css';
 
-const LastActivity = (props) => {
-    const { date, name } = props;
+const LastActivity = ({ activity }) => {
 
     return (
         <div className={s.item}>
-            <div className={s.name}>
-                {name}
-            </div>
             <div className={s.date}>
-                on {date}
+                on {activity.dateTime}
             </div>
         </div >
     );

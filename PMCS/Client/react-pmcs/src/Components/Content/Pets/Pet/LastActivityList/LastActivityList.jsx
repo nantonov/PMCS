@@ -7,9 +7,9 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 const LastActivityList = props => {
     const { pet, setInfoModalOpened } = props;
 
-    let walkingElelement = pet.walkings.map(activityItem => <LastActivity date={activityItem.stared} name={"Walking"} />);
-    let mealElelement = pet.meals.map(activityItem => <LastActivity date={activityItem.dateTime} name={"Meal"} />);
-    let vaccineElelement = pet.vaccines.map(activityItem => <LastActivity date={activityItem.dateTime} name={"Vaccine"} />);
+    let walkingElelement = pet.walkings.map(activityItem => <LastActivity activity={{dateTime:activityItem.dateTime}} />);
+    let mealElelement = pet.meals.map(activityItem => <LastActivity activity={{dateTime:activityItem.dateTime}} />);
+    let vaccineElelement = pet.vaccines.map(activityItem => <LastActivity activity={{dateTime:activityItem.dateTime}} />);
     
     let onShowInfoClick = () => {
         setInfoModalOpened(true);
@@ -19,8 +19,14 @@ const LastActivityList = props => {
         <article className={s.wrapper}>
             <div className={s.title}>Last activities</div>
             <div className={s.list}>
+                <div className={s.name}>Walkings</div>
+                {!walkingElelement[0] && <div className={s.noActivity}>No activity</div>}
                 {walkingElelement[0]}
+                <div className={s.name}>Meals</div>
+                {!mealElelement[0] && <div className={s.noActivity}>No activity</div>}
                 {mealElelement[0]}
+                <div className={s.name}>Vaccines</div>
+                {!vaccineElelement[0] && <div className={s.noActivity}>No activity</div>}
                 {vaccineElelement[0]}
             </div>
             <Button color='info' startIcon={<VisibilityOutlinedIcon />} className={s.showButton} onClick={onShowInfoClick}>
