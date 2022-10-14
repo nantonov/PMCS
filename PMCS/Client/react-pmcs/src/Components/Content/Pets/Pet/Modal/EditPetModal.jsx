@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import s from './PetModal.module.css'
+import s from './PetModal.module.css';
+import { toServerFormatDate } from '../../../../../utils/dateFormatitng';
 
 const EditPetModal = props => {
 
@@ -15,7 +16,7 @@ const EditPetModal = props => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        editPet({ name: inputs.name, weight: inputs.weight, id: pet.id, birthDate: pet.birthDate, info: inputs.info });
+        editPet({ name: inputs.name, weight: inputs.weight, id: pet.id, birthDate: toServerFormatDate(pet.birthDate), info: inputs.info });
         setEditModalOpen(false);
     }
 
