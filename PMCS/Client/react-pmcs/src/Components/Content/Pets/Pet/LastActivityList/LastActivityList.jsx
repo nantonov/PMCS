@@ -7,7 +7,7 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 const LastActivityList = props => {
     const { pet, setInfoModalOpened } = props;
 
-    let walkingElelement = pet.walkings.map(activityItem => <LastActivity activity={{dateTime:activityItem.dateTime}} />);
+    let walkingElelement = pet.walkings.map(activityItem => <LastActivity activity={{dateTime:activityItem.stared}} />);
     let mealElelement = pet.meals.map(activityItem => <LastActivity activity={{dateTime:activityItem.dateTime}} />);
     let vaccineElelement = pet.vaccines.map(activityItem => <LastActivity activity={{dateTime:activityItem.dateTime}} />);
     
