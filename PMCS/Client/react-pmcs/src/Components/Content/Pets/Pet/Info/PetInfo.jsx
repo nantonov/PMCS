@@ -6,6 +6,7 @@ const PetInfo = (props) => {
 
     return (<article className={s.wrapper}>
         <div className={s.info}>
+            {!pet.info && <div>No description provided.</div>}
             {pet.info}
         </div>
         <div className={s.numeralInfo}>
