@@ -1,16 +1,21 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import s from './PetModal.module.css'
+import s from '../PetModal.module.css'
 
-const AddPetModal = props => {
+const AddPetModal = ({ setAddModalOpen, addPet, errors }) => {
     const [inputs, setInputs] = useState({});
-
-    const { setAddModalOpen, addPet } = props;
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {
             setAddModalOpen(false);
         }
     });
+
+    useEffect(() => {
+        if (errors.length > 0) {
+            setIsSuccess(false);
+        }
+    }, [errors.length]);
 
     useEffect(() => {
         document.addEventListener("keydown", escFunction, false);
@@ -35,7 +40,9 @@ const AddPetModal = props => {
             birthDate: inputs.birthDate,
             info: inputs.info,
         });
-        setAddModalOpen(false);
+
+        setInputs({});
+        setIsSuccess(true);
     }
 
     return (
@@ -77,6 +84,8 @@ const AddPetModal = props => {
                         max={Date.now()}
                         onChange={handleChange}
                     />
+                    {!isSuccess ? <div className={s.error}>{errors}</div> : null}
+                    {isSuccess ? <div className={s.success}>You added pet successfully!</div> : null}
                     <button type="submit">Submit</button>
                 </form>
             </div>

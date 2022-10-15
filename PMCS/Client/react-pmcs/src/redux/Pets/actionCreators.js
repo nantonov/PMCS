@@ -1,6 +1,7 @@
 import ownerService from "../../Services/ownerService";
 import petsService from "../../Services/petsService";
-import { setPets, setisFetching } from "./actions";
+import { createErrorsListForPets } from "../../utils/createErrorsList";
+import { setPets, setisFetching, setErrors } from "./actions";
 
 export const fetchPets = () => {
     return async (dispatch) => {
@@ -15,21 +16,41 @@ export const fetchPets = () => {
 
 export const createPet = (pet) => {
     return async (dispatch) => {
-        const createdPet = await petsService.create(pet);
-        if(createdPet) dispatch(fetchPets());
+        const result = await petsService.create(pet);
+        if (result.status === 400) {
+            const errors = createErrorsListForPets(result);
+            dispatch(setErrors(errors));
+        } else
+        {
+            dispatch(cleanErrors());
+            dispatch(fetchPets());
+        }
     };
 }
 
 export const editPet = (pet) => {
     return async (dispatch) => {
         const result = await petsService.update(pet);
-        if(result) dispatch(fetchPets());
+        if (result.status === 400) {
+            const errors = createErrorsListForPets(result);
+            dispatch(setErrors(errors));
+        } else
+        {
+            dispatch(cleanErrors());
+            dispatch(fetchPets());
+        }
     };
 }
 
 export const deletePet = (petId) => {
     return async (dispatch) => {
         const result = await petsService.delete(petId);
-        if(result) dispatch(fetchPets());
+        if (result) dispatch(fetchPets());
+    };
+}
+
+export const cleanErrors = () => {
+    return async (dispatch) => {
+        dispatch(setErrors([]));
     };
 }

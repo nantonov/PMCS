@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Face5Icon from '@mui/icons-material/Face5';
 import ProfileInfo from './Info/ProfileInfo';
 
-const Profile = ({fetchOwner, createOwner, editOwner, owner}) => {
+const Profile = ({fetchOwner, createOwner, editOwner, owner, errors}) => {
     
     useEffect(() => {
         fetchOwner();
@@ -20,6 +20,7 @@ const Profile = ({fetchOwner, createOwner, editOwner, owner}) => {
             </Button>
             {isProfileOpen ? <ProfileInfo owner={owner}
                 editOwner={editOwner}
+                errors={errors}
                 createOwner={createOwner} /> : null}
         </div>
     );

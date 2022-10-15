@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
-import s from './PetModal.module.css';
-import { toServerFormatDate } from '../../../../../utils/dateFormatitng';
+import React, { useEffect, useState } from 'react';
+import s from '../PetModal.module.css';
+import { toServerFormatDate } from '../../../../../../utils/dateFormatitng';
 
-const EditPetModal = props => {
+const EditPetModal = ({ pet, setEditModalOpen, editPet, errors }) => {
 
-    const { pet, setEditModalOpen, editPet } = props;
     const [inputs, setInputs] = useState({name: pet.name, weight: pet.weight, info: pet.info, id: pet.id, birthDate: pet.birthDate});
+
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    useEffect(() => {
+        if (errors.length > 0) {
+            setIsSuccess(false);
+        }
+    }, [errors.length]);
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -17,7 +24,8 @@ const EditPetModal = props => {
         event.preventDefault();
 
         editPet({ name: inputs.name, weight: inputs.weight, id: pet.id, birthDate: toServerFormatDate(pet.birthDate), info: inputs.info });
-        setEditModalOpen(false);
+
+        setIsSuccess(true);
     }
 
     const onCancelled = () => {
@@ -55,6 +63,8 @@ const EditPetModal = props => {
                     />
                 <button type="submit">Submit</button>
                 <button onClick={onCancelled}>Cancel</button>
+                {!isSuccess ? <div className={s.error}>{errors}</div> : null}
+                {isSuccess ? <div className={s.success}>You edited pet successfully.</div> : null}
             </form>
         </div>);
 }

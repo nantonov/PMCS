@@ -1,7 +1,8 @@
-import {SET_OWNER} from './constants';
+import {SET_OWNER, SET_ERRORS} from './constants';
 
 let initialState = {
-    owner: {}
+    owner: {},
+    errors: [],
 };
 
 const ownersReducer = (state = initialState, action) => {
@@ -9,6 +10,11 @@ const ownersReducer = (state = initialState, action) => {
         case SET_OWNER: {
             return {
                 ...state, owner: action.owner
+            };
+        }
+        case SET_ERRORS: {
+            return {
+                 ...state, errors: action.errors
             };
         }
         default:

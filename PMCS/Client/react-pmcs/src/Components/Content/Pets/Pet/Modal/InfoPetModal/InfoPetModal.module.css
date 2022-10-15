@@ -1,4 +1,4 @@
-@import './../../../../Shared/Constants/Colors.scss';
+@import '../../../../../Shared/Constants/Colors.scss';
 
 .modal {
   z-index: 2;
