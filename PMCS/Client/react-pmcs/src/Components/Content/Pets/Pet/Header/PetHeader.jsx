@@ -7,11 +7,12 @@ import EditIcon from '@mui/icons-material/Edit';
 
 const PetHeader = (props) => {
 
-    const { pet, deletePet, setEditModalOpen } = props;
+    const { pet, deletePet, setEditModalOpen, setIsPetDeleted } = props;
 
     let onDeleteButtonClick = () => {
         let id = pet.id;
         deletePet(id);
+        setIsPetDeleted(true);
     };
 
     let onEditButtonClick = () => {

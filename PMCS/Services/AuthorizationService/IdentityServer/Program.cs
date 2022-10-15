@@ -119,7 +119,8 @@ app.UseIdentityServer();
 app.UseAuthorization();
 
 app.UseCsp(options => options.DefaultSources(s => s.Self())
-    .ConnectSources(s => s.CustomSources("wss://localhost:44348/IdentityServer/")));
+    .ConnectSources(s => s.CustomSources("wss://localhost:44348/IdentityServer/"))
+    .ConnectSources(s => s.CustomSources("wss://localhost:44390/IdentityServer/")));
 
 app.UseEndpoints(endpoints =>
 {
