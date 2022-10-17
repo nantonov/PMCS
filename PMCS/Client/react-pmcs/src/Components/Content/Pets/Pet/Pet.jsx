@@ -9,7 +9,7 @@ import InfoPetModal from './../Pet/Modal/InfoPetModal';
 
 const Pet = props => {
 
-    const {pet, editPet, deletePet} = props;
+    const {pet, editPet, deletePet,  setIsPetDeleted} = props;
     const [isEditModalOpened, setEditModalOpen] = useState(false);
     const [isInfoModalOpened, setInfoModalOpen] = useState(false);
 
@@ -19,6 +19,7 @@ const Pet = props => {
             {isInfoModalOpened ? <InfoPetModal pet={pet} setInfoModalOpen = {setInfoModalOpen}/> : null}
             <PetHeader pet={pet} 
             deletePet={deletePet}
+            setIsPetDeleted={ setIsPetDeleted}
             setEditModalOpen = {setEditModalOpen}/>
             <PetInfo pet={pet} />
             <LastActivityList pet={pet} setInfoModalOpened={setInfoModalOpen}/>

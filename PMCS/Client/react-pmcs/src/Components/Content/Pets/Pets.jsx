@@ -4,7 +4,7 @@ import AddPetCell from './Pet/AddPetCell';
 import AddPetModal from './Pet/Modal/AddPetModal';
 
 const Pets = ({ content, createPet }) => {
-    
+
     const [isAddModalOpened, setAddModalOpen] = useState(false);
     return (
         <section className={s.wrapper}>
