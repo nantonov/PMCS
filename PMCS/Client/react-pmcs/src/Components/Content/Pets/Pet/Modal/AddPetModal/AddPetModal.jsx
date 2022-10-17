@@ -9,7 +9,7 @@ const AddPetModal = ({ setAddModalOpen, addPet, errors }) => {
         if (errors.length > 0) {
             setIsSuccess(false);
         }
-    }, [errors.length]);
+    }, [errors]);
 
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {

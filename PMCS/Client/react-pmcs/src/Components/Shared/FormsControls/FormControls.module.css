@@ -1,0 +1,10 @@
+@import '../Constants/Colors.scss';
+
+.error{
+    background-color: var(--color-errors-background);
+    font-size: small;
+    padding: 3px;
+    border-radius: 5px;
+    margin:10px;
+    letter-spacing: 2px;
+}

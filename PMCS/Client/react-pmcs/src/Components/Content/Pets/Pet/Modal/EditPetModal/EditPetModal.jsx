@@ -10,7 +10,7 @@ const EditPetModal = ({ pet, setEditModalOpen, editPet, errors }) => {
         if (errors.length > 0) {
             setIsSuccess(false);
         }
-    }, [errors.length]);
+    }, [errors]);
 
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {
@@ -40,12 +40,10 @@ const EditPetModal = ({ pet, setEditModalOpen, editPet, errors }) => {
 
     return (
         <div className={s.modal}>
-            <EditPetForm 
-                setIsSuccess={setIsSuccess}
-                isSuccess={isSuccess}
-                pet={pet}
+            <EditPetForm isSuccess={isSuccess}
                 onSubmit={updatePetData}
-                errors={errors} />
+                errors={errors}
+                pet={pet} />
         </div>);
 }
 

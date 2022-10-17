@@ -26,6 +26,7 @@
     font-size: 1.3rem;
     line-height: 1.2;
     padding: 10px;
+    min-width: 100%;
   }
   
   .formBox textarea {
