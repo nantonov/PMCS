@@ -9,7 +9,7 @@ import { compose } from 'redux';
 import Preloader from '../../Preloader/Preloader';
 
 const PetsContainer = (props) => {
-    const { deletePet, editPet, fetchPets, createPet, pets, isFetching, errors, cleanErrors } = props;
+    const { deletePet, editPet, fetchPets, createPet, pets, isFetching } = props;
 
     const [isPetDeleted, setIsPetDeleted] = useState(false);
 
@@ -30,7 +30,7 @@ const PetsContainer = (props) => {
     return (
         <div>
             {isFetching ? <Preloader /> : null}
-            <Pets content={content} createPet={createPet} cleanErrors={cleanErrors}/>
+            <Pets content={content} createPet={createPet} />
         </div>
     );
 }

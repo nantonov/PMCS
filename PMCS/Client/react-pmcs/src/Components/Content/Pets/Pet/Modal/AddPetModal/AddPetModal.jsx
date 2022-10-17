@@ -2,8 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import AddPetForm from '../../../../../Forms/AddPetForm';
 import s from '../PetModal.module.css'
 
-const AddPetModal = ({ setAddModalOpen, addPet, errors }) => {
-    const [isSuccess, setIsSuccess] = useState(false);
+const AddPetModal = ({ setAddModalOpen, addPet}) => {
 
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {
@@ -26,13 +25,11 @@ const AddPetModal = ({ setAddModalOpen, addPet, errors }) => {
             birthDate: values.birthDate,
             info: values.info,
         });
-
-        setIsSuccess(true);
     }
 
     return (
         <div className={s.modal}>
-            <AddPetForm onSubmit={addNewPet} />
+            <AddPetForm onSubmit={addNewPet}/>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import s from "./petForm.module.css";
 import { Field, reduxForm } from "redux-form";
 import { useEffect, useState } from "react";
 import { Input } from "../Shared/FormsControls/Input";
-import {required} from "../../utils/validators";
+import { required } from "../../utils/validators";
 
 let EditPetForm = ({ handleSubmit, error, pet, initialize, submitSucceeded }) => {
 
@@ -28,7 +28,7 @@ let EditPetForm = ({ handleSubmit, error, pet, initialize, submitSucceeded }) =>
             <label>Name   </label>
             <Field name={"name"} component={Input} type={"text"} validate={[required]} />
             <label>Info</label>
-            <Field name={"info"} component={Input} validate={[required]}/>
+            <Field name={"info"} component={Input} validate={[required]} />
             <label>Weight</label>
             <Field name={"weight"} component={Input} type={"number"} step={"0.1"} min={"0.1"} validate={[required]} />
             <button>Submit</button>
