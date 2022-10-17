@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import s from '../PetModal.module.css';
 import { toServerFormatDate } from '../../../../../../utils/dateFormatitng';
+import EditPetForm from '../../../../../Forms/EditPetForm';
 
 const EditPetModal = ({ pet, setEditModalOpen, editPet, errors }) => {
-
-    const [inputs, setInputs] = useState({name: pet.name, weight: pet.weight, info: pet.info, id: pet.id, birthDate: pet.birthDate});
-
     const [isSuccess, setIsSuccess] = useState(false);
 
     useEffect(() => {
@@ -14,58 +12,40 @@ const EditPetModal = ({ pet, setEditModalOpen, editPet, errors }) => {
         }
     }, [errors.length]);
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setInputs(values => ({ ...values, [name]: value }))
-    }
+    const escFunction = useCallback((event) => {
+        if (event.key === "Escape") {
+            setEditModalOpen(false);
+        }
+    });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    useEffect(() => {
+        document.addEventListener("keydown", escFunction, false);
 
-        editPet({ name: inputs.name, weight: inputs.weight, id: pet.id, birthDate: toServerFormatDate(pet.birthDate), info: inputs.info });
+        return () => {
+            document.removeEventListener("keydown", escFunction, false);
+        };
+    });
+
+    const updatePetData = (values) => {
+        editPet({
+            name: values.name,
+            weight: values.weight,
+            id: pet.id,
+            birthDate: toServerFormatDate(pet.birthDate),
+            info: values.info
+        });
 
         setIsSuccess(true);
     }
 
-    const onCancelled = () => {
-        setEditModalOpen(false);
-    }
-
     return (
         <div className={s.modal}>
-            <form className={s.formBox} onSubmit={handleSubmit}>
-                <header>Edit pet</header>
-                <label>Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        required
-                        value={inputs.name}
-                        onChange={handleChange}
-                    />
-                <label>Info</label>
-                <textarea className={s.info}
-                    type="text"
-                    name="info"
-                    value={inputs.info}
-                    onChange={handleChange}
-                ></textarea>
-                <label>Weight</label>
-                    <input
-                        min="0.1"
-                        type="number"
-                        step="0.1"
-                        name="weight"
-                        value={inputs.weight}
-                        required
-                        onChange={handleChange}
-                    />
-                <button type="submit">Submit</button>
-                <button onClick={onCancelled}>Cancel</button>
-                {!isSuccess ? <div className={s.error}>{errors}</div> : null}
-                {isSuccess ? <div className={s.success}>You edited pet successfully.</div> : null}
-            </form>
+            <EditPetForm 
+                setIsSuccess={setIsSuccess}
+                isSuccess={isSuccess}
+                pet={pet}
+                onSubmit={updatePetData}
+                errors={errors} />
         </div>);
 }
 

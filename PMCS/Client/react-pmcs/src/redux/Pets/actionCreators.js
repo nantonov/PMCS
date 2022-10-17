@@ -2,6 +2,7 @@ import ownerService from "../../Services/ownerService";
 import petsService from "../../Services/petsService";
 import { createErrorsListForPets } from "../../utils/createErrorsList";
 import { setPets, setisFetching, setErrors } from "./actions";
+import {reset} from 'redux-form';
 
 export const fetchPets = () => {
     return async (dispatch) => {
@@ -23,6 +24,7 @@ export const createPet = (pet) => {
         } else
         {
             dispatch(cleanErrors());
+            dispatch(reset('addPetForm'));
             dispatch(fetchPets());
         }
     };

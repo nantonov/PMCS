@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Pets from './Pets';
 import { deletePet, editPet, fetchPets, createPet, cleanErrors } from '../../../redux/Pets/actionCreators';
-import withAuthRedirect from '../../Auth/WithAuthRedirect';
+import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
 import { useEffect, useState } from 'react';
 import Pet from './Pet/Pet';
 import NoContent from './NoContent';
