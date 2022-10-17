@@ -23,16 +23,14 @@ const PetsContainer = (props) => {
             pet={petItem}
             editPet={editPet}
             deletePet={deletePet}
-            errors={errors}
-            setIsPetDeleted={setIsPetDeleted} 
-            cleanErrors={cleanErrors}/>);
+            setIsPetDeleted={setIsPetDeleted} />);
 
     let content = pets.length === 0 ? <NoContent /> : petsElements;
 
     return (
         <div>
             {isFetching ? <Preloader /> : null}
-            <Pets content={content}  errors={errors} createPet={createPet} cleanErrors={cleanErrors}/>
+            <Pets content={content} createPet={createPet} cleanErrors={cleanErrors}/>
         </div>
     );
 }
@@ -40,11 +38,10 @@ const PetsContainer = (props) => {
 function mapStateToProps(state) {
     return {
         pets: state.petsPage.pets,
-        errors: state.petsPage.errors,
         isFetching: state.petsPage.isFetching
     };
 }
 
 export default compose(
-    connect(mapStateToProps, { deletePet, editPet, fetchPets, createPet, cleanErrors}),
+    connect(mapStateToProps, { deletePet, editPet, fetchPets, createPet}),
     withAuthRedirect)(PetsContainer);

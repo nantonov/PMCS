@@ -1,9 +1,8 @@
-import { SET_IS_FETCHING, SET_PETS, SET_ERRORS } from "./constants";
+import { SET_IS_FETCHING, SET_PETS} from "./constants";
 
 let initialState = {
     pets: [],
-    isFetching: false,
-    errors: [],
+    isFetching: false
 };
 
 const petsReducer = (state = initialState, action) => {
@@ -13,9 +12,6 @@ const petsReducer = (state = initialState, action) => {
         }
         case SET_IS_FETCHING: {
             return { ...state, isFetching: action.isFetching }
-        }
-        case SET_ERRORS: {
-            return { ...state, errors: action.errors }
         }
         default:
             return state;

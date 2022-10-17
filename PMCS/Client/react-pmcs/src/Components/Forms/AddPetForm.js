@@ -3,8 +3,16 @@ import { reduxForm, Field } from "redux-form";
 import s from "./petForm.module.css";
 import { required } from "../../utils/validators";
 import {Input} from "../Shared/FormsControls/Input";
+import { useEffect, useState } from "react";
 
-let AddPetForm = ({ handleSubmit, isSuccess, errors }) => {
+let AddPetForm = ({ handleSubmit, error, submitSucceeded }) => {
+
+    const [isSuccess, setSuccess] = useState(false);
+
+    useEffect(() => {
+        setSuccess(submitSucceeded);
+    }, [pet]);
+
     return (
         <form className={s.formBox} onSubmit={handleSubmit}>
             <header>Add pet</header>
@@ -16,9 +24,9 @@ let AddPetForm = ({ handleSubmit, isSuccess, errors }) => {
             <Field name={"weight"} component={Input} type={"number"} step={"0.1"} min={"0.1"} validate={[required]} />
             <label>Date of birth</label>
             <Field name={"birthDate"} component={Input} type={"date"} validate={[required]} />
-            <button type="submit">Submit</button>
-            {!isSuccess ? <div className={s.error}>{errors}</div> : null}
-            {isSuccess ? <div className={s.success}>You added your pet successfully!</div> : null}
+            <button>Submit</button>
+             {error ? <div className={s.error}>{error}</div> : null}
+            {isSuccess && !error ? <div className={s.success}>You added your pet successfully!</div> : null}
         </form>
     );
 }

@@ -3,9 +3,8 @@ import s from './AddPetCell.module.css'
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const AddPetCell = ({setAddModalOpen, cleanErrors}) => {
+const AddPetCell = ({setAddModalOpen}) => {
     function handleClick() {
-        cleanErrors();
         setAddModalOpen(true);
     };
 

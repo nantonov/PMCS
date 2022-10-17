@@ -5,12 +5,6 @@ import s from '../PetModal.module.css'
 const AddPetModal = ({ setAddModalOpen, addPet, errors }) => {
     const [isSuccess, setIsSuccess] = useState(false);
 
-    useEffect(() => {
-        if (errors.length > 0) {
-            setIsSuccess(false);
-        }
-    }, [errors]);
-
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {
             setAddModalOpen(false);
@@ -38,9 +32,7 @@ const AddPetModal = ({ setAddModalOpen, addPet, errors }) => {
 
     return (
         <div className={s.modal}>
-            <AddPetForm isSuccess={isSuccess}
-                onSubmit={addNewPet}
-                errors={errors} />
+            <AddPetForm onSubmit={addNewPet} />
         </div>
     );
 }

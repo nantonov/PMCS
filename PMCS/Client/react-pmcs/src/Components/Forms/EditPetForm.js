@@ -1,11 +1,17 @@
 import React from "react";
 import s from "./petForm.module.css";
 import { Field, reduxForm } from "redux-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../Shared/FormsControls/Input";
 import {required} from "../../utils/validators";
 
-let EditPetForm = ({ handleSubmit, isSuccess, errors, pet, initialize }) => {
+let EditPetForm = ({ handleSubmit, error, pet, initialize, submitSucceeded }) => {
+
+    const [isSuccess, setSuccess] = useState(false);
+
+    useEffect(() => {
+        setSuccess(submitSucceeded);
+    }, [pet]);
 
     useEffect(() => {
         initialize({
@@ -25,9 +31,9 @@ let EditPetForm = ({ handleSubmit, isSuccess, errors, pet, initialize }) => {
             <Field name={"info"} component={Input} validate={[required]}/>
             <label>Weight</label>
             <Field name={"weight"} component={Input} type={"number"} step={"0.1"} min={"0.1"} validate={[required]} />
-            <button type="submit">Submit</button>
-            {!isSuccess ? <div className={s.error}>{errors}</div> : null}
-            {isSuccess ? <div className={s.success}>You edited your pet successfully!</div> : null}
+            <button>Submit</button>
+            {error ? <div className={s.error}>{error}</div> : null}
+            {isSuccess && !error ? <div className={s.success}>You edited your pet successfully!</div> : null}
         </form>
     );
 }

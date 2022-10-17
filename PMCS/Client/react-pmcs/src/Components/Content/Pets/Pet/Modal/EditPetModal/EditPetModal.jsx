@@ -3,15 +3,7 @@ import s from '../PetModal.module.css';
 import { toServerFormatDate } from '../../../../../../utils/dateFormatitng';
 import EditPetForm from '../../../../../Forms/EditPetForm';
 
-const EditPetModal = ({ pet, setEditModalOpen, editPet, errors }) => {
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    useEffect(() => {
-        if (errors.length > 0) {
-            setIsSuccess(false);
-        }
-    }, [errors]);
-
+const EditPetModal = ({ pet, setEditModalOpen, editPet }) => {
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {
             setEditModalOpen(false);
@@ -34,15 +26,12 @@ const EditPetModal = ({ pet, setEditModalOpen, editPet, errors }) => {
             birthDate: toServerFormatDate(pet.birthDate),
             info: values.info
         });
-
-        setIsSuccess(true);
     }
 
     return (
         <div className={s.modal}>
-            <EditPetForm isSuccess={isSuccess}
+            <EditPetForm
                 onSubmit={updatePetData}
-                errors={errors}
                 pet={pet} />
         </div>);
 }
