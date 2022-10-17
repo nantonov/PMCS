@@ -1,5 +1,6 @@
 import { axiosInstance } from '../utils/axiosInstance';
 import authService from '../Services/authService';
+import { useMemo } from 'react';
 
 const ownerService = {
     getByUserId: async() => {

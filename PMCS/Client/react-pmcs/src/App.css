@@ -2,7 +2,7 @@
 
 .app-wrapper{
   display: grid;
-
+  max-height: 50px;
   grid-template-areas: 
   "header"
   "nav"

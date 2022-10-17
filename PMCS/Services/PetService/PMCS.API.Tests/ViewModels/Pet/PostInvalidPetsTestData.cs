@@ -24,14 +24,6 @@ namespace PMCS.API.Tests.ViewModels.Pet
             } };
             yield return new object[] { new PostPetViewModel()
             {
-                Name = "Turtle Sue",
-                BirthDate = new DateTime(1980, 11, 18),
-                OwnerId = 1,
-                Info = "",
-                Weight = 15.687f
-            } };
-            yield return new object[] { new PostPetViewModel()
-            {
                 Name = "Almost empty",
                 OwnerId = 1,
             } };

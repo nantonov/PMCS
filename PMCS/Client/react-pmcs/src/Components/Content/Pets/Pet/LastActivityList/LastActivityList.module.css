@@ -23,6 +23,12 @@
   text-align: center;
 }
 
+.noActivity{
+  padding:5px;
+  font-size: medium;
+  letter-spacing: 3px;
+  font-style: italic;
+}
 
 .wrapper .showButton {
   grid-area: button;
@@ -30,4 +36,11 @@
 
 .wrapper .list {
   grid-area: list;
+}
+
+.name{
+  padding:5px;
+  font-size: larger;
+  letter-spacing: 4px;
+  font-weight: bolder;
 }

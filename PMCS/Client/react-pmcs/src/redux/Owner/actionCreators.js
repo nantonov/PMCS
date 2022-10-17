@@ -1,6 +1,7 @@
-import authService from "../../Services/authService";
 import ownerService from "../../Services/ownerService";
 import { setOwner } from "./actions";
+import { OWNER_INITIAL_USERNAME } from "./constants";
+
 
 export const fetchOwner = () => {
     return async (dispatch) => {
@@ -11,7 +12,7 @@ export const fetchOwner = () => {
 
 export const createOwner = () => {
     return async (dispatch) => {
-        const initialName = await authService.getUser().then((user) => user.profile.name);
+        const initialName = OWNER_INITIAL_USERNAME;
         const request = {fullName: initialName};
         const createdOwner = await ownerService.create(request);
         if(createdOwner) dispatch(fetchOwner());
