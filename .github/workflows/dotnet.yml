@@ -17,7 +17,7 @@ jobs:
     - name: Test
       uses: ./.github/workflows/Composite/Test
       with:
-        project_path: PMCS/Services/PetService/PMCS.sln
+        project_path: PMCS/Services/AuthorizationService/AuthorizationService.sln
   BuildNotificationService:
     runs-on: ubuntu-latest
     steps:
