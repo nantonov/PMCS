@@ -19,8 +19,8 @@ namespace Schedule.API.Application.Validation
                 IsInEnum().WithMessage(ValidationResources.EnumTypeMustExist);
 
             RuleFor(x => x.NotificationMessage).
-                NotEmpty().WithMessage("").
-                MaximumLength(100).WithMessage("");
+                NotEmpty().WithMessage(ValidationResources.MessageMustNotBeEmpty).
+                MaximumLength(100).WithMessage(ValidationResources.InvalidMessageLength);
 
             RuleFor(x => x.TriggerDateTime).
                 NotEmpty().WithMessage(ValidationResources.TriggerDateMustNotBeEmpty).
