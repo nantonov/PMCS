@@ -1,6 +1,6 @@
 import { axiosInstance } from '../utils/axiosInstance';
-import { createRequestForPetsService } from '../utils/createRequestForPetsService';
-import { setPetDatesToLocalFormattedDate, toLocalDate } from '../utils/dateFormatitng';
+import { createRequestForPetsService } from '../utils/requestCreators/createRequestForPetsService';
+import { setPetDatesToLocalFormattedDate } from '../utils/dateFormatitng';
 
 const petsService = {
     getAll: async(ownerId) => {

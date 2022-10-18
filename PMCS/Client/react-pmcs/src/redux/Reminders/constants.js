@@ -1,0 +1,2 @@
+export const SET_REMINDERS = 'SET-REMINDERS';
+export const SET_IS_FETCHING = 'SET-IS-FETCHING';

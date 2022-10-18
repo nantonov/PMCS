@@ -1,4 +1,4 @@
-import ownerService from "../Services/ownerService";
+import ownerService from "../../Services/ownerService";
 
 export async function createRequestForPetsService(pet) {
     const ownerId = await ownerService.getByUserId().then((owner) => owner.id);

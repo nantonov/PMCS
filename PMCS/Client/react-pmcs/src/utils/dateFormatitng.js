@@ -51,3 +51,14 @@ export function setPetDatesToLocalFormattedDate(pets) {
 
     return result;
 }
+
+export function setRemindersDatesToLocalFormattedDate(reminders) {
+    const result = reminders.map((reminder) => {
+        reminder.triggerDateTime = toLocalDate(reminder.triggerDateTime);
+        reminder.lastModified = toLocalDate(reminder.lastModified);
+
+        return reminder;
+    });
+
+    return result;
+}

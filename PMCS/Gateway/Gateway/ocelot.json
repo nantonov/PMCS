@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/Reminder/complete/{id}",
+      "DownstreamPathTemplate": "/api/reminder/complete/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,7 +9,7 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/api/Reminder/complete/{id}",
+      "UpstreamPathTemplate": "/api/reminders/complete/{id}",
       "UpstreamHttpMethod": [ "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -26,7 +26,7 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/api/Reminder/reset/{id}",
+      "UpstreamPathTemplate": "/api/reminders/reset/{id}",
       "UpstreamHttpMethod": [ "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -43,7 +43,7 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/api/Reminder/{id}",
+      "UpstreamPathTemplate": "/api/reminders/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
@@ -60,7 +60,7 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/api/Reminder",
+      "UpstreamPathTemplate": "/api/reminders",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
