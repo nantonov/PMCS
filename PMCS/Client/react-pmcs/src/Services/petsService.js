@@ -22,7 +22,10 @@ const petsService = {
 
         const result = await axiosInstance.post('api/pet/', {...request}).
         then((response) => response.data).
-        catch((error) => console.log(error));
+        catch((error) => {
+            console.log(error);
+            if(error.response.status === 400) return error.response.data;
+        });
 
         return result;
     },
@@ -31,7 +34,10 @@ const petsService = {
 
         const result = await axiosInstance.put(`api/pet/${pet.id}`, {...request}).
         then((response) => response.data).
-        catch((error) => console.log(error));
+         catch((error) => {
+            console.log(error);
+            if(error.response.status === 400) return error.response.data;
+        });
 
         return result;
     },

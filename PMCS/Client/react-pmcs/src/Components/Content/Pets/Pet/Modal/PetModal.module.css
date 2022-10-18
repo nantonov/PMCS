@@ -4,65 +4,9 @@
   z-index: 2;
   position: fixed;
   padding: 40px;
-  width: 30%;
+  min-width: 30%;
+  max-width: 30%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.formBox {
-  display: grid;
-  grid-gap: 6.5px;
-  font-size: larger;
-  background-color: var(--color-modals-background-global);
-  padding: 40px;
-  border-radius: 25px;
-  box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
-}
-
-.formBox header {
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.4em;
-  opacity: 0.8;
-}
-
-.formBox input {
-  box-sizing: border-box;
-  border: 1px solid var(--color-inputs-border-global);
-  border-radius: 20px;
-  margin-bottom: 10px;
-  font-size: 1.3rem;
-  line-height: 1.2;
-  padding: 10px;
-}
-
-.formBox .info {
-  resize: none;
-  font-size: 1.3rem;
-  line-height: 1.2;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.formBox label {
-  line-height: 24px;
-  font-size: 1.3rem;
-  line-height: 1.2;
-  padding: 2px;
-  opacity: 0.7;
-}
-
-.formBox button {
-  border-radius: 15px;
-  font-size: 1.1rem;
-  line-height: 1.2;
-  padding: 10px;
-  border: none;
-  letter-spacing: 1px;
-}
-
-.formBox button:hover {
-  cursor: pointer;
-  background-color: var(--color-inputs-border-global);
 }

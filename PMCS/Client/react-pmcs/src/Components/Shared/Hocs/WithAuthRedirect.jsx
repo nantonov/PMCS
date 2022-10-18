@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthContext } from "./AuthProvider";
+import { useAuthContext } from "../../Auth/AuthProvider";
 
 const withAuthRedirect = Component => ({ ...props }) => {
     const { isAuth } = useAuthContext();

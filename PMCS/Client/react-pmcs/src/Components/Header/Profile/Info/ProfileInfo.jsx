@@ -6,13 +6,15 @@ import authService, { useUser } from '../../../../Services/authService';
 import { Button } from '@mui/material';
 import { useAuthContext } from '../../../Auth/AuthProvider';
 
-const ProfileInfo = ({ owner, editOwner, createOwner }) => {
+const ProfileInfo = ({ owner, editOwner, createOwner, errors }) => {
 
     const [name, setName] = useState('');
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        errors !== null ? setError(errors[0]) : setError(null);
         owner === null ? createOwner() : setName(owner.fullName);
-    }, [owner]);
+    }, [owner, errors]);
 
     const [isEdit, setIsEdit] = useState(false);
     const { isAuth } = useAuthContext();
@@ -44,6 +46,9 @@ const ProfileInfo = ({ owner, editOwner, createOwner }) => {
                 {!isAuth && <span className={s.guest}>
                     Hey, Guest!
                 </span>}
+                {errors ? <div className={s.error}>
+                    {error}
+                </div> : null}
                 <div className={s.buttons}>
                     {isAuth && <Button onClick={async () => await authService.signOut()}>Logout </Button>}
                     {!isAuth && <Button onClick={async () => await authService.signIn()}>Login</Button>}

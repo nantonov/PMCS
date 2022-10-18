@@ -28,7 +28,10 @@ const ownerService = {
         const request = {fullName:owner.fullName};
         const result = await axiosInstance.put(`api/owner/${owner.id}`, {...request}).
         then((response) => response.data).
-        catch((error) => console.log(error));
+        catch((error) => {
+            console.log(error);
+            if(error.response.status === 400) return error.response.data;
+        });
 
         return result;
     }

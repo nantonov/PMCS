@@ -1,8 +1,8 @@
-import { SET_IS_FETCHING, SET_PETS } from "./constants";
+import { SET_IS_FETCHING, SET_PETS} from "./constants";
 
 let initialState = {
     pets: [],
-    isFetching: false,
+    isFetching: false
 };
 
 const petsReducer = (state = initialState, action) => {

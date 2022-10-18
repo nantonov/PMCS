@@ -1,6 +1,9 @@
 import ownerService from "../../Services/ownerService";
 import petsService from "../../Services/petsService";
-import { setPets, setisFetching } from "./actions";
+import { createErrorsListForPets } from "../../utils/createErrorsList";
+import { setPets, setisFetching, setErrors } from "./actions";
+import {reset, stopSubmit, startSubmit} from 'redux-form';
+import { ADD_FORM, EDIT_FORM } from "./constants";
 
 export const fetchPets = () => {
     return async (dispatch) => {
@@ -15,21 +18,36 @@ export const fetchPets = () => {
 
 export const createPet = (pet) => {
     return async (dispatch) => {
-        const createdPet = await petsService.create(pet);
-        if(createdPet) dispatch(fetchPets());
+        const result = await petsService.create(pet);
+        if (result.status === 400) {
+            const errors = createErrorsListForPets(result);
+            dispatch(stopSubmit(ADD_FORM, { _error: errors[0] }));
+        } else
+        {
+            startSubmit(EDIT_FORM);
+            dispatch(reset(ADD_FORM));
+            dispatch(fetchPets());
+        }
     };
 }
 
 export const editPet = (pet) => {
     return async (dispatch) => {
         const result = await petsService.update(pet);
-        if(result) dispatch(fetchPets());
+        if (result.status === 400) {
+            const errors = createErrorsListForPets(result);
+            dispatch(stopSubmit(EDIT_FORM, { _error: errors[0] }));
+        } else
+        {
+            startSubmit(EDIT_FORM);
+            dispatch(fetchPets());
+        }
     };
 }
 
 export const deletePet = (petId) => {
     return async (dispatch) => {
         const result = await petsService.delete(petId);
-        if(result) dispatch(fetchPets());
+        if (result) dispatch(fetchPets());
     };
 }

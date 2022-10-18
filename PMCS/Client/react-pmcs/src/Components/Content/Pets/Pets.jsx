@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import s from './Pets.module.css';
 import AddPetCell from './Pet/AddPetCell';
-import AddPetModal from './Pet/Modal/AddPetModal';
+import AddPetModal from './Pet/Modal/AddPetModal/AddPetModal';
 
-const Pets = ({ content, createPet }) => {
+const Pets = ({ content, createPet, pets}) => {
 
     const [isAddModalOpened, setAddModalOpen] = useState(false);
     return (
         <section className={s.wrapper}>
             {isAddModalOpened ? <AddPetModal addPet={createPet} setAddModalOpen={setAddModalOpen} /> : null}
             {content}
-            <AddPetCell setAddModalOpen={setAddModalOpen} />
+            <AddPetCell setAddModalOpen={setAddModalOpen}/>
         </section>
     );
 }

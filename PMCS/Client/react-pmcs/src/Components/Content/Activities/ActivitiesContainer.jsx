@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import withAuthRedirect from '../../Auth/WithAuthRedirect';
+import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
 import Activities from './Activities';
 
 let authRedirectComponent = withAuthRedirect(Activities);
