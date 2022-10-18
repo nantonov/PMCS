@@ -5,3 +5,25 @@
     padding: 0 20px;
     height: 100%;
 }
+
+.items{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.addReminderButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--сolor-content-block-background-global);
+    border: 1px dashed var(--color-inputs-border-global);
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 100%;
+    width: 100%;
+    color: var(--color-inputs-border-global);
+    transition: all 0.3s ease;
+}

@@ -13,7 +13,7 @@ const remindersService = {
     create: async (reminder) => {
        const request = await createRequestForRemindersService(reminder);
 
-        const result = await axiosInstance.post('api/reminders/', {...request}).
+        const result = await axiosInstance.post('api/reminders', {...request}).
         then((response) => response.data).
         catch((error) => {
             console.log(error);
@@ -25,7 +25,7 @@ const remindersService = {
     update: async (reminder) => {
         const request = await createRequestForRemindersService(reminder);
 
-        const result = await axiosInstance.put(`api/reminders`, {...request}).
+        const result = await axiosInstance.put(`api/reminders/`, {...request}).
         then((response) => response.data).
          catch((error) => {
             console.log(error);
