@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './Reminders.module.css'
 
-const Reminders = (props) => {
+const Reminders = ({content}) => {
     return (
         <article className={s.wrapper}>
-            Content
+            {content}
         </article>
     );
 }
