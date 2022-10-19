@@ -11,6 +11,7 @@ namespace Schedule.Domain.Entities
     {
         public int PetId { get; private set; }
         public int UserId { get; private set; }
+        public DateTime Created { get; private set; }
         public DateTime LastModified { get; private set; }
         public string Description { get; private set; }
         public string NotificationMessage { get; private set; }
@@ -19,6 +20,7 @@ namespace Schedule.Domain.Entities
         public NotificationType NotificationType { get; private set; }
         public ActionToRemindType ActionToRemindType { get; private set; }
         public ExecutionStatus Status { get; private set; }
+        public int RemainingTimePercentageBeforeTriggering { get; private set; }
 
         private DateTime _triggerDateTime;
         public DateTime TriggerDateTime
@@ -53,6 +55,7 @@ namespace Schedule.Domain.Entities
             UserId = userId;
             IsTriggered = false;
             UserEmail = email;
+            Created = DateTime.UtcNow;
 
             ResetStatus();
         }
@@ -146,6 +149,23 @@ namespace Schedule.Domain.Entities
                         break;
                     }
                 default: throw new ScheduleDomainException("Such type of enum doesn't exist.");
+            }
+        }
+
+        public void CalculateRemainingTimePercentageBeforeTriggering()
+        {
+            if (DateTime.UtcNow >= _triggerDateTime)
+                RemainingTimePercentageBeforeTriggering = 100;
+            else
+            {
+                var dateTimeDifference = _triggerDateTime - Created;
+                var remainingTimeBeforeTrigger = _triggerDateTime - DateTime.UtcNow;
+
+                var ratio = remainingTimeBeforeTrigger.TotalSeconds / dateTimeDifference.TotalSeconds;
+
+                var percentage = 100 - Convert.ToInt32(ratio * 100);
+
+                RemainingTimePercentageBeforeTriggering = percentage;
             }
         }
 

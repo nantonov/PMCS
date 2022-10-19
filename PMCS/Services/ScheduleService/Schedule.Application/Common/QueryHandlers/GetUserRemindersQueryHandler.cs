@@ -22,6 +22,11 @@ namespace Schedule.Application.Common.QueryHandlers
             var userId = _identityService.GetUserId();
             var result = await _repository.GetUserReminders(userId, cancellationToken);
 
+            foreach (var reminder in result)
+            {
+                reminder.CalculateRemainingTimePercentageBeforeTriggering();
+            }
+
             return result;
         }
     }

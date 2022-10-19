@@ -9,6 +9,7 @@ namespace Schedule.API.ViewModels
         string Description,
         string NotificationMessage,
         bool IsTriggered,
+        int RemainingTimePercentageBeforeTriggering,
         NotificationType NotificationType,
         ActionToRemindType ActionToRemindType,
         ExecutionStatus Status);
