@@ -4,6 +4,7 @@ import s from "./petForm.module.css";
 import { required } from "../../utils/validators";
 import { Input } from "../Shared/FormsControls/Input";
 import { useEffect, useState } from "react";
+import { NotificationType, ActionToRemindType  } from "../../Enums/reminderEnums.ts";
 
 let AddReminderForm = ({ handleSubmit, error, submitSucceeded, pets }) => {
     const [isSuccess, setSuccess] = useState(false);
@@ -21,19 +22,20 @@ let AddReminderForm = ({ handleSubmit, error, submitSucceeded, pets }) => {
             <Field name={"triggerDateTime"} component={Input} type={"date"} validate={[required]} />
             <label>How to remind</label>
             <Field name="notificationType" component="select">
-                <option value="0">Email</option>
-                <option value="1">Account</option>
+                <option value={NotificationType.Email}>Email</option>
+                <option value={NotificationType.PersonalAccount}>Account</option>
             </Field>
             <label>Remind to</label>
             <Field name="actionToRemindType" component="select">
-                <option value="0">Make vaccine</option>
-                <option value="1">Feed pet</option>
-                <option value="2">Go for a walk</option>
+                <option value={ActionToRemindType.MakeVaccine}>Make vaccine</option>
+                <option value={ActionToRemindType.FeedPet}>Feed pet</option>
+                <option value={ActionToRemindType.GoForWalk}>Go for a walk</option>
             </Field>
             <label>Notification Message</label>
-            <Field name={"notificationMessage"} component={Input} type={"textarea"} validate={[required]} />
+            <Field name={"notificationMessage"} component={Input} type={"textarea"} validate={[required]} placeholder="Remind me to..."/>
             <label>For pet</label>
             <Field name="petId" component="select">
+                <option validate={[required]}></option>
                 {petsList}
             </Field>
             <button>Submit</button>

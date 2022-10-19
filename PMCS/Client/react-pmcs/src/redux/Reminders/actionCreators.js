@@ -1,5 +1,8 @@
 import { setReminders, setisFetching } from "./actions";
 import remindersService from "../../Services/remindersService";
+import { stopSubmit } from "redux-form";
+import { ADD_FORM, EDIT_FORM } from "./constants";
+import { createErrorsListForReminders } from "../../utils/createErrorsList";
 
 export const fetchReminders = () => {
     return async (dispatch) => {
@@ -15,6 +18,8 @@ export const createReminder = (reminder) => {
     return async (dispatch) => {
         const result = await remindersService.create(reminder);
         if (result.status === 400) {
+            const errors = createErrorsListForReminders(result);
+            dispatch(stopSubmit(ADD_FORM, { _error: errors[0] }));
             console.log(result);
         } else {
             dispatch(fetchReminders());
