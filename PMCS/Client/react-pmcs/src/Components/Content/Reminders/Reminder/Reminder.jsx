@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { Status } from '../../../../Enums/reminderEnums.ts'
 import AlarmIcon from '@mui/icons-material/AlarmOn';
+import CircularProgressWithLabel from '../../../ProgressBars/CircularProgressWithLabel';
 
 const Reminder = ({ reminder, editReminder, deleteReminder, setIsReminderDeleted, setReminderStatusAsDone, resetReminderStatus }) => {
 
@@ -50,10 +51,13 @@ const Reminder = ({ reminder, editReminder, deleteReminder, setIsReminderDeleted
                 </div>
             </header>
             <div className={s.info}>
-                <div>Notify: {reminder.triggerDateTime}</div>
-                <div>Message: {reminder.notificationMessage}</div>
-                <div>Last modified: {reminder.lastModified}</div>
-                <div>Status: {statusTaskSign}</div>
+                <div><strong>Notify:</strong> {reminder.triggerDateTime}</div>
+                <div><strong>Message:</strong> {reminder.notificationMessage}</div>
+                <div><strong>Last modified:</strong> {reminder.lastModified}</div>
+                <div><strong>Status:</strong> {statusTaskSign}</div>
+                <div className={s.progress}>
+                    <CircularProgressWithLabel size="6rem" value={reminder.remainingTimePercentageBeforeTriggering} />
+                </div>
             </div>
             {
                 reminder.status === Status.ToDo ? <Button color='success' startIcon={<DoneAllIcon />} className={s.statusButton} onClick={onCompleteButtonClick}>
