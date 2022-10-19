@@ -6,6 +6,10 @@
     height: 100%;
 }
 
+header{
+    min-height: 65px;
+}
+
 .items{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -26,4 +30,9 @@
     width: 100%;
     color: var(--color-inputs-border-global);
     transition: all 0.3s ease;
+}
+
+.addReminderButton:hover{
+    background-color: var(--color-content-component-background-hover);
+    box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
 }
