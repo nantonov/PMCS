@@ -3,5 +3,5 @@ using Schedule.Domain.Entities;
 
 namespace Schedule.Application.Common.Queries
 {
-    public record GetUserRemindersQuery(int Id) : IRequest<IReadOnlyList<Reminder>>;
+    public record GetUserRemindersQuery() : IRequest<IReadOnlyList<Reminder>>;
 }

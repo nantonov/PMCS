@@ -4,7 +4,7 @@ import { deletePet, editPet, fetchPets, createPet, cleanErrors } from '../../../
 import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
 import { useEffect, useState } from 'react';
 import Pet from './Pet/Pet';
-import NoContent from './NoContent';
+import NoContent from '../NoContent/NoContent';
 import { compose } from 'redux';
 import Preloader from '../../Preloader/Preloader';
 

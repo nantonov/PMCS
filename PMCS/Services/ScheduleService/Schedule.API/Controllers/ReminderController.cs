@@ -23,7 +23,7 @@ namespace Schedule.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<ActionResult> GetAllReminders(CancellationToken cancellationToken = default)
         {
             var query = new GetAllRemindersQuery();
@@ -34,10 +34,10 @@ namespace Schedule.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult> GetRemindersByUserId(int userId, CancellationToken cancellationToken = default)
+        [HttpGet]
+        public async Task<ActionResult> GetRemindersByUserId(CancellationToken cancellationToken = default)
         {
-            var query = new GetUserRemindersQuery(userId);
+            var query = new GetUserRemindersQuery();
             var reminders = await _mediator.Send(query, cancellationToken);
 
             var result = _mapper.Map<IReadOnlyList<ReminderViewModel>>(reminders);

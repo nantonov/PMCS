@@ -1,7 +1,7 @@
 import ownerService from "../../Services/ownerService";
 import petsService from "../../Services/petsService";
 import { createErrorsListForPets } from "../../utils/createErrorsList";
-import { setPets, setisFetching, setErrors } from "./actions";
+import { setPets, setisFetching } from "./actions";
 import {reset, stopSubmit, startSubmit} from 'redux-form';
 import { ADD_FORM, EDIT_FORM } from "./constants";
 

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import s from './Pets.module.css';
 import AddPetCell from './Pet/AddPetCell';
 import AddPetModal from './Pet/Modal/AddPetModal/AddPetModal';
 
-const Pets = ({ content, createPet, pets}) => {
+const Pets = ({ content, createPet }) => {
 
     const [isAddModalOpened, setAddModalOpen] = useState(false);
     return (

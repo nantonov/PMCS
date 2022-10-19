@@ -1,6 +1,40 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/api/reminder/complete/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7064
+        }
+      ],
+      "UpstreamPathTemplate": "/api/reminders/complete/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "schedule"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Reminder/reset/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7064
+        }
+      ],
+      "UpstreamPathTemplate": "/api/reminders/reset/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "schedule"
+    },
+    {
       "DownstreamPathTemplate": "/api/Reminder/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -9,59 +43,11 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/api/Reminder/{id}",
+      "UpstreamPathTemplate": "/api/reminders/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",
         "AllowedScopes": []
-      },
-      "SwaggerKey": "schedule"
-    },
-    {
-      "DownstreamPathTemplate": "/api/Reminder/{userId}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7064
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Reminder/{userId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
-      },
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "3s",
-        "PeriodTimespan": 1,
-        "Limit": 15
-      },
-      "SwaggerKey": "schedule"
-    },
-    {
-      "DownstreamPathTemplate": "/api/Reminder/{action}/{id}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7064
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Reminder/{action}/{id}",
-      "UpstreamHttpMethod": [ "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
-      },
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "3s",
-        "PeriodTimespan": 1,
-        "Limit": 15
       },
       "SwaggerKey": "schedule"
     },
@@ -74,7 +60,7 @@
           "Port": 7064
         }
       ],
-      "UpstreamPathTemplate": "/api/Reminder",
+      "UpstreamPathTemplate": "/api/reminders",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "IdentityApiKey",

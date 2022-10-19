@@ -1,9 +1,49 @@
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { useState, useEffect } from 'react';
 import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
+import NoContent from '../NoContent/NoContent';
+import Preloader from '../../Preloader/Preloader';
+import Reminder from './Reminder/Reminder';
 import Reminders from './Reminders';
+import { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, resetReminderStatus } from '../../../redux/Reminders/actionCreators';
 
-let authRedirectComponent = withAuthRedirect(Reminders);
+const RemindersContainer = ({ fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, resetReminderStatus, reminders, isFetching }) => {
 
-const RemindersContainer = connect()(authRedirectComponent);
+    const [isReminderDeleted, setIsReminderDeleted] = useState(false);
 
-export default RemindersContainer;
+    useEffect(() => {
+        fetchReminders();
+        setIsReminderDeleted(false);
+    }, [isReminderDeleted]);
+
+    let remindersElements = reminders.map(item =>
+        <Reminder key={item.id}
+            reminder={item}
+            editReminder={editReminder}
+            deleteReminder={deleteReminder}
+            setIsReminderDeleted={setIsReminderDeleted}
+            setReminderStatusAsDone={setReminderStatusAsDone}
+            resetReminderStatus={resetReminderStatus} />);
+
+    let content = reminders.length === 0 ? <NoContent /> : remindersElements;
+
+    return (
+        <div>
+            {isFetching ? <Preloader /> : null}
+            <Reminders content={content}
+                createReminder={createReminder} />
+        </div>
+    );
+}
+
+function mapStateToProps(state) {
+    return {
+        reminders: state.remindersPage.reminders,
+        isFetching: state.remindersPage.isFetching
+    };
+}
+
+export default compose(
+    connect(mapStateToProps, { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, resetReminderStatus }),
+    withAuthRedirect)(RemindersContainer);

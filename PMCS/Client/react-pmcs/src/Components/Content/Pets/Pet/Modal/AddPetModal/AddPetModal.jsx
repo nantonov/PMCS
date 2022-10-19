@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import AddPetForm from '../../../../../Forms/AddPetForm';
-import s from '../PetModal.module.css'
+import s from '../../../../../Shared/Modal/Modal.module.css';
 
 const AddPetModal = ({ setAddModalOpen, addPet}) => {
 

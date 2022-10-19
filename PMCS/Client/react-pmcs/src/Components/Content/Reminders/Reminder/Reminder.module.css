@@ -1,1 +1,45 @@
+@import '../../../Shared/Constants/Colors.scss';
 
+.description{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+.info{
+    display: grid;
+    padding-top:10px;
+}
+
+.item{
+    box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
+    border-radius: 15px;
+    padding:15px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item:hover{
+    background-color: var(--color-content-component-background-hover);
+}
+
+.statusButton{
+    width: 100%;
+    padding:5px;
+    margin-top: auto;
+}
+
+.deleteButton{
+    width: 100%;
+    padding:10px;
+    margin-top: auto;
+    bottom: 0;
+}

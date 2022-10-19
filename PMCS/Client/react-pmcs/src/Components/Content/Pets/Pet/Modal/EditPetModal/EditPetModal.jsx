@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import s from '../PetModal.module.css';
+import s from '../../../../../Shared/Modal/Modal.module.css';
 import { toServerFormatDate } from '../../../../../../utils/dateFormatitng';
 import EditPetForm from '../../../../../Forms/EditPetForm';
 
