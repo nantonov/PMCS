@@ -19,12 +19,12 @@
   letter-spacing: 4px;
   font-size: medium;
   padding: 5px;
-  font-weight:lighter;
+  font-weight: lighter;
   text-align: center;
 }
 
-.noActivity{
-  padding:5px;
+.noActivity {
+  padding: 5px;
   font-size: medium;
   letter-spacing: 3px;
   font-style: italic;
@@ -38,8 +38,8 @@
   grid-area: list;
 }
 
-.name{
-  padding:5px;
+.name {
+  padding: 5px;
   font-size: larger;
   letter-spacing: 4px;
   font-weight: bolder;

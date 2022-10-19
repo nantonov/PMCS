@@ -5,7 +5,12 @@ export enum ActionToRemindType {
 }
 
 export enum NotificationType {
-	Emai = "Email",
+	Email = "Email",
 	PersonalAccount = "PersonalAccount"
+}
+
+export enum Status {
+	ToDo = 0,
+	Done = 1
 }
 
