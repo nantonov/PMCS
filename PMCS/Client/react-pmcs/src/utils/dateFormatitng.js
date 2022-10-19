@@ -25,6 +25,13 @@ export function toServerFormatDate(date) {
     return result;
 }
 
+export function toUtcDateTime(date) {
+    let localDate = new Date(date);
+
+    const utcDateTime =  localDate.toISOString();
+    return utcDateTime;
+}
+
 export function setPetDatesToLocalFormattedDate(pets) {
     const result = pets.map((pet) => {
         pet.birthDate = toLocalDate(pet.birthDate);
@@ -54,8 +61,8 @@ export function setPetDatesToLocalFormattedDate(pets) {
 
 export function setRemindersDatesToLocalFormattedDate(reminders) {
     const result = reminders.map((reminder) => {
-        reminder.triggerDateTime = toLocalDate(reminder.triggerDateTime);
-        reminder.lastModified = toLocalDate(reminder.lastModified);
+        reminder.triggerDateTime = toLocalDateTime(reminder.triggerDateTime);
+        reminder.lastModified = toLocalDateTime(reminder.lastModified);
 
         return reminder;
     });
