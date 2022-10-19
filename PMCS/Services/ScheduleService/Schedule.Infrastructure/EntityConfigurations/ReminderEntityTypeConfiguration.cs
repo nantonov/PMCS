@@ -11,6 +11,7 @@ namespace Schedule.Infrastructure.EntityConfigurations
             builder.HasKey(b => b.Id);
 
             builder.Ignore(b => b.DomainEvents);
+            builder.Ignore(b => b.RemainingTimePercentageBeforeTriggering);
 
             builder.Property(b => b.TriggerDateTime).IsRequired();
             builder.Property(x => x.Id).IsRequired();
@@ -19,6 +20,7 @@ namespace Schedule.Infrastructure.EntityConfigurations
             builder.Property(x => x.NotificationMessage).HasMaxLength(100).IsRequired();
             builder.Property(x => x.ActionToRemindType).IsRequired();
             builder.Property(x => x.NotificationType).IsRequired();
+            builder.Property(x => x.Created).IsRequired();
         }
     }
 }
