@@ -17,7 +17,7 @@ const ProfileInfo = ({ owner, editOwner, createOwner, errors }) => {
     }, [owner, errors]);
 
     const [isEdit, setIsEdit] = useState(false);
-    const { isAuth } = useAuthContext();
+    const { isAuth, user } = useAuthContext();
 
     const activateEditMode = () => {
         setIsEdit(true);
@@ -42,6 +42,9 @@ const ProfileInfo = ({ owner, editOwner, createOwner, errors }) => {
                     <IconButton onClick={activateEditMode}>
                         <EditIcon fontSize='small' />
                     </IconButton>
+                    <div className={s.email}>
+                        Email: {user.profile.email}
+                    </div>
                 </span>}
                 {!isAuth && <span className={s.guest}>
                     Hey, Guest!
