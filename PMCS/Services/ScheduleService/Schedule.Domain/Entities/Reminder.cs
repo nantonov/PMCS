@@ -72,6 +72,7 @@ namespace Schedule.Domain.Entities
             TriggerDateTime = triggerDateTime;
             NotificationType = notificationType;
             NotificationMessage = message;
+            LastModified = DateTime.UtcNow;
         }
 
         public void Triggered()
