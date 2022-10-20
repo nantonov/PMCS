@@ -1,10 +1,9 @@
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.OpenApi.Models;
 using Notifications.API.Extentions;
 using Notifications.API.Middlewares;
 using Notifications.BLL.DI;
-using Notifications.BLL.Resources.Constants;
+using Notifications.BLL.SignalR.Configuration;
 using Notifications.BLL.SignalR.Hubs;
 using Serilog;
 using Serilog.Events;
@@ -24,12 +23,6 @@ Log.Logger = Log.Logger = new LoggerConfiguration()
     .Enrich.WithThreadName()
     .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm} [{Level}] ({ThreadId}) ({ThreadName}) {Message}{NewLine}{Exception}")
     .CreateLogger();
-
-builder.Services.AddCors(config =>
-{
-    config.AddPolicy("DefaultPolicy",
-        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-});
 
 builder.Services.ConfigureAuthenticationScheme();
 
@@ -87,8 +80,6 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.UseCors("DefaultPolicy");
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -110,11 +101,14 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials());
+
 app.MapControllers();
 
-app.MapHub<NotificationHub>(HubConfiguration.HubURL, options =>
-{
-    options.Transports = HttpTransportType.ServerSentEvents;
-});
+app.MapHub<NotificationHub>(NotificationHubConfiguration.HubURL);
 
 app.Run();
