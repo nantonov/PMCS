@@ -14,11 +14,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { initializeApp } from './redux/App/actionCreators';
 import Preloader from './Components/Preloader/Preloader';
+import { getIsInitialized } from './redux/App/selectors';
 
 const App = ({ isInitialized, initializeApp }) => {
 
   useEffect(() => {
-    console.log('Initialized');
     initializeApp();
   }, []);
 
@@ -48,7 +48,7 @@ const App = ({ isInitialized, initializeApp }) => {
 
 const mapStateToProps = (state) => {
   return {
-    isInitialized: state.app.isInitialized
+    isInitialized: getIsInitialized(state)
   }
 }
 

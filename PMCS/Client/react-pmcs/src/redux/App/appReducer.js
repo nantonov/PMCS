@@ -1,7 +1,8 @@
-import {SET_INITIALIZED} from './constants';
+import {SET_INITIALIZED, SET_HUB_CONNECTION} from './constants';
 
 let initialState = {
     isInitialized: false,
+    hubConnection: null
 };
 
 const appReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state, isInitialized: true
             };
+        }
+        case SET_HUB_CONNECTION: {
+            return {
+                ...state, hubConnection: action.connection
+            }
         }
         default:
             return state;
