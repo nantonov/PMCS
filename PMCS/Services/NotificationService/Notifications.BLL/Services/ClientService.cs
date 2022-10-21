@@ -2,7 +2,7 @@
 using Notifications.BLL.Interfaces.Services;
 using Notifications.BLL.Models.DTOs;
 using Notifications.BLL.Models.Payloads;
-using Notifications.BLL.Resources.Constants;
+using Notifications.BLL.SignalR.Configuration;
 using Notifications.BLL.SignalR.Hubs;
 
 namespace Notifications.BLL.Services
@@ -20,7 +20,7 @@ namespace Notifications.BLL.Services
         {
             var payload = MapNotificationToPayload(notification);
 
-            await _hubContext.Clients.User(notification.UserId).SendAsync(HubConfiguration.HandlerMethod, payload);
+            await _hubContext.Clients.User(notification.UserId).SendAsync(NotificationHubConfiguration.HandlingMethodURL, payload.Message);
         }
 
         private ClientNotificationPayload MapNotificationToPayload(ClientNotification notification)

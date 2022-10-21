@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.DependencyInjection;
 using Notifications.BLL.Interfaces.Services;
 using Notifications.BLL.Services;
+using Notifications.BLL.SignalR.Connections;
 
 namespace Notifications.BLL.DI
 {
@@ -10,6 +12,7 @@ namespace Notifications.BLL.DI
         {
             services.AddScoped<IEmailService, EmailService>();
             services.AddSingleton<IClientService, ClientService>();
+            services.AddSingleton<IUserIdProvider, UserConnectionProvider>();
         }
     }
 }

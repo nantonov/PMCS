@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Notifications.API.Authentication;
+using Notifications.BLL.SignalR.Configuration;
 
 namespace Notifications.API.Extentions
 {
@@ -19,6 +20,21 @@ namespace Notifications.API.Extentions
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = false,
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments(NotificationHubConfiguration.HubURL)))
+                        {
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
                 };
             });
         }
