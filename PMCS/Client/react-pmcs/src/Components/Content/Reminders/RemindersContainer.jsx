@@ -7,6 +7,7 @@ import Preloader from '../../Preloader/Preloader';
 import Reminder from './Reminder/Reminder';
 import Reminders from './Reminders';
 import { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, resetReminderStatus } from '../../../redux/Reminders/actionCreators';
+import { getIsFetching, getReminders } from '../../../redux/Reminders/selectors';
 
 const RemindersContainer = ({ fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, resetReminderStatus, reminders, isFetching }) => {
 
@@ -39,8 +40,8 @@ const RemindersContainer = ({ fetchReminders, createReminder, editReminder, dele
 
 function mapStateToProps(state) {
     return {
-        reminders: state.remindersPage.reminders,
-        isFetching: state.remindersPage.isFetching
+        reminders: getReminders(state),
+        isFetching: getIsFetching(state)
     };
 }
 

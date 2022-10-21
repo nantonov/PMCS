@@ -42,4 +42,5 @@
 
 .wrapper .info .error{
     background-color: var(--color-errors-background);
+    margin-top: 5px;
 }

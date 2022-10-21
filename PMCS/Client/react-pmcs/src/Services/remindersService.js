@@ -1,13 +1,11 @@
 import { axiosInstance } from '../utils/axiosInstance';
-import { setRemindersDatesToLocalFormattedDate } from '../utils/dateFormatitng';
 import { createRequestToAddReminder, createRequestToUpdateReminder } from '../utils/requestCreators/createRequestForRemindersService';
 
 const remindersService = {
     getAll: async () => {
-        const reminders = await axiosInstance.get(`api/reminders`).
+        const result = await axiosInstance.get(`api/reminders`).
             then((response) => response.data);
 
-        const result = setRemindersDatesToLocalFormattedDate(reminders);
         return result;
     },
     create: async (reminder) => {

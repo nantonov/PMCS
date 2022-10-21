@@ -7,6 +7,7 @@ import Pet from './Pet/Pet';
 import NoContent from '../NoContent/NoContent';
 import { compose } from 'redux';
 import Preloader from '../../Preloader/Preloader';
+import { getIsFetching, getPets } from '../../../redux/Pets/selectors';
 
 const PetsContainer = (props) => {
     const { deletePet, editPet, fetchPets, createPet, pets, isFetching } = props;
@@ -37,8 +38,8 @@ const PetsContainer = (props) => {
 
 function mapStateToProps(state) {
     return {
-        pets: state.petsPage.pets,
-        isFetching: state.petsPage.isFetching
+        pets: getPets(state),
+        isFetching: getIsFetching(state)
     };
 }
 
