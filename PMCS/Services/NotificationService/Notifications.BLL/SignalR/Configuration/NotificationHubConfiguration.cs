@@ -2,7 +2,7 @@
 {
     public static class NotificationHubConfiguration
     {
-        public const string HandlingMethodURL = "RecieveNotification";
+        public const string HandlingMethodURL = "ReceiveNotification";
 
         public const string HubURL = "/notificationHub";
     }
