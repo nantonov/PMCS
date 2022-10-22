@@ -2,18 +2,17 @@ import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 import NotificationsButton from './NotificationsButton/NotificationsButton';
 import s from './NotificationsContainer.module.css';
-import connectionService from '../../../Services/connectionService';
-import { notify, clearMessages } from '../../../redux/Notifications/actionCreators';
+import { clearMessages, startReceivingMessages } from '../../../redux/Notifications/actionCreators';
 import { getHubConnection } from '../../../redux/App/selectors';
 import { getMessages } from '../../../redux/Notifications/selectors';
 import MessagesList from './MessagesList/MessagesList';
 
-const Notifications = ({ connection, notify, clearMessages, messages }) => {
+const Notifications = ({ connection, startReceivingMessages, clearMessages, messages }) => {
 
     const [isNotificationsListOpened, setNotificationsListOpened] = useState(false);
 
     useEffect(() => {
-        connectionService.startReceivingMessages(connection, notify);
+        startReceivingMessages(connection);
         console.log(messages);
     }, [messages]);
 
@@ -40,4 +39,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { notify, clearMessages })(Notifications);
+export default connect(mapStateToProps, { startReceivingMessages, clearMessages })(Notifications);

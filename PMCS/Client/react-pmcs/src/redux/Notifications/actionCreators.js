@@ -1,8 +1,11 @@
 import { clearNotifications, pushNotification } from './actions';
+import connectionService from '../../Services/connectionService';
 
-export const notify = (notification) => {
+export const startReceivingMessages = (connection) => {
     return async (dispatch) => {
-        dispatch(pushNotification(notification));
+        connectionService.startReceivingMessages(connection, (message) => {
+            dispatch(pushNotification(message));
+        });
     };
 };
 
