@@ -9,6 +9,6 @@ export const getPets = createSelector(selectPets, (pets) => {
     return setPetDatesToLocalFormattedDate(pets);
 });
 
-export const getIsFetching = createSelector(selectIsFetching, (isFetching) => {
+export const isFetching = createSelector(selectIsFetching, (isFetching) => {
     return isFetching;
 })

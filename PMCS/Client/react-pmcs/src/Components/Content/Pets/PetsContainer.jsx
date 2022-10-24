@@ -7,7 +7,7 @@ import Pet from './Pet/Pet';
 import NoContent from '../NoContent/NoContent';
 import { compose } from 'redux';
 import Preloader from '../../Preloader/Preloader';
-import { getIsFetching, getPets } from '../../../redux/Pets/selectors';
+import { isFetching, getPets } from '../../../redux/Pets/selectors';
 
 const PetsContainer = (props) => {
     const { deletePet, editPet, fetchPets, createPet, pets, isFetching } = props;
@@ -31,7 +31,7 @@ const PetsContainer = (props) => {
     return (
         <div>
             {isFetching ? <Preloader /> : null}
-            <Pets content={content} createPet={createPet} />
+            {!isFetching && <Pets content={content} createPet={createPet} />}
         </div>
     );
 }
@@ -39,10 +39,10 @@ const PetsContainer = (props) => {
 function mapStateToProps(state) {
     return {
         pets: getPets(state),
-        isFetching: getIsFetching(state)
+        isFetching: isFetching(state)
     };
 }
 
 export default compose(
-    connect(mapStateToProps, { deletePet, editPet, fetchPets, createPet}),
+    connect(mapStateToProps, { deletePet, editPet, fetchPets, createPet }),
     withAuthRedirect)(PetsContainer);
