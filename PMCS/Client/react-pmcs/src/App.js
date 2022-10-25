@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import Header from './Components/Header/Header'
 import Nav from './Components/Nav/Nav';
 import PetsContainer from './Components/Content/Pets/PetsContainer';
@@ -9,8 +10,22 @@ import Logout from './Components/Auth/Logout';
 import Home from './Components/Home/Home';
 import RemindersContainer from './Components/Content/Reminders/RemindersContainer';
 import ActivitiesContainer from './Components/Content/Activities/ActivitiesContainer';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { initializeApp } from './redux/App/actionCreators';
+import Preloader from './Components/Preloader/Preloader';
+import { getIsInitialized } from './redux/App/selectors';
 
-const App = (props) => {
+const App = ({ isInitialized, initializeApp }) => {
+
+  useEffect(() => {
+    initializeApp();
+  }, []);
+
+  if (!isInitialized) {
+    return <div><Preloader /></div>
+  }
+
   return (
     <div className='app-wrapper'>
       <Header />
@@ -31,4 +46,10 @@ const App = (props) => {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isInitialized: getIsInitialized(state)
+  }
+}
+
+export default compose(connect(mapStateToProps, { initializeApp }))(App);

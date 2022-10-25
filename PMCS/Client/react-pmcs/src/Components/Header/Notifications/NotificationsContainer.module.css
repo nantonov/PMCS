@@ -1,0 +1,7 @@
+.wrapper{
+    padding: 10px;
+    width: 7.5em;
+    letter-spacing: 2px;
+    flex-direction: column;
+    word-wrap: break-word;
+}

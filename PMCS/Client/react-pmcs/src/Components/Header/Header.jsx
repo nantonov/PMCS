@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaw } from '@fortawesome/free-solid-svg-icons'
-import NotificationsButton from './Notifications/NotificationsButton';
+import NotificationsContainer from './Notifications/NotificationsContainer';
 import ProfileContainer from './Profile/ProfileContainer';
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
                 Pets Monitoring and Control System
             </div>
             <div className={s.notifications}>
-                <NotificationsButton />
+                <NotificationsContainer />
             </div>
             <div className={s.profile}>
                 <ProfileContainer />
