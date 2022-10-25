@@ -58,11 +58,34 @@ namespace IdentityServerHost.Quickstart.UI
                 throw new Exception("External authentication error");
             }
 
-            var (user, provider, claims) = FindUserFromExternalProvider(result);
+            var externalUser = result.Principal;
+
+            var userIdClaim = externalUser.FindFirst(JwtClaimTypes.Subject) ??
+                              externalUser.FindFirst(ClaimTypes.NameIdentifier) ??
+                              throw new Exception("Unknown userid");
+
+            var claims = externalUser.Claims.ToList();
+            claims.Remove(userIdClaim);
+
+            var email = claims.FirstOrDefault(x => x.Type == "email").Value;
+            var username = email.Split("@")[0];
+
+            var provider = result.Properties.Items["scheme"];
+
+            var user = await _userService.FindByEmailAsync(email);
 
             if (user == null)
             {
-                user = await AutoProvisionUser(claims);
+                await _userService.CreateAsync(new User
+                {
+                    Email = email,
+                    UserName = username
+
+                });
+
+                user = await _userService.FindByEmailAsync(email);
+
+                await _userService.AddClaimsAsync(user, claims);
             }
 
             await HttpContext.SignInAsync(new IdentityServerUser(user.Id.ToString())
@@ -76,44 +99,6 @@ namespace IdentityServerHost.Quickstart.UI
             var returnUrl = result.Properties.Items["returnUrl"] ?? "~/";
 
             return Redirect(returnUrl);
-        }
-
-        private (User user, string provider, IEnumerable<Claim> claims) FindUserFromExternalProvider(AuthenticateResult result)
-        {
-            var externalUser = result.Principal;
-
-            var userIdClaim = externalUser.FindFirst(JwtClaimTypes.Subject) ??
-                              externalUser.FindFirst(ClaimTypes.NameIdentifier) ??
-                              throw new Exception("Unknown userid");
-
-            var claims = externalUser.Claims.ToList();
-            claims.Remove(userIdClaim);
-            var email = claims.FirstOrDefault(x => x.Type == "email").Value;
-
-            var provider = result.Properties.Items["scheme"];
-
-            var user = _userService.FindByEmailAsync(email).GetAwaiter().GetResult();
-
-            return (user, provider, claims);
-        }
-
-        private async Task<User> AutoProvisionUser(IEnumerable<Claim> claims)
-        {
-            var email = claims.FirstOrDefault(x => x.Type == "email").Value;
-            var username = email.Split("@")[0];
-
-            await _userService.CreateAsync(new User
-            {
-                Email = email,
-                UserName = username
-
-            });
-
-            var user = await _userService.FindByEmailAsync(email);
-
-            await _userService.AddClaimsAsync(user, claims);
-
-            return user;
         }
     }
 }
