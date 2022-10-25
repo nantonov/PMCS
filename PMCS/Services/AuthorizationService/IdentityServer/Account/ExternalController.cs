@@ -1,8 +1,10 @@
+using IdentityModel;
+using IdentityServer.Models;
 using IdentityServer4;
 using IdentityServer4.Services;
-using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -12,20 +14,14 @@ namespace IdentityServerHost.Quickstart.UI
     [AllowAnonymous]
     public class ExternalController : Controller
     {
+        private readonly UserManager<User> _userService;
         private readonly IIdentityServerInteractionService _interaction;
-        private readonly IClientStore _clientStore;
-        private readonly ILogger<ExternalController> _logger;
-        private readonly IEventService _events;
         public ExternalController(
             IIdentityServerInteractionService interaction,
-            IClientStore clientStore,
-            IEventService events,
-            ILogger<ExternalController> logger)
+            UserManager<User> userService)
         {
+            _userService = userService;
             _interaction = interaction;
-            _clientStore = clientStore;
-            _logger = logger;
-            _events = events;
         }
 
         [HttpGet]
@@ -64,37 +60,41 @@ namespace IdentityServerHost.Quickstart.UI
 
             var externalUser = result.Principal;
 
-            if (externalUser == null)
-            {
-                throw new Exception("External authentication error");
-            }
+            var userIdClaim = externalUser.FindFirst(JwtClaimTypes.Subject) ??
+                              externalUser.FindFirst(ClaimTypes.NameIdentifier) ??
+                              throw new Exception("Unknown userid");
 
             var claims = externalUser.Claims.ToList();
+            claims.Remove(userIdClaim);
 
-            var userIdClaim = claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            var email = claims.FirstOrDefault(x => x.Type == "email").Value;
+            var username = email.Split("@")[0];
 
-            if (userIdClaim == null)
+            var provider = result.Properties.Items["scheme"];
+
+            var user = await _userService.FindByEmailAsync(email);
+
+            if (user == null)
             {
-                throw new Exception("Unknown userid");
+                await _userService.CreateAsync(new User
+                {
+                    Email = email,
+                    UserName = username
+
+                });
+
+                user = await _userService.FindByEmailAsync(email);
+
+                await _userService.AddClaimsAsync(user, claims);
             }
 
-            var email = claims.FirstOrDefault(c => c.Type == "email").Value;
-            var username = email.Split("@")[0];
-            var externalProvider = userIdClaim.Issuer;
-
-            await HttpContext.SignInAsync(new IdentityServerUser(userIdClaim.Value)
+            await HttpContext.SignInAsync(new IdentityServerUser(user.Id.ToString())
             {
-                DisplayName = username,
-                IdentityProvider = externalProvider,
-                AdditionalClaims = new List<Claim>()
-                {
-                    new Claim(ClaimTypes.Email, email),
-                },
-                AuthenticationTime = DateTime.UtcNow
+                DisplayName = user.UserName,
+                IdentityProvider = provider
             });
 
             await HttpContext.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
-
 
             var returnUrl = result.Properties.Items["returnUrl"] ?? "~/";
 
