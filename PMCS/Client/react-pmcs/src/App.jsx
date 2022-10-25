@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Header from './Components/Header/Header'
 import Nav from './Components/Nav/Nav';
 import PetsContainer from './Components/Content/Pets/PetsContainer';
@@ -15,6 +15,7 @@ import { compose } from 'redux';
 import { initializeApp } from './redux/App/actionCreators';
 import Preloader from './Components/Preloader/Preloader';
 import { getIsInitialized } from './redux/App/selectors';
+import { ApplicationState } from './redux/types';
 
 const App = ({ isInitialized, initializeApp }) => {
 
@@ -46,7 +47,7 @@ const App = ({ isInitialized, initializeApp }) => {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state : ApplicationState) => {
   return {
     isInitialized: getIsInitialized(state)
   }
