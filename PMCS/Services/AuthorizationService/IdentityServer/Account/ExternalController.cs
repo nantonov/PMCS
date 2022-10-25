@@ -89,11 +89,12 @@ namespace IdentityServerHost.Quickstart.UI
 
             var claims = externalUser.Claims.ToList();
             claims.Remove(userIdClaim);
+            var email = claims.FirstOrDefault(x => x.Type == "email").Value;
 
             var provider = result.Properties.Items["scheme"];
             var providerUserId = userIdClaim.Value;
 
-            var user = _users.FindByIdAsync(providerUserId).GetAwaiter().GetResult();
+            var user = _users.FindByEmailAsync(email).GetAwaiter().GetResult();
 
             return (user, provider, claims);
         }
