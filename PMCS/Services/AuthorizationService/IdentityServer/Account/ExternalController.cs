@@ -14,14 +14,13 @@ namespace IdentityServerHost.Quickstart.UI
     [AllowAnonymous]
     public class ExternalController : Controller
     {
-        private readonly UserManager<User> _users;
+        private readonly UserManager<User> _userService;
         private readonly IIdentityServerInteractionService _interaction;
         public ExternalController(
             IIdentityServerInteractionService interaction,
-            UserManager<User> users)
+            UserManager<User> userService)
         {
-            _users = users;
-
+            _userService = userService;
             _interaction = interaction;
         }
 
@@ -92,9 +91,8 @@ namespace IdentityServerHost.Quickstart.UI
             var email = claims.FirstOrDefault(x => x.Type == "email").Value;
 
             var provider = result.Properties.Items["scheme"];
-            var providerUserId = userIdClaim.Value;
 
-            var user = _users.FindByEmailAsync(email).GetAwaiter().GetResult();
+            var user = _userService.FindByEmailAsync(email).GetAwaiter().GetResult();
 
             return (user, provider, claims);
         }
@@ -104,16 +102,16 @@ namespace IdentityServerHost.Quickstart.UI
             var email = claims.FirstOrDefault(x => x.Type == "email").Value;
             var username = email.Split("@")[0];
 
-            await _users.CreateAsync(new User
+            await _userService.CreateAsync(new User
             {
                 Email = email,
                 UserName = username
 
             });
 
-            var user = await _users.FindByEmailAsync(email);
+            var user = await _userService.FindByEmailAsync(email);
 
-            await _users.AddClaimsAsync(user, claims);
+            await _userService.AddClaimsAsync(user, claims);
 
             return user;
         }
