@@ -6,16 +6,16 @@ const axiosInstance = axios.create({
   baseURL: axiosConfig.baseURL,
 });
 
-axiosInstance.interceptors.request.use (
-  async function (config) {
+axiosInstance.interceptors.request.use(
+  async function (config: any) {
     const token = await authService.getUser().then((user) => {
-      return user.access_token;
+      return user?.access_token;
     });
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   function (error) {
-    return Promise.reject (error);
+    return Promise.reject(error);
   }
 );
 
