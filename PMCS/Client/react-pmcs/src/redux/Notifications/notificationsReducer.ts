@@ -1,14 +1,21 @@
 import { CLEAR_NOTIFICATIONS, PUSH_NOTIFICATION } from "./constants";
+import * as actions from './actions';
 
-let initialState = {
+export type NotificationState = {
+    messages: Array<string>
+}
+
+let initialState : NotificationState = {
     messages: [],
 };
 
-const appReducer = (state = initialState, action) => {
+export type NotificationsActions = ReturnType<typeof actions[keyof typeof actions]>;
+
+const appReducer = (state = initialState, action: NotificationsActions) => {
     switch (action.type) {
         case PUSH_NOTIFICATION: {
             return {
-                ...state, messages: [...state.messages, action.message]
+                ...state, messages: [...state.messages, action.payload]
             };
         }
         case CLEAR_NOTIFICATIONS: {
