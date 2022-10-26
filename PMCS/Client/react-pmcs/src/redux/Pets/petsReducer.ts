@@ -14,7 +14,7 @@ let initialState: PetsState = {
 
 export type PetsActions = ReturnType<typeof actions[keyof typeof actions]>;
 
-const petsReducer = (state = initialState, action: PetsActions) => {
+const petsReducer = (state = initialState, action: PetsActions) : PetsState => {
     switch (action.type) {
         case SET_PETS: {
             return { ...state, pets: action.payload }
