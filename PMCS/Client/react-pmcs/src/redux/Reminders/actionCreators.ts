@@ -1,21 +1,24 @@
-import { setReminders, setisFetching } from "./actions";
+import { setReminders, setIsFetching } from "./actions";
 import remindersService from "../../Services/remindersService";
 import { stopSubmit, reset, startSubmit } from "redux-form";
 import { ADD_FORM, EDIT_FORM } from "./constants";
 import { createErrorsListForReminders } from "../../utils/createErrorsList";
+import { AppDispatch } from "../types";
+import { RemindersActions } from "./remindersReducer";
+import { IReminder } from "../../common/models/IReminder";
 
 export const fetchReminders = () => {
-    return async (dispatch) => {
-        dispatch(setisFetching(true));
+    return async (dispatch: AppDispatch<RemindersActions>) => {
+        dispatch(setIsFetching(true));
         await remindersService.getAll().then((reminders) => {
             dispatch(setReminders(reminders));
-            dispatch(setisFetching(false));
+            dispatch(setIsFetching(false));
         });
     };
 };
 
-export const createReminder = (reminder) => {
-    return async (dispatch) => {
+export const createReminder = (reminder: IReminder) => {
+    return async (dispatch: AppDispatch<RemindersActions>) => {
         const result = await remindersService.create(reminder);
         if (result.status === 400) {
             const errors = createErrorsListForReminders(result);
@@ -29,8 +32,8 @@ export const createReminder = (reminder) => {
     };
 };
 
-export const editReminder = (reminder) => {
-    return async (dispatch) => {
+export const editReminder = (reminder: IReminder) => {
+    return async (dispatch: AppDispatch<RemindersActions>) => {
         const result = await remindersService.update(reminder);
         if (result.status === 400) {
             const errors = createErrorsListForReminders(result);
@@ -43,27 +46,16 @@ export const editReminder = (reminder) => {
     };
 };
 
-export const deleteReminder = (reminderId) => {
-    return async (dispatch) => {
+export const deleteReminder = (reminderId: number) => {
+    return async (dispatch: AppDispatch<RemindersActions>) => {
         const result = await remindersService.delete(reminderId);
         if (result) dispatch(fetchReminders());
     };
 };
 
-export const setReminderStatusAsDone = (reminderId) => {
-    return async (dispatch) => {
+export const setReminderStatusAsDone = (reminderId: number) => {
+    return async (dispatch: AppDispatch<RemindersActions>) => {
         const result = await remindersService.setReminderStatusDone(reminderId);
-        if (result.status === 400) {
-            console.log(result);
-        } else {
-            dispatch(fetchReminders());
-        }
-    };
-};
-
-export const resetReminderStatus = (reminderId) => {
-    return async (dispatch) => {
-        const result = await remindersService.resetReminderStatus(reminderId);
         if (result.status === 400) {
             console.log(result);
         } else {
