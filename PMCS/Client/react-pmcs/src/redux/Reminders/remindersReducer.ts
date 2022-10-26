@@ -14,7 +14,7 @@ let initialState: RemindersState = {
 
 export type RemindersActions = ReturnType<typeof actions[keyof typeof actions]>;
 
-const remindersReducer = (state = initialState, action: RemindersActions) : RemindersState => {
+const remindersReducer = (state = initialState, action: RemindersActions): RemindersState => {
     switch (action.type) {
         case SET_REMINDERS: {
             return { ...state, reminders: action.payload }
