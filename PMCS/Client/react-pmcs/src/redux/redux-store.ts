@@ -7,7 +7,7 @@ import notificationsReducer from './Notifications/notificationsReducer';
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 
-let reducersBatch = combineReducers({
+const RootReducer = combineReducers({
     petsPage: petsReducer,
     profile: ownersReducer,
     remindersPage: remindersReducer,
@@ -16,6 +16,6 @@ let reducersBatch = combineReducers({
     form: formReducer,
 });
 
-let store = createStore(reducersBatch, applyMiddleware(thunkMiddleware));
+const store = createStore(RootReducer, applyMiddleware(thunkMiddleware));
 
 export default store;
