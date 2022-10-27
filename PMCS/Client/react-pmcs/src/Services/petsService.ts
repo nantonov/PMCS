@@ -3,23 +3,24 @@ import { IPet } from '../common/models/IPet';
 import { ICreatePetRequest } from '../common/requests/Pet/ICreatePetRequest';
 import { IUpdatePetRequest } from '../common/requests/Pet/IUpdatePetRequest';
 import OwnerService from './ownerService';
+import { AxiosError, AxiosResponse } from 'axios';
 
 class PetsService {
-    public static async getAll(ownerId: number): Promise<any> {
+    public static async getAll(ownerId: number): Promise<Array<IPet>> {
         const result = await axiosInstance.get(`api/Pet/ownerId/${ownerId}`).
             then((response) => response.data);
 
         return result;
     }
 
-    public static async getById(petId: number): Promise<any> {
+    public static async getById(petId: number): Promise<AxiosResponse<IPet>> {
         const result = await axiosInstance.get(`api/Pet/${petId}`).
             then((response) => response.data);
 
         return result;
     }
 
-    public static async update(pet: IUpdatePetRequest): Promise<any> {
+    public static async update(pet: IUpdatePetRequest): Promise<AxiosResponse<IPet>> {
         const ownerId = await OwnerService.getByUserId().then((owner) => owner.id);
         pet.ownerId = ownerId;
 
@@ -33,7 +34,7 @@ class PetsService {
         return result;
     }
 
-    public static async delete(petId: number): Promise<any> {
+    public static async delete(petId: number): Promise<AxiosResponse<IPet>> {
         const result = await axiosInstance.delete(`api/pet/${petId}`).
             then((response) => response.data).
             catch((error) => console.log(error));
@@ -41,7 +42,7 @@ class PetsService {
         return result;
     }
 
-    public static async create(pet: ICreatePetRequest): Promise<any> {
+    public static async create(pet: ICreatePetRequest): Promise<AxiosResponse<IPet>> {
         const ownerId = await OwnerService.getByUserId().then((owner) => owner.id);
         pet.ownerId = ownerId;
 
