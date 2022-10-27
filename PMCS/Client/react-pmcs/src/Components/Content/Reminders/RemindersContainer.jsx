@@ -6,10 +6,10 @@ import NoContent from '../NoContent/NoContent';
 import Preloader from '../../Preloader/Preloader';
 import Reminder from './Reminder/Reminder';
 import Reminders from './Reminders';
-import { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, resetReminderStatus } from '../../../redux/Reminders/actionCreators';
+import { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone } from '../../../redux/Reminders/actionCreators';
 import { getIsFetching, getReminders } from '../../../redux/Reminders/selectors';
 
-const RemindersContainer = ({ fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, resetReminderStatus, reminders, isFetching }) => {
+const RemindersContainer = ({ fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, reminders, isFetching }) => {
 
     const [isReminderDeleted, setIsReminderDeleted] = useState(false);
 
@@ -24,8 +24,7 @@ const RemindersContainer = ({ fetchReminders, createReminder, editReminder, dele
             editReminder={editReminder}
             deleteReminder={deleteReminder}
             setIsReminderDeleted={setIsReminderDeleted}
-            setReminderStatusAsDone={setReminderStatusAsDone}
-            resetReminderStatus={resetReminderStatus} />);
+            setReminderStatusAsDone={setReminderStatusAsDone} />);
 
     let content = reminders.length === 0 ? <NoContent /> : remindersElements;
 
@@ -46,5 +45,5 @@ function mapStateToProps(state) {
 }
 
 export default compose(
-    connect(mapStateToProps, { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, resetReminderStatus }),
+    connect(mapStateToProps, { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone }),
     withAuthRedirect)(RemindersContainer);

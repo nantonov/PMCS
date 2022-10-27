@@ -4,9 +4,12 @@ import { createErrorsListForPets } from "../../utils/createErrorsList";
 import { setPets, setisFetching } from "./actions";
 import {reset, stopSubmit, startSubmit} from 'redux-form';
 import { ADD_FORM, EDIT_FORM } from "./constants";
+import { AppDispatch } from "../types";
+import { PetsActions } from "./petsReducer";
+import { IPet } from "../../common/models/IPet";
 
 export const fetchPets = () => {
-    return async (dispatch) => {
+    return async (dispatch : AppDispatch<PetsActions>) => {
         dispatch(setisFetching(true));
         const ownerId = await ownerService.getByUserId().then((owner) => owner.id);
         await petsService.getAll(ownerId).then((pets) => {
@@ -16,8 +19,8 @@ export const fetchPets = () => {
     };
 };
 
-export const createPet = (pet) => {
-    return async (dispatch) => {
+export const createPet = (pet : IPet) => {
+    return async (dispatch : AppDispatch<PetsActions>) => {
         const result = await petsService.create(pet);
         if (result.status === 400) {
             const errors = createErrorsListForPets(result);
@@ -31,8 +34,8 @@ export const createPet = (pet) => {
     };
 }
 
-export const editPet = (pet) => {
-    return async (dispatch) => {
+export const editPet = (pet : IPet) => {
+    return async (dispatch : AppDispatch<PetsActions>) => {
         const result = await petsService.update(pet);
         if (result.status === 400) {
             const errors = createErrorsListForPets(result);
@@ -45,8 +48,8 @@ export const editPet = (pet) => {
     };
 }
 
-export const deletePet = (petId) => {
-    return async (dispatch) => {
+export const deletePet = (petId : number) => {
+    return async (dispatch : AppDispatch<PetsActions>) => {
         const result = await petsService.delete(petId);
         if (result) dispatch(fetchPets());
     };

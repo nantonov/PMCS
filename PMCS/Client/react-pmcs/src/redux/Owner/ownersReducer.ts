@@ -15,7 +15,7 @@ let initialState : OwnerState = {
 
 export type OwnerActions = ReturnType<typeof actions[keyof typeof actions]>;
 
-const ownersReducer = (state = initialState, action : OwnerActions) => {
+const ownersReducer = (state = initialState, action : OwnerActions) : OwnerState => {
     switch (action.type) {
         case SET_OWNER: {
             return {
