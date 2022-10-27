@@ -6,8 +6,7 @@ import { reset, stopSubmit, startSubmit } from 'redux-form';
 import { ADD_FORM, EDIT_FORM } from "./constants";
 import { AppDispatch } from "../types";
 import { PetsActions } from "./petsReducer";
-import { ICreatePetRequest } from "../../common/requests/Pet/ICreatePetRequest";
-import { IUpdatePetRequest } from "../../common/requests/Pet/IUpdatePetRequest";
+import { IPet } from "../../common/models/IPet";
 
 export const fetchPets = () => {
     return async (dispatch: AppDispatch<PetsActions>) => {
@@ -20,7 +19,7 @@ export const fetchPets = () => {
     };
 };
 
-export const createPet = (pet: ICreatePetRequest) => {
+export const createPet = (pet: IPet) => {
     return async (dispatch: AppDispatch<PetsActions>) => {
         const result = await petsService.create(pet);
         if (result.status === 400) {
@@ -34,7 +33,7 @@ export const createPet = (pet: ICreatePetRequest) => {
     };
 }
 
-export const editPet = (pet: IUpdatePetRequest) => {
+export const editPet = (pet: IPet) => {
     return async (dispatch: AppDispatch<PetsActions>) => {
         const result = await petsService.update(pet);
         if (result.status === 400) {

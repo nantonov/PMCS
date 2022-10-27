@@ -4,5 +4,5 @@ export interface IUpdatePetRequest {
     info: string;
     weight: number;
 
-    ownerId: number;
+    ownerId?: number;
 }

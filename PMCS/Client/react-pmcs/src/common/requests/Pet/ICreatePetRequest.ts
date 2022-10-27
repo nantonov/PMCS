@@ -4,5 +4,5 @@ export interface ICreatePetRequest {
     birthDate: string;
     weight: number;
 
-    ownerId: number;
+    ownerId?: number;
 }
