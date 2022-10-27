@@ -3,7 +3,7 @@ import { IPet } from '../common/models/IPet';
 import { ICreatePetRequest } from '../common/requests/Pet/ICreatePetRequest';
 import { IUpdatePetRequest } from '../common/requests/Pet/IUpdatePetRequest';
 import OwnerService from './ownerService';
-import { AxiosError, AxiosResponse } from 'axios';
+import {AxiosResponse } from 'axios';
 
 class PetsService {
     public static async getAll(ownerId: number): Promise<Array<IPet>> {

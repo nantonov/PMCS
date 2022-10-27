@@ -1,7 +1,5 @@
 import { axiosInstance } from '../utils/axiosInstance';
 import authService from './authService';
-import { IOwner } from '../common/models/IOwner';
-import { AxiosResponse } from 'axios';
 import { ICreateOwnerRequest } from '../common/requests/Owner/ICreateOnwerRequest';
 import { IUpdateOwnerRequest } from '../common/requests/Owner/IUpdateOwnerRequest';
 
