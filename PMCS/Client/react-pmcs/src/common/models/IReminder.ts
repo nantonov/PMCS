@@ -7,6 +7,7 @@ export interface IReminder {
     notificationMessage: string;
     isTriggered: boolean;
     remainingTimePercentageBeforeTriggering: number;
+    lastModified: string;
     notificationType: NotificationType;
     actionToRemindType: ActionToRemindType;
     status: Status;
