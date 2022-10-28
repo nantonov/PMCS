@@ -32,4 +32,4 @@ jobs:
     - name: Sonar
       uses: ./.github/workflows/Composite/Sonar
       with:
-        project_path: PMCS/Client/react-pmcs/
+        solution_path: PMCS/Client/react-pmcs/
