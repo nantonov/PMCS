@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: .github/workflows/Composite/Sonar
+      - uses: ./.github/workflows/Composite/Sonar
         with:
           solution_path: PMCS/Client/react-pmcs
   AuthServiceScan:
@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: .github/workflows/Composite/Sonar
+      - uses: ./.github/workflows/Composite/Sonar
         with:
           solution_path: PMCS/Services/AuthorizationService
   PetServiceScan:
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: .github/workflows/Composite/Sonar
+      - uses: ./.github/workflows/Composite/Sonar
         with:
           solution_path: PMCS/Services/PetService
   ScheduleServiceScan:
@@ -43,7 +43,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: .github/workflows/Composite/Sonar
+      - uses: ./.github/workflows/Composite/Sonar
         with:
           solution_path: PMCS/Services/ScheduleService
   NotificationServiceScan:
@@ -53,7 +53,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: .github/workflows/Composite/Sonar
+      - uses: ./.github/workflows/Composite/Sonar
         with:
           solution_path: PMCS/Services/NotificationService
           
