@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   ReactScan:
-    name: SonarScan
+    name: ReactScan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
         with:
           projectBaseDir: PMCS/Client/react-pmcs
   AuthServiceScan:
-    name: SonarScan
+    name: AuthServiceScan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
         with:
           projectBaseDir: PMCS/Services/AuthorizationService
   PetServiceScan:
-    name: SonarScan
+    name: PetServiceScan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -48,22 +48,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: PMCS/Services/PetService
- NotificationServiceScan:
-    name: SonarScan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: PMCS/Services/NotificationService
- ScheduleServiceScan:
-    name: SonarScan
+  ScheduleServiceScan:
+    name: ScheduleServiceScan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -76,5 +62,18 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: PMCS/Services/ScheduleService
-
+  NotificationServiceScan:
+    name: NotificationServiceScan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: PMCS/Services/NotificationService
           
