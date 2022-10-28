@@ -1,11 +1,12 @@
 name: My Test Monorepo Project
 on:
   push:
-      branches:
+    branches:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
+  sonarcloud:
     name: ScanReact
     runs-on: ubuntu-latest
     steps:
