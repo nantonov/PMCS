@@ -25,11 +25,15 @@ jobs:
         cache-dependency-path: PMCS/Client/react-pmcs/package-lock.json
     - run: npm ci --force
     - run: CI=false npm run build 
-  analyse:
-    runs-on: windows-latest
+  sonarCloudTrigger:
+    needs: build
+    name: SonarCloud trigger
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Sonar
-      uses: ./.github/workflows/Composite/Sonar
-      with:
-        solution_path: PMCS/Client/react-pmcs/
+      - name: Clone Repository
+        uses: actions/checkout@master
+      - name: Analyze with sonar
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
