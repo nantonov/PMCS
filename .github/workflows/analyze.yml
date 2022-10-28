@@ -6,8 +6,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  :
-    name: ReactScan
+    name: ScanReact
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
