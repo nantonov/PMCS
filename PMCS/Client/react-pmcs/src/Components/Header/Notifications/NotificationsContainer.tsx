@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { useState, useEffect } from 'react';
 import NotificationsButton from './NotificationsButton/NotificationsButton';
 import s from './NotificationsContainer.module.css';
@@ -7,7 +7,6 @@ import { getHubConnection } from '../../../redux/App/selectors';
 import { getMessages } from '../../../redux/Notifications/selectors';
 import MessagesList from './MessagesList/MessagesList';
 import { RootState } from '../../../redux/types';
-import { ConnectedProps } from 'react-redux';
 
 function mapStateToProps(state: RootState) {
     return {
