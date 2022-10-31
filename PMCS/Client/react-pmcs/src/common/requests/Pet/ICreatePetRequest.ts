@@ -3,6 +3,6 @@ export interface ICreatePetRequest {
     info: string;
     weight: number;
     birthDate: string;
-
+    
     ownerId?: number;
 }

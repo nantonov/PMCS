@@ -2,14 +2,14 @@ import ownerService from "../../Services/ownerService";
 import petsService from "../../Services/petsService";
 import { createErrorsListForPets } from "../../utils/createErrorsList";
 import { setPets, setisFetching } from "./actions";
-import {reset, stopSubmit, startSubmit} from 'redux-form';
+import { reset, stopSubmit, startSubmit } from 'redux-form';
 import { ADD_FORM, EDIT_FORM } from "./constants";
 import { AppDispatch } from "../types";
 import { PetsActions } from "./petsReducer";
 import { IPet } from "../../common/models/IPet";
 
 export const fetchPets = () => {
-    return async (dispatch : AppDispatch<PetsActions>) => {
+    return async (dispatch: AppDispatch<PetsActions>) => {
         dispatch(setisFetching(true));
         const ownerId = await ownerService.getByUserId().then((owner) => owner.id);
         await petsService.getAll(ownerId).then((pets) => {
@@ -19,14 +19,13 @@ export const fetchPets = () => {
     };
 };
 
-export const createPet = (pet : IPet) => {
-    return async (dispatch : AppDispatch<PetsActions>) => {
+export const createPet = (pet: IPet) => {
+    return async (dispatch: AppDispatch<PetsActions>) => {
         const result = await petsService.create(pet);
         if (result.status === 400) {
             const errors = createErrorsListForPets(result);
             dispatch(stopSubmit(ADD_FORM, { _error: errors[0] }));
-        } else
-        {
+        } else {
             startSubmit(EDIT_FORM);
             dispatch(reset(ADD_FORM));
             dispatch(fetchPets());
@@ -34,22 +33,21 @@ export const createPet = (pet : IPet) => {
     };
 }
 
-export const editPet = (pet : IPet) => {
-    return async (dispatch : AppDispatch<PetsActions>) => {
+export const editPet = (pet: IPet) => {
+    return async (dispatch: AppDispatch<PetsActions>) => {
         const result = await petsService.update(pet);
         if (result.status === 400) {
             const errors = createErrorsListForPets(result);
             dispatch(stopSubmit(EDIT_FORM, { _error: errors[0] }));
-        } else
-        {
+        } else {
             startSubmit(EDIT_FORM);
             dispatch(fetchPets());
         }
     };
 }
 
-export const deletePet = (petId : number) => {
-    return async (dispatch : AppDispatch<PetsActions>) => {
+export const deletePet = (petId: number) => {
+    return async (dispatch: AppDispatch<PetsActions>) => {
         const result = await petsService.delete(petId);
         if (result) dispatch(fetchPets());
     };
