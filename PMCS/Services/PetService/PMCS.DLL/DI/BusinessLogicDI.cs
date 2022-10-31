@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using PMCS.BLL;
 using PMCS.BLL.Interfaces.Services;
 using PMCS.BLL.Services;
+using PMCS.DAL.DI;
 using PMCS.DLL.Interfaces.Services;
 using PMCS.DLL.Services;
 using Polly;
@@ -10,7 +12,7 @@ namespace PMCS.DLL.DI
 {
     public static class BusinessLogicRegistration
     {
-        public static void RegisterBusinessLogicDependencies(this IServiceCollection services)
+        public static void RegisterBusinessLogicDependencies(this IServiceCollection services, IConfiguration config)
         {
             services.AddTransient<IOwnerService, OwnerService>();
             services.AddTransient<IPetService, PetService>();
@@ -23,6 +25,8 @@ namespace PMCS.DLL.DI
                 client => client.BaseAddress = new Uri(ClientsConfiguration.ScheduleServiceAddress))
                 .AddTransientHttpErrorPolicy(policyBuilder => policyBuilder.WaitAndRetryAsync(ClientsConfiguration.ScheduleClientRetryCount,
                     retryNumber => TimeSpan.FromMilliseconds(ClientsConfiguration.ScheduleSleepDurationInMilliseconds)));
+
+            services.RegisterDataAccessDependencies(config);
         }
     }
 }

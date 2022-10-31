@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PMCS.API.Middlewares;
-using PMCS.DAL.DI;
 using PMCS.DLL.DI;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Globalization;
@@ -76,8 +75,7 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services.RegisterDataAccessDependencies(configuration);
-builder.Services.RegisterBusinessLogicDependencies();
+builder.Services.RegisterBusinessLogicDependencies(configuration);
 
 var app = builder.Build();
 
