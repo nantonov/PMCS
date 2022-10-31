@@ -1,11 +1,16 @@
-import { createContext, useContext } from 'react'
+import React, { createContext, useContext } from 'react'
 import { useUser } from '../../Services/authService'
 
-const AuthContext = createContext()
+export type AuthProps = ReturnType<typeof useUser>;
+
+const AuthContext = createContext<AuthProps>({
+    user: null,
+    isAuth: false
+});
 
 const useAuthContext = () => useContext(AuthContext)
 
-const AuthProvider = ({ children }) => {
+const AuthProvider : React.FC<React.ReactNode> = (children) => {
 
     const auth = useUser()
 
