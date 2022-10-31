@@ -26,6 +26,15 @@ namespace Schedule.Application.Services
             return id;
         }
 
+        public int Test()
+        {
+            var idFromClaims = _context.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            Int32.TryParse(idFromClaims, out var id);
+
+            return id;
+        }
+
         public async Task<string?> GetUserEmail()
         {
             var claims = await _authService.GetUserClaims();

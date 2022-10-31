@@ -33,6 +33,16 @@ namespace Notifications.API.Controllers
             return Ok(notification);
         }
 
+        [HttpPost("test")]
+        public async Task<IActionResult> Test([FromBody] EmailNotificationRequest request)
+        {
+            var notification = _mapper.Map<EmailNotification>(request);
+
+            await _emailService.SendNotification(notification);
+
+            return Ok(notification);
+        }
+
         [HttpPost("client")]
         public async Task<IActionResult> NotifyClient([FromBody] ClientNotificationRequest request, CancellationToken cancellationToken)
         {
