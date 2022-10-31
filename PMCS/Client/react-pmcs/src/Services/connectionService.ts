@@ -30,8 +30,10 @@ export class ConnectionService {
         }
     }
 
-    public static async startReceivingMessages(connection: HubConnection, onReceiveNotification: (message: string) => any): Promise<void> {
+    public static async startReceivingMessages(connection: Nullable<HubConnection>, onReceiveNotification: (message: string) => any): Promise<void> {
         try {
+            if (!connection) return;
+            
             connection.on(RECEIVE_NOTIFICATION_METHOD, (message) => {
                 onReceiveNotification(message);
             });
