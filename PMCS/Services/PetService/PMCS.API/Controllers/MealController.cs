@@ -35,6 +35,14 @@ namespace PMCS.API.Controllers
             return _mapper.Map<IEnumerable<MealViewModel>>(models);
         }
 
+        [HttpGet("hello")]
+        public async Task<IEnumerable<MealViewModel>> GetHello(CancellationToken cancellationToken)
+        {
+            var models = await _service.GetAll(cancellationToken);
+
+            return _mapper.Map<IEnumerable<MealViewModel>>(models);
+        }
+
         [HttpGet("{id}")]
         public async Task<MealViewModel> GetById(int id, CancellationToken cancellationToken)
         {
