@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Nav.module.css';
 import NavItem from './NavItem/NavItem';
 
-const Nav = () => {
+const Nav : React.FC = () => {
     return (
         <nav className={s.nav}>
             <NavItem name='Home' path='/' />
