@@ -1,10 +1,13 @@
 import * as React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { circularBarSxProps } from './sxProps';
+import { SxProps } from '@mui/material';
 
-const CircularProgressWithLabel = (props) => {
+type Props = { value: number; } & CircularProgressProps;
+
+const CircularProgressWithLabel: React.FC<Props> = (props) => {
     return (
         <Box sx={{ position: 'relative', display: 'inline-flex' }}>
             <CircularProgress variant="determinate" {...props} />
