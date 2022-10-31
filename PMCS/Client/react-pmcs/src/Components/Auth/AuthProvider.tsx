@@ -3,6 +3,10 @@ import { useUser } from '../../Services/authService'
 
 export type AuthProps = ReturnType<typeof useUser>;
 
+interface AuthProviderProps {
+    children: React.ReactNode;
+}
+
 const AuthContext = createContext<AuthProps>({
     user: null,
     isAuth: false
@@ -10,7 +14,7 @@ const AuthContext = createContext<AuthProps>({
 
 const useAuthContext = () => useContext(AuthContext)
 
-const AuthProvider : React.FC<React.ReactNode> = (children) => {
+const AuthProvider : React.FC<AuthProviderProps> = ({ children }) => {
 
     const auth = useUser()
 
