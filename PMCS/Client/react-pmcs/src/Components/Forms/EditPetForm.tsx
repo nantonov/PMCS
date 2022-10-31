@@ -1,11 +1,18 @@
 import React from "react";
+import { InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { Field, reduxForm } from "redux-form";
 import { useEffect, useState } from "react";
 import { Input } from "../Shared/FormsControls/Input";
 import { required } from "../../utils/validators";
+import { IUpdatePetRequest } from "../../common/requests/Pet/IUpdatePetRequest";
 
-let EditPetForm = ({ handleSubmit, error, pet, initialize, submitSucceeded }) => {
+type FormProps = {
+    pet: IUpdatePetRequest;
+}
+type Props = InjectedFormProps<IUpdatePetRequest, FormProps> & FormProps;
+
+let EditPetForm : React.FC<Props> = ({ handleSubmit, error, pet, initialize, submitSucceeded }) => {
 
     const [isSuccess, setSuccess] = useState(false);
 
@@ -38,6 +45,6 @@ let EditPetForm = ({ handleSubmit, error, pet, initialize, submitSucceeded }) =>
     );
 }
 
-const EditPetReduxForm = reduxForm({ form: "editPetForm" })(EditPetForm);
+const EditPetReduxForm = reduxForm<IUpdatePetRequest, FormProps>({ form: "editPetForm" })(EditPetForm);
 
 export default EditPetReduxForm;

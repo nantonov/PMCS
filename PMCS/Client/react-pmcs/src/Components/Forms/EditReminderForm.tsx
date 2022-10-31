@@ -1,12 +1,17 @@
-import React from "react";
-import { reduxForm, Field } from "redux-form";
-import s from "./petForm.module.css";
+import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import { required } from "../../utils/validators";
 import { Input } from "../Shared/FormsControls/Input";
 import { useEffect, useState } from "react";
-import { NotificationType, ActionToRemindType } from "../../Enums/reminderEnums.ts";
+import s from "./petForm.module.css";
+import { NotificationType, ActionToRemindType } from "../../Enums/reminderEnums";
+import IUpdateReminderRequest from "../../common/requests/Reminder/IUpdateReminderRequest";
 
-let EditReminderForm = ({ handleSubmit, error, submitSucceeded, reminder, initialize }) => {
+type FormProps = {
+    reminder: IUpdateReminderRequest;
+}
+type Props = InjectedFormProps<IUpdateReminderRequest, FormProps> & FormProps;
+
+const EditReminderForm: React.FC<Props> = ({ handleSubmit, error, submitSucceeded, reminder, initialize }) => {
     const [isSuccess, setSuccess] = useState(false);
 
     useEffect(() => {
@@ -47,6 +52,6 @@ let EditReminderForm = ({ handleSubmit, error, submitSucceeded, reminder, initia
     );
 }
 
-const EditReminderReduxForm = reduxForm({ form: "editReminderForm" })(EditReminderForm);
+const EditReminderReduxForm = reduxForm<IUpdateReminderRequest, FormProps>({ form: "editReminderForm" })(EditReminderForm);
 
 export default EditReminderReduxForm;
