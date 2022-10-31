@@ -3,14 +3,16 @@ import s from './Profile.module.css';
 import Button from '@mui/material/Button';
 import Face5Icon from '@mui/icons-material/Face5';
 import ProfileInfo from './Info/ProfileInfo';
+import { ProfileProps } from './ProfileContainer';
 
-const Profile = ({fetchOwner, createOwner, editOwner, owner, errors}) => {
-    
+export type ProfileInfoProps = Omit<ProfileProps, "fetchOwner">;
+
+const Profile: React.FC<ProfileProps> = ({ fetchOwner, createOwner, editOwner, owner, errors }) => {
     useEffect(() => {
         fetchOwner();
     }, []);
 
-    const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
     let toggleProfileSign = isProfileOpen ? String.fromCharCode(9650) : String.fromCharCode(9660);
 
     return (

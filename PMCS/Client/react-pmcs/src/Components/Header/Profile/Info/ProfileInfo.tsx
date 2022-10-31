@@ -2,35 +2,41 @@ import React, { useState, useEffect } from 'react';
 import s from './ProfileInfo.module.css';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
-import authService, { useUser } from '../../../../Services/authService';
+import authService from '../../../../Services/authService';
 import { Button } from '@mui/material';
 import { useAuthContext } from '../../../Auth/AuthProvider';
+import { ProfileInfoProps } from '../Profile';
+import { Nullable } from '../../../../utils/types/Nullable';
 
-const ProfileInfo = ({ owner, editOwner, createOwner, errors }) => {
+const ProfileInfo: React.FC<ProfileInfoProps> = ({ owner, editOwner, createOwner, errors }) => {
 
-    const [name, setName] = useState('');
-    const [error, setError] = useState(null);
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string | undefined>('');
+    const [error, setError] = useState<Nullable<String> | undefined>(null);
 
     useEffect(() => {
-        errors !== null ? setError(errors[0]) : setError(null);
+        errors !== null ? setError(errors.at(0)) : setError('');
         owner === null ? createOwner() : setName(owner?.fullName);
+        user !== null ? setEmail(user.profile?.email) : setEmail('');
     }, [owner, errors]);
 
-    const [isEdit, setIsEdit] = useState(false);
+    const [isEdit, setIsEdit] = useState<boolean>(false);
     const { isAuth, user } = useAuthContext();
 
-    const activateEditMode = () => {
+    const activateEditMode = (): void => {
         setIsEdit(true);
     };
 
-    const deactivateEditMode = () => {
+    const deactivateEditMode = (): void => {
         setIsEdit(false);
 
-        owner.fullName = name;
-        editOwner(owner);
+        if (owner !== null) {
+            owner.fullName = name;
+            editOwner(owner);
+        }
     };
 
-    const onNameChanged = (e) => {
+    const onNameChanged = (e: React.FormEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value);
     }
 
@@ -43,7 +49,7 @@ const ProfileInfo = ({ owner, editOwner, createOwner, errors }) => {
                         <EditIcon fontSize='small' />
                     </IconButton>
                     <div className={s.email}>
-                        Email: {user.profile?.email}
+                        Email: {email}
                     </div>
                 </span>}
                 {!isAuth && <span className={s.guest}>
