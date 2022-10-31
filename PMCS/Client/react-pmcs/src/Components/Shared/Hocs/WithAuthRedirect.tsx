@@ -1,16 +1,18 @@
+import { ReactJSXIntrinsicAttributes } from "@emotion/react/types/jsx-namespace";
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../../Auth/AuthProvider";
 
-const withAuthRedirect = (Component : React.ComponentType<React.PropsWithChildren>) => ({ ...props }) => {
-    const { isAuth } = useAuthContext();
+function withAuthRedirect<WP extends ReactJSXIntrinsicAttributes>(WrappedComponent: React.ComponentType<WP>) {
+    return ({ ...props }: WP) => {
+        const { isAuth } = useAuthContext();
 
-    return (
-        <div>
-            {!isAuth && <Navigate to='/' />}
-            {<Component {...props as React.PropsWithChildren} />}
-        </div>
-    );
+        return (
+            <div>
+                {!isAuth && <Navigate to='/' />}
+                {<WrappedComponent {...props} />}
+            </div>
+        );
+    }
 }
-
 export default withAuthRedirect;
