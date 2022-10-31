@@ -4,7 +4,7 @@ import { useAuthContext } from '../Auth/AuthProvider';
 
 type Props = {};
 
-const Home: React.FC<Props> = ({}) => {
+const Home: React.FC<Props> = (props = {}) => {
     const { isAuth } = useAuthContext();
 
     return (
