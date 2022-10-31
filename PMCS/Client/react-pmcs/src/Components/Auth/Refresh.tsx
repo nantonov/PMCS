@@ -2,8 +2,8 @@ import React from 'react';
 import { Navigate } from "react-router-dom";
 import authService from "../../Services/authService";
 
-const Logout = () => {
-    authService.signOutCallback();
+const Refresh : React.FC = () => {
+    authService.signInSilentCallback();
     return (
         <div>
             <Navigate to="/" replace={true} />
@@ -11,4 +11,4 @@ const Logout = () => {
     );
 }
 
-export default Logout;
+export default Refresh;

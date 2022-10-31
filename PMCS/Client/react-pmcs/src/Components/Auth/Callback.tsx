@@ -3,11 +3,12 @@ import { Navigate } from "react-router-dom";
 import authService from "../../Services/authService";
 
 const Callback = () => {
+    const win: Window = window;
     authService.signInCallback().then(() => {
         window.history.replaceState({},
             window.document.title,
             window.location.origin + window.location.pathname);
-        window.location = "http://localhost:3000/";
+        win.location = "http://localhost:3000/";
     });
     return (
         <div>
