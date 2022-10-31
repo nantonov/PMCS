@@ -4,7 +4,7 @@ import { Input } from "../Shared/FormsControls/Input";
 import { useEffect, useState } from "react";
 import s from "./petForm.module.css";
 import { NotificationType, ActionToRemindType } from "../../Enums/reminderEnums";
-import IUpdateReminderRequest from "../../common/requests/Reminder/IUpdateReminderRequest";
+import {IUpdateReminderRequest} from "../../common/requests/Reminder/IUpdateReminderRequest";
 
 type FormProps = {
     reminder: IUpdateReminderRequest;
