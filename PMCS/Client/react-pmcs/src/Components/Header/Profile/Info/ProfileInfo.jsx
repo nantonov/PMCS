@@ -13,7 +13,7 @@ const ProfileInfo = ({ owner, editOwner, createOwner, errors }) => {
 
     useEffect(() => {
         errors !== null ? setError(errors[0]) : setError(null);
-        owner === null ? createOwner() : setName(owner.fullName);
+        owner === null ? createOwner() : setName(owner?.fullName);
     }, [owner, errors]);
 
     const [isEdit, setIsEdit] = useState(false);
@@ -38,12 +38,12 @@ const ProfileInfo = ({ owner, editOwner, createOwner, errors }) => {
         {!isEdit &&
             <div className={s.info}>
                 {isAuth && owner && <span className={s.name}>
-                    {owner.fullName}
+                    {owner?.fullName}
                     <IconButton onClick={activateEditMode}>
                         <EditIcon fontSize='small' />
                     </IconButton>
                     <div className={s.email}>
-                        Email: {user.profile.email}
+                        Email: {user.profile?.email}
                     </div>
                 </span>}
                 {!isAuth && <span className={s.guest}>

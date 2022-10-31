@@ -1,8 +1,8 @@
 export interface ICreatePetRequest {
     name: string;
     info: string;
-    birthDate: string;
     weight: number;
-
+    birthDate: string;
+    
     ownerId?: number;
 }

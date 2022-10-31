@@ -1,12 +1,19 @@
 import React from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { required } from "../../utils/validators";
 import { Input } from "../Shared/FormsControls/Input";
 import { useEffect, useState } from "react";
-import { NotificationType, ActionToRemindType } from "../../Enums/reminderEnums.ts";
+import { NotificationType, ActionToRemindType } from "../../Enums/reminderEnums";
+import { ICreateReminderRequest } from "../../common/requests/Reminder/ICreateReminderRequest";
+import { IPet } from "../../common/models/IPet";
 
-let AddReminderForm = ({ handleSubmit, error, pets, submitSucceeded }) => {
+type FormProps = {
+    pets: Array<IPet>
+}
+type Props = InjectedFormProps<ICreateReminderRequest, FormProps> & FormProps;
+
+let AddReminderForm: React.FC<Props> = ({ handleSubmit, error, pets, submitSucceeded }) => {
     const [isSuccess, setSuccess] = useState(false);
 
     let petsList = pets.map(pet => <option key={pet.id} value={pet.id}>{pet.name}</option>);
@@ -35,7 +42,7 @@ let AddReminderForm = ({ handleSubmit, error, pets, submitSucceeded }) => {
             <Field name={"notificationMessage"} component={Input} type={"textarea"} validate={[required]} placeholder="Remind me to..." />
             <label>For pet</label>
             <Field name="petId" component="select">
-                <option validate={[required]}></option>
+                <option></option>
                 {petsList}
             </Field>
             <button>Submit</button>
@@ -45,6 +52,6 @@ let AddReminderForm = ({ handleSubmit, error, pets, submitSucceeded }) => {
     );
 }
 
-const AddReminderReduxForm = reduxForm({ form: "addReminderForm" })(AddReminderForm);
+const AddReminderReduxForm = reduxForm<ICreateReminderRequest, FormProps>({ form: "addReminderForm" })(AddReminderForm);
 
 export default AddReminderReduxForm;

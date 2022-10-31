@@ -3,6 +3,7 @@ export interface IUpdatePetRequest {
     name: string;
     info: string;
     weight: number;
+    birthDate: string;
 
     ownerId?: number;
 }
