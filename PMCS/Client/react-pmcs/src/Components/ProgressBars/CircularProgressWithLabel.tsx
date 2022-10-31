@@ -3,7 +3,6 @@ import CircularProgress, { CircularProgressProps } from '@mui/material/CircularP
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { circularBarSxProps } from './sxProps';
-import { SxProps } from '@mui/material';
 
 type Props = { value: number; } & CircularProgressProps;
 
