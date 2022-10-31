@@ -5,7 +5,6 @@ const authConfig: UserManagerSettings = {
     client_id: 'react-client-id',
     scope: 'openid profile email ScheduleAPI PetAPI',
     response_type: 'code',
-
     redirect_uri: 'http://localhost:3000/callback',
     post_logout_redirect_uri: 'http://localhost:3000/logout',
     silent_redirect_uri: `http://localhost:3000/refresh`,
