@@ -1,0 +1,1 @@
+export type ActivitiyUrl = "Meal" | "Vaccine" | "Walking";

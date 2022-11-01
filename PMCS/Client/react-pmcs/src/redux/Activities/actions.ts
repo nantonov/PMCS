@@ -8,7 +8,7 @@ export type SetMealsAction = { type: typeof SET_MEALS, payload: Array<IMeal> };
 export type SetWalkingsAction = { type: typeof SET_WALKINGS, payload: Array<IWalking> };
 export type SetIsFetchingAction = { type: typeof SET_IS_FETCHING, payload: boolean };
 
-export const setVaccines = (pets: Array<IVaccine>): SetVaccinesAction => ({ type: SET_VACCINES, payload: pets });
-export const setMeals = (pets: Array<IMeal>): SetMealsAction => ({ type: SET_MEALS, payload: pets });
-export const setWalkings = (pets: Array<IWalking>): SetWalkingsAction => ({ type: SET_WALKINGS, payload: pets });
-export const setisFetching = (isFetching: boolean): SetIsFetchingAction => ({ type: SET_IS_FETCHING, payload: isFetching });
+export const setVaccines = (vaccines: Array<IVaccine>): SetVaccinesAction => ({ type: SET_VACCINES, payload: vaccines });
+export const setMeals = (meals: Array<IMeal>): SetMealsAction => ({ type: SET_MEALS, payload: meals });
+export const setWalkings = (walkings: Array<IWalking>): SetWalkingsAction => ({ type: SET_WALKINGS, payload: walkings });
+export const setIsFetching = (isFetching: boolean): SetIsFetchingAction => ({ type: SET_IS_FETCHING, payload: isFetching });
