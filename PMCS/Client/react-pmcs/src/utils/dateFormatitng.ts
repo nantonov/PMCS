@@ -1,6 +1,9 @@
 import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 import { IPet } from "../common/models/IPet";
 import { IReminder } from "../common/models/IReminder";
+import { IMeal } from "../common/models/IMeal";
+import { IVaccine } from "../common/models/IVaccine";
+import { IWalking } from "../common/models/IWalking";
 
 function toLocalDate(date: string): string {
     let localDate = new Date(date);
@@ -69,6 +72,37 @@ export function setRemindersDatesToLocalFormattedDate(reminders: Array<IReminder
         reminder.lastModified = toLocalDateTime(reminder.lastModified);
 
         return reminder;
+    });
+
+    return result;
+}
+
+export function setMealDatesToLocalFormattedDate(meals: Array<IMeal>): Array<IMeal> {
+    const result = meals.map((meal) => {
+        meal.dateTime = toLocalDateTime(meal.dateTime);
+
+        return meal;
+    });
+
+    return result;
+}
+
+export function setWalkingDatesToLocalFormattedDate(walkings: Array<IWalking>): Array<IWalking> {
+    const result = walkings.map((walking) => {
+        walking.stared = toLocalDateTime(walking.stared);
+        walking.finished = toLocalDateTime(walking.finished);
+
+        return walking;
+    });
+
+    return result;
+}
+
+export function setVaccineDatesToLocalFormattedDate(vaccines: Array<IVaccine>): Array<IVaccine> {
+    const result = vaccines.map((vaccine) => {
+        vaccine.dateTime = toLocalDateTime(vaccine.dateTime);
+
+        return vaccine;
     });
 
     return result;

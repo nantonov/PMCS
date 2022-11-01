@@ -6,6 +6,7 @@ import appReducer from './App/appReducer';
 import notificationsReducer from './Notifications/notificationsReducer';
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
+import activitiesReducer from './Activities/activitiesReducer';
 
 const RootReducer = combineReducers({
     petsPage: petsReducer,
@@ -13,6 +14,7 @@ const RootReducer = combineReducers({
     remindersPage: remindersReducer,
     app: appReducer,
     notifications: notificationsReducer,
+    activitiesPage: activitiesReducer,
     form: formReducer,
 });
 
