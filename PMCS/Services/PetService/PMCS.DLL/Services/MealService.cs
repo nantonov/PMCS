@@ -26,5 +26,14 @@ namespace PMCS.DLL.Services
 
             return _mapper.Map<MealModel>(result);
         }
+
+        public async Task<IEnumerable<MealModel>> GetByOwnerId(int ownerId, CancellationToken cancellationToken)
+        {
+            var entities = await _repository.GetByPredicate(x => x.Pet.OwnerId == ownerId, cancellationToken);
+
+            var result = _mapper.Map<IEnumerable<MealModel>>(entities);
+
+            return result;
+        }
     }
 }
