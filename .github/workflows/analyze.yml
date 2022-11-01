@@ -50,6 +50,7 @@ jobs:
           sonarProjectKey: nantonov_PMCS_Pet
           sonarProjectName:  PMCS Pet Service
           sonarOrganization: nantonov
+          dotnetBuildArguments: PMCS/Services/PetService
   ScheduleServiceScan:
     name: ScheduleServiceScan
     runs-on: ubuntu-latest
