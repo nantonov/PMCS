@@ -37,6 +37,7 @@ jobs:
           sonarProjectName:  PMCS Authorization Service
           sonarOrganization: nantonov
           dotnetBuildArguments: PMCS/Services/AuthorizationService/AuthorizationService.sln
+          dotnetTestArguments: PMCS/Services/AuthorizationService/AuthorizationService.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
   PetServiceScan:
     name: PetServiceScan
     runs-on: ubuntu-latest
@@ -54,6 +55,7 @@ jobs:
           sonarProjectName:  PMCS Pet Service
           sonarOrganization: nantonov
           dotnetBuildArguments: PMCS/Services/PetService/PMCS.sln
+          dotnetTestArguments: PMCS/Services/PetService/PMCS.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
   ScheduleServiceScan:
     name: ScheduleServiceScan
     runs-on: ubuntu-latest
@@ -71,6 +73,7 @@ jobs:
           sonarProjectName:  PMCS Schedule Service
           sonarOrganization: nantonov
           dotnetBuildArguments: PMCS/Services/ScheduleService/ScheduleService.sln
+          dotnetTestArguments: PMCS/Services/ScheduleService/ScheduleService.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
   NotificationServiceScan:
     name: NotificationServiceScan
     runs-on: ubuntu-latest
@@ -88,4 +91,5 @@ jobs:
           sonarProjectName:  PMCS Notification Service
           sonarOrganization: nantonov
           dotnetBuildArguments: PMCS/Services/NotificationService/NotificationService.sln
+          dotnetTestArguments: PMCS/Services/NotificationService/NotificationService.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
           
