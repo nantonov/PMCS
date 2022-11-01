@@ -74,5 +74,14 @@ namespace PMCS.API.Controllers
 
             return _mapper.Map<WalkingViewModel>(result);
         }
+
+
+        [HttpGet("owner/{ownerId}")]
+        public async Task<IEnumerable<WalkingViewModel>> GetByOwnerId(int ownerId, CancellationToken cancellationToken)
+        {
+            var result = await _service.GetByOwnerId(ownerId, cancellationToken);
+
+            return _mapper.Map<IEnumerable<WalkingViewModel>>(result);
+        }
     }
 }

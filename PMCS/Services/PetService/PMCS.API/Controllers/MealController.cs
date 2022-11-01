@@ -74,5 +74,13 @@ namespace PMCS.API.Controllers
 
             return _mapper.Map<MealViewModel>(result);
         }
+
+        [HttpGet("owner/{ownerId}")]
+        public async Task<IEnumerable<MealViewModel>> GetByOwnerId(int ownerId, CancellationToken cancellationToken)
+        {
+            var result = await _service.GetByOwnerId(ownerId, cancellationToken);
+
+            return _mapper.Map<IEnumerable<MealViewModel>>(result);
+        }
     }
 }
