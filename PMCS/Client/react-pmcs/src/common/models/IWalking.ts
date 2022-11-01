@@ -1,7 +1,6 @@
-export interface IWalking {
-    id: number;
-    title: string;
-    desctiption: string;
+import { IActivity } from "./IActivity";
+
+export interface IWalking extends IActivity{
     stared: string;
     finished: string;
 }

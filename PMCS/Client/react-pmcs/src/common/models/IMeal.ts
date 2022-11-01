@@ -1,6 +1,5 @@
-export interface IMeal {
-    id: number;
-    title: string;
-    desctiption: string;
+import { IActivity } from "./IActivity";
+
+export interface IMeal extends IActivity {
     dateTime: string;
 }

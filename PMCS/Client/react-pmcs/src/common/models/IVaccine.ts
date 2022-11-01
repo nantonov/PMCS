@@ -1,6 +1,5 @@
-export interface IVaccine {
-    id: number;
-    title: string;
-    desctiption: string;
+import { IActivity } from "./IActivity";
+
+export interface IVaccine extends IActivity {
     dateTime: string;
 }
