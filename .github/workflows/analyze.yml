@@ -38,6 +38,7 @@ jobs:
           sonarOrganization: nantonov
           dotnetBuildArguments: PMCS/Services/AuthorizationService/AuthorizationService.sln
           dotnetTestArguments: PMCS/Services/AuthorizationService/AuthorizationService.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
   PetServiceScan:
     name: PetServiceScan
     runs-on: ubuntu-latest
@@ -56,6 +57,7 @@ jobs:
           sonarOrganization: nantonov
           dotnetBuildArguments: PMCS/Services/PetService/PMCS.sln
           dotnetTestArguments: PMCS/Services/PetService/PMCS.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
   ScheduleServiceScan:
     name: ScheduleServiceScan
     runs-on: ubuntu-latest
@@ -74,6 +76,7 @@ jobs:
           sonarOrganization: nantonov
           dotnetBuildArguments: PMCS/Services/ScheduleService/ScheduleService.sln
           dotnetTestArguments: PMCS/Services/ScheduleService/ScheduleService.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
   NotificationServiceScan:
     name: NotificationServiceScan
     runs-on: ubuntu-latest
@@ -92,4 +95,5 @@ jobs:
           sonarOrganization: nantonov
           dotnetBuildArguments: PMCS/Services/NotificationService/NotificationService.sln
           dotnetTestArguments: PMCS/Services/NotificationService/NotificationService.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
           
