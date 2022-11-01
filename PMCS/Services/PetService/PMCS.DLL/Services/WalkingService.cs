@@ -27,5 +27,14 @@ namespace PMCS.DLL.Services
 
             return _mapper.Map<WalkingModel>(result);
         }
+
+        public async Task<IEnumerable<WalkingModel>> GetByOwnerId(int ownerId, CancellationToken cancellationToken)
+        {
+            var entities = await _repository.GetByPredicate(x => x.Pet.OwnerId == ownerId, cancellationToken);
+
+            var result = _mapper.Map<IEnumerable<WalkingModel>>(entities);
+
+            return result;
+        }
     }
 }

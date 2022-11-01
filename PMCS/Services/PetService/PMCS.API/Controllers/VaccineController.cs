@@ -74,5 +74,14 @@ namespace PMCS.API.Controllers
 
             return _mapper.Map<VaccineViewModel>(result);
         }
+
+
+        [HttpGet("owner/{ownerId}")]
+        public async Task<IEnumerable<VaccineViewModel>> GetByOwnerId(int ownerId, CancellationToken cancellationToken)
+        {
+            var result = await _service.GetByOwnerId(ownerId, cancellationToken);
+
+            return _mapper.Map<IEnumerable<VaccineViewModel>>(result);
+        }
     }
 }

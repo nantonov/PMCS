@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PMCS.DAL.Interfaces.Entities;
 using PMCS.DAL.Interfaces.Repositories;
+using System.Linq.Expressions;
 
 namespace PMCS.DAL.Repositories
 {
@@ -20,6 +21,13 @@ namespace PMCS.DAL.Repositories
             await _context.SaveChangesAsync(cancellationToken);
 
             return entity;
+        }
+
+        public async Task<IEnumerable<TEntity>> GetByPredicate(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        {
+            var entities = await Query.Where(predicate).ToListAsync(cancellationToken);
+
+            return entities;
         }
 
         public async Task<IEnumerable<TEntity>> InsertRange(IEnumerable<TEntity> entities, CancellationToken cancellationToken)
