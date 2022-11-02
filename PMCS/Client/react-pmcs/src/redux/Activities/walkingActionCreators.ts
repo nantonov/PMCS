@@ -18,7 +18,7 @@ export const fetchWalkings = () => {
     };
 };
 
-export const createWalkings = (walking: ICreateActivityRequest) => {
+export const createWalking = (walking: ICreateActivityRequest) => {
     return async (dispatch: AppDispatch<ActivitiesActions>) => {
         const result = await activityService.create("Walking", walking);
 

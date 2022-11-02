@@ -2,13 +2,13 @@ import { connect } from 'react-redux';
 import { getMeals, getVaccines, getWalkings, isFetching } from '../../../redux/Activities/selectors';
 import { RootState } from '../../../redux/types';
 import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
-import { ConnectedProps } from 'react-redux';
-import { compose } from 'redux';
 import * as mealActionCreators from '../../../redux/Activities/mealActionCreators';
 import * as vaccineActionCreators from '../../../redux/Activities/vaccineActionCreators';
 import * as walkingActionCreators from '../../../redux/Activities/walkingActionCreators';
 import { bindActionCreators, Dispatch } from 'redux';
-import s from './ActivitiesContainer.module.css';
+import s from './Activities.module.css';
+import React from 'react';
+import { ReactJSXIntrinsicAttributes } from '@emotion/react/types/jsx-namespace';
 
 function mapStateToProps(state: RootState) {
     return {
@@ -41,12 +41,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
         dispatch
     );
 
-
-const connector = compose(connect(mapStateToProps, mapDispatchToProps), withAuthRedirect);
-
-export type ActivitiesProps = ConnectedProps<typeof connector>;
-
-const ActivitiesContainer: React.FC<ActivitiesProps> = ({ }) => {
+type ActivitiesProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & ReactJSXIntrinsicAttributes;
+const ActivitiesContainer: React.FC<ActivitiesProps> = (props) => {
     return (
         <div className={s.wrapper}>
             Here will be activities
@@ -54,4 +50,6 @@ const ActivitiesContainer: React.FC<ActivitiesProps> = ({ }) => {
     );
 }
 
-export default connector(ActivitiesContainer);
+const ComponentWithRedirect = withAuthRedirect<ActivitiesProps>(ActivitiesContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ComponentWithRedirect);
