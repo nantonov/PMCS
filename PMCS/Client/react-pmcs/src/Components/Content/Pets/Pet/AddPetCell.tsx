@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { SetStateAction } from 'react';
 import s from './AddPetCell.module.css'
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const AddPetCell = ({setAddModalOpen}) => {
-    function handleClick() {
+type AddPetCellProps = {
+    setAddModalOpen: React.Dispatch<SetStateAction<boolean>>
+}
+
+const AddPetCell: React.FC<AddPetCellProps> = ({ setAddModalOpen }) => {
+    function handleClick() : void {
         setAddModalOpen(true);
     };
 

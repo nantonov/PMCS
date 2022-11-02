@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import s from './LastActivityList.module.css';
 import LastActivity from './LastActivity/LastActivity';
 import Button from '@mui/material/Button';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import { IPet } from '../../../../../common/models/IPet';
 
-const LastActivityList = props => {
-    const { pet, setInfoModalOpened } = props;
+type LastActivityListProps = {
+    pet: IPet,
+    setInfoModalOpened: React.Dispatch<SetStateAction<boolean>>
+}
 
-    let walkingElelement = pet.walkings.map(activityItem => <LastActivity activity={{dateTime:activityItem.stared}} />);
-    let mealElelement = pet.meals.map(activityItem => <LastActivity activity={{dateTime:activityItem.dateTime}} />);
-    let vaccineElelement = pet.vaccines.map(activityItem => <LastActivity activity={{dateTime:activityItem.dateTime}} />);
-    
-    let onShowInfoClick = () => {
+const LastActivityList: React.FC<LastActivityListProps> = ({ pet, setInfoModalOpened }) => {
+    let walkingElelement = pet.walkings.map(activityItem => <LastActivity activity={{ dateTime: activityItem.stared }} />);
+    let mealElelement = pet.meals.map(activityItem => <LastActivity activity={{ dateTime: activityItem.dateTime }} />);
+    let vaccineElelement = pet.vaccines.map(activityItem => <LastActivity activity={{ dateTime: activityItem.dateTime }} />);
+
+    let onShowInfoClick = () : void => {
         setInfoModalOpened(true);
     };
 

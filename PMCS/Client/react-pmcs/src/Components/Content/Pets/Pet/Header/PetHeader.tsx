@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import s from './PetHeader.module.css'
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { IPet } from '../../../../../common/models/IPet';
+import { deletePet } from '../../../../../redux/Pets/actionCreators'
 
-const PetHeader = (props) => {
+type PetHeaderProps = {
+    pet: IPet,
+    setEditModalOpen: React.Dispatch<SetStateAction<boolean>>,
+    setIsPetDeleted: React.Dispatch<SetStateAction<boolean>>,
+    deletePet: typeof deletePet;
+}
 
-    const { pet, deletePet, setEditModalOpen, setIsPetDeleted, cleanErrors } = props;
-
-    let onDeleteButtonClick = () => {
+const PetHeader: React.FC<PetHeaderProps> = ({ pet, deletePet, setEditModalOpen, setIsPetDeleted }) => {
+    let onDeleteButtonClick = (): void => {
         let id = pet.id;
         deletePet(id);
         setIsPetDeleted(true);
     };
 
-    let onEditButtonClick = () => {
+    let onEditButtonClick = (): void => {
         setEditModalOpen(true);
-        cleanErrors();
     };
 
     return (

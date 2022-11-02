@@ -1,7 +1,7 @@
 export interface IWalking {
     id: number;
     title: string;
-    desctiption: string;
+    description: string;
     stared: string;
     finished: string;
 }

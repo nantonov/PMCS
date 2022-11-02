@@ -1,6 +1,6 @@
 export interface IMeal {
     id: number;
     title: string;
-    desctiption: string;
+    description: string;
     dateTime: string;
 }
