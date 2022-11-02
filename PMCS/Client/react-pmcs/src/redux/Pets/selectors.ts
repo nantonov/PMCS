@@ -7,10 +7,10 @@ const selectPets = (state: RootState) => state.petsPage.pets;
 
 const selectIsFetching = (state: RootState) => state.petsPage.isFetching;
 
-export const getPets = createSelector(selectPets, (pets: Array<IPet>) => {
+export const getPets = createSelector(selectPets, (pets: Array<IPet>) : Array<IPet> => {
     return setPetDatesToLocalFormattedDate(pets);
 });
 
-export const isFetching = createSelector(selectIsFetching, (isFetching: boolean) => {
+export const isFetching = createSelector(selectIsFetching, (isFetching: boolean) : boolean => {
     return isFetching;
 })
