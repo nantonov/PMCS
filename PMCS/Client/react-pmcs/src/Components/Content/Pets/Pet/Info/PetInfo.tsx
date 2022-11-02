@@ -1,9 +1,12 @@
 import React from 'react';
+import { IPet } from '../../../../../common/models/IPet';
 import s from './PetInfo.module.css'
 
-const PetInfo = (props) => {
-    const { pet } = props;
+type PetInfoProps = {
+    pet: IPet
+}
 
+const PetInfo: React.FC<PetInfoProps> = ({ pet }) => {
     return (<article className={s.wrapper}>
         <div className={s.info}>
             {!pet.info && <div>No description provided.</div>}

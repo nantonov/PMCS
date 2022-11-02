@@ -1,0 +1,26 @@
+import React from 'react';
+import { IMeal } from '../../../../../../common/models/IMeal';
+import { IVaccine } from '../../../../../../common/models/IVaccine';
+import { IWalking } from '../../../../../../common/models/IWalking';
+import s from './LastActivity.module.css';
+
+interface ILastActivity {
+    dateTime: string;
+}
+
+type LastActivityProps = {
+    activity: ILastActivity
+}
+
+const LastActivity: React.FC<LastActivityProps> = ({ activity }) => {
+
+    return (
+        <div className={s.item}>
+            <div className={s.date}>
+                on {activity.dateTime}
+            </div>
+        </div >
+    );
+}
+
+export default LastActivity;
