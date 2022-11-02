@@ -1,14 +1,24 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, SetStateAction, useCallback } from 'react';
 import s from '../../../../../Shared/Modal/Modal.module.css';
 import { toServerFormatDate } from '../../../../../../utils/dateFormatitng';
 import EditPetForm from '../../../../../Forms/EditPetForm';
+import { IPet } from '../../../../../../common/models/IPet'
+import { editPet } from '../../../../../../redux/Pets/actionCreators'
+import { IUpdatePetRequest } from '../../../../../../common/requests/Pet/IUpdatePetRequest';
 
-const EditPetModal = ({ pet, setEditModalOpen, editPet }) => {
-    const escFunction = useCallback((event) => {
+type EditPetModalProps = {
+    pet: IPet,
+    setEditModalOpen: React.Dispatch<SetStateAction<boolean>>,
+    editPet: typeof editPet
+}
+
+const EditPetModal: React.FC<EditPetModalProps> = ({ pet, setEditModalOpen, editPet }) => {
+
+    const escFunction = useCallback<(event: KeyboardEvent) => void>((event) => {
         if (event.key === "Escape") {
             setEditModalOpen(false);
         }
-    });
+    }, []);
 
     useEffect(() => {
         document.addEventListener("keydown", escFunction, false);
@@ -18,7 +28,7 @@ const EditPetModal = ({ pet, setEditModalOpen, editPet }) => {
         };
     });
 
-    const updatePetData = (values) => {
+    const updatePetData = (values: IUpdatePetRequest): void => {
         editPet({
             name: values.name,
             weight: values.weight,

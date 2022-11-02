@@ -1,14 +1,21 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { SetStateAction, useCallback, useEffect } from 'react';
 import AddPetForm from '../../../../../Forms/AddPetForm';
 import s from '../../../../../Shared/Modal/Modal.module.css';
+import { createPet } from '../../../../../../redux/Pets/actionCreators'
+import { ICreatePetRequest } from '../../../../../../common/requests/Pet/ICreatePetRequest';
 
-const AddPetModal = ({ setAddModalOpen, addPet}) => {
+type AddPetModalProps = {
+    setAddModalOpen: React.Dispatch<SetStateAction<boolean>>,
+    addPet: typeof createPet
+}
 
-    const escFunction = useCallback((event) => {
+const AddPetModal : React.FC<AddPetModalProps> = ({ setAddModalOpen, addPet}) => {
+
+    const escFunction = useCallback((event : KeyboardEvent) => {
         if (event.key === "Escape") {
             setAddModalOpen(false);
         }
-    });
+    }, []);
 
     useEffect(() => {
         document.addEventListener("keydown", escFunction, false);
@@ -18,7 +25,7 @@ const AddPetModal = ({ setAddModalOpen, addPet}) => {
         };
     });
 
-    const addNewPet = (values) => {
+    const addNewPet = (values : ICreatePetRequest) => {
         addPet({
             name: values.name,
             weight: values.weight,
