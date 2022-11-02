@@ -18,7 +18,7 @@ export const fetchVaccines = () => {
     };
 };
 
-export const createMeal = (vaccine: ICreateActivityRequest) => {
+export const createVaccine = (vaccine: ICreateActivityRequest) => {
     return async (dispatch: AppDispatch<ActivitiesActions>) => {
         const result = await activityService.create("Vaccine", vaccine);
 
@@ -34,7 +34,7 @@ export const createMeal = (vaccine: ICreateActivityRequest) => {
     };
 };
 
-export const editMeal = (meal: IUpdateActivityRequest) => {
+export const editVaccine = (meal: IUpdateActivityRequest) => {
     return async (dispatch: AppDispatch<ActivitiesActions>) => {
         const result = await activityService.update("Vaccine", meal);
         if (result.status === 400) {
