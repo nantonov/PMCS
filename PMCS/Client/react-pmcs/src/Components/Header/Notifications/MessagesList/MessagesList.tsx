@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import s from './MessagesList.module.css';
 import { Button } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 
-const MessagesList = ({ messages, clearMessages, isUserNotified }) => {
+type MessagesListProps = {
+    messages: Array<string>;
+    clearMessages: () => void;
+    isUserNotified: boolean;
+}
+
+const MessagesList : React.FC<MessagesListProps> = ({ messages, clearMessages, isUserNotified }) => {
 
     const messagesElements = messages.map((message, index) => <div key={index} className={s.notification}>{message}</div>);
     const content = isUserNotified ? messagesElements : <div className={s.noContent}>No notifications yet...</div>;

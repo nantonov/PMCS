@@ -5,7 +5,7 @@ import { faPaw } from '@fortawesome/free-solid-svg-icons'
 import NotificationsContainer from './Notifications/NotificationsContainer';
 import ProfileContainer from './Profile/ProfileContainer';
 
-const Header = () => {
+const Header : React.FC = () => {
     return (
         <header className={s.header}>
             <div className={s.icon}>
