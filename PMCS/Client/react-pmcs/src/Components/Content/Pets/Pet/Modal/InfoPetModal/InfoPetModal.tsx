@@ -1,10 +1,16 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, SetStateAction } from 'react';
 import s from './InfoPetModal.module.css'
+import { IPet } from '../../../../../../common/models/IPet'
 
-const InfoPetModal = props => {
+type InfoPetModalProps = {
+    pet: IPet,
+    setInfoModalOpen: React.Dispatch<SetStateAction<boolean>>
+}
+
+const InfoPetModal: React.FC<InfoPetModalProps> = props => {
     const { pet, setInfoModalOpen } = props;
 
-    const escFunction = useCallback((event) => {
+    const escFunction = useCallback<(event: KeyboardEvent) => void>((event) => {
         if (event.key === "Escape") {
             setInfoModalOpen(false);
         }
@@ -18,20 +24,20 @@ const InfoPetModal = props => {
         };
     }, []);
 
-    let walking = pet.walkings.map(item => <div className={s.itemWrapper}>
+    let walking = pet.walkings?.map(item => <div className={s.itemWrapper}>
         <div className={s.title}>{item.title}</div>
         <div className={s.description}>{item.description}</div>
         <div>Started: {item.stared}</div>
         <div>Finished: {item.finished}</div>
     </div>);
 
-    let meal = pet.meals.map(item => <div className={s.itemWrapper}>
+    let meal = pet.meals?.map(item => <div className={s.itemWrapper}>
         <div className={s.title}>{item.title}</div>
         <div className={s.description}>{item.description}</div>
         <div>Date: {item.dateTime}</div>
     </div>);
 
-    let vaccine = pet.vaccines.map(item => <div className={s.itemWrapper}>
+    let vaccine = pet.vaccines?.map(item => <div className={s.itemWrapper}>
         <div className={s.title}>{item.title}</div>
         <div className={s.description}>{item.description}</div>
         <div>Date: {item.dateTime}</div>
