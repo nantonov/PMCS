@@ -43,13 +43,13 @@ const App: FC<Props> = ({ isInitialized, initializeApp }) => {
       <Nav />
       <main className='app-content-wrapper'>
         <Routes>
-          <Route path='/pets/*' element={<PetsContainer />}></Route>
-          <Route path='/activities/*' element={<ActivitiesContainer />}></Route>
-          <Route path='/reminders/*' element={<RemindersContainer />}></Route>
-          <Route path='/callback' element={<Callback />}></Route>
-          <Route path='/refresh' element={<Refresh />}></Route>
-          <Route path='/logout' element={<Logout />}></Route>
-          <Route path='/' element={<Home />}></Route>
+          <Route path='/pets/*' element={<PetsContainer />} />
+          <Route path='/activities/*' element={<ActivitiesContainer />} />
+          <Route path='/reminders/*' element={<RemindersContainer />} />
+          <Route path='/callback' element={<Callback />} />
+          <Route path='/refresh' element={<Refresh />} />
+          <Route path='/logout' element={<Logout />} />
+          <Route path='/' element={<Home />} />
         </Routes>
       </main>
     </div>

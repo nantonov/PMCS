@@ -26,3 +26,16 @@ export function createErrorsListForReminders(result){
 
     return errors;
 }
+
+export function createErrorsListForActivities(result){
+    let errors = [];
+    const titleErrors = result.errors?.Title;
+    const descriptionErrors = result.errors?.Description;
+    const petIdErrors = result.errors?.dateTime;
+
+    errors = errors.concat(titleErrors, descriptionErrors, petIdErrors);
+
+    errors = errors.filter(element => element !== undefined);
+
+    return errors;
+}
