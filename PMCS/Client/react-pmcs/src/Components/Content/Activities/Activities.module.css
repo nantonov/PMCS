@@ -3,9 +3,17 @@
 .wrapper{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 100%;
     background-color: var(--color-content-block-background-global);
     padding: 0 20px;
+}
+
+.wrapper .activityItem {
+    display: flex;
+}
+
+.wrapper .activityItem .title {
+    font-weight: bolder;
+    font-size: large;
+    letter-spacing: 2px;
 }
