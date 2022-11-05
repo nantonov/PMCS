@@ -31,9 +31,12 @@ export function createErrorsListForActivities(result){
     let errors = [];
     const titleErrors = result.errors?.Title;
     const descriptionErrors = result.errors?.Description;
-    const petIdErrors = result.errors?.dateTime;
+    const petIdErrors = result.errors?.PetId;
+    const staredDateTimeErrors = result.errors?.Stared;
+    const finishedDateTimeErrors = result.errors?.Finished;
+    const dateTimeErrors = result.errors?.DateTime;
 
-    errors = errors.concat(titleErrors, descriptionErrors, petIdErrors);
+    errors = errors.concat(titleErrors, descriptionErrors, petIdErrors, staredDateTimeErrors, finishedDateTimeErrors, dateTimeErrors);
 
     errors = errors.filter(element => element !== undefined);
 

@@ -14,9 +14,7 @@ export const getMeals = createSelector(selectMeals, (meals: Array<IMeal>) => {
     return setMealDatesToLocalFormattedDate(meals);
 });
 
-export const getWalkings = createSelector(selectWalkings, (walkings: Array<IWalking>) => {
-    return setWalkingDatesToLocalFormattedDate(walkings);
-});
+export const getWalkings = (state: RootState) : Array<IWalking> => setWalkingDatesToLocalFormattedDate(selectWalkings(state));
 
 export const getVaccines = createSelector(selectVaccines, (vaccines: Array<IVaccine>) => {
     return setVaccineDatesToLocalFormattedDate(vaccines);
