@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as vaccineActionCreators from '../../../redux/Activities/vaccineActionCreators';
 import { RootState } from '../../../redux/types';
 import { getVaccines, isFetching } from '../../../redux/Activities/selectors';
@@ -33,7 +33,7 @@ type VaccineProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof ma
 const Vaccines: React.FC<VaccineProps> = (props) => {
     useEffect(() => {
         props.fetchVaccines();
-    }, []);
+    }, [props.vaccines]);
 
     const vaccineItems = props.vaccines.map(vaccineItem => <VaccineActivity
         title={vaccineItem.title}
@@ -47,7 +47,7 @@ const Vaccines: React.FC<VaccineProps> = (props) => {
         <section>
             {props.isFetching ? <Preloader /> : null}
             <article>
-                <span className={s.title}>Vaccines</span>
+                <span className={s.subTitle}>Vaccines</span>
                 <Activities children={vaccineItems} />
             </article>
         </section>

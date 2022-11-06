@@ -32,10 +32,18 @@
 }
 
 .title {
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     font-weight: bold;
     font-size: larger;
     margin-right: 20px;
+}
+
+.subTitle {
+    font-size: medium;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    margin-left: 10px;
+    margin-bottom: 5px;
 }
 
 .header {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as walkingActionCreators from '../../../redux/Activities/walkingActionCreators';
 import { RootState } from '../../../redux/types';
 import { getWalkings, isFetching } from '../../../redux/Activities/selectors';
@@ -32,7 +32,7 @@ type WalkingProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof ma
 const Walkings: React.FC<WalkingProps> = (props) => {
     useEffect(() => {
         props.fetchWalkings();
-    }, []);
+    }, [props.walkings]);
 
     const vaccineItems = props.walkings.map(walking => <WalkingActivity
         title={walking.title}
@@ -47,7 +47,7 @@ const Walkings: React.FC<WalkingProps> = (props) => {
         <section>
             {props.isFetching ? <Preloader /> : null}
             <article>
-                <span className={s.title}>Walkings</span>
+                <span className={s.subTitle}>Walkings</span>
                 <Activities children={vaccineItems} />
             </article>
         </section>

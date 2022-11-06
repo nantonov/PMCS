@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as mealActionCreators from '../../../redux/Activities/mealActionCreators';
 import { RootState } from '../../../redux/types';
 import { getMeals, isFetching } from '../../../redux/Activities/selectors';
@@ -33,7 +33,7 @@ type MealsProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapS
 const Meals: React.FC<MealsProps> = (props) => {
     useEffect(() => {
         props.fetchMeals();
-    }, []);
+    }, [props.meals]);
 
     const mealActivities = props.meals.map(mealItem => <MealActivity
         title={mealItem.title}
@@ -47,7 +47,7 @@ const Meals: React.FC<MealsProps> = (props) => {
         <section>
             {props.isFetching ? <Preloader /> : null}
             <article>
-                <span className={s.title}>Meals</span>
+                <div className={s.subTitle}>Meals</div>
                 <Activities children={mealActivities} />
             </article>
         </section>

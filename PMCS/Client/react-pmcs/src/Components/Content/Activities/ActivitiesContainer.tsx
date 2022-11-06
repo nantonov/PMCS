@@ -42,7 +42,7 @@ const ActivitiesContainer: React.FC<ActivitiesProps> = (props) => {
     };
 
     const location = useLocation();
-    const content = location.pathname == '/activities' ? <Navigate to='/activities/meals'/> : <Outlet/>;
+    const content = location.pathname === '/activities' ? <Navigate to='/activities/meals' /> : <Outlet />;
 
     return (
         <section className={s.wrapper}>
@@ -57,6 +57,7 @@ const ActivitiesContainer: React.FC<ActivitiesProps> = (props) => {
                 <NavLink to='/activities/walkings' className={s.link}>Walkings</NavLink>
             </nav>
             <div className={s.header}>
+                <span className={s.title}>Activities</span>
                 <Button className={s.addButton} onClick={handleClick} startIcon={<AddIcon />} color="success">
                     New activity
                 </Button>
