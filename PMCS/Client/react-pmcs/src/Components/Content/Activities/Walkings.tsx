@@ -30,9 +30,11 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type WalkingProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps> & ReactJSXIntrinsicAttributes;
 
 const Walkings: React.FC<WalkingProps> = (props) => {
+    const [isWalkingDeleted, setWalkingDeleted] = useState<boolean>(false);
+
     useEffect(() => {
         props.fetchWalkings();
-    }, [props.walkings]);
+    }, [isWalkingDeleted]);
 
     const vaccineItems = props.walkings.map(walking => <WalkingActivity
         title={walking.title}
@@ -41,7 +43,8 @@ const Walkings: React.FC<WalkingProps> = (props) => {
         finished={walking.finished}
         pet={walking.pet}
         deleteWalking={props.deleteWalking}
-        id={walking.id} />);
+        id={walking.id}
+        setWalkingDeleted={setWalkingDeleted} />);
 
     return (
         <section>

@@ -31,9 +31,11 @@ type MealsProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapS
 
 
 const Meals: React.FC<MealsProps> = (props) => {
+    const [isMealDeleted, setMealDeleted] = useState<boolean>(false);
+
     useEffect(() => {
         props.fetchMeals();
-    }, [props.meals]);
+    }, [isMealDeleted]);
 
     const mealActivities = props.meals.map(mealItem => <MealActivity
         title={mealItem.title}
@@ -41,7 +43,8 @@ const Meals: React.FC<MealsProps> = (props) => {
         dateTime={mealItem.dateTime}
         pet={mealItem.pet}
         deleteMeal={props.deleteMeal}
-        id={mealItem.id} />);
+        id={mealItem.id}
+        setMealDeleted={setMealDeleted} />);
 
     return (
         <section>

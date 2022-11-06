@@ -31,9 +31,11 @@ type VaccineProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof ma
 
 
 const Vaccines: React.FC<VaccineProps> = (props) => {
+    const [isVaccineDeleted, setVaccineDeleted] = useState<boolean>(false);
+
     useEffect(() => {
         props.fetchVaccines();
-    }, [props.vaccines]);
+    }, [isVaccineDeleted]);
 
     const vaccineItems = props.vaccines.map(vaccineItem => <VaccineActivity
         title={vaccineItem.title}
@@ -41,7 +43,8 @@ const Vaccines: React.FC<VaccineProps> = (props) => {
         dateTime={vaccineItem.dateTime}
         pet={vaccineItem.pet}
         deleteVaccine={props.deleteVaccine}
-        id={vaccineItem.id} />);
+        id={vaccineItem.id}
+        setVaccineDeleted={setVaccineDeleted} />);
 
     return (
         <section>
