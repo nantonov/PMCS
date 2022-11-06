@@ -29,6 +29,7 @@ export const createMeal = (meal: ICreateActivityRequest) => {
         } else {
             startSubmit(ADD_FORM);
             dispatch(fetchMeals());
+            dispatch(reset(ADD_FORM));
         }
     };
 };

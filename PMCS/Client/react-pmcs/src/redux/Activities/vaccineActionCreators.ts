@@ -29,6 +29,7 @@ export const createVaccine = (vaccine: ICreateActivityRequest) => {
         } else {
             startSubmit(ADD_FORM);
             dispatch(fetchVaccines());
+            dispatch(reset(ADD_FORM));
         }
     };
 };

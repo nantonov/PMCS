@@ -10,6 +10,7 @@ import s from './Activities.module.css';
 import Activities from './Activities';
 import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
 import { ReactJSXIntrinsicAttributes } from '@emotion/react/types/jsx-namespace';
+import NoContent from '../NoContent/NoContent';
 
 function mapStateToProps(state: RootState) {
     return {
@@ -46,12 +47,14 @@ const Vaccines: React.FC<VaccineProps> = (props) => {
         id={vaccineItem.id}
         setVaccineDeleted={setVaccineDeleted} />);
 
+    const content = vaccineItems.length > 0 ? <Activities children={vaccineItems} /> : <NoContent />;
+
     return (
         <section>
             {props.isFetching ? <Preloader /> : null}
             <article>
                 <span className={s.subTitle}>Vaccines</span>
-                <Activities children={vaccineItems} />
+                {content}
             </article>
         </section>
     );

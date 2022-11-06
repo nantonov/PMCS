@@ -10,6 +10,7 @@ import s from './Activities.module.css';
 import Activities from './Activities';
 import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
 import { ReactJSXIntrinsicAttributes } from '@emotion/react/types/jsx-namespace';
+import NoContent from '../NoContent/NoContent';
 
 function mapStateToProps(state: RootState) {
     return {
@@ -46,12 +47,14 @@ const Meals: React.FC<MealsProps> = (props) => {
         id={mealItem.id}
         setMealDeleted={setMealDeleted} />);
 
+    const content = mealActivities.length > 0 ? <Activities children={mealActivities} /> : <NoContent />;
+
     return (
         <section>
             {props.isFetching ? <Preloader /> : null}
             <article>
                 <div className={s.subTitle}>Meals</div>
-                <Activities children={mealActivities} />
+                {content}
             </article>
         </section>
     );

@@ -13,7 +13,7 @@ const MealActivity: React.FC<MealProps> = ({ dateTime, title, description, pet, 
 
     const handleDeleteButtonClick = () => {
         deleteMeal(id);
-        setMealDeleted(true);
+        setMealDeleted(deletedFlag);
         toggleDeletedFlag(!deletedFlag);
     }
 

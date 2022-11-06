@@ -8,12 +8,11 @@ import { deleteVaccine } from '../../../../redux/Activities/vaccineActionCreator
 type VaccineProps = IVaccine & { deleteVaccine: typeof deleteVaccine, setVaccineDeleted: React.Dispatch<SetStateAction<boolean>> };
 
 const VaccineActivity: React.FC<VaccineProps> = ({ dateTime, title, description, pet, setVaccineDeleted, id, deleteVaccine }) => {
-
     const [deletedFlag, toggleDeletedFlag] = React.useState(true);
 
     const handleDeleteButtonClick = () => {
         deleteVaccine(id);
-        setVaccineDeleted(true);
+        setVaccineDeleted(deletedFlag);
         toggleDeletedFlag(!deletedFlag);
     }
 

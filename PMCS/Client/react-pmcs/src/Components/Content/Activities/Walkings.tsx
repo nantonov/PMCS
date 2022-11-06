@@ -10,6 +10,7 @@ import s from './Activities.module.css';
 import Activities from './Activities';
 import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
 import { ReactJSXIntrinsicAttributes } from '@emotion/react/types/jsx-namespace';
+import NoContent from '../NoContent/NoContent';
 
 function mapStateToProps(state: RootState) {
     return {
@@ -36,7 +37,7 @@ const Walkings: React.FC<WalkingProps> = (props) => {
         props.fetchWalkings();
     }, [isWalkingDeleted]);
 
-    const vaccineItems = props.walkings.map(walking => <WalkingActivity
+    const walkingItems = props.walkings.map(walking => <WalkingActivity
         title={walking.title}
         description={walking.description}
         stared={walking.stared}
@@ -46,12 +47,14 @@ const Walkings: React.FC<WalkingProps> = (props) => {
         id={walking.id}
         setWalkingDeleted={setWalkingDeleted} />);
 
+    const content = walkingItems.length > 0 ? <Activities children={walkingItems} /> : <NoContent />;
+
     return (
         <section>
             {props.isFetching ? <Preloader /> : null}
             <article>
                 <span className={s.subTitle}>Walkings</span>
-                <Activities children={vaccineItems} />
+                {content}
             </article>
         </section>
     );

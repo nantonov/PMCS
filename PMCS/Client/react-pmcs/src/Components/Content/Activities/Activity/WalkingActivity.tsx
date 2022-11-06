@@ -8,7 +8,6 @@ import { deleteWalking } from '../../../../redux/Activities/walkingActionCreator
 type WalkingProps = IWalking & { deleteWalking: typeof deleteWalking, setWalkingDeleted: React.Dispatch<SetStateAction<boolean>> };
 
 const WalkingActivity: React.FC<WalkingProps> = ({ stared, finished, title, description, pet, id, setWalkingDeleted, deleteWalking }) => {
-
     const [deletedFlag, toggleDeletedFlag] = React.useState(true);
 
     const handleDeleteButtonClick = () => {

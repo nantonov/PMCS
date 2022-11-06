@@ -29,6 +29,7 @@ export const createWalking = (walking: ICreateActivityRequest) => {
         } else {
             startSubmit(ADD_FORM);
             dispatch(fetchWalkings());
+            dispatch(reset(ADD_FORM));
         }
     };
 };
