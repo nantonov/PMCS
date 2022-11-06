@@ -28,12 +28,13 @@ let AddActivityForm: React.FC<Props> = ({ handleSubmit, error, pets, submitFaile
             <label>DateTime</label>
             <Field name={"dateTime"} component={Input} type={"datetime-local"} validate={[required]} />
             <Field name="activityType" component="select">
+                <option></option>
                 <option value={ActivityType.Vaccine}>Vaccine</option>
                 <option value={ActivityType.Meal}>Meal</option>
                 <option value={ActivityType.Walking}>Walking</option>
             </Field>
             <label>For pet</label>
-            <Field name="petId" component="select"  onFocus={fetchPets}>
+            <Field name="petId" component="select"  onFocus={fetchPets} validate={[required]}>
                 <option></option>
                 {petsList}
             </Field>
