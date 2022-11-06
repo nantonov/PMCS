@@ -54,9 +54,11 @@ const AddActivityModal: React.FC<AddActivityModalProps> = ({ setAddModalOpened, 
     const addActivity = (values: ICreateActivityRequest) => {
         switch (values.activityType) {
             case ActivityType.Meal:
+                values.dateTime = toUtcDateTime(values.dateTime as string);
                 addMeal(values);
                 break;
             case ActivityType.Vaccine:
+                values.dateTime = toUtcDateTime(values.dateTime as string);
                 addVaccine(values);
                 break;
             case ActivityType.Walking:
