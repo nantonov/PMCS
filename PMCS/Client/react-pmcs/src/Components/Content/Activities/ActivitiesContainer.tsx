@@ -7,15 +7,11 @@ import * as vaccineActionCreators from '../../../redux/Activities/vaccineActionC
 import * as walkingActionCreators from '../../../redux/Activities/walkingActionCreators';
 import { bindActionCreators, Dispatch } from 'redux';
 import s from './Activities.module.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ReactJSXIntrinsicAttributes } from '@emotion/react/types/jsx-namespace';
-import WalkingActivity from './Activity/WalkingActivity';
-import MealActivity from './Activity/MealActivity';
-import VaccineActivity from './Activity/VaccineActivity';
-import Activities from './Activities';
-import Preloader from '../../Preloader/Preloader';
-import IconButton from '@mui/material/IconButton';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { Navigate, Outlet, useLocation, NavLink } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 import AddActivityModal from './Activity/Modal/AddActivityModal';
 
 function mapStateToProps(state: RootState) {
@@ -30,21 +26,9 @@ function mapStateToProps(state: RootState) {
 const mapDispatchToProps = (dispatch: Dispatch) =>
     bindActionCreators(
         {
-            fetchMeals: mealActionCreators.fetchMeals,
-            fetchVaccines: vaccineActionCreators.fetchVaccines,
-            fetchWalkings: walkingActionCreators.fetchWalkings,
-
-            deleteMeal: mealActionCreators.deleteMeal,
-            deleteVaccine: vaccineActionCreators.deleteVaccine,
-            deleteWalking: walkingActionCreators.deleteWalking,
-
             addMeal: mealActionCreators.createMeal,
             addVaccine: vaccineActionCreators.createVaccine,
             addWalking: walkingActionCreators.createWalking,
-
-            updateMeal: mealActionCreators.editMeal,
-            updateVaccine: vaccineActionCreators.editVaccine,
-            updateWalking: walkingActionCreators.editWalking
         },
         dispatch
     );
@@ -57,53 +41,27 @@ const ActivitiesContainer: React.FC<ActivitiesProps> = (props) => {
         setAddModalOpened(true);
     };
 
-    useEffect(() => {
-        props.fetchMeals();
-    }, []);
-
-    const walkingActivities = props.walkings.map(walkingItem => <WalkingActivity
-        title={walkingItem.title}
-        description={walkingItem.description}
-        stared={walkingItem.stared}
-        finished={walkingItem.finished}
-        pet={walkingItem.pet} />);
-
-    const mealActivities = props.meals.map(mealItem => <MealActivity
-        title={mealItem.title}
-        description={mealItem.description}
-        dateTime={mealItem.dateTime}
-        pet={mealItem.pet} />);
-
-
-    const vaccineActivities = props.vaccines.map(vaccineItem => <VaccineActivity
-        title={vaccineItem.title}
-        description={vaccineItem.description}
-        dateTime={vaccineItem.dateTime}
-        pet={vaccineItem.pet} />);
+    const location = useLocation();
+    const content = location.pathname == '/activities' ? <Navigate to='/activities/meals'/> : <Outlet/>;
 
     return (
         <section className={s.wrapper}>
-            {props.isFetching ? <Preloader /> : null}
             {isAddModalOpened ? <AddActivityModal
                 addVaccine={props.addVaccine}
                 addMeal={props.addMeal}
                 addWalking={props.addWalking}
                 setAddModalOpened={setAddModalOpened} /> : null}
-            <article className={s.activityItem}>
-                <span className={s.title}>Walkings</span>
-                <Activities children={walkingActivities} />
-            </article>
-            <article className={s.activityItem}>
-                <span className={s.title}>Vaccines</span>
-                <Activities children={vaccineActivities} />
-            </article>
-            <article className={s.activityItem}>
-                <span className={s.title}>Meals</span>
-                <Activities children={mealActivities} />
-            </article>
-            <IconButton onClick={handleClick}>
-                <AddCircleIcon />
-            </IconButton>
+            <nav>
+                <NavLink to='/activities/meals' className={s.link}>Meals</NavLink>
+                <NavLink to='/activities/vaccines' className={s.link}>Vaccines</NavLink>
+                <NavLink to='/activities/walkings' className={s.link}>Walkings</NavLink>
+            </nav>
+            <div className={s.header}>
+                <Button className={s.addButton} onClick={handleClick} startIcon={<AddIcon />} color="success">
+                    New activity
+                </Button>
+            </div>
+            {content}
         </section>
     );
 }
