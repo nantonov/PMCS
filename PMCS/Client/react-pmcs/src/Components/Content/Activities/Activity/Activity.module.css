@@ -5,6 +5,7 @@
     box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
     border-radius: 15px;
     margin: 10px;
+    margin-left: 0px;
 }
 
 .item:hover {

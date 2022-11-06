@@ -54,6 +54,7 @@ const Walkings: React.FC<WalkingProps> = (props) => {
             {props.isFetching ? <Preloader /> : null}
             <article>
                 <span className={s.subTitle}>Walkings</span>
+                <div className={s.annotation}>*Be careful, when you add new walking: finished date time is automatically set as current date time.</div>
                 {content}
             </article>
         </section>
