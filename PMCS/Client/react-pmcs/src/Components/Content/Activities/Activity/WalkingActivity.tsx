@@ -5,13 +5,17 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteWalking } from '../../../../redux/Activities/walkingActionCreators';
 
-type WalkingProps = IWalking & { deleteWalking: typeof deleteWalking, setWalkingDeleted: React.Dispatch<SetStateAction<boolean>> };
+type WalkingProps = {
+    walking: IWalking,
+    deleteWalking: typeof deleteWalking,
+    setWalkingDeleted: React.Dispatch<SetStateAction<boolean>>
+};
 
-const WalkingActivity: React.FC<WalkingProps> = ({ stared, finished, title, description, pet, id, setWalkingDeleted, deleteWalking }) => {
+const WalkingActivity: React.FC<WalkingProps> = ({ walking, setWalkingDeleted, deleteWalking }) => {
     const [deletedFlag, toggleDeletedFlag] = React.useState(true);
 
     const handleDeleteButtonClick = () => {
-        deleteWalking(id);
+        deleteWalking(walking.id);
         setWalkingDeleted(deletedFlag);
         toggleDeletedFlag(!deletedFlag);
     }
@@ -19,19 +23,19 @@ const WalkingActivity: React.FC<WalkingProps> = ({ stared, finished, title, desc
     return (
         <article className={s.item}>
             <div>
-                <span className={s.strong}>Title:</span> {title}
+                <span className={s.strong}>Title:</span> {walking.title}
             </div>
             <div>
-                <span className={s.strong}>Description:</span> {description}
+                <span className={s.strong}>Description:</span> {walking.description}
             </div>
             <div>
-                <span className={s.strong}>Started:</span> {stared}
+                <span className={s.strong}>Started:</span> {walking.stared}
             </div>
             <div>
-                <span className={s.strong}>Finished:</span> {finished}
+                <span className={s.strong}>Finished:</span> {walking.finished}
             </div>
             <div>
-                <span className={s.strong}> Pet name:</span> {pet?.name}
+                <span className={s.strong}> Pet name:</span> {walking.pet?.name}
             </div>
             <Button onClick={handleDeleteButtonClick} startIcon={<DeleteIcon />} color="error" className={s.deleteButton}>
                 Delete

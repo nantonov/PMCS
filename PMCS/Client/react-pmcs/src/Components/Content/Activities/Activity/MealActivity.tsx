@@ -5,14 +5,18 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteMeal } from '../../../../redux/Activities/mealActionCreators';
 
-type MealProps = IMeal & { deleteMeal: typeof deleteMeal, setMealDeleted: React.Dispatch<SetStateAction<boolean>> };
+type MealProps = {
+    meal: IMeal,
+    deleteMeal: typeof deleteMeal,
+    setMealDeleted: React.Dispatch<SetStateAction<boolean>>
+};
 
-const MealActivity: React.FC<MealProps> = ({ dateTime, title, description, pet, deleteMeal, setMealDeleted, id }) => {
+const MealActivity: React.FC<MealProps> = ({ meal, deleteMeal, setMealDeleted }) => {
 
     const [deletedFlag, toggleDeletedFlag] = React.useState(true);
 
     const handleDeleteButtonClick = () => {
-        deleteMeal(id);
+        deleteMeal(meal.id);
         setMealDeleted(deletedFlag);
         toggleDeletedFlag(!deletedFlag);
     }
@@ -20,16 +24,16 @@ const MealActivity: React.FC<MealProps> = ({ dateTime, title, description, pet, 
     return (
         <article className={s.item}>
             <div>
-                <span className={s.strong}>Title:</span> {title}
+                <span className={s.strong}>Title:</span> {meal.title}
             </div>
             <div>
-                <span className={s.strong}>Description:</span> {description}
+                <span className={s.strong}>Description:</span> {meal.description}
             </div>
             <div>
-                <span className={s.strong}>DateTime:</span> {dateTime}
+                <span className={s.strong}>DateTime:</span> {meal.dateTime}
             </div>
             <div>
-                <span className={s.strong}>Pet name:</span> {pet?.name}
+                <span className={s.strong}>Pet name:</span> {meal.pet?.name}
             </div>
             <Button onClick={handleDeleteButtonClick} startIcon={<DeleteIcon />} color="error" className={s.deleteButton}>
                 Delete

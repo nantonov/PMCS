@@ -38,13 +38,9 @@ const Walkings: React.FC<WalkingProps> = (props) => {
     }, [isWalkingDeleted]);
 
     const walkingItems = props.walkings.map(walking => <WalkingActivity
-        title={walking.title}
-        description={walking.description}
-        stared={walking.stared}
-        finished={walking.finished}
-        pet={walking.pet}
+        key={walking.id}
+        walking={walking}
         deleteWalking={props.deleteWalking}
-        id={walking.id}
         setWalkingDeleted={setWalkingDeleted} />);
 
     const content = walkingItems.length > 0 ? <Activities children={walkingItems} /> : <NoContent />;

@@ -39,12 +39,9 @@ const Vaccines: React.FC<VaccineProps> = (props) => {
     }, [isVaccineDeleted]);
 
     const vaccineItems = props.vaccines.map(vaccineItem => <VaccineActivity
-        title={vaccineItem.title}
-        description={vaccineItem.description}
-        dateTime={vaccineItem.dateTime}
-        pet={vaccineItem.pet}
+        key={vaccineItem.id}
+        vaccine={vaccineItem}
         deleteVaccine={props.deleteVaccine}
-        id={vaccineItem.id}
         setVaccineDeleted={setVaccineDeleted} />);
 
     const content = vaccineItems.length > 0 ? <Activities children={vaccineItems} /> : <NoContent />;

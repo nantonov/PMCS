@@ -39,12 +39,9 @@ const Meals: React.FC<MealsProps> = (props) => {
     }, [isMealDeleted]);
 
     const mealActivities = props.meals.map(mealItem => <MealActivity
-        title={mealItem.title}
-        description={mealItem.description}
-        dateTime={mealItem.dateTime}
-        pet={mealItem.pet}
+        key={mealItem.id}
+        meal={mealItem}
         deleteMeal={props.deleteMeal}
-        id={mealItem.id}
         setMealDeleted={setMealDeleted} />);
 
     const content = mealActivities.length > 0 ? <Activities children={mealActivities} /> : <NoContent />;
