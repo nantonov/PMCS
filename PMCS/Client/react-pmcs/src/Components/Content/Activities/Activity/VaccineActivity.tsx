@@ -1,24 +1,31 @@
 import React from 'react';
 import s from './Activity.module.css'
 import { IVaccine } from '../../../../common/models/IVaccine';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteVaccine } from '../../../../redux/Activities/vaccineActionCreators';
 
-type VaccineProps = Omit<IVaccine, "id">;
+type VaccineProps = IVaccine & {deleteVaccine: typeof deleteVaccine};
 
-const VaccineActivity: React.FC<VaccineProps> = ({ dateTime, title, description, pet }) => {
+const VaccineActivity: React.FC<VaccineProps> = ({ dateTime, title, description, pet, id, deleteVaccine }) => {
+    const handleDeleteButtonClick = () => deleteVaccine(id);
     return (
         <article className={s.item}>
             <div>
-                Title: {title}
+                <span className={s.strong}>Title:</span> {title}
             </div>
             <div>
-                Description: {description}
+                <span className={s.strong}>Description:</span> {description}
             </div>
             <div>
-                DateTime: {dateTime}
+                <span className={s.strong}>DateTime:</span> {dateTime}
             </div>
             <div>
-                Pet name: {pet?.name}
+                <span className={s.strong}>Pet name:</span> {pet?.name}
             </div>
+            <Button onClick={handleDeleteButtonClick} startIcon={<DeleteIcon />} color="error" className={s.deleteButton}>
+                Delete
+            </Button>
         </article>
     );
 }

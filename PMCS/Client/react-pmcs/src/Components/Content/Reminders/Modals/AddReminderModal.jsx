@@ -5,11 +5,6 @@ import { connect } from 'react-redux';
 import { fetchPets } from '../../../../redux/Pets/actionCreators';
 
 const AddReminderModal = ({ setAddModalOpen, createReminder, pets, fetchPets }) => {
-
-    useEffect(() => {
-        fetchPets();
-    }, [pets]);
-
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {
             setAddModalOpen(false);
@@ -36,7 +31,7 @@ const AddReminderModal = ({ setAddModalOpen, createReminder, pets, fetchPets }) 
 
     return (
         <div className={s.modal}>
-            <AddReminderForm onSubmit={onSubmit} pets={pets}/>
+            <AddReminderForm onSubmit={onSubmit} pets={pets} fetchPets={fetchPets}/>
         </div>
     );
 }

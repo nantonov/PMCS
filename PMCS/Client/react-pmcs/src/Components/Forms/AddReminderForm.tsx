@@ -7,13 +7,15 @@ import { useEffect, useState } from "react";
 import { NotificationType, ActionToRemindType } from "../../Enums/reminderEnums";
 import { ICreateReminderRequest } from "../../common/requests/Reminder/ICreateReminderRequest";
 import { IPet } from "../../common/models/IPet";
+import { fetchPets } from "../../redux/Pets/actionCreators";
 
 type FormProps = {
-    pets: Array<IPet>
+    pets: Array<IPet>,
+    fetchPets: typeof fetchPets
 }
 type Props = InjectedFormProps<ICreateReminderRequest, FormProps> & FormProps;
 
-let AddReminderForm: React.FC<Props> = ({ handleSubmit, error, pets, submitSucceeded }) => {
+let AddReminderForm: React.FC<Props> = ({ handleSubmit, error, pets, submitSucceeded, fetchPets }) => {
     const [isSuccess, setSuccess] = useState(false);
 
     let petsList = pets.map(pet => <option key={pet.id} value={pet.id}>{pet.name}</option>);
@@ -41,7 +43,7 @@ let AddReminderForm: React.FC<Props> = ({ handleSubmit, error, pets, submitSucce
             <label>Notification Message</label>
             <Field name={"notificationMessage"} component={Input} type={"textarea"} validate={[required]} placeholder="Remind me to..." />
             <label>For pet</label>
-            <Field name="petId" component="select">
+            <Field name="petId" component="select" onFocus={fetchPets}>
                 <option></option>
                 {petsList}
             </Field>

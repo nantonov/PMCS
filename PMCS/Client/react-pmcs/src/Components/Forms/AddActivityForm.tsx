@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { required } from "../../utils/validators";
@@ -9,11 +9,12 @@ import { IPet } from "../../common/models/IPet";
 import { ADD_FORM } from "../../redux/Activities/constants";
 
 type FormProps = {
-    pets: Array<IPet>
+    pets: Array<IPet>,
+    fetchPets: () => void
 };
 type Props = InjectedFormProps<ICreateActivityRequest, FormProps> & FormProps;
 
-let AddActivityForm: React.FC<Props> = ({ handleSubmit, error, pets, submitFailed }) => {
+let AddActivityForm: React.FC<Props> = ({ handleSubmit, error, pets, submitFailed, fetchPets }) => {
 
     let petsList = pets.map(pet => <option key={pet.id} value={pet.id}>{pet.name}</option>);
 
@@ -32,7 +33,7 @@ let AddActivityForm: React.FC<Props> = ({ handleSubmit, error, pets, submitFaile
                 <option value={ActivityType.Walking}>Walking</option>
             </Field>
             <label>For pet</label>
-            <Field name="petId" component="select">
+            <Field name="petId" component="select"  onFocus={fetchPets}>
                 <option></option>
                 {petsList}
             </Field>

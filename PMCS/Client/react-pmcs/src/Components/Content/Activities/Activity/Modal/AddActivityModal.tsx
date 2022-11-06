@@ -10,19 +10,33 @@ import { RootState } from '../../../../../redux/types';
 import { getPets } from '../../../../../redux/Pets/selectors';
 import { connect } from 'react-redux';
 import { fetchPets } from '../../../../../redux/Pets/actionCreators';
-import { IPet } from '../../../../../common/models/IPet';
-import { toServerFormatDate, toUtcDateTime } from '../../../../../utils/dateFormatitng';
+import { toUtcDateTime } from '../../../../../utils/dateFormatitng';
+import { bindActionCreators, Dispatch } from 'redux';
 
-type AddActivityModalProps = {
+function mapStateToProps(state: RootState) {
+    return {
+        pets: getPets(state)
+    };
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) =>
+    bindActionCreators(
+        {
+            fetchPets: fetchPets,
+        },
+        dispatch
+    );
+
+type ExternalProps = {
     setAddModalOpened: React.Dispatch<SetStateAction<boolean>>,
     addMeal: typeof mealActionCreators.createMeal;
     addVaccine: typeof vaccineActionCreators.createVaccine,
     addWalking: typeof walkingActionCreators.createWalking,
-    pets: Array<IPet>
 }
 
-const AddActivityModal: React.FC<AddActivityModalProps> = ({ setAddModalOpened, addMeal, addVaccine, addWalking, pets }) => {
+type AddActivityModalProps = ExternalProps & ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>;
 
+const AddActivityModal: React.FC<AddActivityModalProps> = ({ setAddModalOpened, addMeal, addVaccine, addWalking, fetchPets, pets }) => {
     const escFunction = useCallback((event: KeyboardEvent) => {
         if (event.key === "Escape") {
             setAddModalOpened(false);
@@ -55,15 +69,9 @@ const AddActivityModal: React.FC<AddActivityModalProps> = ({ setAddModalOpened, 
 
     return (
         <div className={s.modal}>
-            <AddActivityForm onSubmit={addActivity} pets={pets} />
+            <AddActivityForm onSubmit={addActivity} pets={pets} fetchPets={fetchPets} />
         </div>
     );
 }
 
-function mapStateToProps(state: RootState) {
-    return {
-        pets: getPets(state)
-    };
-}
-
-export default connect(mapStateToProps, { fetchPets })(AddActivityModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddActivityModal);
