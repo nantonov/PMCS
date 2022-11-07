@@ -23,7 +23,7 @@ namespace BLL.Tests.UnitTests
             emailServiceMock.Setup(x => x.SendNotification(notification)).Returns(Task.CompletedTask).Verifiable();
             mapperMock.Setup(m => m.Map<EmailNotification>(request)).Returns(notification);
 
-            var result = await controller.NotifyByEmail(request);
+            var result = await controller.NotifyByEmail(request, default);
 
             result.ShouldNotBeNull();
             emailServiceMock.Verify(x => x.SendNotification(notification), Times.Once);
