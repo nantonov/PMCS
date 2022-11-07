@@ -44,7 +44,7 @@ namespace Schedule.Application.Services
 
                         return notification;
                     }
-                default: throw new ArgumentNullException(nameof(reminder.NotificationType));
+                default: throw new ArgumentNullException(nameof(reminder));
             }
         }
 

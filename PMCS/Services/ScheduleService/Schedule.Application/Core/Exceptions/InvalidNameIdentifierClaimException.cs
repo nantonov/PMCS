@@ -5,7 +5,7 @@
         public InvalidNameIdentifierClaimException()
         { }
 
-        public InvalidNameIdentifierClaimException(string message) : base(message) { }
+        public InvalidNameIdentifierClaimException(string? message) : base(message) { }
 
         public InvalidNameIdentifierClaimException(int id)
             : base($"Claim Id {id} is not valid.") { }

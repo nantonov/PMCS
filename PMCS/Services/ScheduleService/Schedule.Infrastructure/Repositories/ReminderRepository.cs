@@ -11,31 +11,33 @@ namespace Schedule.Infrastructure.Repositories
 
         public ReminderRepository(ScheduleDbContext context)
         {
+            ArgumentNullException.ThrowIfNull(context);
+
             _context = context;
         }
 
         public async Task<IReadOnlyList<Reminder>> Get(Expression<Func<Reminder, bool>> predicate, CancellationToken cancellationToken)
         {
-            return await _context.Reminders.Where(predicate).ToListAsync(cancellationToken);
+            return await _context.Reminders!.Where(predicate).ToListAsync(cancellationToken);
         }
 
         public async Task<IReadOnlyList<Reminder>> GetAll(CancellationToken cancellationToken)
         {
-            var result = await _context.Reminders.AsNoTracking().ToListAsync(cancellationToken);
+            var result = await _context.Reminders!.AsNoTracking().ToListAsync(cancellationToken);
 
             return result;
         }
 
         public async Task<IReadOnlyList<Reminder>> GetUserReminders(int userId, CancellationToken cancellationToken)
         {
-            var result = await _context.Reminders.Where(x => x.UserId == userId).ToListAsync(cancellationToken);
+            var result = await _context.Reminders!.Where(x => x.UserId == userId).ToListAsync(cancellationToken);
 
             return result;
         }
 
         public async Task<Reminder?> GetById(int id, CancellationToken cancellationToken)
         {
-            var result = await _context.Reminders.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            var result = await _context.Reminders!.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
             return result;
         }

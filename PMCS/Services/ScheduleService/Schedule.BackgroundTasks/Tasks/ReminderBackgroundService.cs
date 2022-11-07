@@ -13,9 +13,9 @@ namespace Schedule.BackgroundTasks.Tasks
             Services = services;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await DoWork(cancellationToken);
+            await DoWork(stoppingToken);
         }
 
         private async Task DoWork(CancellationToken cancellationToken)

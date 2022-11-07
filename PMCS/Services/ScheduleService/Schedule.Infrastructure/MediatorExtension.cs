@@ -22,7 +22,7 @@ static class MediatorExtension
     }
 
     private static IList<INotification> GetDomainEvents(IEnumerable<EntityEntry<Entity>> entities) => entities.
-        SelectMany(x => x.Entity.DomainEvents).ToList();
+        SelectMany(x => x.Entity.DomainEvents!).ToList();
 
     private static void CleanDomainEvents(IEnumerable<EntityEntry<Entity>> entities) => entities.ToList()
         .ForEach(entity => entity.Entity.ClearDomainEvents());
