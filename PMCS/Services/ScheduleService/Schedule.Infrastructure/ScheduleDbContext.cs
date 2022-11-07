@@ -15,7 +15,9 @@ namespace Schedule.Infrastructure
         {
             if (Database.IsRelational()) Database.Migrate();
 
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            ArgumentNullException.ThrowIfNull(mediator);
+
+            _mediator = mediator;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

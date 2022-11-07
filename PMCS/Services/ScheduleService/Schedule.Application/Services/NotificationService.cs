@@ -17,8 +17,11 @@ namespace Schedule.Application.Services
 
         public NotificationService(IHttpClientFactory httpClientFactory, IAuthService authService)
         {
-            _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
-            _authService = authService ?? throw new ArgumentNullException(nameof(authService));
+            ArgumentNullException.ThrowIfNull(httpClientFactory);
+            ArgumentNullException.ThrowIfNull(authService);
+
+            _httpClientFactory = httpClientFactory;
+            _authService = authService;
         }
 
         public async Task<INotification> Notify(Reminder reminder)

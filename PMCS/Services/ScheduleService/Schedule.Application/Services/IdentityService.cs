@@ -13,6 +13,9 @@ namespace Schedule.Application.Services
 
         public IdentityService(IHttpContextAccessor context, IAuthService authService)
         {
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(authService);
+
             _context = context;
             _authService = authService;
         }

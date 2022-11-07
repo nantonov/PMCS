@@ -66,7 +66,7 @@ namespace ScheduleService.InfrastructureTests
             await InitializeDatabaseWithValidRemindersAsync();
             var result = await _repository.GetUserReminders(TestReminders.TestUserId, default);
 
-            var actualCount = result.Count();
+            var actualCount = result.Count;
 
             Assert.NotNull(result);
             Assert.Equal(TestReminders.UserRemindersCount, actualCount);
@@ -89,7 +89,7 @@ namespace ScheduleService.InfrastructureTests
 
             var result = await _repository.Delete(reminderToDelete, default);
 
-            Assert.Equal(reminderToDelete.TriggerDateTime, result.TriggerDateTime);
+            Assert.Equal(reminderToDelete?.TriggerDateTime, result.TriggerDateTime);
         }
 
         [Fact]

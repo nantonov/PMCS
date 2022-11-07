@@ -13,6 +13,9 @@ namespace Schedule.Application.Services
 
         public AuthService(IHttpClientFactory httpClientFactory, IHttpContextAccessor context)
         {
+            ArgumentNullException.ThrowIfNull(httpClientFactory);
+            ArgumentNullException.ThrowIfNull(context);
+
             _httpClientFactory = httpClientFactory;
             _context = context;
         }

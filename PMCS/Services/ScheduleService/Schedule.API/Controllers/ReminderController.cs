@@ -19,6 +19,9 @@ namespace Schedule.API.Controllers
 
         public ReminderController(IMediator mediator, IMapper mapper)
         {
+            ArgumentNullException.ThrowIfNull(mediator);
+            ArgumentNullException.ThrowIfNull(mapper);
+
             _mediator = mediator;
             _mapper = mapper;
         }

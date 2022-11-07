@@ -12,6 +12,9 @@ namespace Schedule.Application.Services
 
         public PetService(IHttpClientFactory httpClientFactory, IAuthService authService)
         {
+            ArgumentNullException.ThrowIfNull(httpClientFactory);
+            ArgumentNullException.ThrowIfNull(authService);
+
             _httpClientFactory = httpClientFactory;
             _authService = authService;
         }
