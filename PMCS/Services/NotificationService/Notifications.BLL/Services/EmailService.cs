@@ -15,7 +15,9 @@ namespace Notifications.BLL.Services
 
         public EmailService(IMapper mapper)
         {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            ArgumentNullException.ThrowIfNull(mapper);
+
+            _mapper = mapper;
         }
 
         public async Task SendNotification(EmailNotification notification)

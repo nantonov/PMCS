@@ -15,8 +15,11 @@ namespace Notifications.BLL.Services
 
         public ClientService(IHubContext<NotificationHub> hubContext, IMapper mapper)
         {
-            _hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            ArgumentNullException.ThrowIfNull(hubContext);
+            ArgumentNullException.ThrowIfNull(mapper);
+
+            _hubContext = hubContext;
+            _mapper = mapper;
         }
 
         public async Task SendNotification(ClientNotification notification)

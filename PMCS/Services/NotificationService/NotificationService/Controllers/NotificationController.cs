@@ -27,11 +27,17 @@ namespace Notifications.API.Controllers
             IValidator<SendEmailNotificationViewModel> sendEmailNotificationValidator)
 
         {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
-            _clientService = clientService ?? throw new ArgumentNullException(nameof(clientService));
-            _sendClientNotificationValidator = sendClientNotificationValidator ?? throw new ArgumentNullException(nameof(sendClientNotificationValidator));
-            _sendEmailNotificationValidator = sendEmailNotificationValidator ?? throw new ArgumentNullException(nameof(sendEmailNotificationValidator));
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(emailService);
+            ArgumentNullException.ThrowIfNull(clientService);
+            ArgumentNullException.ThrowIfNull(sendClientNotificationValidator);
+            ArgumentNullException.ThrowIfNull(sendEmailNotificationValidator);
+
+            _mapper = mapper;
+            _emailService = emailService;
+            _clientService = clientService;
+            _sendClientNotificationValidator = sendClientNotificationValidator;
+            _sendEmailNotificationValidator = sendEmailNotificationValidator;
         }
 
         [HttpPost("email")]
