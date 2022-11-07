@@ -2,6 +2,6 @@
 {
     public class ClientNotification : Notification
     {
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class EmailNotificationRequest
     {
-        public string RecieverEmailAddress { get; set; }
-        public string Message { get; set; }
+        public string? ReceiverEmailAddress { get; set; }
+        public string? Message { get; set; }
     }
 }
