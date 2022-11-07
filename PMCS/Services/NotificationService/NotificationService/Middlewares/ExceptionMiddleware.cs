@@ -35,13 +35,13 @@ namespace Notifications.API.Middlewares
             return context.Response.WriteAsync($"{ex.Message}\nStatusCode:{context.Response.StatusCode}");
         }
 
-        private void LogException(HttpContext? context, Exception ex)
+        private static void LogException(HttpContext? context, Exception ex)
         {
             Log.Error(ex, $"{ex.Message}");
             Log.Error(ex, $"Exception in query: {context?.Request.Path}");
         }
 
-        private void SetResponseParameters(HttpContext context)
+        private static void SetResponseParameters(HttpContext context)
         {
             context.Response.ContentType = "application/json";
         }
