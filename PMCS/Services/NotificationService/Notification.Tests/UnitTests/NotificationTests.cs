@@ -14,7 +14,7 @@ namespace BLL.Tests.UnitTests
     {
         [Theory, AutoNotificationData]
         public async Task NotifyByEmail_ValidRequest_SendsEmail(
-            EmailNotificationRequest request,
+            SendEmailNotificationViewModel request,
             EmailNotification notification,
             [Frozen] Mock<IEmailService> emailServiceMock,
             [Frozen] Mock<IMapper> mapperMock,
@@ -31,7 +31,7 @@ namespace BLL.Tests.UnitTests
 
         [Theory, AutoNotificationData]
         public async Task NotifyClient_ValidRequest_SendsNotification(
-            ClientNotificationRequest request,
+            SendClientNotificationViewModel request,
             ClientNotification notification,
             [Frozen] Mock<IClientService> clientServiceMock,
             [Frozen] Mock<IMapper> mapperMock,

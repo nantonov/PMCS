@@ -12,8 +12,8 @@ namespace BLL.Tests.AutoData
         {
             var fixture = new Fixture();
 
-            fixture.Customize<EmailNotificationRequest>(x => x.With(r => r.ReceiverEmailAddress, TestAddress));
-            fixture.Customize<ClientNotificationRequest>(x => x.With(r => r.UserId, TestUserId));
+            fixture.Customize<SendEmailNotificationViewModel>(x => x.With(r => r.ReceiverEmailAddress, TestAddress));
+            fixture.Customize<SendClientNotificationViewModel>(x => x.With(r => r.UserId, TestUserId));
 
             fixture.Customize(new AutoMoqCustomization());
 

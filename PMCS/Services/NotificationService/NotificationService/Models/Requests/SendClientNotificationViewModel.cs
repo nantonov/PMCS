@@ -1,8 +1,8 @@
 ﻿namespace Notifications.API.Models.Requests
 {
-    public class EmailNotificationRequest
+    public class SendClientNotificationViewModel
     {
-        public string? ReceiverEmailAddress { get; set; }
         public string? Message { get; set; }
+        public string? UserId { get; set; }
     }
 }

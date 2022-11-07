@@ -4,9 +4,9 @@ using Notifications.BLL.Models.Payloads;
 
 namespace Notifications.API.Mapper.Profiles
 {
-    public class NotificationToPayload : Profile
+    public class NotificationToPayloadProfile : Profile
     {
-        public NotificationToPayload()
+        public NotificationToPayloadProfile()
         {
             CreateMap<ClientNotification, ClientNotificationPayload>();
             CreateMap<EmailNotification, EmailNotificationPayload>();
