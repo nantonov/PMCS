@@ -27,7 +27,7 @@ namespace Notifications.API.Middlewares
             }
         }
 
-        private Task HandleException(HttpContext context, Exception ex)
+        private static Task HandleException(HttpContext context, Exception ex)
         {
             SetResponseParameters(context);
             LogException(context, ex);
