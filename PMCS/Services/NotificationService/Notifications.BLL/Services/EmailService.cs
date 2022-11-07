@@ -1,4 +1,5 @@
-﻿using Notifications.BLL.Interfaces.Services;
+﻿using AutoMapper;
+using Notifications.BLL.Interfaces.Services;
 using Notifications.BLL.Models.DTOs;
 using Notifications.BLL.Models.Payloads;
 using Notifications.BLL.Resources.Constants;
@@ -10,9 +11,17 @@ namespace Notifications.BLL.Services
 {
     public class EmailService : IEmailService
     {
+        private readonly IMapper _mapper;
+
+        public EmailService(IMapper mapper)
+        {
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+
         public async Task SendNotification(EmailNotification notification)
         {
-            var payload = MapNotificationToPayload(notification);
+            var payload = _mapper.Map<EmailNotificationPayload>(notification);
+
             var message = CreateMailMessage(payload);
             var smtpClient = ConfigureSmtpClient();
 
@@ -35,7 +44,7 @@ namespace Notifications.BLL.Services
         {
             MailMessage message = new MailMessage();
 
-            message.To.Add(new MailAddress(payload.RecieverEmailAddress));
+            message.To.Add(new MailAddress(payload.ReceiverEmailAddress!));
             message.From = new MailAddress(EmailConfiguration.SENDER_EMAIL, EmailConfiguration.SENDER_NAME);
             message.Subject = payload.Subject;
             message.IsBodyHtml = Boolean.Parse(EmailConfiguration.IS_BODY_HTML);
@@ -64,16 +73,6 @@ namespace Notifications.BLL.Services
             template.AppendLine($"{Phrases.Goodbye}");
 
             return template.ToString();
-        }
-
-        private static EmailNotificationPayload MapNotificationToPayload(EmailNotification notification)
-        {
-            return new EmailNotificationPayload()
-            {
-                RecieverEmailAddress = notification.RecieverEmailAddress,
-                Message = notification.Message,
-                Subject = notification.Subject,
-            };
         }
     }
 }

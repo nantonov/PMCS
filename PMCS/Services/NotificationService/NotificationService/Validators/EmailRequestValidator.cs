@@ -8,7 +8,7 @@ namespace Notifications.API.Validators
     {
         public EmailRequestValidator()
         {
-            RuleFor(x => x.RecieverEmailAddress)
+            RuleFor(x => x.ReceiverEmailAddress)
                 .EmailAddress()
                 .WithMessage(ValidationResources.EmailIsNotVaild)
                 .NotEmpty()
