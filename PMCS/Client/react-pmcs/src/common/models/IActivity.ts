@@ -1,5 +1,8 @@
+import { IPet } from "./IPet";
+
 export interface IActivity {
     id: number;
     title: string;
-    desctiption: string;
+    description: string;
+    pet?: IPet;
 }

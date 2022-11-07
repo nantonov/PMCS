@@ -13,7 +13,7 @@ type Activity = IMeal & IWalking & IVaccine;
 
 class ActivityService {
     public static async getAll(activityUrl: ActivitiyUrl): Promise<Array<Activity>> {
-        const ownerId = await OwnerService.getByUserId().then((owner) => owner.id);
+        const ownerId = await OwnerService.getByUserId().then((owner) => owner?.id);
         const result = await axiosInstance.get(`api/${activityUrl}/owner/${ownerId}`).
             then((response) => response.data).
             catch((error) => {

@@ -28,8 +28,8 @@ export const createMeal = (meal: ICreateActivityRequest) => {
             console.log(result);
         } else {
             startSubmit(ADD_FORM);
-            dispatch(reset(ADD_FORM));
             dispatch(fetchMeals());
+            dispatch(reset(ADD_FORM));
         }
     };
 };
