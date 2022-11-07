@@ -45,7 +45,7 @@ namespace ScheduleService.InfrastructureTests
             await InitializeDatabaseWithValidRemindersAsync();
             var result = await _repository.GetAll(default);
 
-            var actualCount = result.Count();
+            var actualCount = result.Count;
 
             Assert.NotNull(result);
             Assert.Equal(TestReminders.ValidReminders.Count, actualCount);

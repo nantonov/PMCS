@@ -15,10 +15,10 @@ namespace Schedule.Application.Services
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IAuthService _authService;
 
-        public NotificationService(IHttpClientFactory httpClientFactory, IIdentityService identityService, IAuthService authService, IPetService petService)
+        public NotificationService(IHttpClientFactory httpClientFactory, IAuthService authService)
         {
-            _httpClientFactory = httpClientFactory;
-            _authService = authService;
+            _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
+            _authService = authService ?? throw new ArgumentNullException(nameof(authService));
         }
 
         public async Task<INotification> Notify(Reminder reminder)
@@ -41,7 +41,7 @@ namespace Schedule.Application.Services
 
                         return notification;
                     }
-                default: throw new NullReferenceException();
+                default: throw new ArgumentNullException(nameof(reminder.NotificationType));
             }
         }
 

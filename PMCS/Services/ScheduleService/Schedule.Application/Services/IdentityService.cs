@@ -30,7 +30,7 @@ namespace Schedule.Application.Services
         {
             var claims = await _authService.GetUserClaims();
 
-            var emailFromClaims = claims.FirstOrDefault(x => x.Type == "email").Value;
+            var emailFromClaims = claims.FirstOrDefault(x => x.Type == "email")?.Value;
 
             var (result, email) = Ensure.IsValidEmail(emailFromClaims);
 
@@ -41,7 +41,7 @@ namespace Schedule.Application.Services
 
         public bool IsAuthenticated()
         {
-            var isAuthenticated = _context.HttpContext.User.Identity.IsAuthenticated;
+            var isAuthenticated = _context.HttpContext.User.Identity!.IsAuthenticated;
 
             return isAuthenticated;
         }

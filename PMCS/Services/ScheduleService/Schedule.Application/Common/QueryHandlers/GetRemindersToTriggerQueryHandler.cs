@@ -16,7 +16,7 @@ namespace Schedule.Application.Common.QueryHandlers
 
         public async Task<IReadOnlyList<Reminder>> Handle(GetRemindersToTriggerQuery request, CancellationToken cancellationToken)
         {
-            var result = await _repository.Get(x => x.TriggerDateTime <= DateTime.UtcNow && x.IsTriggered == false, cancellationToken);
+            var result = await _repository.Get(x => x.TriggerDateTime <= DateTime.UtcNow && !x.IsTriggered, cancellationToken);
 
             return result;
         }

@@ -5,9 +5,9 @@ using Schedule.Infrastructure.EntityConfigurations;
 
 namespace Schedule.Infrastructure
 {
-    public class ScheduleDbContext : DbContext
+    public sealed class ScheduleDbContext : DbContext
     {
-        public DbSet<Reminder> Reminders { get; set; }
+        public DbSet<Reminder>? Reminders { get; set; }
 
         private readonly IMediator _mediator;
 
@@ -27,7 +27,7 @@ namespace Schedule.Infrastructure
         {
             await _mediator.DispatchDomainEventsAsync(this);
 
-            var result = await SaveChangesAsync(cancellationToken);
+            await SaveChangesAsync(cancellationToken);
 
             return true;
         }

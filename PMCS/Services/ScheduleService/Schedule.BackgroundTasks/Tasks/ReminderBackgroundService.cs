@@ -13,24 +13,17 @@ namespace Schedule.BackgroundTasks.Tasks
             Services = services;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            await DoWork(stoppingToken);
+            await DoWork(cancellationToken);
         }
 
-        private async Task DoWork(CancellationToken stoppingToken)
+        private async Task DoWork(CancellationToken cancellationToken)
         {
-            using (var scope = Services.CreateScope())
-            {
-                var scopedProcessingService = scope.ServiceProvider.GetRequiredService<IProcessingService>();
+            using var scope = Services.CreateScope();
+            var scopedProcessingService = scope.ServiceProvider.GetRequiredService<IProcessingService>();
 
-                await scopedProcessingService.DoWork(stoppingToken);
-            }
-        }
-
-        public override async Task StopAsync(CancellationToken stoppingToken)
-        {
-            await base.StopAsync(stoppingToken);
+            await scopedProcessingService.DoWork(cancellationToken);
         }
     }
 }
