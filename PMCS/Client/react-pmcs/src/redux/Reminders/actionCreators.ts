@@ -26,8 +26,8 @@ export const createReminder = (reminder: IReminder) => {
             console.log(result);
         } else {
             startSubmit(ADD_FORM);
-            dispatch(reset(ADD_FORM));
             dispatch(fetchReminders());
+            dispatch(reset(ADD_FORM));
         }
     };
 };

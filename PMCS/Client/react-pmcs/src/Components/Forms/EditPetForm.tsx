@@ -11,14 +11,7 @@ type FormProps = {
 }
 type Props = InjectedFormProps<IUpdatePetRequest, FormProps> & FormProps;
 
-let EditPetForm : React.FC<Props> = ({ handleSubmit, error, pet, initialize, submitSucceeded }) => {
-
-    const [isSuccess, setSuccess] = useState(false);
-
-    useEffect(() => {
-        setSuccess(submitSucceeded);
-    }, [pet]);
-
+let EditPetForm : React.FC<Props> = ({ handleSubmit, error, pet, initialize, submitFailed }) => {
     useEffect(() => {
         initialize({
             name: pet.name,
@@ -34,12 +27,11 @@ let EditPetForm : React.FC<Props> = ({ handleSubmit, error, pet, initialize, sub
             <label>Name   </label>
             <Field name={"name"} component={Input} type={"text"} validate={[required]} />
             <label>Info</label>
-            <Field name={"info"} component={Input} validate={[required]} />
+            <Field name={"info"} component={Input} />
             <label>Weight</label>
             <Field name={"weight"} component={Input} type={"number"} step={"0.1"} min={"0.1"} validate={[required]} />
             <button>Submit</button>
-            {error ? <div className={s.error}>{error}</div> : null}
-            {isSuccess && !error ? <div className={s.success}>You edited your pet successfully!</div> : null}
+            {submitFailed ? <div className={s.error}>{error}</div> : null}
         </form>
     );
 }

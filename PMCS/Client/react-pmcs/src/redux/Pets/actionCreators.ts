@@ -28,8 +28,8 @@ export const createPet = (pet: ICreatePetRequest) => {
             dispatch(stopSubmit(ADD_FORM, { _error: errors[0] }));
         } else {
             startSubmit(EDIT_FORM);
-            dispatch(reset(ADD_FORM));
             dispatch(fetchPets());
+            dispatch(reset(ADD_FORM));
         }
     };
 }
