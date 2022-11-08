@@ -36,6 +36,7 @@ const Meals: React.FC<MealsProps> = (props) => {
 
     useEffect(() => {
         props.fetchMeals();
+        setMealDeleted(false);
     }, [isMealDeleted]);
 
     const mealActivities = props.meals.map(mealItem => <MealActivity

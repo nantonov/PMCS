@@ -36,6 +36,7 @@ const Vaccines: React.FC<VaccineProps> = (props) => {
 
     useEffect(() => {
         props.fetchVaccines();
+        setVaccineDeleted(false);
     }, [isVaccineDeleted]);
 
     const vaccineItems = props.vaccines.map(vaccineItem => <VaccineActivity
