@@ -7,7 +7,7 @@ import { IUpdateReminderRequest } from "../../common/requests/Reminder/IUpdateRe
 import { Select } from "../Shared/FormsControls/Select";
 import { EDIT_FORM } from "../../redux/Reminders/constants";
 
-type FormProps = { }
+type FormProps = {}
 type Props = InjectedFormProps<IUpdateReminderRequest, FormProps> & FormProps;
 
 const EditReminderForm: React.FC<Props> = ({ handleSubmit, error, submitFailed }) => {

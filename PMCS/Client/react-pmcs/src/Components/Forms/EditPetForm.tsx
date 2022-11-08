@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import { InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { Field, reduxForm } from "redux-form";
@@ -12,7 +12,7 @@ type FormProps = {
 }
 type Props = InjectedFormProps<IUpdatePetRequest, FormProps> & FormProps;
 
-let EditPetForm : React.FC<Props> = ({ handleSubmit, error, pet, initialize, submitFailed }) => {
+let EditPetForm: React.FC<Props> = ({ handleSubmit, error, pet, initialize, submitFailed }) => {
     useEffect(() => {
         initialize({
             name: pet.name,

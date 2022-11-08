@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { useState, useEffect } from 'react';
 import withAuthRedirect from '../../Shared/Hocs/WithAuthRedirect';
 import NoContent from '../NoContent/NoContent';
@@ -29,7 +28,7 @@ function mapStateToProps(state: RootState) {
 
 type RemindersContainerProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & ReactJSXIntrinsicAttributes;
 
-const RemindersContainer : React.FC<RemindersContainerProps> = ({ fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, reminders, isFetching }) => {
+const RemindersContainer: React.FC<RemindersContainerProps> = ({ fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, reminders, isFetching }) => {
 
     const [isReminderDeleted, setIsReminderDeleted] = useState(false);
 
