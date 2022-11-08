@@ -4,11 +4,17 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { IconButton } from '@mui/material';
 import { useState } from 'react';
 import AddReminderModal from './Modals/AddReminderModal';
+import { createReminder } from '../../../redux/Reminders/actionCreators';
 
-const Reminders = ({ content, createReminder }) => {
-    const [isAddModalOpened, setAddModalOpen] = useState(false);
+type RemindersProps = {
+    createReminder: typeof createReminder;
+    content: JSX.Element | Array<JSX.Element>
+}
 
-    function handleClick() {
+const Reminders : React.FC<RemindersProps> = ({ content, createReminder }) => {
+    const [isAddModalOpened, setAddModalOpen] = useState<boolean>(false);
+
+    function handleClick() : void {
         setAddModalOpen(true);
     };
 

@@ -8,8 +8,28 @@ import Reminder from './Reminder/Reminder';
 import Reminders from './Reminders';
 import { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone } from '../../../redux/Reminders/actionCreators';
 import { getIsFetching, getReminders } from '../../../redux/Reminders/selectors';
+import { RootState } from '../../../redux/types';
+import { Dispatch, bindActionCreators } from 'redux';
+import { ReactJSXIntrinsicAttributes } from '@emotion/react/types/jsx-namespace';
 
-const RemindersContainer = ({ fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, reminders, isFetching }) => {
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+    deleteReminder: deleteReminder,
+    fetchReminders: fetchReminders,
+    createReminder: createReminder,
+    setReminderStatusAsDone: setReminderStatusAsDone,
+    editReminder: editReminder,
+}, dispatch);
+
+function mapStateToProps(state: RootState) {
+    return {
+        reminders: getReminders(state),
+        isFetching: getIsFetching(state)
+    };
+}
+
+type RemindersContainerProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & ReactJSXIntrinsicAttributes;
+
+const RemindersContainer : React.FC<RemindersContainerProps> = ({ fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone, reminders, isFetching }) => {
 
     const [isReminderDeleted, setIsReminderDeleted] = useState(false);
 
@@ -36,14 +56,6 @@ const RemindersContainer = ({ fetchReminders, createReminder, editReminder, dele
         </div>
     );
 }
+const ComponentWithRedirect = withAuthRedirect<RemindersContainerProps>(RemindersContainer);
 
-function mapStateToProps(state) {
-    return {
-        reminders: getReminders(state),
-        isFetching: getIsFetching(state)
-    };
-}
-
-export default compose(
-    connect(mapStateToProps, { fetchReminders, createReminder, editReminder, deleteReminder, setReminderStatusAsDone }),
-    withAuthRedirect)(RemindersContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ComponentWithRedirect);
