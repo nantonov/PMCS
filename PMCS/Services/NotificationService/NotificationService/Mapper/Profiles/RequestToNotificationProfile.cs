@@ -8,8 +8,8 @@ namespace Notifications.API.Mapper.Profiles
     {
         public RequestToNotificationProfile()
         {
-            CreateMap<EmailNotificationRequest, EmailNotification>();
-            CreateMap<ClientNotificationRequest, ClientNotification>();
+            CreateMap<SendEmailNotificationViewModel, EmailNotification>();
+            CreateMap<SendClientNotificationViewModel, ClientNotification>();
         }
     }
 }

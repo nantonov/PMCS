@@ -45,7 +45,7 @@ namespace Notifications.API.Authentication
             {
                 return Authenticate(token);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return await Task.Run(() => AuthenticateResult.Fail("Unauthorized"));
             }
@@ -57,8 +57,8 @@ namespace Notifications.API.Authentication
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, GetJWTTokenClaim(validatedToken, ClaimTypes.NameIdentifier) ?? string.Empty),
-                new Claim(ClaimTypes.Email, GetJWTTokenClaim(validatedToken, ClaimTypes.Email) ?? string.Empty),
+                new Claim(ClaimTypes.Name, GetJwtTokenClaim(validatedToken, ClaimTypes.NameIdentifier) ?? string.Empty),
+                new Claim(ClaimTypes.Email, GetJwtTokenClaim(validatedToken, ClaimTypes.Email) ?? string.Empty),
             };
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
@@ -67,14 +67,14 @@ namespace Notifications.API.Authentication
             return AuthenticateResult.Success(ticket);
         }
 
-        private string? GetJWTTokenClaim(JwtSecurityToken securityToken, string claimName)
+        private static string? GetJwtTokenClaim(JwtSecurityToken securityToken, string claimName)
         {
             var claimValue = securityToken.Claims.FirstOrDefault(c => c.Type == claimName)?.Value;
 
             return claimValue;
         }
 
-        private JwtSecurityToken ValidateToken(string token)
+        private static JwtSecurityToken ValidateToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 

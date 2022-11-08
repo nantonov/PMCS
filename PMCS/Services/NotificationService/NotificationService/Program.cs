@@ -1,4 +1,3 @@
-using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using Notifications.API.Extentions;
 using Notifications.API.Middlewares;
@@ -8,11 +7,8 @@ using Notifications.BLL.SignalR.Hubs;
 using Serilog;
 using Serilog.Events;
 using Swashbuckle.AspNetCore.SwaggerUI;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var configuration = new ConfigurationBuilder().Build();
 
 Log.Logger = Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -27,6 +23,7 @@ Log.Logger = Log.Logger = new LoggerConfiguration()
 builder.Services.ConfigureAuthenticationScheme();
 
 builder.Services.AddAuthorization();
+builder.Services.RegisterValidators();
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -66,7 +63,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly())); ;
+builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSignalR(options =>

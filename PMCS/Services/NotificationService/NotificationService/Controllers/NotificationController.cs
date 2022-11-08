@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notifications.API.Models.Requests;
@@ -15,18 +16,36 @@ namespace Notifications.API.Controllers
         private readonly IEmailService _emailService;
         private readonly IClientService _clientService;
         private readonly IMapper _mapper;
+        private readonly IValidator<SendClientNotificationViewModel> _sendClientNotificationValidator;
+        private readonly IValidator<SendEmailNotificationViewModel> _sendEmailNotificationValidator;
 
-        public NotificationController(IMapper mapper, IEmailService emailService, IClientService clientService)
+
+        public NotificationController(IMapper mapper,
+            IEmailService emailService,
+            IClientService clientService,
+            IValidator<SendClientNotificationViewModel> sendClientNotificationValidator,
+            IValidator<SendEmailNotificationViewModel> sendEmailNotificationValidator)
+
         {
-            _mapper = mapper ?? throw new NullReferenceException();
-            _emailService = emailService ?? throw new NullReferenceException();
-            _clientService = clientService ?? throw new NullReferenceException();
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(emailService);
+            ArgumentNullException.ThrowIfNull(clientService);
+            ArgumentNullException.ThrowIfNull(sendClientNotificationValidator);
+            ArgumentNullException.ThrowIfNull(sendEmailNotificationValidator);
+
+            _mapper = mapper;
+            _emailService = emailService;
+            _clientService = clientService;
+            _sendClientNotificationValidator = sendClientNotificationValidator;
+            _sendEmailNotificationValidator = sendEmailNotificationValidator;
         }
 
         [HttpPost("email")]
-        public async Task<IActionResult> NotifyByEmail([FromBody] EmailNotificationRequest request)
+        public async Task<IActionResult> NotifyByEmail([FromBody] SendEmailNotificationViewModel viewModel, CancellationToken cancellationToken)
         {
-            var notification = _mapper.Map<EmailNotification>(request);
+            await _sendEmailNotificationValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
+
+            var notification = _mapper.Map<EmailNotification>(viewModel);
 
             await _emailService.SendNotification(notification);
 
@@ -34,9 +53,11 @@ namespace Notifications.API.Controllers
         }
 
         [HttpPost("client")]
-        public async Task<IActionResult> NotifyClient([FromBody] ClientNotificationRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> NotifyClient([FromBody] SendClientNotificationViewModel viewModel, CancellationToken cancellationToken)
         {
-            var notification = _mapper.Map<ClientNotification>(request);
+            await _sendClientNotificationValidator.ValidateAndThrowAsync(viewModel, cancellationToken);
+
+            var notification = _mapper.Map<ClientNotification>(viewModel);
 
             await _clientService.SendNotification(notification);
 
