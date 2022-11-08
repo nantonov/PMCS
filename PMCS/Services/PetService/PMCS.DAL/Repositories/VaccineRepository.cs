@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PMCS.DAL.Entities;
 using PMCS.DAL.Interfaces.Repositories;
+using System.Linq.Expressions;
 
 namespace PMCS.DAL.Repositories
 {
@@ -16,6 +17,13 @@ namespace PMCS.DAL.Repositories
         public override async Task<VaccineEntity> GetById(int id, CancellationToken cancellationToken)
         {
             return await Query.Include(x => x.Pet).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public override async Task<IEnumerable<VaccineEntity>> GetByPredicate(Expression<Func<VaccineEntity, bool>> predicate, CancellationToken cancellationToken)
+        {
+            var entities = await Query.Where(predicate).Include(x => x.Pet).ToListAsync(cancellationToken);
+
+            return entities;
         }
     }
 }

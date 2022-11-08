@@ -1,0 +1,25 @@
+@import './../../../Shared/Constants/Colors.scss';
+
+.item {
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
+    border-radius: 15px;
+    margin: 10px;
+    margin-left: 0px;
+}
+
+.item:hover {
+    background-color: var(--color-content-component-background-hover);
+}
+
+.item div {
+    padding: 5px;
+}
+
+.strong {
+    font-weight: bolder;
+}
+
+.deleteButton {
+    opacity: 0.9;
+}

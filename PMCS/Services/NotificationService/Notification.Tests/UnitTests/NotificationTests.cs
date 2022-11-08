@@ -14,7 +14,7 @@ namespace BLL.Tests.UnitTests
     {
         [Theory, AutoNotificationData]
         public async Task NotifyByEmail_ValidRequest_SendsEmail(
-            EmailNotificationRequest request,
+            SendEmailNotificationViewModel request,
             EmailNotification notification,
             [Frozen] Mock<IEmailService> emailServiceMock,
             [Frozen] Mock<IMapper> mapperMock,
@@ -23,7 +23,7 @@ namespace BLL.Tests.UnitTests
             emailServiceMock.Setup(x => x.SendNotification(notification)).Returns(Task.CompletedTask).Verifiable();
             mapperMock.Setup(m => m.Map<EmailNotification>(request)).Returns(notification);
 
-            var result = await controller.NotifyByEmail(request);
+            var result = await controller.NotifyByEmail(request, default);
 
             result.ShouldNotBeNull();
             emailServiceMock.Verify(x => x.SendNotification(notification), Times.Once);
@@ -31,7 +31,7 @@ namespace BLL.Tests.UnitTests
 
         [Theory, AutoNotificationData]
         public async Task NotifyClient_ValidRequest_SendsNotification(
-            ClientNotificationRequest request,
+            SendClientNotificationViewModel request,
             ClientNotification notification,
             [Frozen] Mock<IClientService> clientServiceMock,
             [Frozen] Mock<IMapper> mapperMock,

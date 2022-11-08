@@ -23,7 +23,7 @@ namespace PMCS.DAL.Repositories
             return entity;
         }
 
-        public async Task<IEnumerable<TEntity>> GetByPredicate(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        public virtual async Task<IEnumerable<TEntity>> GetByPredicate(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
         {
             var entities = await Query.Where(predicate).ToListAsync(cancellationToken);
 

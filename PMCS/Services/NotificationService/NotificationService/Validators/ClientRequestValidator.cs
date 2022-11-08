@@ -4,7 +4,7 @@ using Notifications.BLL.Resources.Constants.Validators;
 
 namespace Notifications.API.Validators
 {
-    public class ClientRequestValidator : AbstractValidator<ClientNotificationRequest>
+    public class ClientRequestValidator : AbstractValidator<SendClientNotificationViewModel>
     {
         public ClientRequestValidator()
         {
