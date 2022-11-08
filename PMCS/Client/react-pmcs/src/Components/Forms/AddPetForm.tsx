@@ -4,6 +4,7 @@ import s from "./petForm.module.css";
 import { required } from "../../utils/validators";
 import { Input } from "../Shared/FormsControls/Input";
 import { ICreatePetRequest } from "../../common/requests/Pet/ICreatePetRequest";
+import { ADD_FORM } from "../../redux/Pets/constants";
 
 type FormProps = {};
 type Props = InjectedFormProps<ICreatePetRequest, FormProps> & FormProps;
@@ -26,6 +27,6 @@ let AddPetForm: React.FC<Props> = ({ handleSubmit, error, submitFailed }) => {
     );
 }
 
-const AddPetReduxForm = reduxForm<ICreatePetRequest, FormProps>({ form: "addPetForm" })(AddPetForm);
+const AddPetReduxForm = reduxForm<ICreatePetRequest, FormProps>({ form: ADD_FORM })(AddPetForm);
 
 export default AddPetReduxForm;

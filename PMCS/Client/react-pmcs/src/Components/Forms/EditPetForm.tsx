@@ -5,6 +5,7 @@ import { Field, reduxForm } from "redux-form";
 import { Input } from "../Shared/FormsControls/Input";
 import { required } from "../../utils/validators";
 import { IUpdatePetRequest } from "../../common/requests/Pet/IUpdatePetRequest";
+import { EDIT_FORM } from "../../redux/Pets/constants";
 
 type FormProps = {
     pet: IUpdatePetRequest;
@@ -36,6 +37,6 @@ let EditPetForm : React.FC<Props> = ({ handleSubmit, error, pet, initialize, sub
     );
 }
 
-const EditPetReduxForm = reduxForm<IUpdatePetRequest, FormProps>({ form: "editPetForm" })(EditPetForm);
+const EditPetReduxForm = reduxForm<IUpdatePetRequest, FormProps>({ form: EDIT_FORM })(EditPetForm);
 
 export default EditPetReduxForm;

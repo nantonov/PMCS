@@ -1,25 +1,16 @@
 import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import { required } from "../../utils/validators";
 import { Input } from "../Shared/FormsControls/Input";
-import { useEffect } from "react";
 import s from "./petForm.module.css";
 import { NotificationType, ActionToRemindType } from "../../Enums/reminderEnums";
 import { IUpdateReminderRequest } from "../../common/requests/Reminder/IUpdateReminderRequest";
+import { Select } from "../Shared/FormsControls/Select";
+import { EDIT_FORM } from "../../redux/Reminders/constants";
 
-type FormProps = {
-    reminder: IUpdateReminderRequest;
-}
+type FormProps = { }
 type Props = InjectedFormProps<IUpdateReminderRequest, FormProps> & FormProps;
 
-const EditReminderForm: React.FC<Props> = ({ handleSubmit, error, submitFailed, reminder, initialize }) => {
-    useEffect(() => {
-        initialize({
-            triggerDateTime: reminder.triggerDateTime,
-            notificationMessage: reminder.notificationMessage,
-            actionToRemindType: reminder.actionToRemindType,
-            notificationType: reminder.notificationType,
-        });
-    }, [reminder]);
+const EditReminderForm: React.FC<Props> = ({ handleSubmit, error, submitFailed }) => {
 
     return (
         <form className={s.formBox} onSubmit={handleSubmit}>
@@ -27,13 +18,13 @@ const EditReminderForm: React.FC<Props> = ({ handleSubmit, error, submitFailed, 
             <label>When to remind</label>
             <Field name={"triggerDateTime"} component={Input} type={"datetime-local"} validate={[required]} />
             <label>How to remind</label>
-            <Field name="notificationType" component={"select"} >
+            <Field name="notificationType" component={Select} validate={[required]}>
                 <option></option>
                 <option value={NotificationType.Email}>Email</option>
                 <option value={NotificationType.PersonalAccount}>Account</option>
             </Field>
             <label>Remind to</label>
-            <Field name="actionToRemindType" component="select" >
+            <Field name="actionToRemindType" component={Select} validate={[required]}>
                 <option></option>
                 <option value={ActionToRemindType.GoForWalk}>Go for a walk</option>
                 <option value={ActionToRemindType.MakeVaccine}>Make vaccine</option>
@@ -47,6 +38,6 @@ const EditReminderForm: React.FC<Props> = ({ handleSubmit, error, submitFailed, 
     );
 }
 
-const EditReminderReduxForm = reduxForm<IUpdateReminderRequest, FormProps>({ form: "editReminderForm" })(EditReminderForm);
+const EditReminderReduxForm = reduxForm<IUpdateReminderRequest, FormProps>({ form: EDIT_FORM })(EditReminderForm);
 
 export default EditReminderReduxForm;

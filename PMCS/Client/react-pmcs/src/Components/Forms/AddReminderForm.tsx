@@ -7,6 +7,8 @@ import { NotificationType, ActionToRemindType } from "../../Enums/reminderEnums"
 import { ICreateReminderRequest } from "../../common/requests/Reminder/ICreateReminderRequest";
 import { IPet } from "../../common/models/IPet";
 import { fetchPets } from "../../redux/Pets/actionCreators";
+import { Select } from "../Shared/FormsControls/Select";
+import { ADD_FORM } from "../../redux/Reminders/constants";
 
 type FormProps = {
     pets: Array<IPet>,
@@ -23,13 +25,13 @@ let AddReminderForm: React.FC<Props> = ({ handleSubmit, error, pets, submitFaile
             <label>When to remind</label>
             <Field name={"triggerDateTime"} component={Input} type={"datetime-local"} validate={[required]} />
             <label>How to remind</label>
-            <Field name="notificationType" component="select">
+            <Field name="notificationType" component={Select} validate={[required]}>
                 <option ></option>
                 <option value={NotificationType.Email}>Email</option>
                 <option value={NotificationType.PersonalAccount}>Account</option>
             </Field>
             <label>Remind to</label>
-            <Field name="actionToRemindType" component="select">
+            <Field name="actionToRemindType" component={Select} validate={[required]}>
                 <option ></option>
                 <option value={ActionToRemindType.MakeVaccine}>Make vaccine</option>
                 <option value={ActionToRemindType.FeedPet}>Feed pet</option>
@@ -38,7 +40,7 @@ let AddReminderForm: React.FC<Props> = ({ handleSubmit, error, pets, submitFaile
             <label>Notification Message</label>
             <Field name={"notificationMessage"} component={Input} type={"textarea"} validate={[required]} placeholder="Remind me to..." />
             <label>For pet</label>
-            <Field name="petId" component="select" onFocus={fetchPets}>
+            <Field name="petId" component={Select} onFocus={fetchPets} validate={[required]}>
                 <option></option>
                 {petsList}
             </Field>
@@ -48,6 +50,6 @@ let AddReminderForm: React.FC<Props> = ({ handleSubmit, error, pets, submitFaile
     );
 }
 
-const AddReminderReduxForm = reduxForm<ICreateReminderRequest, FormProps>({ form: "addReminderForm" })(AddReminderForm);
+const AddReminderReduxForm = reduxForm<ICreateReminderRequest, FormProps>({ form: ADD_FORM })(AddReminderForm);
 
 export default AddReminderReduxForm;
