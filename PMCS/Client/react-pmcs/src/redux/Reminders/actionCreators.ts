@@ -42,6 +42,7 @@ export const editReminder = (reminder: IReminder) => {
         } else {
             startSubmit(EDIT_FORM);
             dispatch(fetchReminders());
+            dispatch(reset(EDIT_FORM));
         }
     };
 };

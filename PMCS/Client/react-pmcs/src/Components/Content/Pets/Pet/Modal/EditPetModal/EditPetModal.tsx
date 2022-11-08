@@ -36,6 +36,8 @@ const EditPetModal: React.FC<EditPetModalProps> = ({ pet, setEditModalOpen, edit
             birthDate: toServerFormatDate(pet.birthDate),
             info: values.info
         });
+
+        setEditModalOpen(false);
     }
 
     return (
