@@ -1,8 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { Field, reduxForm } from "redux-form";
-import { useEffect, useState } from "react";
 import { Input } from "../Shared/FormsControls/Input";
 import { required } from "../../utils/validators";
 import { IUpdatePetRequest } from "../../common/requests/Pet/IUpdatePetRequest";

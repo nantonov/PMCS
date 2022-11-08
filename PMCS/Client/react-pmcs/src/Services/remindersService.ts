@@ -3,7 +3,7 @@ import { IUpdateReminderRequest } from '../common/requests/Reminder/IUpdateRemin
 import { toUtcDateTime } from '../utils/dateFormatitng';
 import { ICreateReminderRequest } from '../common/requests/Reminder/ICreateReminderRequest';
 import { IReminder } from '../common/models/IReminder';
-import { Axios, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 class RemindersService {
     public static async getAll(): Promise<Array<IReminder>> {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React from "react";
 import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { required } from "../../utils/validators";

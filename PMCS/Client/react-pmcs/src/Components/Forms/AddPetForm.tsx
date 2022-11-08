@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { required } from "../../utils/validators";
 import { Input } from "../Shared/FormsControls/Input";
-import { useEffect, useState } from "react";
 import { ICreatePetRequest } from "../../common/requests/Pet/ICreatePetRequest";
 
 type FormProps = {};

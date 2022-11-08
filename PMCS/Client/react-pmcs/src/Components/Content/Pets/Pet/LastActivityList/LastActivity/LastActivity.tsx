@@ -1,7 +1,4 @@
 import React from 'react';
-import { IMeal } from '../../../../../../common/models/IMeal';
-import { IVaccine } from '../../../../../../common/models/IVaccine';
-import { IWalking } from '../../../../../../common/models/IWalking';
 import s from './LastActivity.module.css';
 
 interface ILastActivity {
