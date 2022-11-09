@@ -13,6 +13,9 @@ namespace Schedule.Application.Services
 
         public AuthService(IHttpClientFactory httpClientFactory, IHttpContextAccessor context)
         {
+            ArgumentNullException.ThrowIfNull(httpClientFactory);
+            ArgumentNullException.ThrowIfNull(context);
+
             _httpClientFactory = httpClientFactory;
             _context = context;
         }
@@ -41,7 +44,7 @@ namespace Schedule.Application.Services
             var discoveryDocument = await client.GetDiscoveryDocumentAsync(ClientsConfiguration.AuthServiceAddress);
 
             var token = _context.HttpContext.Request.Headers.FirstOrDefault(x => x.Key == "Authorization").
-                Value.SingleOrDefault().Replace("Bearer ", "");
+                Value.SingleOrDefault()?.Replace("Bearer ", "");
 
             var response = await client.GetUserInfoAsync(new UserInfoRequest
             {

@@ -14,11 +14,14 @@ namespace Schedule.API.Controllers
     [Authorize]
     public class ReminderController : ControllerBase
     {
-        private IMediator _mediator;
+        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
         public ReminderController(IMediator mediator, IMapper mapper)
         {
+            ArgumentNullException.ThrowIfNull(mediator);
+            ArgumentNullException.ThrowIfNull(mapper);
+
             _mediator = mediator;
             _mapper = mapper;
         }

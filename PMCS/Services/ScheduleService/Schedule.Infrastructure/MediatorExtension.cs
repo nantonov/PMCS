@@ -12,16 +12,17 @@ static class MediatorExtension
             .Entries<Entity>()
             .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any());
 
-        var domainEvents = GetDomainEvents(entitiesWithDomainEvents);
+        var withDomainEvents = entitiesWithDomainEvents.ToList();
+        var domainEvents = GetDomainEvents(withDomainEvents);
 
-        CleanDomainEvents(entitiesWithDomainEvents);
+        CleanDomainEvents(withDomainEvents);
 
         foreach (var domainEvent in domainEvents)
             await mediator.Publish(domainEvent);
     }
 
     private static IList<INotification> GetDomainEvents(IEnumerable<EntityEntry<Entity>> entities) => entities.
-        SelectMany(x => x.Entity.DomainEvents).ToList();
+        SelectMany(x => x.Entity.DomainEvents!).ToList();
 
     private static void CleanDomainEvents(IEnumerable<EntityEntry<Entity>> entities) => entities.ToList()
         .ForEach(entity => entity.Entity.ClearDomainEvents());

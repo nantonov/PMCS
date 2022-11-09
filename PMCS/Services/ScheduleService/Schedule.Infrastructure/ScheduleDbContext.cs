@@ -5,9 +5,9 @@ using Schedule.Infrastructure.EntityConfigurations;
 
 namespace Schedule.Infrastructure
 {
-    public class ScheduleDbContext : DbContext
+    public sealed class ScheduleDbContext : DbContext
     {
-        public DbSet<Reminder> Reminders { get; set; }
+        public DbSet<Reminder>? Reminders { get; set; }
 
         private readonly IMediator _mediator;
 
@@ -15,7 +15,9 @@ namespace Schedule.Infrastructure
         {
             if (Database.IsRelational()) Database.Migrate();
 
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            ArgumentNullException.ThrowIfNull(mediator);
+
+            _mediator = mediator;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,7 +29,7 @@ namespace Schedule.Infrastructure
         {
             await _mediator.DispatchDomainEventsAsync(this);
 
-            var result = await SaveChangesAsync(cancellationToken);
+            await SaveChangesAsync(cancellationToken);
 
             return true;
         }

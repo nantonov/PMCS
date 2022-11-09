@@ -15,8 +15,11 @@ namespace Schedule.Application.Services
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IAuthService _authService;
 
-        public NotificationService(IHttpClientFactory httpClientFactory, IIdentityService identityService, IAuthService authService, IPetService petService)
+        public NotificationService(IHttpClientFactory httpClientFactory, IAuthService authService)
         {
+            ArgumentNullException.ThrowIfNull(httpClientFactory);
+            ArgumentNullException.ThrowIfNull(authService);
+
             _httpClientFactory = httpClientFactory;
             _authService = authService;
         }
@@ -41,7 +44,7 @@ namespace Schedule.Application.Services
 
                         return notification;
                     }
-                default: throw new NullReferenceException();
+                default: throw new ArgumentNullException(nameof(reminder));
             }
         }
 

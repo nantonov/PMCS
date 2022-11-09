@@ -2,5 +2,5 @@
 
 namespace Schedule.Application.Core.Models.Notifications
 {
-    public record EmailNotificationRequest(string RecieverEmailAddress, string Message) : INotificationRequest;
+    public record EmailNotificationRequest(string ReceiverEmailAddress, string Message) : INotificationRequest;
 }
