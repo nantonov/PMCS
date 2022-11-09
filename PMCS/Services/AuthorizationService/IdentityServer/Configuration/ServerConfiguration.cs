@@ -74,10 +74,12 @@ namespace IdentityServer.Configuration
                     RedirectUris = { "http://localhost:3000/callback", "http://localhost:3000/refresh" },
                     PostLogoutRedirectUris = { "http://localhost:3000/logout" },
                     AllowedGrantTypes =  GrantTypes.Code,
+                    AllowOfflineAccess = true,
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
                         "PetAPI",
                         "ScheduleAPI"
                     }
