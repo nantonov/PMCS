@@ -3,7 +3,7 @@ import { UserManagerSettings} from "oidc-client";
 const authConfig: UserManagerSettings = {
     authority: 'https://localhost:5001',
     client_id: 'react-client-id',
-    scope: 'openid profile email ScheduleAPI PetAPI',
+    scope: 'openid profile email offline_access ScheduleAPI PetAPI',
     response_type: 'code',
     redirect_uri: 'http://localhost:3000/callback',
     post_logout_redirect_uri: 'http://localhost:3000/logout',
