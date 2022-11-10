@@ -48,7 +48,7 @@ Schedule.API.Extentions.ServiceCollectionExtensions.ConfigureAuthenticationSchem
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName,
+    options.AddPolicy(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy,
         policy => policy.RequireScope(PolicyBasedAuthorizationParameters.AllMethodsAllowedScopeRequired));
 });
 

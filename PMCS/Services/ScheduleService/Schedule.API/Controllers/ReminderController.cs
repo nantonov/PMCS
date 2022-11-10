@@ -12,7 +12,7 @@ namespace Schedule.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName)]
+    [Authorize(Policy = PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class ReminderController : ControllerBase
     {
         private readonly IMediator _mediator;

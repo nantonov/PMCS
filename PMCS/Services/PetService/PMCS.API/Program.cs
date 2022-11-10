@@ -38,7 +38,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName,
+    options.AddPolicy(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy,
         policy => policy.RequireScope(PolicyBasedAuthorizationParameters.AllMethodsAllowedScopeRequired));
 });
 

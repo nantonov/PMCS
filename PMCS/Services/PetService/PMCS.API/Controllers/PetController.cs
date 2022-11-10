@@ -12,7 +12,7 @@ namespace PMCS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName)]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class PetController : ControllerBase
     {
         private readonly IPetService _petService;

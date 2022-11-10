@@ -12,7 +12,7 @@ namespace PMCS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName)]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class MealController : ControllerBase
     {
         private readonly IMealService _service;

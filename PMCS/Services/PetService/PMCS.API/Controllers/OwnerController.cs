@@ -13,7 +13,7 @@ namespace PMCS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName)]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class OwnerController : ControllerBase
     {
         private readonly IOwnerService _ownerService;
