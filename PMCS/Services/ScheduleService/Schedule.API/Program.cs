@@ -1,6 +1,6 @@
 using FluentValidation.AspNetCore;
 using MediatR;
-using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Authorization;
 using Schedule.API.Constants;
 using Schedule.API.Middlewares;
 using Schedule.Application.Common.CommandHandlers;
