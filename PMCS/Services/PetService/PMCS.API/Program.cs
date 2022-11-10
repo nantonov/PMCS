@@ -1,8 +1,10 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Middlewares;
 using PMCS.DAL.DI;
 using PMCS.DLL.DI;
@@ -33,7 +35,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = false,
     };
 });
-builder.Services.AddAuthorization();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName,
+        policy => policy.RequireScope(PolicyBasedAuthorizationParameters.AllMethodsAllowedScopeRequired));
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

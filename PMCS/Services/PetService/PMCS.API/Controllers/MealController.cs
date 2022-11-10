@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Meal;
 using PMCS.DLL.Interfaces.Services;
@@ -11,7 +12,7 @@ namespace PMCS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName)]
     public class MealController : ControllerBase
     {
         private readonly IMealService _service;

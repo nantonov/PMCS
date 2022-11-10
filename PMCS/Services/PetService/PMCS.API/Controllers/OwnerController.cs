@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Owner;
 using PMCS.BLL.Interfaces.Services;
@@ -12,7 +13,7 @@ namespace PMCS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicyName)]
     public class OwnerController : ControllerBase
     {
         private readonly IOwnerService _ownerService;
