@@ -28,6 +28,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
 type PetsContainerProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & ReactJSXIntrinsicAttributes;
 
 const PetsContainer: React.FC<PetsContainerProps> = ({ deletePet, editPet, fetchPets, createPet, pets, isFetching }) => {
+
     const [isPetDeleted, setIsPetDeleted] = useState<boolean>(false);
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const PetsContainer: React.FC<PetsContainerProps> = ({ deletePet, editPet, fetch
     return (
         <div>
             {isFetching ? <Preloader /> : null}
-            {!isFetching && <Pets content={content} createPet={createPet} />}
+            <Pets content={content} createPet={createPet} />
         </div>
     );
 }

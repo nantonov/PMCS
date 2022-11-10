@@ -27,9 +27,9 @@ export const createPet = (pet: ICreatePetRequest) => {
             const errors = createErrorsListForPets(result);
             dispatch(stopSubmit(ADD_FORM, { _error: errors[0] }));
         } else {
-            startSubmit(EDIT_FORM);
-            dispatch(reset(ADD_FORM));
+            startSubmit(ADD_FORM);
             dispatch(fetchPets());
+            dispatch(reset(ADD_FORM));
         }
     };
 }

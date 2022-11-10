@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React from "react";
 import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { required } from "../../utils/validators";
@@ -7,6 +7,7 @@ import { ICreateActivityRequest } from "../../common/requests/Activities/ICreate
 import { ActivityType } from "../../Enums/activityEnums";
 import { IPet } from "../../common/models/IPet";
 import { ADD_FORM } from "../../redux/Activities/constants";
+import { Select } from "../Shared/FormsControls/Select";
 
 type FormProps = {
     pets: Array<IPet>,
@@ -27,14 +28,14 @@ let AddActivityForm: React.FC<Props> = ({ handleSubmit, error, pets, submitFaile
             <Field name={"description"} component={Input} validate={[required]} />
             <label>DateTime</label>
             <Field name={"dateTime"} component={Input} type={"datetime-local"} validate={[required]} />
-            <Field name="activityType" component="select">
+            <Field name="activityType" component={Select} validate={[required]}>
                 <option></option>
                 <option value={ActivityType.Vaccine}>Vaccine</option>
                 <option value={ActivityType.Meal}>Meal</option>
                 <option value={ActivityType.Walking}>Walking</option>
             </Field>
             <label>For pet</label>
-            <Field name="petId" component="select"  onFocus={fetchPets} validate={[required]}>
+            <Field name="petId" component={Select} onFocus={fetchPets} validate={[required]}>
                 <option></option>
                 {petsList}
             </Field>

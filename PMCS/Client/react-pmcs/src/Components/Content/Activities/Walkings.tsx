@@ -35,6 +35,7 @@ const Walkings: React.FC<WalkingProps> = (props) => {
 
     useEffect(() => {
         props.fetchWalkings();
+        setWalkingDeleted(false);
     }, [isWalkingDeleted]);
 
     const walkingItems = props.walkings.map(walking => <WalkingActivity

@@ -6,28 +6,38 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditReminderModal from '../Modals/EditReminderModal';
 import Button from '@mui/material/Button';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import { Status } from '../../../../Enums/reminderEnums.ts'
+import { Status } from '../../../../Enums/reminderEnums'
 import AlarmIcon from '@mui/icons-material/AlarmOn';
 import CircularProgressWithLabel from '../../../ProgressBars/CircularProgressWithLabel';
+import { IReminder } from '../../../../common/models/IReminder';
+import * as remindersActionCreators from '../../../../redux/Reminders/actionCreators';
 
-const Reminder = ({ reminder, editReminder, deleteReminder, setIsReminderDeleted, setReminderStatusAsDone, resetReminderStatus }) => {
+type RemindersProps = {
+    reminder: IReminder,
+    editReminder: typeof remindersActionCreators.editReminder,
+    deleteReminder: typeof remindersActionCreators.deleteReminder,
+    setIsReminderDeleted: (isReminderDeleted: boolean) => void,
+    setReminderStatusAsDone: typeof remindersActionCreators.setReminderStatusAsDone
+}
 
-    const [isEditModalOpened, setEditModalOpen] = useState(false);
+const Reminder: React.FC<RemindersProps> = ({ reminder, editReminder, deleteReminder, setIsReminderDeleted, setReminderStatusAsDone }) => {
+
+    const [isEditModalOpened, setEditModalOpen] = useState<boolean>(false);
 
     const statusTaskSign = reminder.status === Status.ToDo ? 'In progress... ' + String.fromCharCode(9998) : 'Completed ' + String.fromCharCode(9745);
-    const notificationSentIcon = reminder.isTriggered ? <AlarmIcon color="action"/> : null;
+    const notificationSentIcon = reminder.isTriggered ? <AlarmIcon color="action" /> : null;
 
-    const onDeleteButtonClick = () => {
+    const onDeleteButtonClick = (): void => {
         let id = reminder.id;
         deleteReminder(id);
         setIsReminderDeleted(true);
     }
 
-    const onEditButtonClick = () => {
+    const onEditButtonClick = (): void => {
         setEditModalOpen(true);
     }
 
-    const onCompleteButtonClick = () => {
+    const onCompleteButtonClick = (): void => {
         let id = reminder.id;
         setReminderStatusAsDone(id);
     }

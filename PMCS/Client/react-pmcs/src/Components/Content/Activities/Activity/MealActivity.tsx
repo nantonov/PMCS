@@ -13,12 +13,9 @@ type MealProps = {
 
 const MealActivity: React.FC<MealProps> = ({ meal, deleteMeal, setMealDeleted }) => {
 
-    const [deletedFlag, toggleDeletedFlag] = React.useState(true);
-
     const handleDeleteButtonClick = () => {
         deleteMeal(meal.id);
-        setMealDeleted(deletedFlag);
-        toggleDeletedFlag(!deletedFlag);
+        setMealDeleted(true);
     }
 
     return (

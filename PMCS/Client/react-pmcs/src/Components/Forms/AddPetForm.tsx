@@ -3,37 +3,30 @@ import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import s from "./petForm.module.css";
 import { required } from "../../utils/validators";
 import { Input } from "../Shared/FormsControls/Input";
-import { useEffect, useState } from "react";
 import { ICreatePetRequest } from "../../common/requests/Pet/ICreatePetRequest";
+import { ADD_FORM } from "../../redux/Pets/constants";
 
 type FormProps = {};
 type Props = InjectedFormProps<ICreatePetRequest, FormProps> & FormProps;
 
-let AddPetForm: React.FC<Props> = ({ handleSubmit, error, submitSucceeded }) => {
-    const [isSuccess, setSuccess] = useState(false);
-
-    useEffect(() => {
-        setSuccess(submitSucceeded);
-    }, []);
-
+let AddPetForm: React.FC<Props> = ({ handleSubmit, error, submitFailed }) => {
     return (
         <form className={s.formBox} onSubmit={handleSubmit}>
             <header>Add pet</header>
             <label>Name   </label>
             <Field name={"name"} component={Input} type={"text"} validate={[required]} />
             <label>Info</label>
-            <Field name={"info"} component={Input} validate={[required]} />
+            <Field name={"info"} component={Input} />
             <label>Weight</label>
             <Field name={"weight"} component={Input} type={"number"} step={"0.1"} min={"0.1"} validate={[required]} />
             <label>Date of birth</label>
             <Field name={"birthDate"} component={Input} type={"date"} validate={[required]} />
             <button>Submit</button>
-            {error ? <div className={s.error}>{error}</div> : null}
-            {isSuccess && !error ? <div className={s.success}>You added your pet successfully!</div> : null}
+            {submitFailed ? <div className={s.error}>{error}</div> : null}
         </form>
     );
 }
 
-const AddPetReduxForm = reduxForm<ICreatePetRequest, FormProps>({ form: "addPetForm" })(AddPetForm);
+const AddPetReduxForm = reduxForm<ICreatePetRequest, FormProps>({ form: ADD_FORM })(AddPetForm);
 
 export default AddPetReduxForm;

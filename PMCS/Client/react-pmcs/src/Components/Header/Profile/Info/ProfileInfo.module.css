@@ -10,7 +10,6 @@
     box-shadow: 0 4px 8px 0 var(--color-box-shadow-global), 0 6px 20px 0 var(--color-box-shadow-global);
     padding: 10px;
     width: 8.5em;
-    display: block;
     letter-spacing: 1px;
     opacity: 0.9;
     display: flex;
