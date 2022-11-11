@@ -28,6 +28,12 @@ namespace PMCS.API.Controllers
             UpdateOwnerValidator updateOwnerValidator,
             IIdentityService identityService)
         {
+            ArgumentNullException.ThrowIfNull(ownerService);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updateOwnerValidator);
+            ArgumentNullException.ThrowIfNull(postOwnerValidator);
+            ArgumentNullException.ThrowIfNull(identityService);
+
             _ownerService = ownerService;
             _mapper = mapper;
             _postOwnerValidator = postOwnerValidator;

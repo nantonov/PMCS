@@ -21,6 +21,11 @@ namespace PMCS.API.Controllers
 
         public VaccineController(IVaccineService service, IMapper mapper, PostVaccineValidator postVaccineValidator, UpdateVaccineValidator updateVaccineValidator)
         {
+            ArgumentNullException.ThrowIfNull(service);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updateVaccineValidator);
+            ArgumentNullException.ThrowIfNull(postVaccineValidator);
+
             _service = service;
             _mapper = mapper;
             _postVaccineValidator = postVaccineValidator;
