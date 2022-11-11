@@ -1,6 +1,6 @@
-﻿using PMCS.DLL.Interfaces.Models;
+﻿using PMCS.BLL.Interfaces.Models;
 
-namespace PMCS.DLL.Models
+namespace PMCS.BLL.Models
 {
     public class PetModel : IHasIdModel
     {

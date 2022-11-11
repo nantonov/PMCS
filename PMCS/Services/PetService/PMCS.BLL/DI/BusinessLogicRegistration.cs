@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using PMCS.BLL;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using PMCS.BLL.Interfaces.Services;
 using PMCS.BLL.Services;
-using PMCS.DLL.Interfaces.Services;
-using PMCS.DLL.Services;
+using PMCS.DAL.DI;
 using Polly;
 
-namespace PMCS.DLL.DI
+namespace PMCS.BLL.DI
 {
     public static class BusinessLogicRegistration
     {

@@ -1,8 +1,8 @@
-﻿using PMCS.DLL.Interfaces.Models;
+﻿using PMCS.BLL.Interfaces.Models;
 
-namespace PMCS.DLL.Models
+namespace PMCS.BLL.Models
 {
-    public class VaccineModel : IHasIdModel
+    public class MealModel : IHasIdModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

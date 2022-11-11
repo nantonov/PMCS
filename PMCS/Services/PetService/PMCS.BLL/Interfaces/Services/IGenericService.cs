@@ -1,6 +1,6 @@
-﻿using PMCS.DLL.Interfaces.Models;
+﻿using PMCS.BLL.Interfaces.Models;
 
-namespace PMCS.DLL.Interfaces.Services
+namespace PMCS.BLL.Interfaces.Services
 {
     public interface IGenericService<TModel> where TModel : IHasIdModel
     {

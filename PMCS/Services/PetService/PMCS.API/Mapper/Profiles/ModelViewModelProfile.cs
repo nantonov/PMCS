@@ -4,7 +4,7 @@ using PMCS.API.ViewModels.Owner;
 using PMCS.API.ViewModels.Pet;
 using PMCS.API.ViewModels.Vaccine;
 using PMCS.API.ViewModels.Walking;
-using PMCS.DLL.Models;
+using PMCS.BLL.Models;
 
 namespace PMCS.API.Mapper.Profiles
 {

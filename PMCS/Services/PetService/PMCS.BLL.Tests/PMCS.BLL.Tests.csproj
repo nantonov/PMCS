@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PMCS.API\PMCS.API.csproj" />
-    <ProjectReference Include="..\PMCS.DLL\PMCS.BLL.csproj" />
+    <ProjectReference Include="..\PMCS.BLL\PMCS.BLL.csproj" />
   </ItemGroup>
 
 </Project>

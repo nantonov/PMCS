@@ -1,4 +1,4 @@
-﻿using PMCS.DLL.Exceptions;
+﻿using PMCS.BLL.Exceptions;
 
 namespace PMCS.API.Middlewares
 {
@@ -50,7 +50,7 @@ namespace PMCS.API.Middlewares
             _logger.LogWarning(ex, $"Exception in query: {context?.Request.Path}");
         }
 
-        private void SetResponseParameters(HttpContext context)
+        private static void SetResponseParameters(HttpContext context)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = context.Response.StatusCode;

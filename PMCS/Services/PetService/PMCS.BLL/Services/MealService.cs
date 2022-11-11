@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
+using PMCS.BLL.Exceptions;
+using PMCS.BLL.Interfaces.Services;
+using PMCS.BLL.Models;
 using PMCS.DAL.Entities;
 using PMCS.DAL.Interfaces.Repositories;
-using PMCS.DLL.Exceptions;
-using PMCS.DLL.Interfaces.Services;
-using PMCS.DLL.Models;
 
-namespace PMCS.DLL.Services
+namespace PMCS.BLL.Services
 {
     public class MealService : GenericService<MealModel, MealEntity>, IMealService
     {

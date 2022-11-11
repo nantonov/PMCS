@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
+using PMCS.BLL.Exceptions;
+using PMCS.BLL.Interfaces.Models;
+using PMCS.BLL.Interfaces.Services;
 using PMCS.DAL.Interfaces.Entities;
 using PMCS.DAL.Interfaces.Repositories;
-using PMCS.DLL.Exceptions;
-using PMCS.DLL.Interfaces.Models;
-using PMCS.DLL.Interfaces.Services;
 
-namespace PMCS.DLL.Services
+namespace PMCS.BLL.Services
 {
     public class GenericService<TModel, TEntity> : IGenericService<TModel>
         where TEntity : IHasIdEntity

@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Pet;
-using PMCS.DLL.Interfaces.Services;
-using PMCS.DLL.Models;
+using PMCS.BLL.Interfaces.Services;
+using PMCS.BLL.Models;
 
 namespace PMCS.API.Controllers
 {

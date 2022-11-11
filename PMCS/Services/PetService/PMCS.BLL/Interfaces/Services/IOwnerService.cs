@@ -1,6 +1,6 @@
-﻿using PMCS.DLL.Models;
+﻿using PMCS.BLL.Models;
 
-namespace PMCS.DLL.Interfaces.Services
+namespace PMCS.BLL.Interfaces.Services
 {
     public interface IOwnerService : IGenericService<OwnerModel>
     {

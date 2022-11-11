@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using PMCS.BLL.Models;
 using PMCS.DAL.Entities;
-using PMCS.DLL.Models;
 
 namespace PMCS.API.Mapper.Profiles
 {
