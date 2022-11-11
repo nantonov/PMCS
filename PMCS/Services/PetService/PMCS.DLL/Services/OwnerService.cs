@@ -13,8 +13,6 @@ namespace PMCS.DLL.Services
 
         public OwnerService(IOwnerRepository repository, IMapper mapper) : base(repository, mapper)
         {
-            ArgumentNullException.ThrowIfNull(repository);
-
             _ownerRepository = repository;
         }
 

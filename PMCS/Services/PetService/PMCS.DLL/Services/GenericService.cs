@@ -16,9 +16,6 @@ namespace PMCS.DLL.Services
 
         public GenericService(IGenericRepository<TEntity> repository, IMapper mapper)
         {
-            ArgumentNullException.ThrowIfNull(repository);
-            ArgumentNullException.ThrowIfNull(mapper);
-
             _repository = repository;
             _mapper = mapper;
         }

@@ -13,8 +13,6 @@ namespace PMCS.DLL.Services
 
         public VaccineService(IVaccineRepository repository, IMapper mapper, IPetService petService) : base(repository, mapper)
         {
-            ArgumentNullException.ThrowIfNull(petService);
-
             _petService = petService;
         }
 
