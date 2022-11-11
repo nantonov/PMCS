@@ -12,6 +12,8 @@ namespace PMCS.DLL.Services
         private readonly IPetService _petService;
         public MealService(IMealRepository repository, IMapper mapper, IPetService petService) : base(repository, mapper)
         {
+            ArgumentNullException.ThrowIfNull(petService);
+
             _petService = petService;
         }
 

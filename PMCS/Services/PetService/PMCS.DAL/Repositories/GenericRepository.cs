@@ -12,6 +12,8 @@ namespace PMCS.DAL.Repositories
         protected IQueryable<TEntity> Query => _dbSet.AsQueryable();
         public GenericRepository(AppContext context)
         {
+            ArgumentNullException.ThrowIfNull(context);
+
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }

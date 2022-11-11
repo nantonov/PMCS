@@ -13,6 +13,8 @@ namespace PMCS.DLL.Services
 
         public WalkingService(IWalkingRepository repository, IMapper mapper, IPetService petService) : base(repository, mapper)
         {
+            ArgumentNullException.ThrowIfNull(petService);
+
             _petService = petService;
         }
 

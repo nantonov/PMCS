@@ -19,6 +19,10 @@ namespace PMCS.DLL.Services
             IOwnerService ownerService,
             IHttpClientFactory httpClientFactory) : base(repository, mapper)
         {
+            ArgumentNullException.ThrowIfNull(ownerService);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(httpClientFactory);
+
             _repository = repository;
             _ownerService = ownerService;
             _httpClientFactory = httpClientFactory;
@@ -42,11 +46,11 @@ namespace PMCS.DLL.Services
 
             var result = await _repository.Delete(id, cancellationToken);
 
-            if (result != null)
+            if (result is not null)
             {
                 var client = _httpClientFactory.CreateClient(ClientsConfiguration.ScheduleClientName);
 
-                await client.DeleteAsync($"/api/Reminder/api/Pet/{id}");
+                await client.DeleteAsync($"/api/Reminder/api/Pet/{id}", cancellationToken);
             }
 
             return _mapper.Map<PetModel>(result);
