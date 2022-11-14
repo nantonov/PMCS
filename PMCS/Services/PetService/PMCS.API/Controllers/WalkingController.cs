@@ -22,6 +22,11 @@ namespace PMCS.API.Controllers
 
         public WalkingController(IWalkingService service, IMapper mapper, PostWalkingValidator postWalkingValidator, UpdateWalkingValidator updateWalkingValidator)
         {
+            ArgumentNullException.ThrowIfNull(service);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updateWalkingValidator);
+            ArgumentNullException.ThrowIfNull(postWalkingValidator);
+
             _service = service;
             _mapper = mapper;
             _postWalkingValidator = postWalkingValidator;

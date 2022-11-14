@@ -22,6 +22,11 @@ namespace PMCS.API.Controllers
 
         public PetController(IPetService petService, IMapper mapper, PostPetValidator postPetValidator, UpdatePetValidator updatePetValidator)
         {
+            ArgumentNullException.ThrowIfNull(petService);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updatePetValidator);
+            ArgumentNullException.ThrowIfNull(postPetValidator);
+
             _petService = petService;
             _mapper = mapper;
             _postPetValidator = postPetValidator;

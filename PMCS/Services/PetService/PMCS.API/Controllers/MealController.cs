@@ -22,6 +22,11 @@ namespace PMCS.API.Controllers
 
         public MealController(IMealService service, IMapper mapper, UpdateMealValidator updateMealValidator, PostMealValidator postMealValidator)
         {
+            ArgumentNullException.ThrowIfNull(service);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updateMealValidator);
+            ArgumentNullException.ThrowIfNull(postMealValidator);
+
             _service = service;
             _mapper = mapper;
             _updateMealValidator = updateMealValidator;
