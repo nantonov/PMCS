@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Pet;
 using PMCS.DLL.Interfaces.Services;
@@ -9,9 +10,9 @@ using PMCS.DLL.Models;
 
 namespace PMCS.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class PetController : ControllerBase
     {
         private readonly IPetService _petService;
