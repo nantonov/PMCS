@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using PMCS.API.Constants.Authorization;
 
 namespace PMCS.API.Extension
 {
@@ -18,7 +20,11 @@ namespace PMCS.API.Extension
                 };
             });
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy,
+                    policy => policy.RequireScope(PolicyBasedAuthorizationParameters.AllMethodsAllowedScopeRequired));
+            });
         }
     }
 }

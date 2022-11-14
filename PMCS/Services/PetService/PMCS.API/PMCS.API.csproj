@@ -19,8 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PMCS.DAL\PMCS.DAL.csproj" />
-    <ProjectReference Include="..\PMCS.DLL\PMCS.BLL.csproj" />
+    <ProjectReference Include="..\PMCS.BLL\PMCS.BLL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PMCS.API.Constants.Authorization;
 using PMCS.API.Middlewares;
+using PMCS.BLL.DI;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Globalization;
 using System.Reflection;

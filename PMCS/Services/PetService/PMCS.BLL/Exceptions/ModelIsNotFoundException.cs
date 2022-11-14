@@ -1,4 +1,4 @@
-﻿namespace PMCS.DLL.Exceptions
+﻿namespace PMCS.BLL.Exceptions
 {
     public class ModelIsNotFoundException : Exception
     {

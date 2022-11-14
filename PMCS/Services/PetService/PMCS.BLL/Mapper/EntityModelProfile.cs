@@ -2,7 +2,7 @@
 using PMCS.BLL.Models;
 using PMCS.DAL.Entities;
 
-namespace PMCS.API.Mapper.Profiles
+namespace PMCS.BLL.Mapper
 {
     public class EntityModelProfile : Profile
     {

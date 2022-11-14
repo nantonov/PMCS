@@ -1,4 +1,4 @@
-﻿using PMCS.DLL.Models;
+﻿using PMCS.BLL.Models;
 
 namespace PMCS.BLL.Tests.Models
 {
