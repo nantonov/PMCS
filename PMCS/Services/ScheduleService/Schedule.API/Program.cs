@@ -1,5 +1,7 @@
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Schedule.API.Constants;
 using Schedule.API.Middlewares;
 using Schedule.Application.Common.CommandHandlers;
 using Schedule.Application.Configuration;
@@ -43,7 +45,12 @@ builder.Services.AddCors(config =>
 });
 
 Schedule.API.Extentions.ServiceCollectionExtensions.ConfigureAuthenticationScheme(builder.Services);
-builder.Services.AddAuthorization();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy,
+        policy => policy.RequireScope(PolicyBasedAuthorizationParameters.AllMethodsAllowedScopeRequired));
+});
 
 builder.Services.AddSwaggerGen(Schedule.API.Extentions.SwaggerGenOptionsExtensions.AddSecurityConfiguration);
 

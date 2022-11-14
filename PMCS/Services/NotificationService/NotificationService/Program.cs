@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.OpenApi.Models;
 using Notifications.API.Extentions;
 using Notifications.API.Middlewares;
@@ -24,6 +25,17 @@ builder.Services.ConfigureAuthenticationScheme();
 
 builder.Services.AddAuthorization();
 builder.Services.RegisterValidators();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DefaultPolicy", policy =>
+    {
+        policy.AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithOrigins("http://localhost:3000")
+            .AllowCredentials();
+    });
+});
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -93,19 +105,18 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseCors("DefaultPolicy");
+
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors(x => x
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .SetIsOriginAllowed(origin => true)
-    .AllowCredentials());
-
 app.MapControllers();
 
-app.MapHub<NotificationHub>(NotificationHubConfiguration.HubURL);
+app.MapHub<NotificationHub>(NotificationHubConfiguration.HubURL, options =>
+{
+    options.Transports = HttpTransportType.ServerSentEvents;
+});
 
 app.Run();

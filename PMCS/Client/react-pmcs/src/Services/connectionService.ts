@@ -1,5 +1,5 @@
-import { HubConnectionBuilder, HttpTransportType, HubConnection } from '@microsoft/signalr';
-import { HUB_URL, RECEIVE_NOTIFICATION_METHOD, SKIP_NEGOTIATION } from '../configuration/signalRConfig';
+import { HubConnectionBuilder, HubConnection, HttpTransportType } from '@microsoft/signalr';
+import { HUB_URL, RECEIVE_NOTIFICATION_METHOD } from '../configuration/signalRConfig';
 import { Nullable } from '../utils/types/Nullable';
 import authService from './authService';
 
@@ -14,9 +14,8 @@ export class ConnectionService {
         try {
             ConnectionService._connection = new HubConnectionBuilder().
                 withUrl(HUB_URL, {
-                    transport: HttpTransportType.WebSockets,
-                    skipNegotiation: SKIP_NEGOTIATION,
-                    accessTokenFactory: () => user.access_token
+                    accessTokenFactory: () => user.access_token,
+                    transport: HttpTransportType.ServerSentEvents,
                 }).
                 withAutomaticReconnect().
                 build();

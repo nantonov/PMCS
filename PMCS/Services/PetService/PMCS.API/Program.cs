@@ -1,8 +1,12 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Localization;
 using PMCS.API.Extension;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Middlewares;
-using PMCS.DLL.DI;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Globalization;
 using System.Reflection;
@@ -21,6 +25,7 @@ builder.Services.AddControllers()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.RegisterAuthorizationServices();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => options.AddSecurityConfiguration());
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
