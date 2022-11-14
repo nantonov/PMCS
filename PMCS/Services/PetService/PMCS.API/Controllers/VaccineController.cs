@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Vaccine;
 using PMCS.BLL.Interfaces.Services;
@@ -11,7 +12,7 @@ namespace PMCS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class VaccineController : ControllerBase
     {
         private readonly IVaccineService _service;
@@ -21,6 +22,11 @@ namespace PMCS.API.Controllers
 
         public VaccineController(IVaccineService service, IMapper mapper, PostVaccineValidator postVaccineValidator, UpdateVaccineValidator updateVaccineValidator)
         {
+            ArgumentNullException.ThrowIfNull(service);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updateVaccineValidator);
+            ArgumentNullException.ThrowIfNull(postVaccineValidator);
+
             _service = service;
             _mapper = mapper;
             _postVaccineValidator = postVaccineValidator;

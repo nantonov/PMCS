@@ -41,11 +41,11 @@ namespace PMCS.BLL.Services
 
             var result = await _repository.Delete(id, cancellationToken);
 
-            if (result != null)
+            if (result is not null)
             {
                 var client = _httpClientFactory.CreateClient(ClientsConfiguration.ScheduleClientName);
 
-                await client.DeleteAsync($"/api/Reminder/api/Pet/{id}");
+                await client.DeleteAsync($"/api/Reminder/api/Pet/{id}", cancellationToken);
             }
 
             return _mapper.Map<PetModel>(result);

@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Owner;
 using PMCS.BLL.Interfaces.Services;
@@ -11,7 +12,7 @@ namespace PMCS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class OwnerController : ControllerBase
     {
         private readonly IOwnerService _ownerService;
@@ -27,6 +28,12 @@ namespace PMCS.API.Controllers
             UpdateOwnerValidator updateOwnerValidator,
             IIdentityService identityService)
         {
+            ArgumentNullException.ThrowIfNull(ownerService);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updateOwnerValidator);
+            ArgumentNullException.ThrowIfNull(postOwnerValidator);
+            ArgumentNullException.ThrowIfNull(identityService);
+
             _ownerService = ownerService;
             _mapper = mapper;
             _postOwnerValidator = postOwnerValidator;

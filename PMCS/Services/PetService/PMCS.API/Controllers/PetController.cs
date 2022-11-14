@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Pet;
 using PMCS.BLL.Interfaces.Services;
@@ -9,9 +10,9 @@ using PMCS.BLL.Models;
 
 namespace PMCS.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class PetController : ControllerBase
     {
         private readonly IPetService _petService;
@@ -21,6 +22,11 @@ namespace PMCS.API.Controllers
 
         public PetController(IPetService petService, IMapper mapper, PostPetValidator postPetValidator, UpdatePetValidator updatePetValidator)
         {
+            ArgumentNullException.ThrowIfNull(petService);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updatePetValidator);
+            ArgumentNullException.ThrowIfNull(postPetValidator);
+
             _petService = petService;
             _mapper = mapper;
             _postPetValidator = postPetValidator;

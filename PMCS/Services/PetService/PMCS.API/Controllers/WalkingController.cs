@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PMCS.API.Constants.Authorization;
 using PMCS.API.Validators;
 using PMCS.API.ViewModels.Walking;
 using PMCS.BLL.Interfaces.Services;
@@ -11,7 +12,7 @@ namespace PMCS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(PolicyBasedAuthorizationParameters.AllMethodsAllowedPolicy)]
     public class WalkingController : ControllerBase
     {
         private readonly IWalkingService _service;
@@ -21,6 +22,11 @@ namespace PMCS.API.Controllers
 
         public WalkingController(IWalkingService service, IMapper mapper, PostWalkingValidator postWalkingValidator, UpdateWalkingValidator updateWalkingValidator)
         {
+            ArgumentNullException.ThrowIfNull(service);
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentNullException.ThrowIfNull(updateWalkingValidator);
+            ArgumentNullException.ThrowIfNull(postWalkingValidator);
+
             _service = service;
             _mapper = mapper;
             _postWalkingValidator = postWalkingValidator;

@@ -11,6 +11,8 @@ namespace PMCS.BLL.Services
 
         public IdentityService(IHttpContextAccessor context)
         {
+            ArgumentNullException.ThrowIfNull(context);
+
             _context = context;
         }
 
